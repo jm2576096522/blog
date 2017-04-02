@@ -1,0 +1,104 @@
+*, body {
+	padding: 0px;
+	margin: 0px auto;
+	
+}
+
+li {
+	list-style-type: none;
+}
+
+#top {
+	width: 660px;
+	height: 500px;
+	border: 2px solid #f96;
+	border-radius: 5px;
+	margin-top:50px;
+}
+
+#top legend {
+	margin-left: 20px;
+	font-size: 14px;
+}
+
+#top legend span {
+	font-size: 17px;
+	color: #FF6633;
+	letter-spacing: 2px;
+	margin-left: 8px;
+	
+}
+
+#header {
+	width: 610px;
+	height: 350px;
+	margin-top: 30px;
+	border: none;
+	border-top: 1px dotted #FF6633;
+	border-bottom: 1px dotted #FF6633;
+}
+
+#header legend {
+	margin-left: 0px;
+	color: #FF6633;
+	font-size: 15px;
+}
+
+#header form {
+	margin-top: 20px;
+	margin-left: 30px;
+	font-size: 12px;
+}
+
+#header form ul li {
+	padding-left: 30px;
+	background: url(../images/register/register-arrow.gif) no-repeat left center;
+	height: 30px;
+	line-height: 30px;
+}
+
+#header form ul li label {
+	color: #FF6666;
+	font-size:16px;
+}
+
+#header form ul li .rad1 {
+	margin-left: 20px;
+}
+
+#header form ul li .rad2 {
+	margin-left: 30px;
+}
+
+#header form ul li select {
+	width: 145px;
+}
+
+#sub {
+	width: 90px;
+	height: 30px;
+	background: #FF9933;
+	color: #fff;
+	font-size: 16px;
+	margin-top: 30px;
+	margin-left: 250px;
+	border-radius: 5px;
+}
+
+.correct {
+	color: green;
+	padding-left: 20px;
+	background: url(../images/register/onCorrect.gif) no-repeat left center;
+}
+
+.error {
+	color: red;
+	padding-left: 20px;
+	background: url(../images/register/onError.gif) no-repeat left center;
+}
+
+.focus {
+	color: blue;
+	padding-left: 20px;
+	background: url(../images/register/onFocus.gif) no-repeat left center;
+}
