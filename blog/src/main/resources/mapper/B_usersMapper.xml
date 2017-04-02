@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射文件的命名空间namespace的值是与之对应的映射接口的全类名 -->
+<mapper namespace="com.yc.ssm.us.mapper.B_userMapper">
+	<select id="finUser" parameterType="B_user" resultType="B_user">
+		select *
+		from b_user where upassword=#{upassword} and (uemail=#{uemail} or
+		uname=#{uemail})
+	</select>
+	<select id="findUserByUname" parameterType="string" resultType="boolean">
+		select
+		count(*) from b_user
+		where uname=#{uname}
+	</select>
+	<select id="findUserByUsid" parameterType="int" resultType="boolean">
+		select
+		count(*) from b_user
+		where usid=#{usid}
+	</select>
+	<select id="findUserAll" resultType="B_user">
+		select * from b_user
+	</select>
+	<resultMap type="PaginationBean" id="PaginationBeanMap">
+		<collection property="rows"
+			column="{pageSize=pageSize,currPage=currPage}" ofType="B_user"
+			select="getPartUser" />
+	</resultMap>
+	<select id="partUser" parameterType="PaginationBean" resultMap="PaginationBeanMap">
+		select count(1) total ,ceil(count(1)/${pageSize}) totalPage ,
+		${currPage}
+		currPage,${pageSize} pageSize from b_user
+	</select>
+
+	<select id="getPartUser" resultType="B_user">
+		select * from (select
+		n.*,rownum rn from (select * from b_user )n
+		where
+		${currPage}*${pageSize}>=rownum) t where
+		rn>(${currPage}-1)*${pageSize}
+	</select>
+
+	<update id="updataUser" parameterType="B_user">
+		update b_user
+		<set>
+			<if test="uemail!=null">
+				uemail=#{uemail},
+			</if>
+			<if test="upassword!=null">
+				upassword=#{upassword},
+			</if>
+			<if test="uname!=null">
+				uname=#{uname},
+			</if>
+			<if test="usex!=null">
+				usex=#{usex},
+			</if>
+			<if test="ubirthday!=null">
+				ubirthday=#{ubirthday},
+			</if>
+
+			<if test="uaddress!=null">
+				uaddress=#{uaddress},
+			</if>
+			<if test="upic!=null">
+				upic=#{upic}
+			</if>
+			<if test="uprofession!=null">
+				uprofession=#{uprofession},
+			</if>
+			<if test="uprofession!=null">
+				uprofession=#{uprofession},
+			</if>
+			<if test="upersondesc!=null">
+				upersondesc=#{upersondesc}
+			</if>
+		</set>
+		where usid=#{usid}
+	</update>
+	<!-- <insert id="insertUser" parameterType="B_user"> insert into b_user(usid,uemail,upassword) 
+		values(seq_usid.nextval,#{uemail},#{upassword},#{uname},#{usex},#{ubirthday},#{uaddress},#{upic},#{uphone},#{uprofession},#{upersondesc}) 
+		</insert> -->
+	<insert id="insertUser" parameterType="B_user">
+		insert into
+		b_user(usid,uemail,upassword)
+		values(seq_usid.nextval,#{uemail},#{upassword})
+	</insert>
+</mapper>

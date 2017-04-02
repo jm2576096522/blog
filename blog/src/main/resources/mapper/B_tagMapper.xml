@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.ssm.us.mapper.B_tagMapper">
+
+	<select id="findALlTags" resultType="B_tag">
+		select * from b_tag
+	</select>
+	<select id="findTag" parameterType="string" resultType="boolean">
+		select count(1) from b_tag where tagname=#{tagname}
+	</select>
+	<insert id="insertTag" parameterType="string">
+		insert into b_tag
+		values(seq_tagid.nextval,#{tagname})
+	</insert>
+	
+</mapper>

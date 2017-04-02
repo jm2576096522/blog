@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射文件的命名空间namespace的值是与之对应的映射接口的全类名 -->
+<mapper namespace="com.yc.ssm.us.mapper.B_articleMapper">
+	<select id="listArticles" parameterType="string" resultType="B_article">
+		select *
+		from b_article
+		<choose>
+			<when test="_parameter!= '-0' and _parameter!='-1'">
+				where tagname like '%,${_parameter},%'
+				or tagname like
+				'%,${_parameter}'
+				or tagname like
+				'${_parameter},%'
+				or tagname like
+				'${_parameter}%'
+			</when>
+			<when test="_parameter=='-1'">
+				where tagname is null
+			</when>
+		</choose>
+	</select>
+	<select id="findArticle" parameterType="B_user" resultType="B_article">
+		select *
+		from b_article where uname=#{uname}
+	</select>
+
+	<resultMap type="PaginationBean" id="PaginationBeanMap">
+		<collection property="rows"
+			column="{pageSize=pageSize,currPage=currPage}" ofType="B_article"
+			select="getPartArticle" />
+	</resultMap>
+	<select id="partArticle" parameterType="PaginationBean"
+		resultMap="PaginationBeanMap">
+		select count(1) total ,ceil(count(1)/${pageSize})
+		totalPage ,
+		${currPage} currPage,${pageSize} pageSize from b_article
+	</select>
+	<select id="getPartArticle" resultType="B_article"> select * from (select
+		n.*,rownum
+		rn from (select * from b_article )n where
+		${currPage}*${pageSize}>=rownum)
+		t
+		where rn>(${currPage}-1)*${pageSize}
+	</select>
+	<update id="modifyArticle" parameterType="B_article">
+		update B_article
+		<set>
+			<if test="atitle!=null"> atitle=#{atitle}, </if>
+			<if test="tagname!=null"> tagname=#{tagname}, </if>
+			<if test="uname!=null">
+				uname=#{uname},
+			</if>
+			<if test="acontent!=null"> acontent=#{acontent}, </if>
+			<if test="apic!=null"> apic=#{apic} </if>
+			<if test="aviewnum!=null">
+				aviewnum=#{aviewnum},
+			</if>
+		</set>
+		where aid=#{aid}
+	</update>
+
+	<insert id="insertArticle" parameterType="B_article">
+		insert into b_article
+		values(seq_aid.nextval,#{atitle},#{tid},#{tagname},#{uname},to_char(sysdate,'yyyy-MM-dd
+		hh:mm:ss'),#{acontent},#{apic},#{aviewnum})
+	</insert>
+
+
+</mapper>

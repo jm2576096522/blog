@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射文件的命名空间namespace的值是与之对应的映射接口的全类名 -->
+<mapper namespace=" com.yc.ssm.us.mapper.B_commentMapper">
+	<select id="listComment" resultType="B_comment">
+		select * from b_comment
+		where caid=#{caid}
+	</select>
+
+
+	<!-- <resultMap type="PaginationBean" id="PaginationBeanMap"> <collection 
+		property="rows" column="{pageSize=pageSize,currPage=currPage}" ofType="B_user" 
+		select="getPartUser" /> </resultMap> <select id="partUser" parameterType="PaginationBean" 
+		resultMap="PaginationBeanMap"> select count(1) total ,ceil(count(1)/${pageSize}) 
+		totalPage , ${currPage} currPage,${pageSize} pageSize from b_user </select> 
+		<select id="getPartUser" resultType="B_user"> select * from (select n.*,rownum 
+		rn from (select * from b_user )n where ${currPage}*${pageSize}>=rownum) t 
+		where rn>(${currPage}-1)*${pageSize} </select> -->
+	<insert id="addComment" parameterType="B_comment">
+		insert into b_comment
+		values(seq_cid.nextval,#{caid},#{usid},#{ccontent},to_char(sysdate,'yyyy-MM-dd
+		hh:mm:ss'))
+	</insert>
+</mapper>
