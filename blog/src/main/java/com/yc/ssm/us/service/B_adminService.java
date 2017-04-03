@@ -1,5 +1,7 @@
 package com.yc.ssm.us.service;
 
+import java.util.List;
+
 import com.yc.ssm.us.entity.B_admin;
 import com.yc.ssm.us.entity.PaginationBean;
 
@@ -7,11 +9,17 @@ public interface B_adminService {
 	//管理员登陆
 	B_admin login(B_admin b_admin);
 
+<<<<<<< HEAD
 	// 分页显示员工信息
 	PaginationBean<B_admin> partUser(String page, String rows);
 
 	// 修改员工信息
 	int modifyUser(B_admin b_admin);
+=======
+		List<B_admin> findAllUser();
+		// 分页显示员工信息
+		PaginationBean<B_admin> partUser(String page, String rows);
+>>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
 
 
 }

@@ -41,4 +41,11 @@ public class B_adminServiceImpl implements B_adminService {
 		return b_adminMapper.modifyUser(b_admin);
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public List<B_admin> findAllUser() {
+		return b_adminMapper.findUserAll();
+	}
+>>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
 }

@@ -17,14 +17,26 @@ create table b_user(
        uprofession varchar2(20),          --用户的职业背景
        upersondesc varchar2(200)        --用户个人描述
 );
---alter  table BUSER modify upassword varchar2(100);
+<<<<<<< HEAD
+=======
 insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'1506173890@qq.com','a');
 update  b_user set upassword = '6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2';
+>>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
 
-update b_user set uemail='18473435230.com' where usid=11001
+select count(1) total ,ceil(count(1)/10) totalPage ,10 currPage,20pageSize from b_user
+select * from (select n.*,rownum rn from (select * from b_user )n
+where 10*10>=rownum) t where rn>(10-1)*10
 
+<<<<<<< HEAD
 
 --插入1000条用户数据
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
+--插入155条用户数据
+>>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
 insert into b_user
 select seq_usid.nextval, 
 dbms_random.string('x', 4)||'qq.com','a',
@@ -33,7 +45,14 @@ decode(ceil(dbms_random.value(0, 2)), 1, '男', '女'),
 to_char(add_months(sysdate, dbms_random.value(12*18, 12*50) * -1), 'yyyy-MM-dd'),
 decode(ceil(dbms_random.value(0, 6)), 1, '湖南', 2, '湖北', 3, '广东', 4, '广西', 5, '北京', '上海'),'',
 '180'||ceil(dbms_random.value(10000000,99999999)) ,
-decode(ceil(dbms_random.value(0, 6)), 1, '程序员', 2, '测试员', 3, '分析员', 4, '设计员', 5, '翻译员', '管理员'),'' from dual connect by level <= 5;
+decode(ceil(dbms_random.value(0, 6)), 1, '程序员', 2, '测试员', 3, '分析员', 4, '设计员', 5, '翻译员', '管理员'),'' from dual connect by level <= 150;
+<<<<<<< HEAD
+
+
+insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'1506173890@qq.com','a');
+update  b_user set upassword = '6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2';
+=======
+>>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
 
 insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'123@qq.com','6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2');
 
@@ -46,12 +65,15 @@ create table b_admin(
        adid int primary key,              --管理员id 
        adname varchar2(20) not null unique,      --管理员名称
        adpassword varchar2(20) default 'a'   --管理员密码
+<<<<<<< HEAD
 );
 --插入管理员数据
 insert into B_ADMIN values(seq_adid.nextval,'admin','a');
 select * from B_ADMIN;
 
 
+=======
+>>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
 );
 --插入管理员数据
 insert into B_ADMIN values(seq_adid.nextval,'admin','a');
@@ -98,10 +120,13 @@ create table b_article(
        apic varchar2(200),                --文章图片  
        aviewnum varchar2(10)            --文章浏览量
 );
-insert into b_article values(seq_aid.nextval,'java编程',1,'java','taonplag',
+insert into b_article values(seq_aid.nextval,'java编程',1,1,10001,
 to_char(sysdate,'yyyy-MM-dd hh:mm:ss'),'java是面向对象的一种编程，由属性和方法组成。Java对c的有点是不适用指针，实现跨区域','',0);
+<<<<<<< HEAD
 
 updata b_article set apic = "";
+=======
+>>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
 
 insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'java的基本介绍',10002,
 			'2017-4-1','30','常常是彼此交换名片，然后郑重或是出于礼貌用手机记下对方的电话号'); 
@@ -126,9 +151,8 @@ create table b_comment(
        ctime varchar2(20)              --评论时间
 );
 
-
-
 select * from B_ARTICLE;
+
 create sequence seq_drid start with 1;
 -----草稿箱
 create table b_drafets(

@@ -12,6 +12,8 @@ public interface B_adminMapper {
 	PaginationBean<B_admin> partUser(PaginationBean<B_admin> pb);
 
 	int modifyUser(B_admin b_admin);
+
+	List<B_admin> findUserAll ();
 	
 	List<B_admin> findUserAll ();
 }

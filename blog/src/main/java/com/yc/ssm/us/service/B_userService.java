@@ -11,7 +11,11 @@ public interface B_userService {
 	
 	List<B_user> findUserAll();
 	// 分页显示用户信息
+<<<<<<< HEAD
 	PaginationBean<B_user> partUser(String page, String rows);
+=======
+
+>>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
 
 	// 修改用户信息
 	boolean modifyUser(B_user b_user);
@@ -23,4 +27,6 @@ public interface B_userService {
 	int insertUser(B_user b_user);
 	// 通过用户id查找用户
 	boolean findUserByUsid(int usid);
+
+	PaginationBean<B_user> partUser(String page, String rows);
 }
