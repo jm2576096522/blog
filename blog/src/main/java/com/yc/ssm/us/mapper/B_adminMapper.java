@@ -13,7 +13,6 @@ public interface B_adminMapper {
 
 	int modifyUser(B_admin b_admin);
 
-	List<B_admin> findUserAll ();
+	List<B_admin> findUserAll();
 	
-	List<B_admin> findUserAll ();
 }

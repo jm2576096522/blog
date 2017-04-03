@@ -13,7 +13,7 @@ public class B_article implements Serializable {
 	private String acontent;
 	private String apic;
 	private String aviewnum;
-<<<<<<< HEAD
+
 	
 	private String uname;
 	
@@ -23,9 +23,7 @@ public class B_article implements Serializable {
 	public void setUname(String uname) {
 		this.uname = uname;
 	}
-=======
 
->>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
 	public Integer getAid() {
 		return aid;
 	}

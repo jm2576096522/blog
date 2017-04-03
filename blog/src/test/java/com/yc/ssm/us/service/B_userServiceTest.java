@@ -35,16 +35,6 @@ public class B_userServiceTest {
 	@Test
 	public void testPartUser() {
 		PaginationBean<B_user> tb = bus.partUser("2", "3");
-<<<<<<< HEAD
-=======
-		System.out.println(tb);
-		assertNotNull(tb);
-	}
-
-	@Test
-	public void testFindAllUser() {
-		List<B_user> tb = bus.findUserAll();
->>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
 		System.out.println(tb);
 		assertNotNull(tb);
 	}

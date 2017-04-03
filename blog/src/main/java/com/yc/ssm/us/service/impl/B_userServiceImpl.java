@@ -27,7 +27,6 @@ public class B_userServiceImpl implements B_userService {
 		return b_userMapper.finUser(b_user);
 	}
 
-<<<<<<< HEAD
 	@Override
 	public PaginationBean<B_user> partUser(String page, String rows) {
 		PaginationBean<B_user> pb = new PaginationBean<>();
@@ -40,8 +39,7 @@ public class B_userServiceImpl implements B_userService {
 		pb=b_userMapper.partUser(pb);
 		return pb;
 	}
-=======
->>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
+
 
 	@Override
 	public boolean modifyUser(B_user b_user) {
@@ -68,19 +66,6 @@ public class B_userServiceImpl implements B_userService {
 	@Override
 	public List<B_user> findUserAll() {
 		return b_userMapper.findUserAll();
-	}
-
-	@Override
-	public PaginationBean<B_user> partUser(String page, String rows) {
-		PaginationBean<B_user> pb = new PaginationBean<>();
-		if (page != null) {
-			pb.setCurrPage(Integer.parseInt(page));
-		}
-		if (rows != null) {
-			pb.setPageSize(Integer.parseInt(rows));
-		}
-		pb=b_userMapper.partUser(pb);
-		return pb;
 	}
 
 }
