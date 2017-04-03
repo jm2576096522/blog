@@ -8,7 +8,7 @@ create table b_user(
        usid int primary key,               --用户id
        uemail varchar2(50) not null unique, --用户账号(邮箱登录)
        upassword varchar2(50) not null,   --用户密码
-       uname varchar2(30),         		  --用户（昵称）    
+       uname varchar2(30),               --用户（昵称）    
        usex varchar2(4)  default '男' check (usex in('男','女')),     --用户性别
        ubirthday varchar2(20),            --用户出生日期
        uaddress varchar2(30),             --用户所在地
@@ -17,13 +17,12 @@ create table b_user(
        uprofession varchar2(20),          --用户的职业背景
        upersondesc varchar2(200)        --用户个人描述
 );
---alter  table BUSER modify upassword varchar2(100);
 insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'1506173890@qq.com','a');
 update  b_user set upassword = '6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2';
 
 update b_user set uemail='18473435230.com' where usid=11001
 
---插入1000条用户数据
+--插入155条用户数据
 insert into b_user
 select seq_usid.nextval, 
 dbms_random.string('x', 4)||'qq.com','a',
@@ -32,7 +31,7 @@ decode(ceil(dbms_random.value(0, 2)), 1, '男', '女'),
 to_char(add_months(sysdate, dbms_random.value(12*18, 12*50) * -1), 'yyyy-MM-dd'),
 decode(ceil(dbms_random.value(0, 6)), 1, '湖南', 2, '湖北', 3, '广东', 4, '广西', 5, '北京', '上海'),'',
 '180'||ceil(dbms_random.value(10000000,99999999)) ,
-decode(ceil(dbms_random.value(0, 6)), 1, '程序员', 2, '测试员', 3, '分析员', 4, '设计员', 5, '翻译员', '管理员'),'' from dual connect by level <= 1000;
+decode(ceil(dbms_random.value(0, 6)), 1, '程序员', 2, '测试员', 3, '分析员', 4, '设计员', 5, '翻译员', '管理员'),'' from dual connect by level <= 150;
 
 
 select * from b_user;
@@ -43,25 +42,12 @@ create sequence seq_adid start with 1001;
 create table b_admin(
        adid int primary key,              --管理员id 
        adname varchar2(20) not null,      --管理员名称
-<<<<<<< HEAD
        adpassword varchar2(20) default 'a'   --管理员密码
-=======
-<<<<<<< HEAD
-       adpassword varchar2(20) default 'a'   --管理员密码
-);
---插入管理员数据
-insert into B_ADMIN values(seq_adid.nextval,'admin','a');
-select * from B_ADMIN;
---alter table b_admin rename column adpasswoed  to adpassword;
-=======
-       adpasswoed varchar2(20) default 'a'   --管理员密码
->>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
 );
 --插入管理员数据
 insert into B_ADMIN values(seq_adid.nextval,'admin','a');
 select * from B_ADMIN;
 
->>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
 -----文章所属类型（原创，转载，翻译） 1 2 3 
 create table b_type(
        tid int primary key,
@@ -103,22 +89,21 @@ create table b_article(
        apic varchar2(200),                --文章图片  
        aviewnum varchar2(10)            --文章浏览量
 );
-insert into b_article values(seq_aid.nextval,'java编程',1,'java','taonplag',
+insert into b_article values(seq_aid.nextval,'java编程',1,1,10001,
 to_char(sysdate,'yyyy-MM-dd hh:mm:ss'),'java是面向对象的一种编程，由属性和方法组成。Java对c的有点是不适用指针，实现跨区域','',0);
 
-insert into b_article values(seq_aid.nextval,'spring_mvc框架',1,'spring_mvc,java','akmfdyo',
-to_char(sysdate,'yyyy-MM-dd hh:mm:ss'),'spring_mvc 框架，结合spring和mvc ,可以实现依赖注入面向切面编程','',0);
 
-insert into b_article(aid,atitle,uname,atime,aviewnum,acontent) values(seq_aid.nextval,'java的基本介绍','akmfdyo',
-			'2017-4-1','30','常常是彼此交换名片，然后郑重或是出于礼貌用手机记下对方的电话号'); 
-insert into b_article(aid,atitle,uname,atime,aviewnum,acontent) values(seq_aid.nextval,'oracle的基本介绍','akmfdyo',
-			'2017-4-1','50','oracle数据库'); 
-insert into b_article(aid,atitle,uname,atime,aviewnum,acontent) values(seq_aid.nextval,'spring的基本介绍','akmfdyo',
-			'2017-4-1','60','spring:一个开源的框架；  包含：IOC(控制反转)/DI（依赖注入） 和 面向切面编程'); 
-insert into b_article(aid,atitle,uname,atime,aviewnum,acontent) values(seq_aid.nextval,'aop的作用','akmfdyo',
-			'2017-4-1','40','主要有两点：1.解决代码的混乱问题2.代码的分散问题'); 
-insert into b_article(aid,atitle,uname,atime,aviewnum,acontent) values(seq_aid.nextval,'事务的特性','akmfdyo',
-			'2017-4-1','40','1. 原子性 2. 一致性 3. 隔离性  4. 持久性'); 
+
+insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'java的基本介绍',10002,
+      '2017-4-1','30','常常是彼此交换名片，然后郑重或是出于礼貌用手机记下对方的电话号'); 
+insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'oracle的基本介绍',10002,
+      '2017-4-1','50','oracle数据库'); 
+insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'spring的基本介绍',10002,
+      '2017-4-1','60','spring:一个开源的框架；  包含：IOC(控制反转)/DI（依赖注入） 和 面向切面编程'); 
+insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'aop的作用',10003,
+      '2017-4-1','40','主要有两点：1.解决代码的混乱问题2.代码的分散问题'); 
+insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'事务的特性',10003,
+      '2017-4-1','40','1. 原子性 2. 一致性 3. 隔离性  4. 持久性'); 
 select * from b_article;
 
 
