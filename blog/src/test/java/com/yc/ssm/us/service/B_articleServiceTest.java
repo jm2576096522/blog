@@ -28,7 +28,7 @@ public class B_articleServiceTest {
 		}
 		assertNotNull(articles);
 	}
-
+	@Test
 	public void testModifyArticle() {
 		B_article b_article = new B_article();
 		b_article.setAid(1004);
@@ -36,6 +36,13 @@ public class B_articleServiceTest {
 		b_article.setAtitle("eclispe");
 		
 		bart.modifyArticle(b_article);
+	}
+	@Test
+	public void testFindArticle(){
+		List<B_article> list = bart.findArticle();
+		System.out.println(list);
+		assertNotNull(list);
+	
 	}
 
 }

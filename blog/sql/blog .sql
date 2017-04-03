@@ -23,6 +23,7 @@ update  b_user set upassword = '6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2';
 
 update b_user set uemail='18473435230.com' where usid=11001
 
+
 --插入1000条用户数据
 insert into b_user
 select seq_usid.nextval, 
@@ -34,6 +35,7 @@ decode(ceil(dbms_random.value(0, 6)), 1, '湖南', 2, '湖北', 3, '广东', 4, 
 '180'||ceil(dbms_random.value(10000000,99999999)) ,
 decode(ceil(dbms_random.value(0, 6)), 1, '程序员', 2, '测试员', 3, '分析员', 4, '设计员', 5, '翻译员', '管理员'),'' from dual connect by level <= 5;
 
+insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'123@qq.com','6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2');
 
 select * from b_user;
 
@@ -42,12 +44,13 @@ create sequence seq_adid start with 1001;
 -----管理员表
 create table b_admin(
        adid int primary key,              --管理员id 
-       adname varchar2(20) not null,      --管理员名称
+       adname varchar2(20) not null unique,      --管理员名称
        adpassword varchar2(20) default 'a'   --管理员密码
 );
 --插入管理员数据
 insert into B_ADMIN values(seq_adid.nextval,'admin','a');
 select * from B_ADMIN;
+
 
 );
 --插入管理员数据
@@ -98,7 +101,7 @@ create table b_article(
 insert into b_article values(seq_aid.nextval,'java编程',1,'java','taonplag',
 to_char(sysdate,'yyyy-MM-dd hh:mm:ss'),'java是面向对象的一种编程，由属性和方法组成。Java对c的有点是不适用指针，实现跨区域','',0);
 
-
+updata b_article set apic = "";
 
 insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'java的基本介绍',10002,
 			'2017-4-1','30','常常是彼此交换名片，然后郑重或是出于礼貌用手机记下对方的电话号'); 

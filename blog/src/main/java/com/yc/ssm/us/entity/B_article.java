@@ -13,6 +13,15 @@ public class B_article implements Serializable {
 	private String acontent;
 	private String apic;
 	private String aviewnum;
+	
+	private String uname;
+	
+	public String getUname() {
+		return uname;
+	}
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
 	public Integer getAid() {
 		return aid;
 	}
@@ -84,7 +93,9 @@ public class B_article implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "\nArticle [aid=" + aid + ", atitle=" + atitle + ", tid=" + tid + ", tagid=" + tagid + ", usid=" + usid
-				+ ", atime=" + atime + ", acontent=" + acontent + ", apic=" + apic + ", aviewnum=" + aviewnum + "]";
+		return "\nB_article [aid=" + aid + ", atitle=" + atitle + ", tid=" + tid + ", tagid=" + tagid + ", usid=" + usid
+				+ ", atime=" + atime + ", acontent=" + acontent + ", apic=" + apic + ", aviewnum=" + aviewnum
+				+ ", uname=" + uname + "]";
 	}
+	
 }

@@ -39,5 +39,6 @@ public class B_adminServiceTest {
 		int result=bad.modifyUser(admin);
 		assertNotNull(result);
 	}
+	
 
 }

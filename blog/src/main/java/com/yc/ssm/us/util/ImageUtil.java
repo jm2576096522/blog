@@ -9,8 +9,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Random;
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpSession;
 public class ImageUtil {
-
+	
 	// 验证码字符集
 	private static final char[] chars = { 
 			'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
@@ -25,9 +26,11 @@ public class ImageUtil {
 	// 宽度
 	private static final int WIDTH = 80;
 	// 高度
-	private static final int HEIGHT = 40;
+	private static final int HEIGHT = 37;
 	// 字体大小
 	private static final int FONT_SIZE = 30;
+	
+	private static StringBuffer sb;
 
 	/**
 	 * 生成随机验证码及图片
@@ -35,7 +38,7 @@ public class ImageUtil {
 	 * Object[1]：验证码图片。
 	 */
 	public static Object[] createImage() {
-		StringBuffer sb = new StringBuffer();
+		sb = new StringBuffer();
 		// 1.创建空白图片
 		BufferedImage image = new BufferedImage(
 				WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -90,7 +93,6 @@ public class ImageUtil {
 		ImageIO.write(image, "png", os);
 		os.close();
 	}
-
 }
 
 

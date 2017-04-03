@@ -4,7 +4,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 映射文件的命名空间namespace的值是与之对应的映射接口的全类名 -->
 <mapper namespace="com.yc.ssm.us.mapper.B_articleMapper">
-	<select id="listArticles" parameterType="string" resultType="B_article">
+
+	<!--查询所有的文章  -->
+	<select id="findArticle" resultType="B_article">
+		select bt.*, bu.uname from b_article bt inner join b_user bu on bt.usid = bu.usid
+	</select>
+	<!-- 通过用户id查询个人文章 -->
+	<select id="findPersonArticle" parameterType="Integer" resultType="B_article">
+		select bt.*, bu.uname from b_article bt inner join b_user bu on bt.usid = bu.usid where bu.usid = #{usid} 
+	</select>
+
+
+	<select id="listArticles" parameterType="String" resultType="B_article">
 		select *
 		from b_article
 		<choose>
@@ -22,10 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose>
 	</select>
-	<select id="findArticle" parameterType="B_user" resultType="B_article">
-		select *
-		from b_article where uname=#{uname}
-	</select>
+	
 
 	<resultMap type="PaginationBean" id="PaginationBeanMap">
 		<collection property="rows"

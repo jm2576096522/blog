@@ -13,7 +13,7 @@ public interface B_userMapper {
 
 	int updataUser(B_user b_user);// 更新用户信息
 
-	boolean insertUser(B_user b_user);
+	int insertUser(B_user b_user);
 
 	boolean findUserByUname(String uname);
 

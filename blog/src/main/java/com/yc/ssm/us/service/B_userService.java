@@ -11,8 +11,7 @@ public interface B_userService {
 	
 	List<B_user> findUserAll();
 	// 分页显示用户信息
-
-	PaginationBean<B_user> partUser(PaginationBean<B_user> pb);
+	PaginationBean<B_user> partUser(String page, String rows);
 
 	// 修改用户信息
 	boolean modifyUser(B_user b_user);
@@ -21,7 +20,7 @@ public interface B_userService {
 	boolean findUserByUname(String uname);
 
 	//插入用户
-	boolean insertUser(B_user b_user);
+	int insertUser(B_user b_user);
 	// 通过用户id查找用户
 	boolean findUserByUsid(int usid);
 }

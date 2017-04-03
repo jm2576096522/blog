@@ -9,7 +9,7 @@ public class B_admin {
 
 	public B_admin() {
 	}
-	public B_admin(Integer adid, String adname, String adpasswoed) {
+	public B_admin(Integer adid, String adname, String adpassword) {
 		this.adid = adid;
 		this.adname = adname;
 		this.adpassword = adpassword;

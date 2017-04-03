@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * 生成验证码的Servlet
@@ -93,4 +94,5 @@ public class VcodeServlet extends HttpServlet {
 		int b = fc + random.nextInt(bc - fc);
 		return new Color(r, g, b);
 	}
+	
 }

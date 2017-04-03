@@ -1,23 +1,19 @@
 package com.yc.ssm.us.web.filter;
 
-import java.io.IOException;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.yc.ssm.us.util.ServletUtil;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-@WebFilter("/*")
-public class CheckLoginUserFilter extends AbstractFilter {
+@Controller
+@RequestMapping("login_check")
+public class CheckLoginUserFilter{
 
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
+	/*public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
 		String reqUriStr = req.getRequestURI();
@@ -28,11 +24,21 @@ public class CheckLoginUserFilter extends AbstractFilter {
 				if (session.getAttribute("errorMsg") == null) {
 					session.setAttribute("errorMsg", "请先登录！！！");
 				}
-
 				resp.sendRedirect(req.getServletContext().getContextPath() + "/page/login.jsp");
 				return;
 			}
 		}
 		chain.doFilter(request, response);
+	}*/
+	@RequestMapping()
+	@ResponseBody
+	public String CheckLogin(HttpSession session){
+		System.out.println("我是检查登陆类");
+		System.out.println(session.getAttribute("loginUser"));
+		if(session.getAttribute("loginUser") == null || session.getAttribute("loginUser") ==""){
+			return "redirect:/login.jsp";
+		}else{
+			return "redirect:/login.jsp";
+		}
 	}
 }

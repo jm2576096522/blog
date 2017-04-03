@@ -13,7 +13,7 @@ public class Encrypt {
 	 * 测试
 	 */
 	public static void main(String[] args) {
-		System.out.println(Encrypt.md5AndSha("navy121314"));
+		System.out.println(Encrypt.md5AndSha("a"));
 	}
 
 	/**

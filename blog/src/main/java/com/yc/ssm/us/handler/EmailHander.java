@@ -13,20 +13,18 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.apache.logging.log4j.LogManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yc.ssm.us.entity.B_user;
 
-
 @Controller
 @RequestMapping("sendEmail")
-public class EmailUntil{ 
+public class EmailHander{ 
 	
-	public EmailUntil() {
-		LogManager.getLogger().debug("我进来了 sendEmail");
+	public EmailHander() {
+		System.out.println("我进来了");
 	}
 	private static String random;
 

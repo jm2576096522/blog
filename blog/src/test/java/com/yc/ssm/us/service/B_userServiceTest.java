@@ -31,10 +31,10 @@ public class B_userServiceTest {
 		assertNotNull(buser);
 	}
 
+
 	@Test
 	public void testPartUser() {
-		PaginationBean<B_user> tb = new PaginationBean<B_user>(2, 30);
-		tb = bus.partUser(tb);
+		PaginationBean<B_user> tb = bus.partUser("2", "3");
 		System.out.println(tb);
 		assertNotNull(tb);
 	}
@@ -67,8 +67,8 @@ public class B_userServiceTest {
 		B_user b_user = new B_user();
 		b_user.setUemail("2576096522@qq.com");
 		b_user.setUpassword("a");
-		boolean result = bus.insertUser(b_user);
-		System.out.println(b_user);
-		assertEquals(result, true);
+		int result = bus.insertUser(b_user);
+		System.out.println(result);
+		assertNotNull(result);
 	}
 }

@@ -14,19 +14,16 @@ import com.yc.ssm.us.service.B_articleService;
 import com.yc.ssm.us.service.B_tagService;
 import com.yc.ssm.us.service.B_userService;
 
-/*@Component//一般bean
-@Controller//控制分发层的bean
-@Repository//数据访问层bean
-*/
-@Service("b_articleService") // 业务处理层 相当于配置中的 <bean id="userService"
-								// class="com.yc.mybatis.us.service.impl.UserServiceImpl">
+@Service("b_articleService") 
+
 public class B_articleServiceImpl implements B_articleService {
-	@Autowired // 相当于spring.xml中的<property name="userMapper" ref="userMapper" />
+	@Autowired 
 	private B_articleMapper b_articleMapper;
 
-	@Autowired // 相当于spring.xml中的<property name="userMapper" ref="userMapper" />
+	@Autowired 
 	private B_tagService b_tagService;
-	@Autowired // 相当于spring.xml中的<property name="userMapper" ref="userMapper" />
+	
+	@Autowired 
 	private B_userService b_userService;
 
 	@Override
@@ -61,14 +58,18 @@ public class B_articleServiceImpl implements B_articleService {
 		return b_articleMapper.insertArticle(b_article) > 0;
 	}*/
 
+	//通过用户id查询查询个人文章
 	@Override
-	public List<B_article> findArticleByUname(B_user b_user) {
-		String uname=b_user.getUname();
-		if (!b_userService.findUserByUname(uname)) {
-			//注册
-			b_userService.insertUser(b_user);
-		}
-		return b_articleMapper.findArticle(b_user);
+	public List<B_article> findPersonArticle(Integer usid) {
+		System.out.println("我是通过usid查询来的");
+		return b_articleMapper.findPersonArticle(usid);
+	}
+
+	@Override
+	public List<B_article> findArticle() {
+		System.out.println("我是articleService里的：");
+		return b_articleMapper.findArticle();
+		
 	}
 
 }

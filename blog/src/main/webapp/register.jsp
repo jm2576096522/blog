@@ -114,8 +114,9 @@
 		window.location.href='login.jsp';
 	}
 	
-	var countdown=60; 
+	var countdown=0; 
 	function getYZM(){
+		countdown = 60;
 		var uemail=$.trim($("#doc-vld-email-2-1").val());
 		var random ;
 		if(uemail == null || uemail==""){
@@ -149,7 +150,6 @@
 		  if(countdown == 0){
 			$("#yzmbutton").removeAttr("disabled");
 			$("#yzmbutton").text("点击获取验证码"); 
-			countdown = 60; 
 		}else { 
 			$("#yzmbutton").attr("disabled", "disabled"); 
 			$("#yzmbutton").text("重新发送(" + countdown + ")s"); 
@@ -181,6 +181,9 @@
 		});
 		return false;
 	}
+	
+	
+	
 </script>
 </body>
 </html>
