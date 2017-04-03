@@ -17,12 +17,20 @@ create table b_user(
        uprofession varchar2(20),          --用户的职业背景
        upersondesc varchar2(200)        --用户个人描述
 );
+<<<<<<< HEAD
+=======
+insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'1506173890@qq.com','a');
+update  b_user set upassword = '6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2';
+>>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
 
 select count(1) total ,ceil(count(1)/10) totalPage ,10 currPage,20pageSize from b_user
 select * from (select n.*,rownum rn from (select * from b_user )n
 where 10*10>=rownum) t where rn>(10-1)*10
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
 --插入155条用户数据
 insert into b_user
 select seq_usid.nextval, 
@@ -33,10 +41,13 @@ to_char(add_months(sysdate, dbms_random.value(12*18, 12*50) * -1), 'yyyy-MM-dd')
 decode(ceil(dbms_random.value(0, 6)), 1, '湖南', 2, '湖北', 3, '广东', 4, '广西', 5, '北京', '上海'),'',
 '180'||ceil(dbms_random.value(10000000,99999999)) ,
 decode(ceil(dbms_random.value(0, 6)), 1, '程序员', 2, '测试员', 3, '分析员', 4, '设计员', 5, '翻译员', '管理员'),'' from dual connect by level <= 150;
+<<<<<<< HEAD
 
 
 insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'1506173890@qq.com','a');
 update  b_user set upassword = '6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2';
+=======
+>>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
 
 
 select * from b_user;

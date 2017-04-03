@@ -5,7 +5,6 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
-
 import com.yc.ssm.us.entity.B_user;
 import com.yc.ssm.us.util.Encrypt;
 
