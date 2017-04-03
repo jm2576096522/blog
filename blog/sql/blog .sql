@@ -8,7 +8,7 @@ create table b_user(
        usid int primary key,               --用户id
        uemail varchar2(50) not null unique, --用户账号(邮箱登录)
        upassword varchar2(50) not null,   --用户密码
-       uname varchar2(30),          --用户网页个人名称（昵称）    
+       uname varchar2(30),         		  --用户（昵称）    
        usex varchar2(4)  default '男' check (usex in('男','女')),     --用户性别
        ubirthday varchar2(20),            --用户出生日期
        uaddress varchar2(30),             --用户所在地
@@ -43,7 +43,7 @@ create sequence seq_adid start with 1001;
 create table b_admin(
        adid int primary key,              --管理员id 
        adname varchar2(20) not null,      --管理员名称
-       adpasswoed varchar2(20) default 'a'   --管理员密码
+       adpassword varchar2(20) default 'a'   --管理员密码
 );
 --插入管理员数据
 insert into B_ADMIN values(seq_adid.nextval,'admin','a');
@@ -83,8 +83,8 @@ create table b_article(
        aid int primary key,               --文章id
        atitle varchar2(20) not null,      --文章标题
        tid int references b_type(tid),   --文章所属类型（原创，转载，翻译） 1 2 3 
-       tagname varchar2(30),     --文章标签名
-       uname varchar2(50) not null,     --文章作者
+       tagid int references b_tag(tagid),    --文章标签
+       usid int references b_user(usid),     --文章作者
        atime varchar2(30),                --文章创作时间
        acontent varchar2(800),            --文章文本内容
        apic varchar2(200),                --文章图片  
