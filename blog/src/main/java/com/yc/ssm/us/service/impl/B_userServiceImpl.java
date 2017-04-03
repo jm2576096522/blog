@@ -40,7 +40,7 @@ public class B_userServiceImpl implements B_userService {
 
 	@Override
 	public boolean insertUser(B_user b_user) {
-		LogManager.getLogger().debug("我是B_userService里的"+b_user);
+		LogManager.getLogger().debug("我是B_userService里的" + b_user);
 		return b_userMapper.insertUser(b_user);
 	}
 
@@ -56,6 +56,7 @@ public class B_userServiceImpl implements B_userService {
 
 	@Override
 	public List<B_user> findUserAll() {
+		LogManager.getLogger().debug("我是B_userServiceImpl里的findUserAll");
 		LogManager.getLogger().debug("我是B_userServiceImpl里的");
 		return b_userMapper.findUserAll();
 	}
