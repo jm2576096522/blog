@@ -46,7 +46,7 @@ public class B_articleServiceImpl implements B_articleService {
 		return b_articleMapper.modifyArticle(b_article);
 	}
 
-	@Override
+	/*@Override
 	public boolean addArticle(B_article b_article) {
 		b_article.setTagname(b_article.getTagname().replace(" ", ""));// 标签去空格
 		// 1.添加博客文章或者更新
@@ -59,7 +59,7 @@ public class B_articleServiceImpl implements B_articleService {
 			}
 		}
 		return b_articleMapper.insertArticle(b_article) > 0;
-	}
+	}*/
 
 	@Override
 	public List<B_article> findArticleByUname(B_user b_user) {

@@ -19,7 +19,7 @@ public interface B_articleService {
 	// 通过用户昵称查询博客
 	List<B_article> findArticleByUname(B_user b_user);
 
-	// 添加博客文章
-	boolean addArticle(B_article b_article);
+/*	// 添加博客文章
+	boolean addArticle(B_article b_article);*/
 
 }
