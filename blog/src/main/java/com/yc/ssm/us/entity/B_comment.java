@@ -4,11 +4,13 @@ import java.util.Date;
 
 public class B_comment {
 
-	@Override
-	public String toString() {
-		return "\nB_comment [cid=" + cid + ", caid=" + caid + ", usid=" + usid + ", ccontent=" + ccontent + ", ctime="
-				+ ctime + "]";
-	}
+	private Integer cid;
+	private Integer caid;
+	private Integer usid;
+	private String ccontent;
+	private Date ctime;
+
+	
 
 	public Integer getCaid() {
 		return caid;
@@ -50,13 +52,22 @@ public class B_comment {
 		this.ctime = ctime;
 	}
 
-	private Integer cid;
-	private Integer caid;
-	private Integer usid;
-	private String ccontent;
-	private Date ctime;
 
 	public B_comment() {
+	}
+
+	public B_comment(Integer cid, Integer caid, Integer usid, String ccontent, Date ctime) {
+		this.cid = cid;
+		this.caid = caid;
+		this.usid = usid;
+		this.ccontent = ccontent;
+		this.ctime = ctime;
+	}
+	
+	@Override
+	public String toString() {
+		return "\nB_comment [cid=" + cid + ", caid=" + caid + ", usid=" + usid + ", ccontent=" + ccontent + ", ctime="
+				+ ctime + "]";
 	}
 
 }

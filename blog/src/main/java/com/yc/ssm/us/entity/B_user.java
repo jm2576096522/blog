@@ -4,12 +4,18 @@ import java.io.Serializable;
 
 public class B_user implements Serializable {
 
-	@Override
-	public String toString() {
-		return "\nB_user [usid=" + usid + ", uemail=" + uemail + ", upassword=" + upassword + ", uname=" + uname
-				+ ", usex=" + usex + ", ubirthday=" + ubirthday + ", uaddress=" + uaddress + ", upic=" + upic
-				+ ", uphone=" + uphone + ", uprofession=" + uprofession + ", upersondesc=" + upersondesc + "]";
-	}
+	private static final long serialVersionUID = 1L;;
+	private Integer usid;
+	private String uemail;
+	private String upassword;
+	private String uname;
+	private String usex;
+	private String ubirthday;
+	private String uaddress;
+	private String upic;
+	private String uphone;
+	private String uprofession;
+	private String upersondesc;
 
 	public Integer getUsid() {
 		return usid;
@@ -98,21 +104,13 @@ public class B_user implements Serializable {
 	public void setUpersondesc(String upersondesc) {
 		this.upersondesc = upersondesc;
 	}
-
-	private static final long serialVersionUID = 1L;;
-	private Integer usid;
-	private String uemail;
-	private String upassword;
-	private String uname;
-	private String usex;
-	private String ubirthday;
-	private String uaddress;
-	private String upic;
-	private String uphone;
-	private String uprofession;
-	private String upersondesc;
-
 	public B_user() {
+	}
+	@Override
+	public String toString() {
+		return "\nB_user [usid=" + usid + ", uemail=" + uemail + ", upassword=" + upassword + ", uname=" + uname
+				+ ", usex=" + usex + ", ubirthday=" + ubirthday + ", uaddress=" + uaddress + ", upic=" + upic
+				+ ", uphone=" + uphone + ", uprofession=" + uprofession + ", upersondesc=" + upersondesc + "]";
 	}
 
 }
