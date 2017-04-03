@@ -35,6 +35,7 @@ public class B_admin {
 	private String adpassword;
 
 	public B_admin() {
+
 	}
 
 }

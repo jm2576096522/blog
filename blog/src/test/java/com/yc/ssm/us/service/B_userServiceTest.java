@@ -38,13 +38,6 @@ public class B_userServiceTest {
 		System.out.println(tb);
 		assertNotNull(tb);
 	}
-	
-	@Test
-	public void testFindAllUser(){
-		List<B_user> tb=bus.findUserAll();
-		System.out.println(tb);
-		assertNotNull(tb);
-	}
 
 	@Test
 	public void testmodifyUser() {

@@ -54,17 +54,18 @@ public class UserHandler {
 
 	@RequestMapping("list")
 	@ResponseBody
-	public List<B_user> list(){
+	public List<B_user> list() {
 		LogManager.getLogger().debug("我是userhandler 中的List处理");
 		return b_userService.findUserAll();
 	}
-	/*public PaginationBean<B_user> list(String rows, String page) {
-		PaginationBean<B_user> pb=new PaginationBean<B_user>();
-		pb.setCurrPage(Integer.parseInt(page));
-		pb.setPageSize(Integer.parseInt(rows));
-		System.out.println("list:row==>" + rows + ",page==>" + page);
-		return b_userService.partUser(pb);// 异步数据响应
-	}*/
+	/*
+	 * public PaginationBean<B_user> list(String rows, String page) {
+	 * PaginationBean<B_user> pb=new PaginationBean<B_user>();
+	 * pb.setCurrPage(Integer.parseInt(page));
+	 * pb.setPageSize(Integer.parseInt(rows)); System.out.println("list:row==>"
+	 * + rows + ",page==>" + page); return b_userService.partUser(pb);// 异步数据响应
+	 * }
+	 */
 
 	@RequestMapping("modify")
 	@ResponseBody
