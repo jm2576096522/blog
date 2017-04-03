@@ -8,7 +8,7 @@ create table b_user(
        usid int primary key,               --用户id
        uemail varchar2(50) not null unique, --用户账号(邮箱登录)
        upassword varchar2(50) not null,   --用户密码
-       uname varchar2(30),               --用户（昵称）    
+       uname varchar2(30),         		  --用户（昵称）    
        usex varchar2(4)  default '男' check (usex in('男','女')),     --用户性别
        ubirthday varchar2(20),            --用户出生日期
        uaddress varchar2(30),             --用户所在地
@@ -89,21 +89,21 @@ create table b_article(
        apic varchar2(200),                --文章图片  
        aviewnum varchar2(10)            --文章浏览量
 );
-insert into b_article values(seq_aid.nextval,'java编程',1,1,10001,
+insert into b_article values(seq_aid.nextval,'java编程',1,'java','taonplag',
 to_char(sysdate,'yyyy-MM-dd hh:mm:ss'),'java是面向对象的一种编程，由属性和方法组成。Java对c的有点是不适用指针，实现跨区域','',0);
 
 
 
 insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'java的基本介绍',10002,
-      '2017-4-1','30','常常是彼此交换名片，然后郑重或是出于礼貌用手机记下对方的电话号'); 
+			'2017-4-1','30','常常是彼此交换名片，然后郑重或是出于礼貌用手机记下对方的电话号'); 
 insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'oracle的基本介绍',10002,
-      '2017-4-1','50','oracle数据库'); 
+			'2017-4-1','50','oracle数据库'); 
 insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'spring的基本介绍',10002,
-      '2017-4-1','60','spring:一个开源的框架；  包含：IOC(控制反转)/DI（依赖注入） 和 面向切面编程'); 
+			'2017-4-1','60','spring:一个开源的框架；  包含：IOC(控制反转)/DI（依赖注入） 和 面向切面编程'); 
 insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'aop的作用',10003,
-      '2017-4-1','40','主要有两点：1.解决代码的混乱问题2.代码的分散问题'); 
+			'2017-4-1','40','主要有两点：1.解决代码的混乱问题2.代码的分散问题'); 
 insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'事务的特性',10003,
-      '2017-4-1','40','1. 原子性 2. 一致性 3. 隔离性  4. 持久性'); 
+			'2017-4-1','40','1. 原子性 2. 一致性 3. 隔离性  4. 持久性'); 
 select * from b_article;
 
 
