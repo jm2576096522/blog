@@ -32,7 +32,7 @@ decode(ceil(dbms_random.value(0, 2)), 1, '男', '女'),
 to_char(add_months(sysdate, dbms_random.value(12*18, 12*50) * -1), 'yyyy-MM-dd'),
 decode(ceil(dbms_random.value(0, 6)), 1, '湖南', 2, '湖北', 3, '广东', 4, '广西', 5, '北京', '上海'),'',
 '180'||ceil(dbms_random.value(10000000,99999999)) ,
-decode(ceil(dbms_random.value(0, 6)), 1, '程序员', 2, '测试员', 3, '分析员', 4, '设计员', 5, '翻译员', '管理员'),'' from dual connect by level <= 1000;
+decode(ceil(dbms_random.value(0, 6)), 1, '程序员', 2, '测试员', 3, '分析员', 4, '设计员', 5, '翻译员', '管理员'),'' from dual connect by level <= 5;
 
 
 select * from b_user;
@@ -45,14 +45,25 @@ create table b_admin(
        adname varchar2(20) not null,      --管理员名称
        adpassword varchar2(20) default 'a'   --管理员密码
 );
+<<<<<<< HEAD
 --插入管理员数据
 insert into B_ADMIN values(seq_adid.nextval,'admin','a');
 select * from B_ADMIN;
 --alter table b_admin rename column adpasswoed  to adpassword;
+=======
+>>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
 --插入管理员数据
 insert into B_ADMIN values(seq_adid.nextval,'admin','a');
 select * from B_ADMIN;
 
+<<<<<<< HEAD
+=======
+);
+--插入管理员数据
+insert into B_ADMIN values(seq_adid.nextval,'admin','a');
+select * from B_ADMIN;
+
+>>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
 -----文章所属类型（原创，转载，翻译） 1 2 3 
 create table b_type(
        tid int primary key,
@@ -97,18 +108,17 @@ create table b_article(
 insert into b_article values(seq_aid.nextval,'java编程',1,'java','taonplag',
 to_char(sysdate,'yyyy-MM-dd hh:mm:ss'),'java是面向对象的一种编程，由属性和方法组成。Java对c的有点是不适用指针，实现跨区域','',0);
 
-insert into b_article values(seq_aid.nextval,'spring_mvc框架',1,'spring_mvc,java','akmfdyo',
-to_char(sysdate,'yyyy-MM-dd hh:mm:ss'),'spring_mvc 框架，结合spring和mvc ,可以实现依赖注入面向切面编程','',0);
 
-insert into b_article(aid,atitle,uname,atime,aviewnum,acontent) values(seq_aid.nextval,'java的基本介绍','akmfdyo',
+
+insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'java的基本介绍',10002,
 			'2017-4-1','30','常常是彼此交换名片，然后郑重或是出于礼貌用手机记下对方的电话号'); 
-insert into b_article(aid,atitle,uname,atime,aviewnum,acontent) values(seq_aid.nextval,'oracle的基本介绍','akmfdyo',
+insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'oracle的基本介绍',10002,
 			'2017-4-1','50','oracle数据库'); 
-insert into b_article(aid,atitle,uname,atime,aviewnum,acontent) values(seq_aid.nextval,'spring的基本介绍','akmfdyo',
+insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'spring的基本介绍',10002,
 			'2017-4-1','60','spring:一个开源的框架；  包含：IOC(控制反转)/DI（依赖注入） 和 面向切面编程'); 
-insert into b_article(aid,atitle,uname,atime,aviewnum,acontent) values(seq_aid.nextval,'aop的作用','akmfdyo',
+insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'aop的作用',10003,
 			'2017-4-1','40','主要有两点：1.解决代码的混乱问题2.代码的分散问题'); 
-insert into b_article(aid,atitle,uname,atime,aviewnum,acontent) values(seq_aid.nextval,'事务的特性','akmfdyo',
+insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'事务的特性',10003,
 			'2017-4-1','40','1. 原子性 2. 一致性 3. 隔离性  4. 持久性'); 
 select * from b_article;
 
