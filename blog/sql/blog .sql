@@ -43,25 +43,18 @@ create sequence seq_adid start with 1001;
 create table b_admin(
        adid int primary key,              --管理员id 
        adname varchar2(20) not null,      --管理员名称
-<<<<<<< HEAD
-       adpassword varchar2(20) default 'a'   --管理员密码
-=======
-<<<<<<< HEAD
        adpassword varchar2(20) default 'a'   --管理员密码
 );
 --插入管理员数据
 insert into B_ADMIN values(seq_adid.nextval,'admin','a');
 select * from B_ADMIN;
 --alter table b_admin rename column adpasswoed  to adpassword;
-=======
        adpasswoed varchar2(20) default 'a'   --管理员密码
->>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
 );
 --插入管理员数据
 insert into B_ADMIN values(seq_adid.nextval,'admin','a');
 select * from B_ADMIN;
 
->>>>>>> branch 'master' of ssh://git@github.com/jm2576096522/blog
 -----文章所属类型（原创，转载，翻译） 1 2 3 
 create table b_type(
        tid int primary key,
