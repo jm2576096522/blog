@@ -1,5 +1,7 @@
 package com.yc.ssm.us.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.yc.ssm.us.entity.B_admin;
@@ -37,5 +39,10 @@ public class B_adminServiceImpl implements B_adminService {
 	@Override
 	public int modifyUser(B_admin b_admin) {
 		return b_adminMapper.modifyUser(b_admin);
+	}
+
+	@Override
+	public List<B_admin> findAllUser() {
+		return b_adminMapper.findUserAll();
 	}
 }

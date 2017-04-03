@@ -1,5 +1,6 @@
 package com.yc.ssm.us.handler;
 
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
@@ -28,23 +29,22 @@ public class B_adminHandler {
 		b_admin = b_adminService.login(b_admin);
 		if (b_admin == null) {
 			request.setAttribute(ServletUtil.ERROR_MESSAGE, "用户名或密码错误！！！");
-			return "redirect:/back/login.jsp";
+			return "redirect:/back/admin_login.jsp";
 		} else {
 			request.getSession().setAttribute(ServletUtil.LOGIN_ADMIN, b_admin);
 			return "redirect:/back/manage.jsp";
 		}
 	}
 
-	/*@RequestMapping("list")
-	  
-	  @ResponseBody public PaginationBean<B_admin> list(String rows, String
-	  page) { System.out.println("list:row==>" + rows + ",page==>" + page);
-	  return b_adminService.partUser(page, rows);// 异步数据响应 }
-
-	@RequestMapping("modify")
-	  
-	  @ResponseBody public int modify(B_admin user) {
-	  System.out.println("modify:user==>" + user); return
-	  b_adminService.modifyUser(user);// 异步数据响应 }
+	/*
+	 * @ResponseBody public PaginationBean<B_admin> list(String rows, String
+	 * page) { System.out.println("list:row==>" + rows + ",page==>" + page);
+	 * return b_adminService.partUser(page, rows);// 异步数据响应 }
 	 */
+	@RequestMapping("modify")
+	public int modify(B_admin user) {
+		System.out.println("modify:user==>" + user);
+		return b_adminService.modifyUser(user);// 异步数据响应
+	}
+
 }

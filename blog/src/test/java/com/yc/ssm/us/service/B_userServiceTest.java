@@ -33,8 +33,7 @@ public class B_userServiceTest {
 
 	@Test
 	public void testPartUser() {
-		PaginationBean<B_user> tb = new PaginationBean<B_user>(2, 30);
-		tb = bus.partUser(tb);
+		PaginationBean<B_user> tb = bus.partUser("2", "3");
 		System.out.println(tb);
 		assertNotNull(tb);
 	}

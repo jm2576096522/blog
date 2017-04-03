@@ -1,7 +1,10 @@
-$("#userList").datagrid(
+$("#userList")
+		.datagrid(
 				{
 					url : "blog/list",
 					pagination : true,
+					fit:true,
+					border:false,
 					fitColumns : true,
 					singleSelect : true,
 					pageList : [ 5, 10, 15, 20, 25, 30 ],
@@ -9,18 +12,12 @@ $("#userList").datagrid(
 							{
 								field : 'usid',
 								title : '编号',
-								width : 50,
+								width : 80,
 								align : 'center'
 							},
 							{
 								field : 'uemail',
-								title : '姓名',
-								width : 100,
-								align : 'center'
-							},
-							{
-								field : 'upassword',
-								title : '密码',
+								title : '邮箱',
 								width : 100,
 								align : 'center'
 							},
@@ -39,7 +36,7 @@ $("#userList").datagrid(
 							{
 								field : 'ubirthday',
 								title : '生日',
-								width : 100,
+								width : 80,
 								align : 'center'
 							},
 							{
@@ -57,7 +54,7 @@ $("#userList").datagrid(
 							{
 								field : 'uprofession',
 								title : '职业背景',
-								width : 100,
+								width : 80,
 								align : 'center'
 							},
 							{
@@ -73,7 +70,7 @@ $("#userList").datagrid(
 								align : 'center',
 								formatter : function(value, row, index) {
 									if (value == null) {
-										return "<img width='100' src='image/not_pic.jpg'/>"
+										return "<img width='100' height='100' src='images/not_pic.jpg'/>"
 									} else {
 										return "<img width='100' src='" + value
 												+ "'/>"
@@ -150,24 +147,23 @@ $(".updateBtn").linkbutton({
 });
 
 function openUpdate(index) {
-	alert("打开更新窗口"+index);
 	$("#modifyDiv").dialog("open");
 	var row = $("#userList").datagrid("getRows")[index];
-	$("#usid").val(row.usid);
-	$("#uemail").val(row.uemail);
-	$("#uname").val(row.uname);
-	$("#upassword").val(row.upassword);
-	$("#ubirthday").val(row.ubirthday);
-	$("#usex").val(row.usex);
-	$("#uprofession").val(row.uprofession);
-	$("#upersondesc").val(row.upersondesc);
-	$("#uaddress").val(row.uaddress);
-	$("#uphone").val(row.uphone);
-	$("#upic").val("");
+	$("#id").val(row.usid);
+	$("#email").val(row.uemail);
+	$("#name").val(row.uname);
+	$("#password").val(row.upassword);
+	$("#birthday").val(row.ubirthday);
+	$("#sex").val(row.usex);
+	$("#profession").val(row.uprofession);
+	$("#persondesc").val(row.upersondesc);
+	$("#address").val(row.uaddress);
+	$("#phone").val(row.uphone);
+	$("#pic").val("");
 	if (row.upic) {
-		$("#upic").attr("src", row.pic);
+		$("#pic").attr("src", row.upic);
 	} else {
-		$("#upic").attr("src", "image/not_pic.jpg");
+		$("#pic").attr("src", "../images/not_pic.jpg");
 	}
 }
 
@@ -180,7 +176,6 @@ $("#detailsDiv").dialog({
 $("#detailsDiv").dialog("close");
 
 function openDatail(index) {
-	alert("显示数据窗口"+index);
 	$("#detailsDiv").dialog("open");
 	var row = $("#userList").datagrid("getRows")[index];
 	$("#dname").html(row.uname);
@@ -191,10 +186,10 @@ function openDatail(index) {
 	$("#dpersondesc").html(row.upersondesc);
 	$("#daddress").html(row.uaddress);
 	$("#dmobile").html(row.uphone);
-	if (row.picPath) {
-		$("#pic").attr("src", row.picPath);
+	if (row.upic) {
+		$("#pic").attr("src", row.upic);
 	} else {
-		$("#pic").attr("src", "image/not_pic.jpg");
+		$("#pic").attr("src", "images/not_pic.jpg");
 	}
 }
 

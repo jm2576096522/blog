@@ -27,10 +27,6 @@ public class B_userServiceImpl implements B_userService {
 		return b_userMapper.finUser(b_user);
 	}
 
-	public PaginationBean<B_user> partUser(PaginationBean<B_user> pb) {
-		b_userMapper.partUser(pb);
-		return pb;
-	}
 
 	@Override
 	public boolean modifyUser(B_user b_user) {
@@ -56,9 +52,20 @@ public class B_userServiceImpl implements B_userService {
 
 	@Override
 	public List<B_user> findUserAll() {
-		LogManager.getLogger().debug("我是B_userServiceImpl里的findUserAll");
-		LogManager.getLogger().debug("我是B_userServiceImpl里的");
 		return b_userMapper.findUserAll();
+	}
+
+	@Override
+	public PaginationBean<B_user> partUser(String page, String rows) {
+		PaginationBean<B_user> pb = new PaginationBean<>();
+		if (page != null) {
+			pb.setCurrPage(Integer.parseInt(page));
+		}
+		if (rows != null) {
+			pb.setPageSize(Integer.parseInt(rows));
+		}
+		pb=b_userMapper.partUser(pb);
+		return pb;
 	}
 
 }

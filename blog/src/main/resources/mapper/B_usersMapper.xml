@@ -22,6 +22,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findUserAll" resultType="B_user">
 		select * from b_user
 	</select>
+	
+	
 	<resultMap type="PaginationBean" id="PaginationBeanMap">
 		<collection property="rows"
 			column="{pageSize=pageSize,currPage=currPage}" ofType="B_user"
@@ -29,14 +31,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	<select id="partUser" parameterType="PaginationBean" resultMap="PaginationBeanMap">
 		select count(1) total ,ceil(count(1)/${pageSize}) totalPage ,
-		${currPage}
-		currPage,${pageSize} pageSize from b_user
+		${currPage}currPage,${pageSize} pageSize from b_user
 	</select>
 
 	<select id="getPartUser" resultType="B_user">
-		select * from (select
-		n.*,rownum rn from (select * from b_user )n
-		where
+		select * from (select n.*,rownum rn from 
+		(select * from b_user order by 1)n where
 		${currPage}*${pageSize}>=rownum) t where
 		rn>(${currPage}-1)*${pageSize}
 	</select>

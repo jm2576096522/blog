@@ -24,7 +24,7 @@
 			</p>
 			<p>
 				<input type="password" name="adpassword" placeholder="输入密码"
-					required="required" value="admin" class="inputclass" />
+					required="required" value="a" class="inputclass" />
 			</p>
 			<p>
 				<img src="vcode.jpg" title="看不清，换一张" /><input name="vcode"
