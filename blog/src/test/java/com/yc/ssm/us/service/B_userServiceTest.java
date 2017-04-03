@@ -40,6 +40,13 @@ public class B_userServiceTest {
 	}
 
 	@Test
+	public void testFindAllUser() {
+		List<B_user> tb = bus.findUserAll();
+		System.out.println(tb);
+		assertNotNull(tb);
+	}
+
+	@Test
 	public void testmodifyUser() {
 		B_user buser = new B_user();
 		buser.setUsid(10269);
