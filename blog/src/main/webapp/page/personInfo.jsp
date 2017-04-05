@@ -50,7 +50,7 @@
 		<div class="am-collapse am-topbar-collapse" id="blog-collapse">
 			<ul class="am-nav am-nav-pills am-topbar-nav">
 				<li><a href="homePage.jsp">首页</a></li>
-				<li><a href="article.jsp">我的文章</a></li>
+				<li><a href="personPage.jsp">我的文章</a></li>
 				<li><a href="page/blog_add.jsp">写新文章</a></li>
 				<li><a href="page/blogHistory.jsp">博客历史</a></li>
 				<li><a href="#">标签管理</a></li>
@@ -73,7 +73,7 @@
 				<ul>
 					<li>
 						<label>头 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;像：</label> 
-						<img src="images/03.jpg" id="pic" width="150" height="150"> 
+						<img src="images/not_pic.jpg" id="pic" width="150" height="150"> 
 						<input id="upicPath" type="file" name="picData" onchange="chgPic(this)"/>
 					</li>
 					<li>

@@ -39,7 +39,7 @@
   <div class="am-collapse am-topbar-collapse" id="blog-collapse">
     <ul class="am-nav am-nav-pills am-topbar-nav">
       <li><a href="homePage.jsp">首页</a></li>
-      <li><a href="article.jsp" style="color:#10D07A;">我的文章</a></li>
+      <li><a href="personPage.jsp" style="color:#10D07A;">我的文章</a></li>
       <li><a href="page/blog_add.jsp">写新文章</a></li>
       <li><a href="page/blogHistory.jsp">博客历史</a></li>
       <li><a href="#">标签管理</a></li>	

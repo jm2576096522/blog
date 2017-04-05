@@ -31,33 +31,25 @@
 <body id="blog-article-sidebar">
 	<!-- header start -->
 	<header class="am-g am-g-fixed blog-fixed blog-text-center blog-header">
-		<div class="am-u-sm-8 am-u-sm-centered">
-			<img width="200" src="assets/i/amazeui-b.png" alt="Amaze UI Logo" />
-			<span style="float: right;"> <a href="page/login.jsp">登录</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="page/regist.jsp">注册</a>
-			</span>
-		</div>
-	</header>
-	<!-- header end -->
-	<hr>
+    <div class="am-u-sm-8 am-u-sm-centered">
+        <img width="200" src="assets/i/plot2.png" alt="Amaze UI Logo"/>
+        <h2 class="am-hide-sm-only"></h2>
+    </div>
+</header>
+<hr>
+<nav class="am-g am-g-fixed blog-fixed blog-nav">
+<button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only blog-button" data-am-collapse="{target: '#blog-collapse'}" ><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
 
-	<!-- nav start -->
-	<nav class="am-g am-g-fixed blog-fixed blog-nav">
-		<button
-			class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only blog-button"
-			data-am-collapse="{target: '#blog-collapse'}">
-			<span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span>
-		</button>
-
-		<div class="am-collapse am-topbar-collapse" id="blog-collapse">
-			<ul class="am-nav am-nav-pills am-topbar-nav">
-				<li><a href="homePage.jsp">首页</a></li>
-				<li class="am-active"><a href="page/myblog.jsp">博客历史</a></li>
-				<li ><a href="article.jsp">我的文章</a></li>
-				<li><a href="page/blog_add.jsp">写新文章</a></li>
-				<li><a href="page/blog_add.jsp">草稿箱</a></li>
-				<li><a href="page/userinfo.jsp">个人主页</a></li>
-			</ul>
+  <div class="am-collapse am-topbar-collapse" id="blog-collapse">
+    <ul class="am-nav am-nav-pills am-topbar-nav">
+      <li><a href="homePage.jsp">首页</a></li>
+      <li><a href="article.jsp">我的文章</a></li>
+      <li><a href="page/blog_add.jsp">写新文章</a></li>
+      <li><a href="page/blogHistory.jsp"  style="color:#10D07A;">博客历史</a></li>
+      <li><a href="javaScript:void(0)">标签管理</a></li>	
+      <li><a href="javaScript:void(0)">草稿箱</a></li>
+      <li><a href="page/personInfo.jsp">个人信息管理</a></li>
+    </ul>
 			<form class="am-topbar-form am-topbar-right am-form-inline"
 				role="search">
 				<div class="am-form-group">
