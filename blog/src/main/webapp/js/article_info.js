@@ -1,7 +1,8 @@
-$("#userList")
+
+$("#articleList")
 		.datagrid(
 				{
-					url : "blog/list",
+					url : "article/list",
 					pagination : true,
 					fit:true,
 					border:false,
@@ -10,62 +11,50 @@ $("#userList")
 					pageList : [ 5, 10, 15, 20, 25, 30 ],
 					columns : [ [
 							{
-								field : 'usid',
+								field : 'aid',
 								title : '编号',
 								width : 80,
 								align : 'center'
 							},
 							{
-								field : 'uemail',
-								title : '邮箱',
+								field : 'atitle',
+								title : '文章标题',
 								width : 100,
 								align : 'center'
 							},
 							{
-								field : 'uname',
-								title : '姓名',
-								width : 100,
-								align : 'center'
-							},
-							{
-								field : 'usex',
-								title : '性别',
+								field : 'tid',
+								title : '文章类型',
 								width : 50,
 								align : 'center'
 							},
 							{
-								field : 'ubirthday',
-								title : '生日',
+								field : 'tagid',
+								title : '标签',
+								width : 100,
+								align : 'center'
+							},
+							{
+								field : 'usid',
+								title : '文章作者',
 								width : 80,
 								align : 'center'
 							},
 							{
-								field : 'uaddress',
-								title : '地址',
-								width : 100,
-								align : 'center'
-							},
-							{
-								field : 'uphone',
-								title : '电话',
-								width : 100,
-								align : 'center'
-							},
-							{
-								field : 'uprofession',
-								title : '职业背景',
+								field : 'atime',
+								title : '创作时间',
 								width : 80,
 								align : 'center'
 							},
 							{
-								field : 'upersondesc',
-								title : '个人描述',
-								width : 100,
+								field : 'aviewnum',
+								title : '文章浏览量',
+								width : 50,
 								align : 'center'
 							},
 							{
-								field : 'upic',
-								title : '用户图像',
+								field : 'apic',
+								title : '图片',
 								width : 100,
 								align : 'center',
 								formatter : function(value, row, index) {
@@ -88,9 +77,9 @@ $("#userList")
 											+ ')">详情</a>&nbsp;&nbsp;'
 											+ '<a class="modifyBtn" href="javascript:void(0)" onclick="openUpdate('
 											+ index
-											+ ')">修改</a>'
+											+ ')">删除</a>'
 											+ '<script>$(".detailBtn").linkbutton({iconCls: "icon-search"});'
-											+ '$(".modifyBtn").linkbutton({iconCls: "icon-edit"});</script>';
+											+ '$(".modifyBtn").linkbutton({iconCls: "icon-remove"});</script>';
 									return oprStr;
 								}
 							} ] ]
@@ -116,7 +105,7 @@ $("#modifyForm").form(
 
 				if (data.trim() == "true") {
 					$("#modifyDiv").dialog("close"); // 关闭修改框
-					$("#userList").datagrid("reload"); // 刷新修改数据
+					$("#articleList").datagrid("reload"); // 刷新修改数据
 				} else {
 					$.messager.show({
 						title : '修改信息',
@@ -148,7 +137,7 @@ $(".updateBtn").linkbutton({
 
 function openUpdate(index) {
 	$("#modifyDiv").dialog("open");
-	var row = $("#userList").datagrid("getRows")[index];
+	var row = $("#articleList").datagrid("getRows")[index];
 	$("#id").val(row.usid);
 	$("#email").val(row.uemail);
 	$("#name").val(row.uname);
@@ -168,7 +157,7 @@ function openUpdate(index) {
 }
 
 $("#detailsDiv").dialog({
-	title : "用户详情",
+	title : "文章详情",
 	closable : false,
 	modal : true,
 });
@@ -177,17 +166,17 @@ $("#detailsDiv").dialog("close");
 
 function openDatail(index) {
 	$("#detailsDiv").dialog("open");
-	var row = $("#userList").datagrid("getRows")[index];
-	$("#dname").html(row.uname);
-	$("#demail").html(row.uemail);
-	$("#dbirthday").html(row.ubirthday);
-	$("#dgender").html(row.usex);
-	$("#dprofession").html(row.uprofession);
-	$("#dpersondesc").html(row.upersondesc);
-	$("#daddress").html(row.uaddress);
-	$("#dmobile").html(row.uphone);
-	if (row.upic) {
-		$("#pic").attr("src", row.upic);
+	var row = $("#articleList").datagrid("getRows")[index];
+	$("#daid").html(row.aid);
+	$("#datitle").html(row.atitle);
+	$("#dtid").html(row.tid);
+	$("#dtagid").html(row.tagid);
+	$("#dusid").html(row.usid);
+	$("#datime").html(row.atime);
+	$("#daviewnum").html(row.aviewnum);
+	$("#dacontent").html(row.acontent);
+	if (row.apic) {
+		$("#pic").attr("src", row.apic);
 	} else {
 		$("#pic").attr("src", "images/not_pic.jpg");
 	}

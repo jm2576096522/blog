@@ -14,5 +14,7 @@ public interface B_adminMapper {
 	int modifyUser(B_admin b_admin);
 
 	List<B_admin> findUserAll();
+
+	int insertUser(B_admin b_admin);
 	
 }

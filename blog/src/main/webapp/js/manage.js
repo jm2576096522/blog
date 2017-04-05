@@ -21,7 +21,6 @@ $(".treeNav").tree({
 				closable : true,
 			});
 		} else if (nodeContent == "管理员设置") {
-			alert("进入查询管理员");
 			$("#main").tabs('add', {
 				title : nodeContent,
 				href : "back/admin_edit.jsp",

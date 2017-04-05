@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.yc.ssm.us.entity.B_admin;
+import com.yc.ssm.us.entity.PaginationBean;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring.xml")
@@ -28,17 +29,29 @@ public class B_adminServiceTest {
 
 	@Test
 	public void testPartUser() {
-		fail("Not yet implemented");
+		PaginationBean<B_admin> pb = new PaginationBean<>();
+		pb = bad.partUser("1", "10");
+		System.out.println(pb);
+		assertNotNull(pb);
 	}
 
 	@Test
 	public void testModifyUser() {
 		B_admin admin = new B_admin();
 		admin.setAdid(1001);
-		admin.setAdpassword("admin");
-		int result=bad.modifyUser(admin);
+		// admin.setAdpassword("admin");
+		admin.setAdpassword("a");
+		boolean result = bad.modifyUser(admin);
+		assertEquals(result, true);
+	}
+
+	@Test
+	public void testInsertUser() {
+		B_admin admin = new B_admin();
+		admin.setAdname("jm");
+		admin.setAdpassword("a");
+		int result = bad.insertUser(admin);
 		assertNotNull(result);
 	}
-	
 
 }

@@ -1,6 +1,5 @@
 package com.yc.ssm.us.handler;
 
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
@@ -8,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yc.ssm.us.entity.B_admin;
+import com.yc.ssm.us.entity.PaginationBean;
 import com.yc.ssm.us.service.B_adminService;
 import com.yc.ssm.us.util.ServletUtil;
 
@@ -36,15 +37,25 @@ public class B_adminHandler {
 		}
 	}
 
-	/*
-	 * @ResponseBody public PaginationBean<B_admin> list(String rows, String
-	 * page) { System.out.println("list:row==>" + rows + ",page==>" + page);
-	 * return b_adminService.partUser(page, rows);// 异步数据响应 }
-	 */
+	@RequestMapping(value = "list", method = RequestMethod.POST)
+	@ResponseBody
+	public PaginationBean<B_admin> list(String rows, String page) {
+		LogManager.getLogger().debug("list:row==>" + rows + ",page==>" + page);
+		return b_adminService.partUser(page, rows);// 异步数据响应
+	}
+
 	@RequestMapping("modify")
-	public int modify(B_admin user) {
-		System.out.println("modify:user==>" + user);
+	@ResponseBody
+	public boolean modify(B_admin user) {
+		LogManager.getLogger().debug("modify:user==>" + user);
 		return b_adminService.modifyUser(user);// 异步数据响应
+	}
+
+	@RequestMapping(value = "add", method = RequestMethod.POST)
+	@ResponseBody
+	public int insertUser(B_admin b_admin) {
+		LogManager.getLogger().debug("我是add admin的处理");
+		return b_adminService.insertUser(b_admin);
 	}
 
 }

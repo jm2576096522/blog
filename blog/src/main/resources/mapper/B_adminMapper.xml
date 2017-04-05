@@ -6,29 +6,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.yc.ssm.us.mapper.B_adminMapper">
 	<select id="finUser" parameterType="B_admin" resultType="B_admin">
 		select *
-		from b_admin where adpassword=#{adpassword} and adname=#{adname} 
+		from b_admin where adpassword=#{adpassword} and adname=#{adname}
 	</select>
 
-	<!-- <select id="partUser" parameterType="PaginationBean"
-		statementType="CALLABLE">
-		{call pro_paginationUser(#{currPage},#{pageSize},
-		#{total ,mode=OUT,javaType=int,jdbcType=INTEGER},
-		#{totalPage,
-		mode=OUT,javaType=int,jdbcType=INTEGER},
-		#{rows,
-		mode=OUT,jdbcType=CURSOR,resultMap=UserMap})}
-	</select> -->
-	<!-- <resultMap type="User" id="UserMap">
-		<id column="id" property="id" />
-		<result column="name" property="name" />
-		<result column="password" property="password" />
-		<result column="birthday" property="birthday" />
-		<result column="gender" property="gender" />
-		<result column="career" property="career" />
-		<result column="address" property="address" />
-		<result column="mobile" property="mobile" />
-		<result column="picPath" property="picPath" />
-	</resultMap> -->
+	<select id="findUserAll" resultType="B_admin">
+		select * from b_admin
+	</select>
+	
+	<resultMap type="PaginationBean" id="PaginationBeanMap">
+		<collection property="rows"
+			column="{pageSize=pageSize,currPage=currPage}" ofType="B_user"
+			select="getPartUser" />
+	</resultMap>
+	<select id="partUser" parameterType="PaginationBean" resultMap="PaginationBeanMap">
+		select count(1) total ,ceil(count(1)/${pageSize}) totalPage ,
+		${currPage}currPage,${pageSize} pageSize from b_admin
+	</select>
+
+	<select id="getPartUser" resultType="B_admin">
+		select * from (select
+		n.*,rownum rn from
+		(select * from b_admin order by 1)n where
+		${currPage}*${pageSize}>=rownum) t
+		where
+		rn>(${currPage}-1)*${pageSize}
+	</select>
+	
+	<insert id="insertUser">
+		insert into b_admin values(seq_adid.nextval,#{adname},#{adpassword})
+	</insert>
+	
+	
 
 	<update id="modifyUser" parameterType="B_admin">
 		update b_admin
@@ -37,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				adname=#{adname},
 			</if>
 			<if test="adpassword!=null">
-				adpassword=#{adpassword},
+				adpassword=#{adpassword}
 			</if>
 		</set>
 		where adid=#{adid}

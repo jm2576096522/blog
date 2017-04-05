@@ -29,7 +29,7 @@ import com.yc.ssm.us.util.ServletUtil;
 @RequestMapping("blog")
 public class UserHandler {
 	public UserHandler() {
-		System.out.println("我进入了userHandler");
+		LogManager.getLogger().debug("我进入了userHandler");
 	}
 	
 	@Autowired
@@ -41,8 +41,8 @@ public class UserHandler {
 		HttpSession session = request.getSession();
 		//获取图片验证码
 		String imageCode = (String) session.getAttribute("imageCode");
-		System.out.println("项目发布ming:"+session.getAttribute("deployName"));
-		System.out.println("user的值是："+user);
+		LogManager.getLogger().debug("项目发布ming:"+session.getAttribute("deployName"));
+		LogManager.getLogger().debug("user的值是："+user);
 		if (user == null) {
 			request.setAttribute(ServletUtil.ERROR_MESSAGE,"用户名或密码错误！！！");
 			return "redirect:/login.jsp";
@@ -63,7 +63,7 @@ public class UserHandler {
 		//利用图片工具生成图片
 		//第一个参数是生成的验证码，第二个参数是生成的图片
 		Object[] objs = ImageUtil.createImage();
-		System.out.println("输出"+objs[0]);
+		LogManager.getLogger().debug("输出"+objs[0]);
 		//将验证码存入Session
 		session.setAttribute("imageCode",objs[0]);
 		//将图片输出给浏览器
@@ -84,14 +84,14 @@ public class UserHandler {
 	@RequestMapping(value = "list", method = RequestMethod.POST)
 	@ResponseBody
 	public PaginationBean<B_user> list(String rows, String page) {
-		System.out.println("list:row==>" + rows + ",page==>" + page);
+		LogManager.getLogger().debug("list:row==>" + rows + ",page==>" + page);
 		return userService.partUser(page, rows);// 异步数据响应
 	}
 
 	@RequestMapping("modify")
 	@ResponseBody
 	public boolean modify(@RequestParam("picData") MultipartFile picData, B_user user) {
-		System.out.println("modify:user==>" + user);
+		LogManager.getLogger().debug("modify:user==>" + user);
 		String picPath = null;
 		if (picData != null && !picData.isEmpty()) {// 判断是否有文件上传
 				try {
@@ -104,7 +104,7 @@ public class UserHandler {
 				}
 		}
 		user.setUpic(picPath);
-		System.out.println("上传图片==》user:" + user);
+		LogManager.getLogger().debug("上传图片==》user:" + user);
 		return userService.modifyUser(user);// 异步数据响应
 	}
 }

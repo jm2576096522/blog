@@ -22,8 +22,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findUserAll" resultType="B_user">
 		select * from b_user
 	</select>
-	
-	
+
+
 	<resultMap type="PaginationBean" id="PaginationBeanMap">
 		<collection property="rows"
 			column="{pageSize=pageSize,currPage=currPage}" ofType="B_user"
@@ -35,9 +35,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="getPartUser" resultType="B_user">
-		select * from (select n.*,rownum rn from 
+		select * from (select
+		n.*,rownum rn from
 		(select * from b_user order by 1)n where
-		${currPage}*${pageSize}>=rownum) t where
+		${currPage}*${pageSize}>=rownum) t
+		where
 		rn>(${currPage}-1)*${pageSize}
 	</select>
 
@@ -64,10 +66,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				uaddress=#{uaddress},
 			</if>
 			<if test="upic!=null">
-				upic=#{upic}
+				upic=#{upic},
 			</if>
-			<if test="uprofession!=null">
-				uprofession=#{uprofession},
+			<if test="uphone!=null">
+				uphone=#{uphone},
 			</if>
 			<if test="uprofession!=null">
 				uprofession=#{uprofession},
@@ -78,9 +80,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</set>
 		where usid=#{usid}
 	</update>
-	<!-- <insert id="insertUser" parameterType="B_user"> insert into b_user(usid,uemail,upassword) 
-		values(seq_usid.nextval,#{uemail},#{upassword},#{uname},#{usex},#{ubirthday},#{uaddress},#{upic},#{uphone},#{uprofession},#{upersondesc}) 
-		</insert> -->
 	<insert id="insertUser" parameterType="B_user">
 		insert into
 		b_user(usid,uemail,upassword)

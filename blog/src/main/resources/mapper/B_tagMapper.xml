@@ -10,9 +10,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findTag" parameterType="string" resultType="boolean">
 		select count(1) from b_tag where tagname=#{tagname}
 	</select>
-	<insert id="insertTag" parameterType="string">
+	<insert id="insertTag" parameterType="B_tag">
 		insert into b_tag
 		values(seq_tagid.nextval,#{tagname})
 	</insert>
+	
+	
+	<resultMap type="PaginationBean" id="PaginationBeanMap">
+		<collection property="rows"
+			column="{pageSize=pageSize,currPage=currPage}" ofType="B_tag"
+			select="getPartTag" />
+	</resultMap>
+	<select id="partTag" parameterType="PaginationBean" resultMap="PaginationBeanMap">
+		select count(1) total ,ceil(count(1)/${pageSize}) totalPage ,
+		${currPage}currPage,${pageSize} pageSize from b_tag
+	</select>
+
+	<select id="getPartTag" resultType="B_tag">
+		select * from (select
+		n.*,rownum rn from
+		(select * from b_tag order by 1)n where
+		${currPage}*${pageSize}>=rownum) t
+		where
+		rn>(${currPage}-1)*${pageSize}
+	</select>
+	
+	<update id="modifyTag" parameterType="B_tag">
+		update b_tag
+		<set>
+			<if test="tagname!=null">
+				tagname=#{tagname}
+			</if>
+		</set>
+		where tagid=#{tagid}
+	</update>
 	
 </mapper>

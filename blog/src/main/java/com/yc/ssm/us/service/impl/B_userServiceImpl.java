@@ -43,6 +43,9 @@ public class B_userServiceImpl implements B_userService {
 
 	@Override
 	public boolean modifyUser(B_user b_user) {
+		if(!b_userMapper.findUserByUsid(b_user.getUsid())){
+			b_userMapper.insertUser(b_user);
+		}
 		LogManager.getLogger().debug("用户进行修改操作==》" + b_user);
 		return b_userMapper.updataUser(b_user) > 0;
 	}

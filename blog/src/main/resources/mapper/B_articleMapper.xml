@@ -5,13 +5,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 映射文件的命名空间namespace的值是与之对应的映射接口的全类名 -->
 <mapper namespace="com.yc.ssm.us.mapper.B_articleMapper">
 
-	<!--查询所有的文章  -->
+	<!--查询所有的文章 -->
 	<select id="findArticle" resultType="B_article">
-		select bt.*, bu.uname from b_article bt inner join b_user bu on bt.usid = bu.usid
+		select bt.*, bu.uname from
+		b_article bt inner join b_user bu on bt.usid = bu.usid
 	</select>
 	<!-- 通过用户id查询个人文章 -->
-	<select id="findPersonArticle" parameterType="Integer" resultType="B_article">
-		select bt.*, bu.uname from b_article bt inner join b_user bu on bt.usid = bu.usid where bu.usid = #{usid} 
+	<select id="findPersonArticle" parameterType="Integer"
+		resultType="B_article">
+		select bt.*, bu.uname from b_article bt inner join b_user
+		bu on bt.usid = bu.usid where bu.usid = #{usid}
 	</select>
 
 
@@ -33,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose>
 	</select>
-	
+
 
 	<resultMap type="PaginationBean" id="PaginationBeanMap">
 		<collection property="rows"
@@ -48,11 +51,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="getPartArticle" resultType="B_article"> select * from (select
 		n.*,rownum
-		rn from (select * from b_article )n where
+		rn from (select * from b_article order by 1 )n where
 		${currPage}*${pageSize}>=rownum)
 		t
 		where rn>(${currPage}-1)*${pageSize}
 	</select>
+
 	<update id="modifyArticle" parameterType="B_article">
 		update B_article
 		<set>

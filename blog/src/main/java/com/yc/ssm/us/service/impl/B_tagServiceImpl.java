@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yc.ssm.us.entity.B_tag;
+import com.yc.ssm.us.entity.PaginationBean;
 import com.yc.ssm.us.mapper.B_tagMapper;
 import com.yc.ssm.us.service.B_tagService;
 
@@ -25,12 +26,31 @@ public class B_tagServiceImpl implements B_tagService {
 	}
 
 	@Override
-	public boolean insertTag(String tagname) {
-		return b_tagMapper.insertTag(tagname);
+	public boolean insertTag(B_tag b_tag) {
+		return b_tagMapper.insertTag(b_tag);
 	}
 
 	@Override
 	public List<B_tag> findALlTags() {
 		return b_tagMapper.findALlTags();
+	}
+
+
+	@Override
+	public boolean modifyTag(B_tag b_tag) {
+		return b_tagMapper.modifyTag(b_tag);
+	}
+
+	@Override
+	public PaginationBean<B_tag> partTag(String page, String rows) {
+		PaginationBean<B_tag> pb = new PaginationBean<>();
+		if (page != null) {
+			pb.setCurrPage(Integer.parseInt(page));
+		}
+		if (rows != null) {
+			pb.setPageSize(Integer.parseInt(rows));
+		}
+		pb = b_tagMapper.partTag(pb);
+		return pb;
 	}
 }
