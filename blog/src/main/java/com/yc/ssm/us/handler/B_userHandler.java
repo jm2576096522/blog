@@ -27,8 +27,8 @@ import com.yc.ssm.us.util.ServletUtil;
 
 @Controller
 @RequestMapping("blog")
-public class UserHandler {
-	public UserHandler() {
+public class B_userHandler {
+	public B_userHandler() {
 		System.out.println("我进入了userHandler");
 	}
 	
@@ -106,5 +106,13 @@ public class UserHandler {
 		user.setUpic(picPath);
 		System.out.println("上传图片==》user:" + user);
 		return userService.modifyUser(user);// 异步数据响应
+	}
+	
+	//显示用户信息
+	@RequestMapping("showUserInfo")
+	@ResponseBody
+	public B_user showUserInfo(HttpSession session){
+		B_user user= (B_user) session.getAttribute("loginUser");
+		return user;
 	}
 }

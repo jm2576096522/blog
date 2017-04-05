@@ -8,8 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="">
 <meta name="keywords" content="">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>新建博客</title>
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -19,10 +18,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="Amaze UI" />
-<link rel="apple-touch-icon-precomposed"
-	href="assets/i/app-icon72x72@2x.png">
-<meta name="msapplication-TileImage"
-	content="assets/i/app-icon72x72@2x.png">
+<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+<meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
 <meta name="msapplication-TileColor" content="#0e90d2">
 <link rel="stylesheet" href="assets/css/amazeui.min.css">
 <link rel="stylesheet" href="assets/css/app.css">
@@ -48,11 +45,12 @@
 		<div class="am-collapse am-topbar-collapse" id="blog-collapse">
 			<ul class="am-nav am-nav-pills am-topbar-nav">
 				<li><a href="homePage.jsp">首页</a></li>
-				<li ><a href="page/myblog.jsp">博客历史</a></li>
-				<li ><a href="article.jsp">我的文章</a></li>
-				<li class="am-active"><a href="page/blog_add.jsp">写新文章</a></li>
-				<li><a href="page/blog_add.jsp">草稿箱</a></li>
-				<li><a href="page/userinfo.jsp">个人主页</a></li>
+     			<li><a href="article.jsp">我的文章</a></li>
+      			<li><a href="page/blog_add.jsp" style="color:#10D07A;">写新文章</a></li>
+      			<li><a href="page/blogHistory.jsp">博客历史</a></li>
+     			<li><a href="#">标签管理</a></li>	
+      			<li><a href="#">草稿箱</a></li>
+      			<li><a href="#">个人信息管理</a></li>
 			</ul>
 			<form class="am-topbar-form am-topbar-right am-form-inline"
 				role="search">
@@ -61,13 +59,10 @@
 						placeholder="搜索">
 				</div>
 			</form>
-
-
 		</div>
 	</nav>
 	<hr>
 	<!-- nav end -->
-
 	<!-- content srart -->
 	<div class="am-g am-g-fixed blog-fixed">
 		<div class="am-u-md-8 am-u-sm-12">
@@ -123,10 +118,8 @@
 				<h2 class="blog-text-center blog-title">
 					<span>About ME</span>
 				</h2>
-				<img src="assets/i/f14.jpg" alt="about me" class="blog-entry-img">
-				<p>昵称：迷梦</p>
-				<p>个性签名：我是妹子UI，中国首个开源 HTML5 跨屏前端框架</p>
-				<p>我的说明：我不想成为一个庸俗的人。十年百年后，当我们死去，质疑我们的人同样死去，后人看到的是裹足不前、原地打转的你，还是一直奔跑、走到远方的我？</p>
+				<div id="userPersonInfo"></div>
+				
 			</div>
 			<div class="blog-sidebar-widget blog-bor">
 				<h2 class="blog-text-center blog-title">
@@ -166,8 +159,6 @@
 		</div>
 	</div>
 	<!-- content end -->
-
-
 	<footer class="blog-footer">
 		<div
 			class="am-g am-g-fixed blog-fixed am-u-sm-centered blog-footer-padding">
@@ -227,16 +218,10 @@
 <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 	<script src="assets/js/amazeui.min.js"></script>
-	<script src="js/blog_add.js"></script>
-	<!-- <script src="assets/js/app.js"></script> -->
 
-	<script type="text/javascript" charset="utf-8"
-		src="ueditor/ueditor.config.js"></script>
-	<script type="text/javascript" charset="utf-8"
-		src="ueditor/ueditor.all.min.js">
-		
-	</script>
-	<script type="text/javascript" charset="utf-8"
-		src="ueditor/lang/zh-cn/zh-cn.js"></script>
+	<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
+	<script type="text/javascript" src="js/commonUserInfo.js"></script>	
 </body>
 </html>

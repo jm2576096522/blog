@@ -23,9 +23,9 @@
 	<nav class="blog-nav">
 		<ul class="nav_left">
 			<li class="am-active"><a href="homePage.html" style="color: #10D07A;">首页</a></li>
-			<li><a href="">标准文章</a></li>
-			<li><a href="#">图片库</a></li>
-			<li><a href="#">全宽页面</a></li>
+			<li><a href="">博客专栏</a></li>
+			<li><a href="#">博客专家</a></li>
+			<li><a href="#">热度话题</a></li>
 			<li><a href="personPage.jsp" onClick="check_login()">我的博客</a></li>
 		</ul>
 		<ul class="nav_right">
