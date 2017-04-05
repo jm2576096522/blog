@@ -22,10 +22,10 @@
 	<hr>
 	<nav class="blog-nav">
 		<ul class="nav_left">
-			<li class="am-active"><a href="homePage.html" style="color: #10D07A;">首页</a></li>
-			<li><a href="">标准文章</a></li>
-			<li><a href="#">图片库</a></li>
-			<li><a href="#">全宽页面</a></li>
+			<li class="am-active"><a href="homePage.jsp" style="color: #10D07A;">首页</a></li>
+			<li><a href="">博客专栏</a></li>
+			<li><a href="#">博客专家</a></li>
+			<li><a href="#">热度话题</a></li>
 			<li><a href="personPage.jsp" onClick="check_login()">我的博客</a></li>
 		</ul>
 		<ul class="nav_right">
@@ -85,30 +85,6 @@
 				<div id = "content" class="content">
 			
 				 </div>
-				<!-- 	<div class="blogs">
-					<figure>
-						<img src="images/01.jpg">
-					</figure>
-					<ul>
-						<h3>
-							<a href="/">住在手机里的朋友</a>
-						</h3>
-
-						<p id="con_text" class="con_text">通信时代，无论是初次相见还是老友重逢，交换联系方式，常常是彼此交换名片，然后郑重或是出于礼貌用手机记下对方的电话号码。通信时代，无论是初次相见还是老友重逢，交换联系方式
-							，常常是彼此交换名片，然后郑重或是出于礼貌用手机记下对方的电话号码。在快节奏的生活里，我们不知不觉中就成为住在别人手机里的朋友。又因某些意外，变成了别人手机里匆忙的过客，
-							这种快餐式的友谊 .通信时代，无论是初次相见还是老友重逢，交换联系方式，常常是彼此交换名片，然后郑重或是出于礼貌用手机记下对方的电话号码。通信时代，无论是初次相见还是老友重逢，交换联系方式
-							，常常是彼此交换名片，然后郑重或是出于礼貌用手机记下对方的电话号码。在快节奏的生活里，我们不知不觉中就成为住在别人手机里的朋友。又因某些意外，变成了别人手机里匆忙的过客，
-							这种快餐式的友谊 ...</p>
-						<p class="autor">
-							<span class="lm f_l"><a href="/">个人博客</a></span><span
-								class="dtime f_l">2014-02-19</span><span class="viewnum f_r">浏览（<a
-								href="/">459</a>）
-							</span><span class="pingl f_r">评论（<a href="/">30</a>）
-							</span>
-						</p>
-					</ul>
-				</div> -->
-				 
 			</div>
 		</div>
 		<div class="r_box f_r">
@@ -260,8 +236,7 @@
 		<!--r_box end -->
 	</article>
 	<footer>
-		<p class="ft-copyright">兔小白博客 Design by DanceSmile
-			蜀ICP备11002373号-1</p>
+		<p class="ft-copyright">© 2015 AllMobilize, Inc. Licensed under MIT license. Made with love By LWXYFER1</p>
 		<div id="tbox">
 			<a id="togbook" href="/"></a> <a id="gotop" href="javascript:void(0)"></a>
 		</div>

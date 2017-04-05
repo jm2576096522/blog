@@ -39,12 +39,12 @@
   <div class="am-collapse am-topbar-collapse" id="blog-collapse">
     <ul class="am-nav am-nav-pills am-topbar-nav">
       <li><a href="homePage.jsp">首页</a></li>
-      <li><a href="article.jsp" style="color:#10D07A;">我的文章</a></li>
+      <li><a href="personPage.jsp" style="color:#10D07A;">我的文章</a></li>
       <li><a href="page/blog_add.jsp">写新文章</a></li>
       <li><a href="page/blogHistory.jsp">博客历史</a></li>
       <li><a href="#">标签管理</a></li>	
       <li><a href="#">草稿箱</a></li>
-      <li><a href="#">个人信息管理</a></li>
+      <li><a href="page/personInfo.jsp">个人信息管理</a></li>
     </ul>
     <form class="am-topbar-form am-topbar-right am-form-inline" role="search">
       <div class="am-form-group">
@@ -54,7 +54,6 @@
   </div>
 </nav>
 <hr>
-
 
 <!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed">
@@ -77,111 +76,17 @@
     
     <div id="personArticle"></div>
         
-       <!--  
-        <article class="am-g blog-entry-article">
-            <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
-                <img src="assets/i/f6.jpg" alt="" class="am-u-sm-12">
-            </div>
-            <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
-                <span><a href="" class="blog-color">article&nbsp;</a></span>
-                <span>@amazeUI &nbsp;</span>
-                <span>2015/10/9</span>
-                <h1><a href="">选择的正确性</a></h1>
-                <p>你可以选择在原处不停地跟周遭不解的人解释你为何这么做，让他们理解你，你可以选择什么都不讲，自顾自往前走。
-                </p>
-                <p><a href="" class="blog-continue">continue</a></p>
-            </div>
-        </article>
-
-        <article class="am-g blog-entry-article">
-            <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
-                <img src="assets/i/f12.jpg" alt="" class="am-u-sm-12">
-            </div>
-            <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
-                <span><a href="" class="blog-color">article&nbsp;</a></span>
-                <span>@amazeUI</span>
-                <span>2015/10/9</span>
-                <h1><a href="">开心时拥抱全世界</a></h1>
-                <p>那时候刚好下着雨，柏油路面湿冷冷的，还闪烁着青、黄、红颜色的灯火。我们就在骑楼下躲雨，看绿色的邮筒孤独地站在街的对面。
-                </p>
-                <p><a href="" class="blog-continue">continue</a></p>
-            </div>
-        </article>
-
-        <article class="am-g blog-entry-article">
-            <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
-                <img src="assets/i/f13.jpg" alt="" class="am-u-sm-12">
-            </div>
-            <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
-                <span><a href="" class="blog-color">article&nbsp;</a></span>
-                <span>@amazeUI</span>
-                <span>2015/10/9</span>
-                <h1><a href="">总以为机会无限</a></h1>
-                <p>那时候刚好下着雨，柏油路面湿冷冷的，还闪烁着青、黄、红颜色的灯火。我们就在骑楼下躲雨，看绿色的邮筒孤独地站在街的对面。
-                </p>
-                <p><a href="" class="blog-continue">continue</a></p>
-            </div>
-        </article>
-
-        <article class="am-g blog-entry-article">
-            <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
-                <img src="assets/i/f10.jpg" alt="" class="am-u-sm-12">
-            </div>
-            <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
-                <span><a href="" class="blog-color">article&nbsp;</a></span>
-                <span> @amazeUI &nbsp;</span>
-                <span>2015/10/9</span>
-                <h1><a href="">GIVE ME SOME BIG TEXT AND FONT </a></h1>
-                <p>那时候刚好下着雨，柏油路面湿冷冷的，还闪烁着青、黄、红颜色的灯火。我们就在骑楼下躲雨，看绿色的邮筒孤独地站在街的对面。
-                </p>
-                <p><a href="" class="blog-continue">continue reading</a></p>
-            </div>
-        </article>
-
-        <article class="am-g blog-entry-article">
-            <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
-                <img src="assets/i/f10.jpg" alt="" class="am-u-sm-12">
-            </div>
-            <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
-                <span><a href="" class="blog-color">article&nbsp;</a></span>
-                <span> @amazeUI &nbsp;</span>
-                <span>2015/10/9</span>
-                <h1><a href="">taha cool man i do believe</a></h1>
-                <p>那时候刚好下着雨，柏油路面湿冷冷的，还闪烁着青、黄、红颜色的灯火。我们就在骑楼下躲雨，看绿色的邮筒孤独地站在街的对面。
-                </p>
-                <p><a href="" class="blog-continue">continue reading</a></p>
-            </div>
-        </article>
-
-         <article class="am-g blog-entry-article">
-            <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
-                <img src="assets/i/f10.jpg" alt="" class="am-u-sm-12">
-            </div>
-            <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
-                <span><a href="" class="blog-color">article&nbsp;</a></span>
-                <span> @amazeUI &nbsp;</span>
-                <span>2015/10/9</span>
-                <h1><a href="">taha cool man i do believe</a></h1>
-                <p>那时候刚好下着雨，柏油路面湿冷冷的，还闪烁着青、黄、红颜色的灯火。我们就在骑楼下躲雨，看绿色的邮筒孤独地站在街的对面。
-                </p>
-                <p><a href="" class="blog-continue">continue reading</a></p>
-            </div>
-        </article> -->
-        
         <ul class="am-pagination">
-  <li class="am-pagination-prev"><a href="">&laquo; Prev</a></li>
-  <li class="am-pagination-next"><a href="">Next &raquo;</a></li>
-</ul>
+  			<li class="am-pagination-prev"><a href="">&laquo; Prev</a></li>
+ 			 <li class="am-pagination-next"><a href="">Next &raquo;</a></li>
+		</ul>
     </div>
 
     <div class="am-u-md-4 am-u-sm-12 blog-sidebar">
         <div class="blog-sidebar-widget blog-bor">
             <h2 class="blog-text-center blog-title"><span>About ME</span></h2>
-            <img src="assets/i/f14.jpg" alt="about me" class="blog-entry-img" >
-            <p>妹纸</p>
-            <p>
-        我是妹子UI，中国首个开源 HTML5 跨屏前端框架
-        </p><p>我不想成为一个庸俗的人。十年百年后，当我们死去，质疑我们的人同样死去，后人看到的是裹足不前、原地打转的你，还是一直奔跑、走到远方的我？</p>
+            
+            <div id="userPersonInfo"></div>
         </div>
         <div class="blog-sidebar-widget blog-bor">
             <h2 class="blog-text-center blog-title"><span>Contact ME</span></h2>
@@ -216,43 +121,9 @@
     </div>
 </div>
 <!-- content end -->
-
-
- <footer class="blog-footer">
-    <div class="am-g am-g-fixed blog-fixed am-u-sm-centered blog-footer-padding">
-        <div class="am-u-sm-12 am-u-md-4- am-u-lg-4">
-            <h3>模板简介</h3>
-            <p class="am-text-sm">这是一个使用amazeUI做的简单的前端模板。<br> 博客/ 资讯类 前端模板 <br> 支持响应式，多种布局，包括主页、文章页、媒体页、分类页等<br>嗯嗯嗯，不知道说啥了。外面的世界真精彩<br><br>
-            Amaze UI 使用 MIT 许可证发布，用户可以自由使用、复制、修改、合并、出版发行、散布、再授权及贩售 Amaze UI 及其副本。</p>
-        </div>
-        <div class="am-u-sm-12 am-u-md-4- am-u-lg-4">
-            <h3>社交账号</h3>
-            <p>
-                <a href=""><span class="am-icon-qq am-icon-fw am-primary blog-icon blog-icon"></span></a>
-                <a href=""><span class="am-icon-github am-icon-fw blog-icon blog-icon"></span></a>
-                <a href=""><span class="am-icon-weibo am-icon-fw blog-icon blog-icon"></span></a>
-                <a href=""><span class="am-icon-reddit am-icon-fw blog-icon blog-icon"></span></a>
-                <a href=""><span class="am-icon-weixin am-icon-fw blog-icon blog-icon"></span></a>
-            </p>
-            <h3>Credits</h3>
-            <p>我们追求卓越，然时间、经验、能力有限。Amaze UI 有很多不足的地方，希望大家包容、不吝赐教，给我们提意见、建议。感谢你们！</p>          
-        </div>
-        <div class="am-u-sm-12 am-u-md-4- am-u-lg-4">
-              <h1>我们站在巨人的肩膀上</h1>
-             <h3>Heroes</h3>
-            <p>
-                <ul>
-                    <li>jQuery</li>
-                    <li>Zepto.js</li>
-                    <li>Seajs</li>
-                    <li>LESS</li>
-                    <li>...</li>
-                </ul>
-            </p>
-        </div>
-    </div>    
-    <div class="blog-text-center">© 2015 AllMobilize, Inc. Licensed under MIT license. Made with love By LWXYFER</div>    
-  </footer>
+	<footer class="blog-footer">
+		<div class="blog-text-center">© 2015 AllMobilize, Inc. Licensed under MIT license. Made with love By LWXYFER</div>
+	</footer>
 
 
 
@@ -266,6 +137,7 @@
 <![endif]-->
 <script src="assets/js/amazeui.min.js"></script>
 <script type="text/javascript" src="js/personPage.js"></script>
+<script type="text/javascript" src="js/commonUserInfo.js"></script>
 <!-- <script src="assets/js/app.js"></script> -->
 </body>
 </html>

@@ -36,6 +36,12 @@ decode(ceil(dbms_random.value(0, 6)), 1, '湖南', 2, '湖北', 3, '广东', 4, 
 '180'||ceil(dbms_random.value(10000000,99999999)) ,
 decode(ceil(dbms_random.value(0, 6)), 1, '程序员', 2, '测试员', 3, '分析员', 4, '设计员', 5, '翻译员', '管理员'),'' from dual connect by level <= 150;
 
+
+insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'1506173890@qq.com','a');
+update  b_user set upassword = '6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2';
+
+update b_user set uname = '星空浪漫' , ubirthday = '1999-11-1' , uphone = '10086' ,uprofession = '软件编程师' ,upersondesc = '我是非常叼炸天的，别小看我哦！' where usid = 10007;
+
 insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'123@qq.com','6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2');
 
 select * from b_user;
@@ -48,6 +54,10 @@ create table b_admin(
        adname varchar2(20) not null unique,      --管理员名称
        adpassword varchar2(20) default 'a'   --管理员密码
 );
+--插入管理员数据
+insert into B_ADMIN values(seq_adid.nextval,'admin','a');
+select * from B_ADMIN;
+
 --插入管理员数据
 insert into B_ADMIN values(seq_adid.nextval,'admin','a');
 select * from B_ADMIN;

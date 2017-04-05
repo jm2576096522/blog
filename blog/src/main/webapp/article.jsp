@@ -39,29 +39,23 @@
 
 	<!-- nav start -->
 	<nav class="am-g am-g-fixed blog-fixed blog-nav">
-		<button
-			class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only blog-button"
-			data-am-collapse="{target: '#blog-collapse'}">
-			<span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span>
-		</button>
-
-		<div class="am-collapse am-topbar-collapse" id="blog-collapse">
-			<ul class="am-nav am-nav-pills am-topbar-nav">
-				<li><a href="homePage.jsp">首页</a></li>
-				<li><a href="page/myblog.jsp">博客历史</a></li>
-				<li class="am-active"><a href="article.jsp">我的文章</a></li>
-				<li><a href="page/blog_add.jsp">写新文章</a></li>
-				<li><a href="page/blog_add.jsp">草稿箱</a></li>
-				<li><a href="page/userinfo.jsp">个人主页</a></li>
-			</ul>
-			<form class="am-topbar-form am-topbar-right am-form-inline"
-				role="search">
-				<div class="am-form-group">
-					<input type="text" class="am-form-field am-input-sm"
-						placeholder="搜索">
-				</div>
-			</form>
-		</div>
+		<ul class="am-nav am-nav-pills am-topbar-nav">
+			<li><a href="homePage.jsp">首页</a></li>
+			<li><a href="article.jsp" style="color: #10D07A;">我的文章</a></li>
+			<li><a href="page/blog_add.jsp">写新文章</a></li>
+			<li><a href="page/blogHistory.jsp">博客历史</a></li>
+			<li><a href="#">标签管理</a></li>
+			<li><a href="#">草稿箱</a></li>
+			<li><a href="page/personInfo.jsp">个人信息管理</a></li>
+		</ul>
+		<form class="am-topbar-form am-topbar-right am-form-inline"
+			role="search">
+			<div class="am-form-group">
+				<input type="text" class="am-form-field am-input-sm"
+					placeholder="搜索">
+			</div>
+		</form>
+		
 	</nav>
 	<!-- nav end -->
 	<hr>
@@ -80,16 +74,15 @@
 					<img src="assets/i/f17.jpg" alt=""
 						class="blog-entry-img blog-article-margin">
 					<p class="class="am-article-lead"">
-						炊烟 <br> ／阿城 <br>
-						<br> 老张得了一个闺女。老张说，挺好，就是大了别长得像我，那可嫁不出去了。因此，女儿名美丽，自然姓张。
+						炊烟 <br> ／阿城 <br> <br>
+						老张得了一个闺女。老张说，挺好，就是大了别长得像我，那可嫁不出去了。因此，女儿名美丽，自然姓张。
 
 						老张的大学同学都说，叫个美丽，没什么不好，就是俗了点。老张你也是读过书的人，怎么不能想个雅点儿的呢？ <br>
 						老张说，俗有什么不好？实惠。这年头你还想怎么着？结结实实的吧。 <br>
 
 						老张的同学说，结实？那叫矿石好了，叫火成岩，水成岩也成。咱们这行就是学了个结实。<br> 老张在大学读的地质。 <br>
 
-						老张疼闺女。 <br> 老张抽烟。<br>
-						<br>
+						老张疼闺女。 <br> 老张抽烟。<br> <br>
 						老张的老婆说，你要想要孩子，就把烟忌了，书上说，大人抽烟，会影响胎儿的基因。老张正抽到了一半儿，马上扔掉，用脚碾灭，戒了。美丽生出来了，老张买了一包烟。老张的老婆说，你叫美丽从小肺就是黑的吗？老张凄凄的样子。老张的老婆说，你抽吧，别在美丽的旁边儿抽。
 						<br>
 
@@ -97,8 +90,8 @@
 						<br>
 
 						老张瞧着老婆给美丽喂奶。老张的老婆书也念得不少，瞧老张老盯着，说，还没瞧够呀，又不是没瞧过。老张说，谁瞧你了，我是怕美丽吃不饱。俩人都笑了，美丽换过一口气，也笑了。
+						<br> <br> 秋天了，美丽大了点儿，手会指东西，指妈妈，指爸爸，还会抓耳朵，抓妈妈的头发，抓爸爸的鼻子。
 						<br>
-						<br> 秋天了，美丽大了点儿，手会指东西，指妈妈，指爸爸，还会抓耳朵，抓妈妈的头发，抓爸爸的鼻子。 <br>
 
 						有一天，老张的老婆抱着美丽，老张在旁边挤眉弄眼，逗得美丽嘎嘎乐，两只小手儿奓着。老张的老婆把美丽凑到老张的脸前，美丽的手就伸进爸爸的嘴里。
 						<br>
@@ -113,8 +106,8 @@
 						<br>
 
 						后来，从肚子开始发热，脚心，脖子，指头尖儿，越来越烫。安徒生不是写过个卖火柴的小女孩儿吗？这个丹麦的老东西，他写得对。人饿死前，就是发热，热过了，就是死。
-						<br> 我没死。死了怎么还能跟你结婚？怎么还能有美丽？ <br>
-						<br> 我醒的时候，好半天才看得清东西。我瞧见远处有烟。当时，我只有一个念头儿，烧饭才会有烟。爬吧。<br>
+						<br> 我没死。死了怎么还能跟你结婚？怎么还能有美丽？ <br> <br>
+						我醒的时候，好半天才看得清东西。我瞧见远处有烟。当时，我只有一个念头儿，烧饭才会有烟。爬吧。<br>
 
 						就别说怎么才爬到了吧。到了，是个人家。我趴在门口说，救个命吧，给口吃的吧。没人应。对，可能我的声音太小。我进去了。 <br>
 
@@ -198,9 +191,9 @@
 				<h3>模板简介</h3>
 				<p class="am-text-sm">
 					这是一个使用amazeUI做的简单的前端模板。<br> 博客/ 资讯类 前端模板 <br>
-					支持响应式，多种布局，包括主页、文章页、媒体页、分类页等<br>嗯嗯嗯，不知道说啥了。外面的世界真精彩<br>
-					<br> Amaze UI 使用 MIT 许可证发布，用户可以自由使用、复制、修改、合并、出版发行、散布、再授权及贩售
-					Amaze UI 及其副本。
+					支持响应式，多种布局，包括主页、文章页、媒体页、分类页等<br>嗯嗯嗯，不知道说啥了。外面的世界真精彩<br> <br>
+					Amaze UI 使用 MIT 许可证发布，用户可以自由使用、复制、修改、合并、出版发行、散布、再授权及贩售 Amaze UI
+					及其副本。
 				</p>
 			</div>
 			<div class="am-u-sm-12 am-u-md-4- am-u-lg-4">

@@ -64,7 +64,7 @@
       </div>      
       <br>
       <div class="am-input-group am-animation-slide-left log-animation-delay">       
-        <input type="text" name="upassword" class="am-form-field am-radius log-input" placeholder="密码" minlength="1" required>
+        <input type="password" name="upassword" id="" class="am-form-field am-radius log-input" placeholder="密码" minlength="1" required>
         <span class="am-input-group-label log-icon am-radius"><i class="am-icon-lock am-icon-sm am-icon-fw"></i></span>
       </div>      
       <br>
@@ -116,6 +116,12 @@
 	});
 
 </script>
-
+<!-- <script src="/jquery-toggle-password.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $( "input#p11" ).togglePassword({ el: "input#t1", ev: "click" });
+        $( "input#p21, input#p22" ).togglePassword({ el: "input#t2" });
+    });
+</script> -->
 </body>
 </html>
