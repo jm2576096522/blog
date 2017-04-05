@@ -11,8 +11,8 @@ import com.yc.ssm.us.util.Encrypt;
 @Component("encryptAspect")
 @Aspect
 public class EncryptAspect {
-	@Before("execution ( * com.yc.ssm.us.service.impl.B_userServiceImpl.login(com.yc.ssm.us.entity.B_user))") // com.yc.ssm.us.entity.B_user
-	public void beforeLoginMethod(JoinPoint joinPoint) {
+	@Before("execution ( * com.yc.ssm.us.service.impl.B_userServiceImpl.userLogin(com.yc.ssm.us.entity.B_user))") // com.yc.ssm.us.entity.B_user
+	public void beforeuserLoginMethod(JoinPoint joinPoint) {
 		LogManager.getLogger().debug("--------前置Login：EncryptAspect---------");
 		B_user b_user = (B_user) joinPoint.getArgs()[0];
 		LogManager.getLogger().debug("对密码加密前==》" + b_user);
@@ -29,12 +29,12 @@ public class EncryptAspect {
 		LogManager.getLogger().debug("对密码加密后==》" + b_user);
 	}
 
-/*	@Before("execution ( * com.yc.ssm.us.service.impl.B_userServiceImpl.modifyUser(com.yc.ssm.us.entity.B_user))") // 指定链接点和切点
-	public void beforemodifyUserMethod(JoinPoint joinPoint) {
+	@Before("execution ( * com.yc.ssm.us.service.impl.B_userServiceImpl.updateUser(com.yc.ssm.us.entity.B_user))") // 指定链接点和切点
+	public void beforeUpdateUserMethod(JoinPoint joinPoint) {
 		LogManager.getLogger().debug("--------前置modifyUser：EncryptAspect---------");
 		B_user b_user = (B_user) joinPoint.getArgs()[0];
 		LogManager.getLogger().debug("对密码加密前==》" + b_user);
 		b_user.setUpassword(Encrypt.md5AndSha(b_user.getUpassword()));
 		LogManager.getLogger().debug("对密码加密后==》" + b_user);
-	}*/
+	}
 }

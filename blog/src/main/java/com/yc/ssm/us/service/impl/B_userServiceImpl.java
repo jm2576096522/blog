@@ -10,6 +10,7 @@ import com.yc.ssm.us.entity.PaginationBean;
 import com.yc.ssm.us.entity.B_user;
 import com.yc.ssm.us.mapper.B_userMapper;
 import com.yc.ssm.us.service.B_userService;
+import com.yc.ssm.us.util.Encrypt;
 
 /*@Component//一般bean
 @Controller//控制分发层的bean
@@ -20,11 +21,12 @@ import com.yc.ssm.us.service.B_userService;
 public class B_userServiceImpl implements B_userService {
 	@Autowired // 相当于spring.xml中的<property name="userMapper" ref="userMapper" />
 	private B_userMapper b_userMapper;
-
-	public B_user login(B_user b_user) {
+	
+	//用户登陆
+	public B_user userLogin(B_user b_user) {
 		// user.setPassword(Encrypt.md5AndSha(user.getPassword()));
 		LogManager.getLogger().debug("用户进行登录操作==》" + b_user);
-		return b_userMapper.finUser(b_user);
+		return b_userMapper.userLogin(b_user);
 	}
 
 	@Override
@@ -40,14 +42,14 @@ public class B_userServiceImpl implements B_userService {
 		return pb;
 	}
 
-
+	//用户信息修改
 	@Override
-	public boolean modifyUser(B_user b_user) {
-		if(!b_userMapper.findUserByUsid(b_user.getUsid())){
+	public boolean updateUser(B_user b_user) {
+		/*if(!b_userMapper.findUserByUsid(b_user.getUsid())){
 			b_userMapper.insertUser(b_user);
-		}
+		}*/
 		LogManager.getLogger().debug("用户进行修改操作==》" + b_user);
-		return b_userMapper.updataUser(b_user) > 0;
+		return b_userMapper.updateUser(b_user) > 0;
 	}
 
 	@Override
@@ -70,5 +72,6 @@ public class B_userServiceImpl implements B_userService {
 	public List<B_user> findUserAll() {
 		return b_userMapper.findUserAll();
 	}
+	
 
 }

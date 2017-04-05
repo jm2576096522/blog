@@ -12,9 +12,11 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,8 +38,8 @@ public class B_userHandler {
 	private B_userService userService;
 	
 	@RequestMapping(value="login",method = RequestMethod.POST)
-	public String login(B_user user,@RequestParam("yzm") String yzm,HttpServletRequest request){
-		user = userService.login(user);
+	public String userLogin(B_user user,@RequestParam("yzm") String yzm,HttpServletRequest request){
+		user = userService.userLogin(user);
 		HttpSession session = request.getSession();
 		//获取图片验证码
 		String imageCode = (String) session.getAttribute("imageCode");
@@ -73,7 +75,7 @@ public class B_userHandler {
 		ImageIO.write(images, "png", os);
 		
 	}
-	
+	//注册
 	@RequestMapping(value="register",method = RequestMethod.POST)
 	@ResponseBody
 	public int insertUser(B_user b_user){
@@ -105,7 +107,20 @@ public class B_userHandler {
 		}
 		user.setUpic(picPath);
 		System.out.println("上传图片==》user:" + user);
-		return userService.modifyUser(user);// 异步数据响应
+		return userService.updateUser(user);// 异步数据响应
+	}
+	
+	//更改用户密码
+	@RequestMapping("update_pwd")
+	@ResponseBody
+	public boolean update_pwd(@RequestParam("upassword") String upassword, HttpSession session){
+		B_user user = new B_user();
+		System.out.println("upassword的值是："+upassword);
+		user.setUpassword(upassword);
+		B_user user1 = (B_user) session.getAttribute("loginUser");
+		user.setUsid(user1.getUsid());
+		System.out.println("我是更改密码的操作");
+		return userService.updateUser(user);
 	}
 	
 	//显示用户信息

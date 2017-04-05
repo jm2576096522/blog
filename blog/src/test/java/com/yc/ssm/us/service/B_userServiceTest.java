@@ -26,7 +26,7 @@ public class B_userServiceTest {
 		// buser.setUemail(10269);
 		buser.setUemail("dukvauunwkhi");
 		buser.setUpassword("aaaaaa");
-		buser = bus.login(buser);
+		buser = bus.userLogin(buser);
 		System.out.println("查询结果==》" + buser);
 		assertNotNull(buser);
 	}
@@ -39,14 +39,7 @@ public class B_userServiceTest {
 		assertNotNull(tb);
 	}
 
-	@Test
-	public void testmodifyUser() {
-		B_user buser = new B_user();
-		buser.setUsid(10269);
-		buser.setUpassword("aaaaaa");
-		boolean result = bus.modifyUser(buser);
-		assertEquals(result, true);
-	}
+	
 
 	@Test
 	public void testfindUserByUname() {
@@ -71,4 +64,5 @@ public class B_userServiceTest {
 		System.out.println(result);
 		assertNotNull(result);
 	}
+	
 }

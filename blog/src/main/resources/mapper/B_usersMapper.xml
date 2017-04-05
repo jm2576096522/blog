@@ -4,10 +4,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 映射文件的命名空间namespace的值是与之对应的映射接口的全类名 -->
 <mapper namespace="com.yc.ssm.us.mapper.B_userMapper">
-	<select id="finUser" parameterType="B_user" resultType="B_user">
+	<!--  用户登录-->
+	<select id="userLogin" parameterType="B_user" resultType="B_user">
 		select *
-		from b_user where upassword=#{upassword} and (uemail=#{uemail} or
-		uname=#{uemail})
+		from b_user where upassword=#{upassword} and (uemail=#{uemail} or uname=#{uemail})
 	</select>
 	<select id="findUserByUname" parameterType="string" resultType="boolean">
 		select
@@ -19,11 +19,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		count(*) from b_user
 		where usid=#{usid}
 	</select>
+	<!-- 查询所有的用户 -->
 	<select id="findUserAll" resultType="B_user">
 		select * from b_user
 	</select>
-
-
 	<resultMap type="PaginationBean" id="PaginationBeanMap">
 		<collection property="rows"
 			column="{pageSize=pageSize,currPage=currPage}" ofType="B_user"
@@ -42,8 +41,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where
 		rn>(${currPage}-1)*${pageSize}
 	</select>
-
-	<update id="updataUser" parameterType="B_user">
+	<!-- 更改用户信息 -->
+	<update id="updateUser" parameterType="B_user">
 		update b_user
 		<set>
 			<if test="uemail!=null">
@@ -61,7 +60,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="ubirthday!=null">
 				ubirthday=#{ubirthday},
 			</if>
-
 			<if test="uaddress!=null">
 				uaddress=#{uaddress},
 			</if>
@@ -80,6 +78,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</set>
 		where usid=#{usid}
 	</update>
+	
+ 	<!-- 更改用户密码
+	<update id="updatePWD" parameterType="String" >
+		update b_user set upassword = #{upassword} where usid = #{usid}
+	</update> -->
+	<!-- 注册用户 -->
 	<insert id="insertUser" parameterType="B_user">
 		insert into
 		b_user(usid,uemail,upassword)

@@ -85,7 +85,6 @@
     <div class="am-u-md-4 am-u-sm-12 blog-sidebar">
         <div class="blog-sidebar-widget blog-bor">
             <h2 class="blog-text-center blog-title"><span>About ME</span></h2>
-            
             <div id="userPersonInfo"></div>
         </div>
         <div class="blog-sidebar-widget blog-bor">
