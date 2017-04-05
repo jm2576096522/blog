@@ -44,7 +44,7 @@
       <li><a href="page/blogHistory.jsp">博客历史</a></li>
       <li><a href="#">标签管理</a></li>	
       <li><a href="#">草稿箱</a></li>
-      <li><a href="#">个人信息管理</a></li>
+      <li><a href="page/personInfo.jsp">个人信息管理</a></li>
     </ul>
     <form class="am-topbar-form am-topbar-right am-form-inline" role="search">
       <div class="am-form-group">
@@ -54,7 +54,6 @@
   </div>
 </nav>
 <hr>
-
 
 <!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed">

@@ -8,7 +8,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="">
 <meta name="keywords" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>个人信息</title>
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -18,11 +19,15 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="Amaze UI" />
-<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
-<meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+<link rel="apple-touch-icon-precomposed"
+	href="assets/i/app-icon72x72@2x.png">
+<meta name="msapplication-TileImage"
+	content="assets/i/app-icon72x72@2x.png">
 <meta name="msapplication-TileColor" content="#0e90d2">
 <link rel="stylesheet" href="assets/css/amazeui.min.css">
 <link rel="stylesheet" href="assets/css/app.css">
+<link rel="stylesheet" href="css/personInfo.css">
+<script type="text/javascript" src="js/jquery.min.js"></script>
 </head>
 
 <body id="blog">
@@ -45,12 +50,12 @@
 		<div class="am-collapse am-topbar-collapse" id="blog-collapse">
 			<ul class="am-nav am-nav-pills am-topbar-nav">
 				<li><a href="homePage.jsp">首页</a></li>
-     			<li><a href="article.jsp">我的文章</a></li>
-      			<li><a href="page/blog_add.jsp">写新文章</a></li>
-      			<li><a href="page/blogHistory.jsp">博客历史</a></li>
-     			<li><a href="#">标签管理</a></li>	
-      			<li><a href="#">草稿箱</a></li>
-      			<li><a href="page/personInfo.jsp" style="color:#10D07A;">个人信息管理</a></li>
+				<li><a href="article.jsp">我的文章</a></li>
+				<li><a href="page/blog_add.jsp">写新文章</a></li>
+				<li><a href="page/blogHistory.jsp">博客历史</a></li>
+				<li><a href="#">标签管理</a></li>
+				<li><a href="#">草稿箱</a></li>
+				<li><a href="page/personInfo.jsp" style="color: #10D07A;">个人信息管理</a></li>
 			</ul>
 			<form class="am-topbar-form am-topbar-right am-form-inline"
 				role="search">
@@ -62,60 +67,117 @@
 		</div>
 	</nav>
 	<hr>
-	
+	<div class="am-g am-g-fixed blog-fixed">
+		<div id="contentBox">
+			<form action="" method="" name="myform" onSubmit="return sub()">
+				<ul>
+					<li>
+						<label>头 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;像：</label> 
+						<img src="images/03.jpg" id="pic" width="150" height="150"> 
+						<input id="upicPath" type="file" name="picData" onchange="chgPic(this)"/>
+					</li>
+					<li>
+						<label>昵 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：</label> 
+						<input id="uname" type="text" name="uname" placeholder="请输入你的个人昵称" />
+					</li>
+					<li>
+						<label>性 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label> 
+						<input type="radio" name="rad1" class="rad1" value="男" onClick="ck()"/>男 
+						<input type="radio" name="rad2" value="女" class="rad2" onClick="ck2()" />女
+					</li>
+					<li>
+						<label>出生日期：</label> 
+						<input type="date" placeholder="请输入你的出生日期">
+					</li>
+					<li>
+						<label>联系方式：</label> 
+						<input type="text" name="uphone" />
+					</li>
+					<li>
+						<label>所 &nbsp;在 &nbsp;地：</label> 
+						<select id="selProvince">
+							<option value="0">--请选择省份--</option>
+						</select> 
+						<select id="selCity">
+							<option value="0">--请选择城市--</option>
+						</select> 
+						<select id="selDistrict">
+							<option value="0">--请选择区/县--</option>
+						</select>
+					</li>
+					<li>
+						<label>擅长职业：</label> 
+						<input id="uprefession" name="uprefession" class="class">
+					</li>
+					<li>
+						<label>个性签名：</label> 
+						<textarea rows="4" cols="40"></textarea>
+					</li>
+				</ul>
+				<button class="button_reset" type="reset">取消</button>
+				<button class="button_submit" type="submit">保存</button>
+			</form>
+		</div>
+
+	</div>
+
+
 	<!-- content end -->
 	<footer class="blog-footer">
-		<div
-			class="am-g am-g-fixed blog-fixed am-u-sm-centered blog-footer-padding">
-			<div class="am-u-sm-12 am-u-md-4- am-u-lg-4">
-				<h3>模板简介</h3>
-				<p class="am-text-sm">
-					这是一个使用amazeUI做的简单的前端模板。<br> 博客/ 资讯类 前端模板 <br>
-					支持响应式，多种布局，包括主页、文章页、媒体页、分类页等<br>嗯嗯嗯，不知道说啥了。外面的世界真精彩<br> <br>
-					Amaze UI 使用 MIT 许可证发布，用户可以自由使用、复制、修改、合并、出版发行、散布、再授权及贩售 Amaze UI
-					及其副本。
-				</p>
-			</div>
-			<div class="am-u-sm-12 am-u-md-4- am-u-lg-4">
-				<h3>社交账号</h3>
-				<p>
-					<a href=""><span
-						class="am-icon-qq am-icon-fw am-primary blog-icon blog-icon"></span></a>
-					<a href=""><span
-						class="am-icon-github am-icon-fw blog-icon blog-icon"></span></a> <a
-						href=""><span
-						class="am-icon-weibo am-icon-fw blog-icon blog-icon"></span></a> <a
-						href=""><span
-						class="am-icon-reddit am-icon-fw blog-icon blog-icon"></span></a> <a
-						href=""><span
-						class="am-icon-weixin am-icon-fw blog-icon blog-icon"></span></a>
-				</p>
-				<h3>Credits</h3>
-				<p>我们追求卓越，然时间、经验、能力有限。Amaze UI
-					有很多不足的地方，希望大家包容、不吝赐教，给我们提意见、建议。感谢你们！</p>
-			</div>
-			<div class="am-u-sm-12 am-u-md-4- am-u-lg-4">
-				<h1>我们站在巨人的肩膀上</h1>
-				<h3>Heroes</h3>
-				<p>
-				<ul>
-					<li>jQuery</li>
-					<li>Zepto.js</li>
-					<li>Seajs</li>
-					<li>LESS</li>
-					<li>...</li>
-				</ul>
-				</p>
-			</div>
-		</div>
+		
 		<div class="blog-text-center">© 2015 AllMobilize, Inc. Licensed
 			under MIT license. Made with love By LWXYFER</div>
 	</footer>
 
-	<script src="assets/js/amazeui.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.config.js"></script>
-	<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
-	<script type="text/javascript" src="js/commonUserInfo.js"></script>	
+	<script src="js/CityJson.js" type="text/javascript"></script>
+    <script src="js/ProJson.js" type="text/javascript"></script>
+    <script src="js/DistrictJson.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.each(province, function (k, p) { 
+                var option = "<option value='" + p.ProID + "'>" + p.ProName + "</option>";
+                $("#selProvince").append(option);
+            });
+            $("#selProvince").change(function () {
+                var selValue = $(this).val(); 
+                $("#selCity option:gt(0)").remove();
+                $.each(city, function (k, p) { 
+                    if (p.ProID == selValue) {
+                        var option = "<option value='" + p.CityID + "'>" + p.CityName + "</option>";
+                        $("#selCity").append(option);
+                    }
+                });
+            });
+            $("#selCity").change(function () {
+                var selValue = $(this).val();
+                $("#selDistrict option:gt(0)").remove(); 
+
+                $.each(District, function (k, p) {
+                    if (p.CityID == selValue) {
+                        var option = "<option value='" + p.Id + "'>" + p.DisName + "</option>";
+                        $("#selDistrict").append(option);
+                    }
+                }); 
+            }); 
+        });
+    	function ck(){
+			var clc=document.getElementsByClassName("rad1");
+			console.info(clc.item(0).checked);
+			clc[0].checked=true;
+			
+			var cl2=document.getElementsByClassName("rad2");
+				if(cl2.item(0).checked==true){
+						cl2[0].checked=false;	
+				}
+			}
+		function ck2(){
+				var cl2=document.getElementsByClassName("rad2");
+				cl2.item(0).checked=true;
+					var clc=document.getElementsByClassName("rad1");
+						if(clc[0].checked==true){
+						clc[0].checked=false;	
+				}
+			}
+    </script>
 </body>
 </html>
