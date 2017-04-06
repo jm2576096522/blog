@@ -57,5 +57,19 @@ public class B_adminHandler {
 		LogManager.getLogger().debug("我是add admin的处理");
 		return b_adminService.insertUser(b_admin);
 	}
+	
+	
+	@RequestMapping(value = "forgetPassword", method = RequestMethod.POST)
+	public String forgetPassword(B_admin b_admin, HttpServletRequest request) {
+		LogManager.getLogger().debug("forgetPassword:admin===>" + b_admin);
+		b_admin = b_adminService.forgetPassword(b_admin);
+		if (b_admin == null) {
+			request.setAttribute(ServletUtil.ERROR_MESSAGE, "管理员名称或者邮箱错误！！！");
+			return "redirect:/back/forgetPassword.jsp";
+		} else {
+			request.getSession().setAttribute(ServletUtil.LOGIN_ADMIN, b_admin);
+			return "redirect:/back/manage.jsp";
+		}
+	}
 
 }

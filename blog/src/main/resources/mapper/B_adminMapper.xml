@@ -6,7 +6,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.yc.ssm.us.mapper.B_adminMapper">
 	<select id="finUser" parameterType="B_admin" resultType="B_admin">
 		select *
-		from b_admin where adpassword=#{adpassword} and adname=#{adname}
+		from b_admin where adname=#{adname} and adpassword=#{adpassword} 
+	</select>
+	<select id="forgetPassword" parameterType="B_admin" resultType="B_admin">
+		select *
+		from b_admin where adname=#{adname} and  admail=#{admail}
 	</select>
 
 	<select id="findUserAll" resultType="B_admin">
@@ -33,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insertUser">
-		insert into b_admin values(seq_adid.nextval,#{adname},#{adpassword})
+		insert into b_admin values(seq_adid.nextval,#{adname},#{adpassword},#{admail})
 	</insert>
 	
 	
@@ -45,7 +49,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				adname=#{adname},
 			</if>
 			<if test="adpassword!=null">
-				adpassword=#{adpassword}
+				adpassword=#{adpassword},
+			</if>
+			<if test="admail!=null">
+				admail=#{admail}
 			</if>
 		</set>
 		where adid=#{adid}

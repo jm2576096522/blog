@@ -4,24 +4,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>用户列表</title>
+<title>管理员列表</title>
 </head>
 <body>
 	<table id="adminList"></table>
 
-	<div id="modifyDiv" style="width: 300px; direction: center;">
+	<div id="modifyAdmin" style="width: 300px; direction: center;">
 		<form id="modifyForm" method="post" enctype="multipart/form-data"
 			style="margin-left: 20px;">
 			<p>
-				<span>编号：</span> <input id="id" name="adid" readonly="readonly"
+				<span>编号：</span> <input id="aid" name="adid" readonly="readonly"
 					class="inputclass" />
 			</p>
 			<p>
-				<span>用户名：</span> <input id="name" name="adname" class="inputclass" />
+				<span>用户名：</span> <input id="aname" name="adname" class="inputclass" />
 			</p>
 			<p>
-				<span>密码：</span> <input id="password" name="adpassword"
+				<span>密码：</span> <input id="apassword" name="adpassword"
 					class="inputclass" />
+			</p>
+			<p>
+				<span>邮箱：</span> <input id="amail" name="admail" class="inputclass" />
 			</p>
 			<p>
 				<a class="closeBtn" href="javascript:void(0)">关闭</a>&nbsp;&nbsp; <a

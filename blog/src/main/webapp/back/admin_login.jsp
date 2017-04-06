@@ -31,7 +31,7 @@
 					placeholder="请输入验证码" id="vcode" required="required" />
 			</p>
 			<p>
-				<a id="btnLogin" href="javascript:void(0)">登录</a>
+				<a id="btnLogin" href="javascript:void(0)" style="width: 60%;">登录</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="back/forgetPassword.jsp">找回密码</a>
 			</p>
 		</form>
 	</div>

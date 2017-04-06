@@ -4,7 +4,7 @@ $("#articleList")
 				{
 					url : "article/list",
 					pagination : true,
-					fit:true,
+					fit:false,
 					border:false,
 					fitColumns : true,
 					singleSelect : true,
@@ -85,26 +85,25 @@ $("#articleList")
 							} ] ]
 				});
 
-$("#modifyDiv").dialog({
-	title : "用户修改",
-	closable : false,
+$("#modifyArticle").dialog({
+	title : "文章修改",
+	closed : true,
 	modal : true,
 });
 
-$("#modifyDiv").dialog("close");
 
 $("#modifyForm").form(
 		{
-			url : "blog/modify",
+			url : "article/modify",
 			success : function(data) {
 				if (data == "") {
-					$.messager.alert('用户修改主', '当前用户没有修改用户的权限 ！', 'warning');
-					$("#modifyDiv").dialog("close"); // 关闭修改框
+					$.messager.alert('类型修改', '当前用户没有修改用户的权限 ！', 'warning');
+					$("#modifyArticle").dialog("close"); // 关闭修改框
 					return;
 				}
 
 				if (data.trim() == "true") {
-					$("#modifyDiv").dialog("close"); // 关闭修改框
+					$("#modifyArticle").dialog("close"); // 关闭修改框
 					$("#articleList").datagrid("reload"); // 刷新修改数据
 				} else {
 					$.messager.show({
@@ -123,8 +122,7 @@ $("#modifyForm").form(
 $(".closeBtn").linkbutton({
 	iconCls : "icon-cancel",
 	onClick : function() {
-		$("#modifyDiv").dialog("close");
-		$("#detailsDiv").dialog("close");
+		$("#detailsArticle").dialog("close");
 	}
 });
 
@@ -136,7 +134,7 @@ $(".updateBtn").linkbutton({
 });
 
 function openUpdate(index) {
-	$("#modifyDiv").dialog("open");
+	$("#modifyArticle").dialog("open");
 	var row = $("#articleList").datagrid("getRows")[index];
 	$("#id").val(row.usid);
 	$("#email").val(row.uemail);
@@ -156,32 +154,27 @@ function openUpdate(index) {
 	}
 }
 
-$("#detailsDiv").dialog({
+$("#detailsArticle").dialog({
 	title : "文章详情",
-	closable : false,
+	closed :true,
 	modal : true,
 });
 
-$("#detailsDiv").dialog("close");
 
 function openDatail(index) {
-	$("#detailsDiv").dialog("open");
+	$("#detailsArticle").dialog("open");
 	var row = $("#articleList").datagrid("getRows")[index];
-	$("#daid").html(row.aid);
-	$("#datitle").html(row.atitle);
-	$("#dtid").html(row.tid);
-	$("#dtagid").html(row.tagid);
-	$("#dusid").html(row.usid);
-	$("#datime").html(row.atime);
-	$("#daviewnum").html(row.aviewnum);
-	$("#dacontent").html(row.acontent);
+	$("#Aaid").html(row.aid);
+	$("#Aatitle").html(row.atitle);
+	$("#Atid").html(row.tid);
+	$("#Atagid").html(row.tagid);
+	$("#Ausid").html(row.usid);
+	$("#Aatime").html(row.atime);
+	$("#Aaviewnum").html(row.aviewnum);
+	$("#Aacontent").html(row.acontent);
 	if (row.apic) {
 		$("#pic").attr("src", row.apic);
 	} else {
 		$("#pic").attr("src", "images/not_pic.jpg");
 	}
-}
-
-function chgPic(obj) {
-	$("#upic").attr("src", window.URL.createObjectURL(obj.files[0]));
 }

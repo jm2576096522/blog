@@ -40,26 +40,24 @@ $("#tagList")
 							} ] ]
 				});
 
-$("#modifyDiv").dialog({
-	title : "用户修改",
-	closable : false,
+$("#modifyTag").dialog({
+	title : "标签修改",
+	closed : true,
 	modal : true,
 });
-
-$("#modifyDiv").dialog("close");
 
 $("#modifyForm").form(
 		{
 			url : "tag/modify",
 			success : function(data) {
 				if (data == "") {
-					$.messager.alert('用户修改主', '当前用户没有修改用户的权限 ！', 'warning');
-					$("#modifyDiv").dialog("close"); // 关闭修改框
+					$.messager.alert('标签修改', '当前用户没有修改用户的权限 ！', 'warning');
+					$("#modifyTag").dialog("close"); // 关闭修改框
 					return;
 				}
 
 				if (data.trim() == "true") {
-					$("#modifyDiv").dialog("close"); // 关闭修改框
+					$("#modifyTag").dialog("close"); // 关闭修改框
 					$("#tagList").datagrid("reload"); // 刷新修改数据
 				} else {
 					$.messager.show({
@@ -78,7 +76,7 @@ $("#modifyForm").form(
 $(".closeBtn").linkbutton({
 	iconCls : "icon-cancel",
 	onClick : function() {
-		$("#modifyDiv").dialog("close");
+		$("#modifyTag").dialog("close");
 	}
 });
 
@@ -90,9 +88,9 @@ $(".updateBtn").linkbutton({
 });
 
 function openUpdate(index) {
-	$("#modifyDiv").dialog("open");
+	$("#modifyTag").dialog("open");
 	var row = $("#tagList").datagrid("getRows")[index];
-	$("#id").val(row.tagid);
-	$("#name").val(row.tagname);
+	$("#Tid").val(row.tagid);
+	$("#Tname").val(row.tagname);
 
 }

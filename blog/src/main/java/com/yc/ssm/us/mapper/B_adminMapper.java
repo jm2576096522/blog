@@ -16,5 +16,7 @@ public interface B_adminMapper {
 	List<B_admin> findUserAll();
 
 	int insertUser(B_admin b_admin);
+
+	B_admin forgetPassword(B_admin b_admin);
 	
 }

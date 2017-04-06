@@ -123,7 +123,7 @@
 			alert("请输入邮箱号");
 		}else{
 			$.ajax({
-				url:'sendEmail',
+				url:'sendEmail/user',
 				type:'GET',
 				data:{uemail:uemail},
 				contentType:'application/json;charset=UTF-8',

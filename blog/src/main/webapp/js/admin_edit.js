@@ -28,6 +28,12 @@ $("#adminList")
 								align : 'center'
 							},
 							{
+								field : 'admail',
+								title : '邮箱',
+								width : 100,
+								align : 'center'
+							},
+							{
 								field : 'opr',
 								title : '操作',
 								width : 100,
@@ -43,26 +49,25 @@ $("#adminList")
 							} ] ]
 				});
 
-$("#modifyDiv").dialog({
-	title : "用户修改",
-	closable : false,
+$("#modifyAdmin").dialog({
+	title : "管理员修改",
+	closed : true,
 	modal : true,
 });
 
-$("#modifyDiv").dialog("close");
 
 $("#modifyForm").form(
 		{
 			url : "admin/modify",
 			success : function(data) {
 				if (data == "") {
-					$.messager.alert('用户修改主', '当前用户没有修改用户的权限 ！', 'warning');
-					$("#modifyDiv").dialog("close"); // 关闭修改框
+					$.messager.alert('管理员修改', '当前用户没有修改管理员的权限 ！', 'warning');
+					$("#modifyAdmin").dialog("close"); // 关闭修改框
 					return;
 				}
 
 				if (data.trim() == "true") {
-					$("#modifyDiv").dialog("close"); // 关闭修改框
+					$("#modifyAdmin").dialog("close"); // 关闭修改框
 					$("#adminList").datagrid("reload"); // 刷新修改数据
 				} else {
 					$.messager.show({
@@ -81,7 +86,7 @@ $("#modifyForm").form(
 $(".closeBtn").linkbutton({
 	iconCls : "icon-cancel",
 	onClick : function() {
-		$("#modifyDiv").dialog("close");
+		$("#modifyAdmin").dialog("close");
 	}
 });
 
@@ -93,10 +98,10 @@ $(".updateBtn").linkbutton({
 });
 
 function openUpdate(index) {
-	$("#modifyDiv").dialog("open");
+	$("#modifyAdmin").dialog("open");
 	var row = $("#adminList").datagrid("getRows")[index];
-	$("#id").val(row.adid);
-	$("#name").val(row.adname);
-	$("#password").val(row.adpassword);
-
+	$("#aid").val(row.adid);
+	$("#aname").val(row.adname);
+	$("#apassword").val(row.adpassword);
+	$("#amail").val(row.admail);
 }

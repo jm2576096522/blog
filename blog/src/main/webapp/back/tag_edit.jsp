@@ -9,14 +9,14 @@
 <body>
 	<table id="tagList"></table>
 
-	<div id="modifyDiv" style="width: 300px; direction: center;">
+	<div id="modifyTag" style="width: 300px; direction: center;">
 		<form id="modifyForm" method="post" enctype="multipart/form-data"
 			style="margin-left: 20px;">
 			<p>
-				<span>编号：</span> <input id="id" name="tagid" class="inputclass" />
+				<span>编号：</span> <input id="Tid" name="tagid" class="inputclass" />
 			</p>
 			<p>
-				<span>标签名：</span> <input id="name" name="tagname" class="inputclass" />
+				<span>标签名：</span> <input id="Tname" name="tagname" class="inputclass" />
 			</p>
 			<p>
 				<a class="closeBtn" href="javascript:void(0)">关闭</a>&nbsp;&nbsp; <a

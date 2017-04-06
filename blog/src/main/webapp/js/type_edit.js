@@ -40,26 +40,25 @@ $("#typeList")
 							} ] ]
 				});
 
-$("#modifyDiv").dialog({
-	title : "用户修改",
-	closable : false,
+$("#modifyType").dialog({
+	title : "类型修改",
+	closed : true,
 	modal : true,
 });
 
-$("#modifyDiv").dialog("close");
 
 $("#modifyForm").form(
 		{
 			url : "type/modify",
 			success : function(data) {
 				if (data == "") {
-					$.messager.alert('用户修改主', '当前用户没有修改用户的权限 ！', 'warning');
-					$("#modifyDiv").dialog("close"); // 关闭修改框
+					$.messager.alert('类型修改', '当前用户没有修改用户的权限 ！', 'warning');
+					$("#modifyType").dialog("close"); // 关闭修改框
 					return;
 				}
 
 				if (data.trim() == "true") {
-					$("#modifyDiv").dialog("close"); // 关闭修改框
+					$("#modifyType").dialog("close"); // 关闭修改框
 					$("#typeList").datagrid("reload"); // 刷新修改数据
 				} else {
 					$.messager.show({
@@ -78,7 +77,7 @@ $("#modifyForm").form(
 $(".closeBtn").linkbutton({
 	iconCls : "icon-cancel",
 	onClick : function() {
-		$("#modifyDiv").dialog("close");
+		$("#modifyType").dialog("close");
 	}
 });
 
@@ -90,7 +89,7 @@ $(".updateBtn").linkbutton({
 });
 
 function openUpdate(index) {
-	$("#modifyDiv").dialog("open");
+	$("#modifyType").dialog("open");
 	var row = $("#typeList").datagrid("getRows")[index];
 	$("#id").val(row.tid);
 	$("#name").val(row.tname);

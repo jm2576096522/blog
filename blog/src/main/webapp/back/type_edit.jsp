@@ -9,7 +9,7 @@
 <body>
 	<table id="typeList"></table>
 
-	<div id="modifyDiv" style="width: 300px; direction: center;">
+	<div id="modifyType" style="width: 300px; direction: center;">
 		<form id="modifyForm" method="post" enctype="multipart/form-data"
 			style="margin-left: 20px;">
 			<p>

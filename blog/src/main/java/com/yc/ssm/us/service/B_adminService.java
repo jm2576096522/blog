@@ -16,4 +16,7 @@ public interface B_adminService {
 	// 增加管理员
 	int insertUser(B_admin b_admin);
 
+	// 忘记密码
+	B_admin forgetPassword(B_admin b_admin);
+
 }
