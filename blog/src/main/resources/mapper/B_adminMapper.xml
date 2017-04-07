@@ -34,7 +34,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="insertUser" parameterType="B_admin">
 		insert into
-		b_admin values(seq_adid.nextval,#{adname},#{adpassword},#{admail})
+		b_admin
+		values(seq_adid.nextval,#{adname},#{adpassword},#{admail})
 	</insert>
 
 
@@ -54,6 +55,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</set>
 		where adid=#{adid}
 	</update>
-
+	<delete id="deleteUser">
+		delete from b_admin where adid=#{adid}
+	</delete>
 
 </mapper>

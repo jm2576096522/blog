@@ -80,5 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		hh:mm:ss'),#{acontent},#{apic},#{aviewnum})
 	</insert>
 
-
+	<delete id="deleteArticle">
+		delete from B_article where aid=#{aid}
+	</delete>
 </mapper>

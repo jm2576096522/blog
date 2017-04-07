@@ -4,11 +4,12 @@ $("#articleList")
 				{
 					url : "article/list",
 					pagination : true,
-					fit:false,
+					fit:true,
 					border:false,
 					fitColumns : true,
 					singleSelect : true,
 					pageList : [ 5, 10, 15, 20, 25, 30 ],
+					toolbar : '#tb',
 					columns : [ [
 							{
 								field : 'aid',
@@ -75,11 +76,11 @@ $("#articleList")
 									var oprStr = '<a class="detailBtn" href="javascript:void(0)" onclick="openDatail('
 											+ index
 											+ ')">详情</a>&nbsp;&nbsp;'
-											+ '<a class="modifyBtn" href="javascript:void(0)" onclick="openUpdate('
+											+ '<a class="removeBtn" href="javascript:void(0)" onclick="deleteDate('
 											+ index
 											+ ')">删除</a>'
 											+ '<script>$(".detailBtn").linkbutton({iconCls: "icon-search"});'
-											+ '$(".modifyBtn").linkbutton({iconCls: "icon-remove"});</script>';
+											+ '$(".removeBtn").linkbutton({iconCls: "icon-remove"});</script>';
 									return oprStr;
 								}
 							} ] ]
@@ -119,6 +120,7 @@ $("#modifyForm").form(
 			}
 		});
 
+
 $(".closeBtn").linkbutton({
 	iconCls : "icon-cancel",
 	onClick : function() {
@@ -133,25 +135,27 @@ $(".updateBtn").linkbutton({
 	}
 });
 
-function openUpdate(index) {
-	$("#modifyArticle").dialog("open");
+function deleteDate(index) {
+	// 删除时先获取选择行
 	var row = $("#articleList").datagrid("getRows")[index];
-	$("#id").val(row.usid);
-	$("#email").val(row.uemail);
-	$("#name").val(row.uname);
-	$("#password").val(row.upassword);
-	$("#birthday").val(row.ubirthday);
-	$("#sex").val(row.usex);
-	$("#profession").val(row.uprofession);
-	$("#persondesc").val(row.upersondesc);
-	$("#address").val(row.uaddress);
-	$("#phone").val(row.uphone);
-	$("#pic").val("");
-	if (row.upic) {
-		$("#upic").attr("src", row.upic);
-	} else {
-		$("#upic").attr("src", "images/not_pic.jpg");
-	}
+	
+	var aid = row.aid;
+	// 选择要删除的行
+	$.messager.confirm("提示", "你确定要删除吗?", function(r) {
+		if (r) {
+			$.post("article/delete", {
+				aid : aid
+			}, function(data) {
+				if (data > 0) {
+					$("#articleList").datagrid("reload"); // 刷新修改数据
+				} else {
+					alert("删除失败失败");
+				}
+			});
+			// 将选择到的行存入数组并用,分隔转换成字符串，
+			// 本例只是前台操作没有与数据库进行交互所以此处只是弹出要传入后台的id
+		}
+	});
 }
 
 $("#detailsArticle").dialog({

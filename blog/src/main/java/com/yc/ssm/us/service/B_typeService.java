@@ -13,4 +13,6 @@ public interface B_typeService {
 	// 插入文章类型
 	int insertType(B_type b_type);
 
+	int deleteType(String tid);
+
 }

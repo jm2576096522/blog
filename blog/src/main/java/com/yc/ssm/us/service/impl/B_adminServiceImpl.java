@@ -52,4 +52,10 @@ public class B_adminServiceImpl implements B_adminService {
 	public int insertUser(B_admin b_admin) {
 		return b_adminMapper.insertUser(b_admin);
 	}
+
+	@Override
+	public int deleteUser(String adid) {
+		int adid1=Integer.parseInt(adid);
+		return b_adminMapper.deleteUser(adid1);
+	}
 }

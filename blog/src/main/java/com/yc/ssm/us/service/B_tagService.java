@@ -21,4 +21,6 @@ public interface B_tagService {
 	// 分页显示标签
 	PaginationBean<B_tag> partTag(String page, String rows);
 
+	int deleteTag(String tagid);
+
 }

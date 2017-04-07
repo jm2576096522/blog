@@ -5,6 +5,7 @@ $("#tagList")
 					pagination : true,
 					fit : true,
 					border : false,
+					toolbar : '#tag',
 					fitColumns : true,
 					singleSelect : true,
 					pageList : [ 5, 10, 15, 20, 25, 30 ],
@@ -30,10 +31,10 @@ $("#tagList")
 									var oprStr = '<a class="modifyBtn" href="javascript:void(0)" onclick="openUpdate('
 											+ index
 											+ ')">修改</a> &nbsp;&nbsp;'
-											+ '<a class="detailBtn" href="javascript:void(0)" onclick="openDatail('
+											+ '<a class="removeBtn" href="javascript:void(0)" onclick="deleteDate('
 											+ index
 											+ ')">删除</a>'
-											+ '<script>$(".detailBtn").linkbutton({iconCls: "icon-remove"});'
+											+ '<script>$(".removeBtn").linkbutton({iconCls: "icon-remove"});'
 											+ '$(".modifyBtn").linkbutton({iconCls: "icon-edit"});</script>';
 									return oprStr;
 								}
@@ -45,7 +46,11 @@ $("#modifyTag").dialog({
 	closed : true,
 	modal : true,
 });
-
+$("#addTag").dialog({
+	title : "标签添加",
+	closed : true,
+	modal : true,
+});
 $("#modifyForm").form(
 		{
 			url : "tag/modify",
@@ -72,7 +77,26 @@ $("#modifyForm").form(
 				}
 			}
 		});
-
+$("#addForm").form(
+		{
+			url : "tag/add",
+			success : function(data) {
+				if (data.trim()) {
+					$("#addTag").dialog("close"); // 关闭添加框
+					$("#tagList").datagrid("reload"); // 刷新添加数据
+				} else {
+					$.messager.show({
+						title : '添加标签',
+						msg : '添加标签失败！！！',
+						showType : 'show',
+						style : {
+							top : document.body.scrollTop
+									+ document.documentElement.scrollTop,
+						}
+					});
+				}
+			}
+		});
 $(".closeBtn").linkbutton({
 	iconCls : "icon-cancel",
 	onClick : function() {
@@ -86,11 +110,51 @@ $(".updateBtn").linkbutton({
 		$("#modifyForm").submit();
 	}
 });
+$(".addBtn").linkbutton({
+	iconCls : "icon-add",
+	onClick : function() {
+		$("#addTag").dialog("open");
 
+	}
+});
+$(".updBtn").linkbutton({
+	iconCls : "icon-reload",
+	onClick : function() {
+		$("#tagList").datagrid("reload");
+	}
+});
+
+$(".submitBtn").linkbutton({
+	iconCls : "icon-ok",
+	onClick : function() {
+		$("#addForm").submit();
+	}
+});
 function openUpdate(index) {
 	$("#modifyTag").dialog("open");
 	var row = $("#tagList").datagrid("getRows")[index];
 	$("#Tid").val(row.tagid);
 	$("#Tname").val(row.tagname);
 
+}
+function deleteDate(index) {
+	// 删除时先获取选择行
+	var row = $("#tagList").datagrid("getRows")[index];
+	var tagid = row.tagid;
+	// 选择要删除的行
+	$.messager.confirm("提示", "你确定要删除吗?", function(r) {
+		if (r) {
+			$.post("tag/delete", {
+				tagid : tagid
+			}, function(data) {
+				if (data > 0) {
+					$("#tagList").datagrid("reload"); // 刷新修改数据
+				} else {
+					alert("删除失败失败");
+				}
+			});
+			// 将选择到的行存入数组并用,分隔转换成字符串，
+			// 本例只是前台操作没有与数据库进行交互所以此处只是弹出要传入后台的id
+		}
+	});
 }

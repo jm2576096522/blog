@@ -69,4 +69,10 @@ public class B_articleServiceImpl implements B_articleService {
 		return pb;
 	}
 
+	@Override
+	public int deleteArticle(String aid) {
+		int aid1=Integer.parseInt(aid);
+		return b_articleMapper.deleteArticle(aid1);
+	}
+
 }

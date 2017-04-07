@@ -62,6 +62,14 @@ public class B_adminHandler {
 		return b_adminService.insertUser(b_admin);
 	}
 
+	// 删除管理员
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	@ResponseBody
+	public int deleteUser(String adid) {
+		LogManager.getLogger().debug("我是delete admin的处理");
+		return b_adminService.deleteUser(adid);
+	}
+
 	// 管理员忘记密码登录
 	@RequestMapping(value = "forgetPassword", method = RequestMethod.POST)
 	public String forgetPassword(B_admin b_admin, HttpServletRequest request) {

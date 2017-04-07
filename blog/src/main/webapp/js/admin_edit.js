@@ -9,6 +9,7 @@ $("#adminList")
 					singleSelect : true,
 					pageList : [ 5, 10, 15, 20, 25, 30 ],
 					toolbar : '#tb',
+					idField : 'adid',
 					columns : [ [
 							{
 								field : 'adid',
@@ -45,9 +46,9 @@ $("#adminList")
 									var oprStr = '<a class="modifyBtn" href="javascript:void(0)" onclick="openUpdate('
 											+ index
 											+ ')">修改</a>'
-											+'<a class="removeBtn" href="javascript:void(0)"onclick="deleteDate('
-											+ index 
-											+')">删除</a>'
+											+ '<a class="removeBtn" href="javascript:void(0)"onclick="deleteDate('
+											+ index
+											+ ')">删除</a>'
 											+ '<script>$(".removeBtn").linkbutton({iconCls: "icon-remove"});'
 											+ '$(".modifyBtn").linkbutton({iconCls: "icon-edit"});</script>';
 									return oprStr;
@@ -65,6 +66,29 @@ $("#addAdmin").dialog({
 	closed : true,
 	modal : true,
 });
+
+function deleteDate(index) {
+
+	// 删除时先获取选择行
+	var row = $("#adminList").datagrid("getRows")[index];
+	var adid = row.adid;
+	// 选择要删除的行
+	$.messager.confirm("提示", "你确定要删除吗?", function(r) {
+		if (r) {
+			$.post("admin/delete", {
+				adid : adid
+			}, function(data) {
+				if (data > 0) {
+					$("#adminList").datagrid("reload"); // 刷新修改数据
+				} else {
+					alert("删除失败失败");
+				}
+			});
+			// 将选择到的行存入数组并用,分隔转换成字符串，
+			// 本例只是前台操作没有与数据库进行交互所以此处只是弹出要传入后台的id
+		}
+	});
+}
 
 $("#modifyForm").form(
 		{
@@ -96,7 +120,7 @@ $("#addForm").form(
 		{
 			url : "admin/add",
 			success : function(data) {
-				if (data.trim()>0) {
+				if (data.trim() > 0) {
 					$("#addAdmin").dialog("close"); // 关闭添加框
 					$("#adminList").datagrid("reload"); // 刷新添加数据
 				} else {
@@ -117,14 +141,14 @@ $(".closeBtn").linkbutton({
 	onClick : function() {
 		$("#modifyAdmin").dialog("close");
 		$("#addAdmin").dialog("close");
-		
+
 	}
 });
 $(".addBtn").linkbutton({
 	iconCls : "icon-add",
 	onClick : function() {
 		$("#addAdmin").dialog("open");
-		
+
 	}
 });
 $(".updBtn").linkbutton({
@@ -133,8 +157,6 @@ $(".updBtn").linkbutton({
 		$("#adminList").datagrid("reload");
 	}
 });
-
-
 
 $(".submitBtn").linkbutton({
 	iconCls : "icon-ok",

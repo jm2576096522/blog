@@ -51,4 +51,12 @@ public class B_articleHandler {
 		LogManager.getLogger().debug("list:row==>" + rows + ",page==>" + page);
 		return articleService.partArticle(page, rows);// 异步数据响应
 	}
+
+	// 删除文章
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	@ResponseBody
+	public int deleteUser(String aid) {
+		LogManager.getLogger().debug("我是delete admin的处理");
+		return articleService.deleteArticle(aid);
+	}
 }

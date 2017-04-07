@@ -18,5 +18,6 @@ public interface B_adminMapper {
 
 	// 管理员忘记密码登录
 	B_admin forgetPassword(B_admin b_admin);
-
+	//删除管理员
+	int deleteUser(int adid);
 }

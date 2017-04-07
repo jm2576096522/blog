@@ -7,24 +7,24 @@
 <title>文章列表</title>
 </head>
 <body>
-	<span style=" text-align:center;">按文章类型查询:</span><select id="cc" class="easyui-combobox" name="dept"
-		style="width: 100px;">
-		<option value="1">原创</option>
-		<option value="2">转载</option>
-		<option value="2">翻译</option>
-	</select>
-	
-	<span style="text-align:center; padding-left: 30px;">按文章标签查询:</span><select id="cc1" class="easyui-combobox" name="dept"
-		style="width: 100px;">
-		<option value="1">java</option>
-		<option value="2">oracle</option>
-		<option value="3">oop</option>
-	</select>
-	<table id="articleList"></table>
-
-	<div id="modifyArticle" style="width: 300px; direction: center;">
-		<!-- 删除操作 -->
+	<div id="tb">
+		<span style="text-align: center;">按文章类型查询:</span> <select id="cc"
+			class="easyui-combobox" name="dept" style="width: 100px;">
+			<option value="1">原创</option>
+			<option value="2">转载</option>
+			<option value="2">翻译</option>
+		</select> <span style="text-align: center; padding-left: 30px;">按文章标签查询:</span>
+		<select id="cc1" class="easyui-combobox" name="dept"
+			style="width: 100px;">
+			<option value="1">java</option>
+			<option value="2">oracle</option>
+			<option value="3">oop</option>
+		</select> 
+		<a class="addBtn" href="javascript:void(0)">添加</a> <a class="updBtn"
+			href="javascript:void(0)">刷新</a>
 	</div>
+
+	<table id="articleList"></table>
 
 	<div id="detailsArticle" style="width: 300px; padding: 10px">
 

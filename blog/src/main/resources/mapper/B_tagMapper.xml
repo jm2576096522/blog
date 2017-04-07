@@ -8,18 +8,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from b_tag
 	</select>
 	<select id="findTag" parameterType="string" resultType="boolean">
-		select count(1) from b_tag where tagname=#{tagname}
+		select
+		count(1) from b_tag where tagname=#{tagname}
 	</select>
 	<insert id="insertTag" parameterType="B_tag">
 		insert into b_tag
 		values(seq_tagid.nextval,#{tagname})
 	</insert>
-	
-	
+
+
 	<resultMap type="PaginationBean" id="PaginationBeanMap">
 		<collection property="rows"
-			column="{pageSize=pageSize,currPage=currPage}" ofType="B_tag"
-			select="getPartTag" />
+			column="{pageSize=pageSize,currPage=currPage}" ofType="B_tag" select="getPartTag" />
 	</resultMap>
 	<select id="partTag" parameterType="PaginationBean" resultMap="PaginationBeanMap">
 		select count(1) total ,ceil(count(1)/${pageSize}) totalPage ,
@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where
 		rn>(${currPage}-1)*${pageSize}
 	</select>
-	
+
 	<update id="modifyTag" parameterType="B_tag">
 		update b_tag
 		<set>
@@ -45,4 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where tagid=#{tagid}
 	</update>
 	
+	<delete id="deleteTag">
+		delete from b_tag where tagid=#{tagid}
+	</delete>
 </mapper>

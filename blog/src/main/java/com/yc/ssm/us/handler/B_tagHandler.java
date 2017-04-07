@@ -41,8 +41,16 @@ public class B_tagHandler {
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean insertTag(B_tag b_tag) {
-		LogManager.getLogger().debug("我是add admin的处理");
+		LogManager.getLogger().debug("我是add tag的处理");
 		return b_tagService.insertTag(b_tag);
+	}
+
+	// 删除标签
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	@ResponseBody
+	public int deleteTag(String tagid) {
+		LogManager.getLogger().debug("我是delete type的处理");
+		return b_tagService.deleteTag(tagid);
 	}
 
 }

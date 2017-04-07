@@ -44,5 +44,12 @@ public class B_typeHandler {
 		LogManager.getLogger().debug("我是add type的处理");
 		return b_typeService.insertType(b_type);
 	}
+	// 删除文章类型
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	@ResponseBody
+	public int deleteType(String tid) {
+		LogManager.getLogger().debug("我是delete admin的处理");
+		return b_typeService.deleteType(tid);
+	}
 
 }

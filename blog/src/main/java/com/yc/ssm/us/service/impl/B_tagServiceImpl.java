@@ -53,4 +53,10 @@ public class B_tagServiceImpl implements B_tagService {
 		pb = b_tagMapper.partTag(pb);
 		return pb;
 	}
+
+	@Override
+	public int deleteTag(String tagid) {
+		int tagid1=Integer.parseInt(tagid);
+		return b_tagMapper.deleteTag(tagid1);
+	}
 }

@@ -16,4 +16,6 @@ public interface B_tagMapper {
 
 	PaginationBean<B_tag> partTag(PaginationBean<B_tag> pb);
 
+	int deleteTag(int tagid);
+
 }
