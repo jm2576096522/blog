@@ -88,7 +88,7 @@
 			<textarea id="dpersondesc" style="width: 200px;"></textarea>
 		</p>
 		<p>
-			图片：<img src="images/not_pic.jpg" id="pic" width="100" height="100"
+			图片：<img src="images/not_pic.jpg" id="dpic" width="100" height="100"
 				align="top">
 		</p>
 		<p>

@@ -19,4 +19,6 @@ public interface B_adminService {
 	// 忘记密码
 	B_admin forgetPassword(B_admin b_admin);
 
+	
+
 }

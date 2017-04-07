@@ -15,6 +15,7 @@
 	<div id="loginDiv">
 		<form id="loginForm" action="admin/forgetPassword" method="post">
 			<p>
+			<script type="text/javascript">alert('${errorMsg}')</script>
 				<label style="color: red;">${errorMsg}&nbsp;</label>
 			</p>
 			<!-- 问题反馈 -->
@@ -76,9 +77,6 @@
 				}
 			});
 		}
-		/* 	$("#yzm").focusout(function(){
-		 $("#yzmbutton").attr("disabled", "disabled"); 
-		 }); */
 		function settime() {
 			if (countdown == 0) {
 				$("#yzmbutton").removeAttr("disabled");

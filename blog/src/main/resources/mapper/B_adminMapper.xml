@@ -6,17 +6,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.yc.ssm.us.mapper.B_adminMapper">
 	<select id="finUser" parameterType="B_admin" resultType="B_admin">
 		select *
-		from b_admin where adname=#{adname} and adpassword=#{adpassword} 
+		from b_admin where adname=#{adname} and adpassword=#{adpassword}
 	</select>
 	<select id="forgetPassword" parameterType="B_admin" resultType="B_admin">
 		select *
-		from b_admin where adname=#{adname} and  admail=#{admail}
+		from b_admin where adname=#{adname} and admail=#{admail}
 	</select>
 
-	<select id="findUserAll" resultType="B_admin">
-		select * from b_admin
-	</select>
-	
 	<resultMap type="PaginationBean" id="PaginationBeanMap">
 		<collection property="rows"
 			column="{pageSize=pageSize,currPage=currPage}" ofType="B_user"
@@ -35,12 +31,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where
 		rn>(${currPage}-1)*${pageSize}
 	</select>
-	
-	<insert id="insertUser">
-		insert into b_admin values(seq_adid.nextval,#{adname},#{adpassword},#{admail})
+
+	<insert id="insertUser" parameterType="B_admin">
+		insert into
+		b_admin values(seq_adid.nextval,#{adname},#{adpassword},#{admail})
 	</insert>
-	
-	
+
+
 
 	<update id="modifyUser" parameterType="B_admin">
 		update b_admin

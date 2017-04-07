@@ -26,6 +26,7 @@ public class B_articleHandler {
 	@Autowired
 	private B_articleService articleService;
 
+	// 文章查询
 	@RequestMapping("find")
 	@ResponseBody
 	public List<B_article> findArticle() {
@@ -33,6 +34,7 @@ public class B_articleHandler {
 		return articleService.findArticle();
 	}
 
+	// 查询个人文章（用户id）
 	@RequestMapping("findPerson")
 	@ResponseBody
 	public List<B_article> findPersonArticle(Integer usid, HttpSession session) {
@@ -41,7 +43,8 @@ public class B_articleHandler {
 		System.out.println("我是个人的文章。。。");
 		return articleService.findPersonArticle(usid);
 	}
-	
+
+	// 分页查询文章
 	@RequestMapping(value = "list", method = RequestMethod.POST)
 	@ResponseBody
 	public PaginationBean<B_article> list(String rows, String page) {

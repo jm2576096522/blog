@@ -8,18 +8,21 @@ $("#adminList")
 					fitColumns : true,
 					singleSelect : true,
 					pageList : [ 5, 10, 15, 20, 25, 30 ],
+					toolbar : '#tb',
 					columns : [ [
 							{
 								field : 'adid',
 								title : '编号',
 								width : 100,
-								align : 'center'
+								align : 'center',
+								sortable : true
 							},
 							{
 								field : 'adname',
 								title : '用户名',
 								width : 100,
-								align : 'center'
+								align : 'center',
+								sortable : true
 							},
 							{
 								field : 'adpassword',
@@ -42,7 +45,10 @@ $("#adminList")
 									var oprStr = '<a class="modifyBtn" href="javascript:void(0)" onclick="openUpdate('
 											+ index
 											+ ')">修改</a>'
-											+ '<script>$(".detailBtn").linkbutton({iconCls: "icon-search"});'
+											+'<a class="removeBtn" href="javascript:void(0)"onclick="deleteDate('
+											+ index 
+											+')">删除</a>'
+											+ '<script>$(".removeBtn").linkbutton({iconCls: "icon-remove"});'
 											+ '$(".modifyBtn").linkbutton({iconCls: "icon-edit"});</script>';
 									return oprStr;
 								}
@@ -54,7 +60,11 @@ $("#modifyAdmin").dialog({
 	closed : true,
 	modal : true,
 });
-
+$("#addAdmin").dialog({
+	title : "管理员添加",
+	closed : true,
+	modal : true,
+});
 
 $("#modifyForm").form(
 		{
@@ -82,14 +92,56 @@ $("#modifyForm").form(
 				}
 			}
 		});
-
+$("#addForm").form(
+		{
+			url : "admin/add",
+			success : function(data) {
+				if (data.trim()>0) {
+					$("#addAdmin").dialog("close"); // 关闭添加框
+					$("#adminList").datagrid("reload"); // 刷新添加数据
+				} else {
+					$.messager.show({
+						title : '添加信息',
+						msg : '添加信息失败！！！',
+						showType : 'show',
+						style : {
+							top : document.body.scrollTop
+									+ document.documentElement.scrollTop,
+						}
+					});
+				}
+			}
+		});
 $(".closeBtn").linkbutton({
 	iconCls : "icon-cancel",
 	onClick : function() {
 		$("#modifyAdmin").dialog("close");
+		$("#addAdmin").dialog("close");
+		
+	}
+});
+$(".addBtn").linkbutton({
+	iconCls : "icon-add",
+	onClick : function() {
+		$("#addAdmin").dialog("open");
+		
+	}
+});
+$(".updBtn").linkbutton({
+	iconCls : "icon-reload",
+	onClick : function() {
+		$("#adminList").datagrid("reload");
 	}
 });
 
+
+
+$(".submitBtn").linkbutton({
+	iconCls : "icon-ok",
+	onClick : function() {
+		$("#addForm").submit();
+	}
+});
 $(".updateBtn").linkbutton({
 	iconCls : "icon-ok",
 	onClick : function() {

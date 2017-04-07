@@ -13,7 +13,8 @@ $("#userList")
 								field : 'usid',
 								title : '编号',
 								width : 80,
-								align : 'center'
+								align : 'center',
+								sortable:true
 							},
 							{
 								field : 'uemail',
@@ -25,13 +26,15 @@ $("#userList")
 								field : 'uname',
 								title : '姓名',
 								width : 100,
-								align : 'center'
+								align : 'center',
+								sortable:true
 							},
 							{
 								field : 'usex',
 								title : '性别',
 								width : 50,
-								align : 'center'
+								align : 'center',
+								sortable:true
 							},
 							{
 								field : 'ubirthday',
@@ -185,9 +188,9 @@ function openDatail1(index) {
 	$("#daddress").html(row.uaddress);
 	$("#dmobile").html(row.uphone);
 	if (row.upic) {
-		$("#pic").attr("src", row.upic);
+		$("#dpic").attr("src", row.upic);
 	} else {
-		$("#pic").attr("src", "images/not_pic.jpg");
+		$("#dpic").attr("src", "images/not_pic.jpg");
 	}
 }
 

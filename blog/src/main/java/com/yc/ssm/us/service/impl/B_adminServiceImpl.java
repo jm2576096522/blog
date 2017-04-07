@@ -41,14 +41,15 @@ public class B_adminServiceImpl implements B_adminService {
 		return b_adminMapper.modifyUser(b_admin) > 0;
 	}
 
-	@Override
-	public int insertUser(B_admin b_admin) {
-		return b_adminMapper.insertUser(b_admin);
-	}
 
 	@Override
 	public B_admin forgetPassword(B_admin b_admin) {
 		LogManager.getLogger().debug("用户进行忘记密码操作==》" + b_admin);
 		return b_adminMapper.forgetPassword(b_admin);
+	}
+
+	@Override
+	public int insertUser(B_admin b_admin) {
+		return b_adminMapper.insertUser(b_admin);
 	}
 }
