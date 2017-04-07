@@ -10,7 +10,7 @@ public interface B_tagMapper {
 
 	boolean findTag(String tagname);
 
-	boolean insertTag(B_tag b_tag);
+	int insertTag(B_tag b_tag);
 
 	boolean modifyTag(B_tag b_tag);
 

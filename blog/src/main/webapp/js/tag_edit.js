@@ -51,7 +51,7 @@ $("#addTag").dialog({
 	closed : true,
 	modal : true,
 });
-$("#modifyForm").form(
+$("#modifyTagForm").form(
 		{
 			url : "tag/modify",
 			success : function(data) {
@@ -77,13 +77,13 @@ $("#modifyForm").form(
 				}
 			}
 		});
-$("#addForm").form(
+$("#addTagForm").form(
 		{
 			url : "tag/add",
 			success : function(data) {
-				if (data.trim()) {
+				if (data.trim()>0) {
 					$("#addTag").dialog("close"); // 关闭添加框
-					$("#tagList").datagrid("reload"); // 刷新添加数据
+					$("#tagList").datagrid("reload"); // 刷新修改数据
 				} else {
 					$.messager.show({
 						title : '添加标签',
@@ -107,7 +107,7 @@ $(".closeBtn").linkbutton({
 $(".updateBtn").linkbutton({
 	iconCls : "icon-ok",
 	onClick : function() {
-		$("#modifyForm").submit();
+		$("#modifyTagForm").submit();
 	}
 });
 $(".addBtn").linkbutton({
@@ -127,7 +127,7 @@ $(".updBtn").linkbutton({
 $(".submitBtn").linkbutton({
 	iconCls : "icon-ok",
 	onClick : function() {
-		$("#addForm").submit();
+		$("#addTagForm").submit();
 	}
 });
 function openUpdate(index) {

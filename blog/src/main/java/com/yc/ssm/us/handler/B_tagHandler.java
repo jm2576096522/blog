@@ -40,7 +40,7 @@ public class B_tagHandler {
 	// 添加标签
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean insertTag(B_tag b_tag) {
+	public int insertTag(B_tag b_tag) {
 		LogManager.getLogger().debug("我是add tag的处理");
 		return b_tagService.insertTag(b_tag);
 	}

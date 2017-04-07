@@ -7,7 +7,7 @@
 <title>文章列表</title>
 </head>
 <body>
-	<div id="tb">
+	<div id="article">
 		<span style="text-align: center;">按文章类型查询:</span> <select id="cc"
 			class="easyui-combobox" name="dept" style="width: 100px;">
 			<option value="1">原创</option>

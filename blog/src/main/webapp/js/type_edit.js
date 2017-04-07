@@ -51,7 +51,7 @@ $("#addType").dialog({
 	closed : true,
 	modal : true,
 });
-$("#modifyForm").form(
+$("#modifyTypeForm").form(
 		{
 			url : "type/modify",
 			success : function(data) {
@@ -77,7 +77,7 @@ $("#modifyForm").form(
 				}
 			}
 		});
-$("#addForm").form(
+$("#addTypeForm").form(
 		{
 			url : "type/add",
 			success : function(data) {
@@ -107,7 +107,7 @@ $(".closeBtn").linkbutton({
 $(".updateBtn").linkbutton({
 	iconCls : "icon-ok",
 	onClick : function() {
-		$("#modifyForm").submit();
+		$("#modifyTypeForm").submit();
 	}
 });
 $(".addBtn").linkbutton({
@@ -127,7 +127,7 @@ $(".updBtn").linkbutton({
 $(".submitBtn").linkbutton({
 	iconCls : "icon-ok",
 	onClick : function() {
-		$("#addForm").submit();
+		$("#addTypeForm").submit();
 	}
 });
 

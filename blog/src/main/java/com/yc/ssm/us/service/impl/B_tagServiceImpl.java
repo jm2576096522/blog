@@ -26,7 +26,7 @@ public class B_tagServiceImpl implements B_tagService {
 	}
 
 	@Override
-	public boolean insertTag(B_tag b_tag) {
+	public int insertTag(B_tag b_tag) {
 		return b_tagMapper.insertTag(b_tag);
 	}
 

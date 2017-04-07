@@ -8,7 +8,7 @@ $("#adminList")
 					fitColumns : true,
 					singleSelect : true,
 					pageList : [ 5, 10, 15, 20, 25, 30 ],
-					toolbar : '#tb',
+					toolbar : '#admin',
 					idField : 'adid',
 					columns : [ [
 							{
@@ -90,7 +90,7 @@ function deleteDate(index) {
 	});
 }
 
-$("#modifyForm").form(
+$("#modifyAdminForm").form(
 		{
 			url : "admin/modify",
 			success : function(data) {
@@ -116,7 +116,7 @@ $("#modifyForm").form(
 				}
 			}
 		});
-$("#addForm").form(
+$("#addAdminForm").form(
 		{
 			url : "admin/add",
 			success : function(data) {
@@ -161,13 +161,13 @@ $(".updBtn").linkbutton({
 $(".submitBtn").linkbutton({
 	iconCls : "icon-ok",
 	onClick : function() {
-		$("#addForm").submit();
+		$("#addAdminForm").submit();
 	}
 });
 $(".updateBtn").linkbutton({
 	iconCls : "icon-ok",
 	onClick : function() {
-		$("#modifyForm").submit();
+		$("#modifyAdminForm").submit();
 	}
 });
 

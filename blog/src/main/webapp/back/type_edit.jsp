@@ -13,7 +13,7 @@
 			href="javascript:void(0)">刷新</a>
 	</div>
 	<div id="modifyType" style="width: 300px; direction: center;">
-		<form id="modifyForm" method="post" enctype="multipart/form-data"
+		<form id="modifyTypeForm" method="post" enctype="multipart/form-data"
 			style="margin-left: 20px;">
 			<p>
 				<span>编号：</span> <input id="id" name="tid" class="inputclass" />
@@ -28,7 +28,7 @@
 		</form>
 	</div>
 	<div id="addType" style="width: 300px; direction: center;">
-		<form id="addForm" method="post" enctype="multipart/form-data"
+		<form id="addTypeForm" method="post" enctype="multipart/form-data"
 			style="margin-left: 20px;">
 			<p>
 				<span>类型名：</span> <input id="tname" name="tname" class="inputclass" />

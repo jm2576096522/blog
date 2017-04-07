@@ -13,7 +13,7 @@ public interface B_tagService {
 	boolean findTag(String tagname);
 
 	// 插入标签
-	boolean insertTag(B_tag b_tag);
+	int insertTag(B_tag b_tag);
 
 	// 修改标签
 	boolean modifyTag(B_tag b_tag);

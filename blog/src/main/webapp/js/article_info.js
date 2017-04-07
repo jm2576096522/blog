@@ -1,15 +1,14 @@
-
 $("#articleList")
 		.datagrid(
 				{
 					url : "article/list",
 					pagination : true,
-					fit:true,
-					border:false,
+					fit : true,
+					border : false,
 					fitColumns : true,
 					singleSelect : true,
 					pageList : [ 5, 10, 15, 20, 25, 30 ],
-					toolbar : '#tb',
+					toolbar : '#article',
 					columns : [ [
 							{
 								field : 'aid',
@@ -86,41 +85,6 @@ $("#articleList")
 							} ] ]
 				});
 
-$("#modifyArticle").dialog({
-	title : "文章修改",
-	closed : true,
-	modal : true,
-});
-
-
-$("#modifyForm").form(
-		{
-			url : "article/modify",
-			success : function(data) {
-				if (data == "") {
-					$.messager.alert('类型修改', '当前用户没有修改用户的权限 ！', 'warning');
-					$("#modifyArticle").dialog("close"); // 关闭修改框
-					return;
-				}
-
-				if (data.trim() == "true") {
-					$("#modifyArticle").dialog("close"); // 关闭修改框
-					$("#articleList").datagrid("reload"); // 刷新修改数据
-				} else {
-					$.messager.show({
-						title : '修改信息',
-						msg : '修改失败！！！',
-						showType : 'show',
-						style : {
-							top : document.body.scrollTop
-									+ document.documentElement.scrollTop,
-						}
-					});
-				}
-			}
-		});
-
-
 $(".closeBtn").linkbutton({
 	iconCls : "icon-cancel",
 	onClick : function() {
@@ -128,17 +92,10 @@ $(".closeBtn").linkbutton({
 	}
 });
 
-$(".updateBtn").linkbutton({
-	iconCls : "icon-ok",
-	onClick : function() {
-		$("#modifyForm").submit();
-	}
-});
-
 function deleteDate(index) {
 	// 删除时先获取选择行
 	var row = $("#articleList").datagrid("getRows")[index];
-	
+
 	var aid = row.aid;
 	// 选择要删除的行
 	$.messager.confirm("提示", "你确定要删除吗?", function(r) {
@@ -160,10 +117,9 @@ function deleteDate(index) {
 
 $("#detailsArticle").dialog({
 	title : "文章详情",
-	closed :true,
+	closed : true,
 	modal : true,
 });
-
 
 function openDatail(index) {
 	$("#detailsArticle").dialog("open");
