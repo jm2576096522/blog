@@ -9,19 +9,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select *
 		from b_user where upassword=#{upassword} and (uemail=#{uemail} or uname=#{uemail})
 	</select>
-	<select id="findUserByUname" parameterType="string" resultType="boolean">
-		select
-		count(*) from b_user
-		where uname=#{uname}
-	</select>
-	<select id="findUserByUsid" parameterType="int" resultType="boolean">
-		select
-		count(*) from b_user
-		where usid=#{usid}
+	
+	<!-- 通过id查询用户 -->
+	<select id="findUserByUsid" parameterType="Integer" resultType="B_user">
+		select * from b_user where usid=#{usid}
 	</select>
 	<!-- 查询所有的用户 -->
 	<select id="findUserAll" resultType="B_user">
 		select * from b_user
+	</select>
+	<!--验证登录是否存在  -->
+	<select id="findUser" parameterType="Integer" resultType="boolean">
+		select * from b_user where usid = #{usid}
 	</select>
 	<resultMap type="PaginationBean" id="PaginationBeanMap">
 		<collection property="rows"

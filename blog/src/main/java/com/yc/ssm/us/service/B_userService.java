@@ -15,13 +15,13 @@ public interface B_userService {
 	
 	// 修改用户信息
 	boolean updateUser(B_user b_user);
-
-	// 通过用户昵称查找用户
-	boolean findUserByUname(String uname);
+	
+	//验证登录是否存在
+	boolean findUser(Integer usid);
 
 	//插入用户
 	int insertUser(B_user b_user);
 	// 通过用户id查找用户
-	boolean findUserByUsid(int usid);
+	B_user findUserByUsid(Integer usid);
 	
 }

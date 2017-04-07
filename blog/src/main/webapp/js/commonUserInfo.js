@@ -13,4 +13,5 @@ $.get("blog/showUserInfo",function(data){
 	userInfoStr +='<p>个性签名 ：'+data.upersondesc+'</p>';
 	
 	$("#userPersonInfo").html(userInfoStr);
+	
 },'json');

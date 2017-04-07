@@ -42,17 +42,17 @@ public class B_userServiceTest {
 	
 
 	@Test
-	public void testfindUserByUname() {
-		boolean result = bus.findUserByUname("dukvauunwkhi");
+	public void testfindUser() {
+		boolean result = bus.findUser(10007);
 		System.out.println(result);
-		assertEquals(result, true);
+		assertNotNull(result);
 	}
 
 	@Test
 	public void testfindUserByUsId() {
-		boolean result = bus.findUserByUsid(10269);
+		B_user result = bus.findUserByUsid(10007);
 		System.out.println(result);
-		assertEquals(result, true);
+		assertNotNull(result);
 	}
 
 	@Test

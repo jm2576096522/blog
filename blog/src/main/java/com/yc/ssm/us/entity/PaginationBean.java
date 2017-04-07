@@ -20,7 +20,6 @@ public class PaginationBean<T> {
 	private List<T> rows; // 当前页的数据
 
 	public PaginationBean() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public PaginationBean(Integer currPage, Integer pageSize) {

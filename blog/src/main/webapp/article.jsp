@@ -48,13 +48,10 @@
 			<li><a href="#">草稿箱</a></li>
 			<li><a href="page/personInfo.jsp">个人信息管理</a></li>
 		</ul>
-		<form class="am-topbar-form am-topbar-right am-form-inline"
-			role="search">
-			<div class="am-form-group">
-				<input type="text" class="am-form-field am-input-sm"
-					placeholder="搜索">
-			</div>
-		</form>
+		<div class="show_loginUser" style="float:right;">
+        	<img src="${loginUser.getUpic()}" style="width:50px;height:50px;border-radius:50%;margin-right:10px;">
+        	欢迎  : <input type="text" id="loginUname" style="border:none;width:120px;" value="${loginUser.getUname()}"/>
+     	 </div>
 		
 	</nav>
 	<!-- nav end -->

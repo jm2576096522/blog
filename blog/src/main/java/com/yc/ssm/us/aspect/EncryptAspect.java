@@ -29,12 +29,12 @@ public class EncryptAspect {
 		LogManager.getLogger().debug("对密码加密后==》" + b_user);
 	}
 
-	@Before("execution ( * com.yc.ssm.us.service.impl.B_userServiceImpl.updateUser(com.yc.ssm.us.entity.B_user))") // 指定链接点和切点
+	/*@Before("execution ( * com.yc.ssm.us.service.impl.B_userServiceImpl.updateUser(com.yc.ssm.us.entity.B_user))") // 指定链接点和切点
 	public void beforeUpdateUserMethod(JoinPoint joinPoint) {
 		LogManager.getLogger().debug("--------前置modifyUser：EncryptAspect---------");
 		B_user b_user = (B_user) joinPoint.getArgs()[0];
 		LogManager.getLogger().debug("对密码加密前==》" + b_user);
 		b_user.setUpassword(Encrypt.md5AndSha(b_user.getUpassword()));
 		LogManager.getLogger().debug("对密码加密后==》" + b_user);
-	}
+	}*/
 }

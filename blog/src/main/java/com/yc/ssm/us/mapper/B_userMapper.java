@@ -14,13 +14,11 @@ public interface B_userMapper {
 	int updateUser(B_user b_user);// 更新用户信息
 	//注册用户
 	int insertUser(B_user b_user);
-
-	boolean findUserByUname(String uname);
-
-	boolean findUserByUsid(int usid);
+	//验证登录是否存在
+	boolean findUser(Integer usid);
+	//通过用户id查询用户
+	B_user findUserByUsid(Integer usid);
 	
-	/*//更改用户密码
-	boolean updatePWD(String upassword,String usid);*/
 	//查询所有的用户
 	List<B_user> findUserAll();
 	

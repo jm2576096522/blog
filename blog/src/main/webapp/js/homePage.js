@@ -13,3 +13,13 @@ $.get("article/find",function(data){
 		}
 		$("#content").html(articleStr);
 },"json");
+
+
+function check_login(){
+	if($("#user_usid").val() == ""){
+		alert("你尚未登陆，请先登录");
+		location.href="login.jsp";
+	}else{
+		location.href="personPage.jsp";
+	}
+}

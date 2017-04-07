@@ -57,17 +57,11 @@
 		<div class="am-u-sm-8 am-u-sm-centered">
 			<img width="200" src="assets/i/plot2.png" alt="Amaze UI Logo" />
 			<h2 class="am-hide-sm-only"></h2>
-			<span style="float: right;"> 欢迎 【 迷梦】 </span>
+			
 		</div>
 	</header>
 	<hr>
 	<nav class="am-g am-g-fixed blog-fixed blog-nav">
-		<button
-			class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only blog-button"
-			data-am-collapse="{target: '#blog-collapse'}">
-			<span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span>
-		</button>
-
 		<div class="am-collapse am-topbar-collapse" id="blog-collapse">
 			<ul class="am-nav am-nav-pills am-topbar-nav">
 				<li><a href="homePage.jsp">首页</a></li>
@@ -78,13 +72,10 @@
 				<li><a href="#">草稿箱</a></li>
 				<li><a href="page/personInfo.jsp" style="color: #10D07A;">个人信息管理</a></li>
 			</ul>
-			<form class="am-topbar-form am-topbar-right am-form-inline"
-				role="search">
-				<div class="am-form-group">
-					<input type="text" class="am-form-field am-input-sm"
-						placeholder="搜索">
-				</div>
-			</form>
+		<div class="show_loginUser" style="float:right;">
+        	<img src="${loginUser.getUpic()}" style="width:50px;height:50px;border-radius:50%;margin-right:10px;">
+        	欢迎  : <input type="text" id="loginUname" style="border:none;width:120px;" value="${loginUser.getUname()}"/>
+      </div>
 		</div>
 	</nav>
 	<hr>
@@ -210,8 +201,14 @@
 				$("#span3").attr("class")== "error"||$("#span4").attr("class") == "focus"){
 			return false;
 		}else{
-			$.post("blog/update_pwd",{upassword:new_pwd},function(data){
-				alert("更改成功...");
+			$.post("blog/update_pwd",{upassword:new_pwd,old_pwd:old_pwd},function(data){
+				if(data == false){
+					info.innerHTML="密码不正确";
+					info.className="error";
+				}else{
+					alert("更改成功...");
+				}
+			
 			},"json");
 		}
 	}

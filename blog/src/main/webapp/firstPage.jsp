@@ -28,15 +28,12 @@
 			<li><a href="#">热度话题</a></li>
 			<li><a onclick="check_login()">我的博客</a></li>
 		</ul>
-	<%--  <div class="show_loginUser">
-        	<img src="${loginUser.getUpic()}">
-        	欢迎  : <input type="text" id="loginUname" class="loginUname" value="${loginUser.getUname()}"/>
-        	<select id="user_select" style="border:none;width:20px;">
-        		<option value="personPage.jsp"></option>
-        		<option onclick="switch_user()">切换用户</option>
-        		<option onclick="login_out()">退出</option>
-        	</select>
-      </div> --%>
+		<ul class="nav_right">
+			<li><a href="register.jsp"> 注册 </li>
+			<li>|</li>
+			<li><a href="login.jsp"> 登录 </li>
+			
+		</ul>
 	</nav>
 	<hr>
 	<article>
@@ -94,7 +91,7 @@
 		<div class="r_box f_r">
 			<div class="tit01">
 				<h3>关注我 :
-					<input type="hidden" id="user_usid" style=" border:none;" value="${loginUser.getUsid()}">
+					<input type="text" id="user_usid" style="border:none;">
 				</h3>
 				
 				<div class="gzwm">
@@ -249,7 +246,33 @@
 		</div>
 	</footer>
 	
-	<script type="text/javascript" src="js/homePage.js"></script>
+	<script type="text/javascript">
+	$.get("article/find",function(data){
+		var articleStr = "";
+		for (var i = 0; i < data.length; i++){
+			articleStr +='<div class="blogs">';
+			articleStr +='<figure><img src="'+data[i].apic+'"></figure>';
+			articleStr +='<ul><h3><a href="/">'+data[i].atitle+'</a></h3>';
+			articleStr +='<p id="con_text" class="con_text">'+data[i].acontent+'</p>';
+			articleStr +='<p class="autor"><span class="lm f_l"><a href="/">'+data[i].uname+'</a></span>';
+			articleStr +='<span class="dtime f_l">'+data[i].atime+'</span>';
+			articleStr +='<span class="viewnum f_r"><a href="/">浏览（'+data[i].aviewnum+'）</a></span>';
+			articleStr +='<span class="pingl f_r"><a href="/">评论（'+data[i].aviewnum+'）</a></span></p>';
+			articleStr +='</ul></div>';
+		}
+		$("#content").html(articleStr);
+	},"json");
+
+
+	function check_login(){
+		if($("#user_usid").val() == ""){
+			alert("你尚未登陆，请先登录");
+			location.href="login.jsp";
+		}else{
+			location.href="homePage.jsp";
+		}
+	}
+</script>
 </body>
 
 </html>

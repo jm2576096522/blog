@@ -26,5 +26,15 @@ public class B_userMapperTest {
 		assertEquals(result, true);
 	}
 	
+	@Test
+	public void testUpdate_userInfo() {
+		B_user buser = new B_user();
+		buser.setUsid(10009);
+		buser.setUname("无恒");
+		buser.setUphone("31222211");
+		boolean result = userService.updateUser(buser);
+		assertEquals(result, true);
+	}
+	
 
 }

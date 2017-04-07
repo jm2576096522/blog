@@ -16,6 +16,14 @@ $.get("article/findPerson",function(data){
 	$("#personArticle").html(articleStr);
 },"json");
 
+function switch_user(){
+	location.href = "login.jsp";
+}
+
+function login_out(){
+	$.get("blog/login_out");
+}
+
 
  
    

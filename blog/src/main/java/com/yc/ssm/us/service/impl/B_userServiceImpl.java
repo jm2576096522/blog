@@ -45,26 +45,28 @@ public class B_userServiceImpl implements B_userService {
 	//用户信息修改
 	@Override
 	public boolean updateUser(B_user b_user) {
-		/*if(!b_userMapper.findUserByUsid(b_user.getUsid())){
-			b_userMapper.insertUser(b_user);
-		}*/
+		
+		if(b_user.getUpassword() != null){
+			b_user.setUpassword(Encrypt.md5AndSha(b_user.getUpassword()));
+		}
+		
 		LogManager.getLogger().debug("用户进行修改操作==》" + b_user);
 		return b_userMapper.updateUser(b_user) > 0;
 	}
-
+	
 	@Override
 	public int insertUser(B_user b_user) {
 		LogManager.getLogger().debug("我是B_userService里的" + b_user);
 		return b_userMapper.insertUser(b_user);
 	}
-
+	 //验证登录是否存在
 	@Override
-	public boolean findUserByUname(String uname) {
-		return b_userMapper.findUserByUname(uname);
+	public boolean findUser(Integer usid){
+		return b_userMapper.findUser(usid);
 	}
 
 	@Override
-	public boolean findUserByUsid(int usid) {
+	public B_user findUserByUsid(Integer usid) {
 		return b_userMapper.findUserByUsid(usid);
 	}
 

@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.yc.ssm.us.entity.B_user;
 import com.yc.ssm.us.entity.PaginationBean;
 import com.yc.ssm.us.service.B_userService;
+import com.yc.ssm.us.util.Encrypt;
 import com.yc.ssm.us.util.ImageUtil;
 import com.yc.ssm.us.util.ServletUtil;
 
@@ -37,6 +38,9 @@ public class B_userHandler {
 	@Autowired
 	private B_userService userService;
 	
+	private B_user current_user;
+	
+	//用户登录
 	@RequestMapping(value="login",method = RequestMethod.POST)
 	public String userLogin(B_user user,@RequestParam("yzm") String yzm,HttpServletRequest request){
 		user = userService.userLogin(user);
@@ -53,9 +57,19 @@ public class B_userHandler {
 			return "redirect:/login.jsp";
 		}else{
 			session.setAttribute(ServletUtil.LOGIN_USER, user);
+			current_user = (B_user) session.getAttribute("loginUser");
 			System.out.println("用户session"+session.getAttribute("loginUser"));
-			return "redirect:/personPage.jsp";
+			return "redirect:/homePage.jsp";
 		}
+	}
+	
+	//用户退出
+	@RequestMapping("login_out")
+	public String login_out(HttpSession session){
+		LogManager.getLogger().debug("我是退出用户的处理");
+		session.setAttribute(ServletUtil.LOGIN_USER, "");
+		return "redirect:/homePage.jsp";
+		
 	}
 	
 	//生成验证码图片
@@ -90,10 +104,12 @@ public class B_userHandler {
 		return userService.partUser(page, rows);// 异步数据响应
 	}
 
-	@RequestMapping("modify")
+	@RequestMapping("motify")
 	@ResponseBody
 	public boolean modify(@RequestParam("picData") MultipartFile picData, B_user user) {
 		System.out.println("modify:user==>" + user);
+		System.out.println("upicPath ==>> " +picData);
+		
 		String picPath = null;
 		if (picData != null && !picData.isEmpty()) {// 判断是否有文件上传
 				try {
@@ -110,24 +126,32 @@ public class B_userHandler {
 		return userService.updateUser(user);// 异步数据响应
 	}
 	
+	//更改用户信息
+	@RequestMapping("update_userInfo")
+	@ResponseBody
+	public boolean update_userInfo(B_user user,HttpSession session){
+			user.setUsid(current_user.getUsid());
+			System.out.println("user:"+user);
+			return userService.updateUser(user);
+	}
 	//更改用户密码
 	@RequestMapping("update_pwd")
 	@ResponseBody
-	public boolean update_pwd(@RequestParam("upassword") String upassword, HttpSession session){
+	public boolean update_pwd(@RequestParam("upassword") String upassword,@RequestParam("old_pwd") String old_pwd){
 		B_user user = new B_user();
-		System.out.println("upassword的值是："+upassword);
 		user.setUpassword(upassword);
-		B_user user1 = (B_user) session.getAttribute("loginUser");
-		user.setUsid(user1.getUsid());
-		System.out.println("我是更改密码的操作");
-		return userService.updateUser(user);
+		if(!current_user.getUpassword().equals( Encrypt.md5AndSha(old_pwd))){
+			return false;
+		}else{
+			user.setUsid(current_user.getUsid());
+			return userService.updateUser(user);
+		}
 	}
-	
 	//显示用户信息
 	@RequestMapping("showUserInfo")
 	@ResponseBody
-	public B_user showUserInfo(HttpSession session){
-		B_user user= (B_user) session.getAttribute("loginUser");
-		return user;
+	public B_user showUserInfo(){
+		Integer usid = current_user.getUsid();
+		return userService.findUserByUsid(usid);
 	}
 }

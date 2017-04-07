@@ -24,7 +24,7 @@ public class B_commentServiceImpl implements B_commentService {
 		return b_commentMapper.listComment(caid);
 	}
 
-	@Override
+/*	@Override
 	public boolean addComment(B_comment b_comment) {
 		int usid = b_comment.getUsid();
 		if (!b_userService.findUserByUsid(usid)) {
@@ -32,6 +32,6 @@ public class B_commentServiceImpl implements B_commentService {
 			// b_userService.insertUser(b_user);
 		}
 		return b_commentMapper.addComment(b_comment);
-	}
+	}*/
 
 }

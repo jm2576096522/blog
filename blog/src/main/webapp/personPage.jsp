@@ -1,9 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html>
 <head>
   <meta charset="utf-8">
+  <base href="${deployName}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="">
   <meta name="keywords" content="">
@@ -46,11 +46,16 @@
       <li><a href="#">草稿箱</a></li>
       <li><a href="page/personInfo.jsp">个人信息管理</a></li>
     </ul>
-    <form class="am-topbar-form am-topbar-right am-form-inline" role="search">
-      <div class="am-form-group">
-        <input type="text" class="am-form-field am-input-sm" placeholder="搜索">
+     <div class="show_loginUser" style="float:right;">
+        	<img src="${loginUser.getUpic()}" style="width:50px;height:50px;border-radius:50%;margin-right:10px;">
+        	欢迎  : <input type="text" id="loginUname" style="border:none;width:90px;" value="${loginUser.getUname()}"/>
+        	<select id="user_select" style="border:none;width:20px;">
+        		<option value="personPage.jsp"></option>
+        		<option onclick="switch_user()">切换用户</option>
+        		<option onclick="login_out()">退出</option>
+        	</select>
       </div>
-    </form>
+   
   </div>
 </nav>
 <hr>

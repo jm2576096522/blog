@@ -29,27 +29,18 @@
 <link rel="stylesheet" href="css/personInfo.css">
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
-
 </head>
-
 <body id="blog">
 
 	<header class="am-g am-g-fixed blog-fixed blog-text-center blog-header">
 		<div class="am-u-sm-8 am-u-sm-centered">
 			<img width="200" src="assets/i/plot2.png" alt="Amaze UI Logo" />
 			<h2 class="am-hide-sm-only"></h2>
-			<span style="float: right;"> 欢迎 【 迷梦】 </span>
 		</div>
 	</header>
 	<hr>
 	<nav class="am-g am-g-fixed blog-fixed blog-nav">
-		<button
-			class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only blog-button"
-			data-am-collapse="{target: '#blog-collapse'}">
-			<span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span>
-		</button>
-
+		
 		<div class="am-collapse am-topbar-collapse" id="blog-collapse">
 			<ul class="am-nav am-nav-pills am-topbar-nav">
 				<li><a href="homePage.jsp">首页</a></li>
@@ -60,13 +51,10 @@
 				<li><a href="#">草稿箱</a></li>
 				<li><a href="page/personInfo.jsp" style="color: #10D07A;">个人信息管理</a></li>
 			</ul>
-			<form class="am-topbar-form am-topbar-right am-form-inline"
-				role="search">
-				<div class="am-form-group">
-					<input type="text" class="am-form-field am-input-sm"
-						placeholder="搜索">
-				</div>
-			</form>
+			 <div class="show_loginUser" style="float:right;">
+        	<img src="${loginUser.getUpic()}" style="width:50px;height:50px;border-radius:50%;margin-right:10px;">
+        	欢迎  : <input type="text" id="loginUname" style="border:none;width:120px;" value="${loginUser.getUname()}"/>
+      </div>
 		</div>
 	</nav>
 	<hr>
@@ -90,63 +78,64 @@
 			
 			<div data-options="region:'center', fit:true, border:false">
 			 	<div id="contentBox">
-					<form action="" method="" name="myform" onSubmit="return sub()">
+					<form id="form_img" name="form_img" method="post" enctype="multipart/form-data">
 						<ul>
 							<li>
 								<label>头 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;像：</label> 
-								<img src="images/not_pic.jpg" id="pic" width="150" height="150"> 
-								<input id="upic" type="file" name="picData" onchange="chgPic(this)"/>
+								<img src="images/not_pic.jpg" id="upic" width="150" height="150" > <!--圆形样式 style=" border-radius:50%;" -->
+								<input id="upicPath" type="file" name="upicPath" onchange="chgPic(this)"/>
 							</li>
+						</ul>
+					</form>
+					<form id="myform" name="myform">	
+						<ul>	
 							<li>
 								<label>昵 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：</label> 
 								<input id="uname" type="text" name="uname" placeholder="请输入你的个人昵称" />
 							</li>
 							<li>
 								<label>性 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label> 
-								<input type="radio" name="rad1" class="rad1" value="男" onClick="ck()"/>男 
-								<input type="radio" name="rad2" class="rad2" value="女" onClick="ck2()" />女
+								<input type="radio" id="usex1" name="usex" class="rad1" value="男" onClick="ck()"/>男 
+								<input type="radio" id="usex2" name="usex" class="rad2" value="女" onClick="ck2()"/>女
 							</li>
 							<li>
 								<label>出生日期：</label> 
-								<input type="date" placeholder="请输入你的出生日期">
+								 <input class="easyui-datebox" name="ubirthday" id="ubirthday" data-options="formatter:myformatter,parser:myparser"></input>
 							</li>
 							<li>
 								<label>联系方式：</label> 
-								<input type="text" name="uphone" />
+								<input type="text" name="uphone" id="uphone"/>
 							</li>
 							<li>
 								<label>所 &nbsp;在 &nbsp;地：</label> 
 								<select id="selProvince">
-									<option value="0">--请选择省份--</option>
+									<option value="0" id="selProvince_op">--请选择省份--</option>
 								</select> 
 								<select id="selCity">
-									<option value="0">--请选择城市--</option>
+									<option value="0" id="selCity_op">--请选择城市--</option>
 								</select> 
 								<select id="selDistrict">
-									<option value="0">--请选择区/县--</option>
+									<option value="0" id="selDistrict_op">--请选择区/县--</option>
 								</select>
 							</li>
 							<li>
 								<label>擅长职业：</label> 
-								<input id="uprefession" name="uprefession" class="class">
+								<input id="uprofession" name="uprofession">
 							</li>
 							<li>
 								<label>个性签名：</label> 
-								<textarea rows="4" cols="40"></textarea>
+								<textarea id="upersondesc" rows="4" cols="45" style="resize:none; overflow: scroll;"></textarea>
 							</li>
 						</ul>
-						<button class="button_reset" type="reset">取消</button>
-						<button class="button_submit" type="submit">保存</button>
+							<button class="button_reset" type="reset">取消</button>
+							<button class="button_submit" type="button" onclick="updata_userInfo()">保存</button>
 					</form>
 				</div> 
 			</div>
 		</div>
 	</div>
-
-
 	<!-- content end -->
 	<footer class="blog-footer">
-
 		<div class="blog-text-center">© 2015 AllMobilize, Inc. Licensed
 			under MIT license. Made with love By LWXYFER</div>
 	</footer>
@@ -157,6 +146,8 @@
 	<script type="text/javascript" src="easyui/jquery.min.js"></script>
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
+	
+	
 	<script type="text/javascript" src="js/personInfo.js"></script>
 </body>
 </html>

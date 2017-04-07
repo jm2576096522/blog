@@ -2,43 +2,32 @@ package com.yc.ssm.us.web.filter;
 
 
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yc.ssm.us.entity.B_user;
+import com.yc.ssm.us.service.B_userService;
+
 @Controller
-@RequestMapping("login_check")
 public class CheckLoginUserFilter{
 
-	/*public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)throws IOException, ServletException {
-		HttpServletRequest req = (HttpServletRequest) request;
-		HttpServletResponse resp = (HttpServletResponse) response;
-		String reqUriStr = req.getRequestURI();
-		if (reqUriStr.endsWith("list.jsp")) {
-			Object user = req.getSession().getAttribute(ServletUtil.LOGIN_USER);
-			if (user == null) {
-				HttpSession session = req.getSession();
-				if (session.getAttribute("errorMsg") == null) {
-					session.setAttribute("errorMsg", "请先登录！！！");
-				}
-				resp.sendRedirect(req.getServletContext().getContextPath() + "/page/login.jsp");
-				return;
-			}
-		}
-		chain.doFilter(request, response);
-	}*/
-	@RequestMapping()
+	@Autowired
+	private B_userService buserService;
+	//检查用户是否登陆
+	@RequestMapping("login_check")
 	@ResponseBody
-	public String CheckLogin(HttpSession session){
+	public boolean checkLogin(HttpSession session){
 		System.out.println("我是检查登陆类");
 		System.out.println(session.getAttribute("loginUser"));
-		if(session.getAttribute("loginUser") == null || session.getAttribute("loginUser") ==""){
-			return "redirect:/login.jsp";
+		B_user current_user = (B_user) session.getAttribute("loginUser");
+		if(current_user == null){
+			return false;
 		}else{
-			return "redirect:/login.jsp";
+			return buserService.findUser(current_user.getUsid());
 		}
 	}
 }

@@ -41,7 +41,7 @@ insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'1506173890@qq
 update  b_user set upassword = '6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2';
 
 update b_user set uname = '星空浪漫' , ubirthday = '1999-11-1' , uphone = '10086' ,uprofession = '软件编程师' ,upersondesc = '我是非常叼炸天的，别小看我哦！' where usid = 10007;
-
+update b_user set uaddress = '湖南省-衡阳市-珠晖区' where usid = 10007;
 insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'123@qq.com','6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2');
 
 select * from b_user;
