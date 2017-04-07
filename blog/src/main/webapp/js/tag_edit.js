@@ -5,6 +5,7 @@ $("#tagList")
 					pagination : true,
 					fit : true,
 					border : false,
+					toolbar : '#tag',
 					fitColumns : true,
 					singleSelect : true,
 					pageList : [ 5, 10, 15, 20, 25, 30 ],
@@ -30,36 +31,38 @@ $("#tagList")
 									var oprStr = '<a class="modifyBtn" href="javascript:void(0)" onclick="openUpdate('
 											+ index
 											+ ')">修改</a> &nbsp;&nbsp;'
-											+ '<a class="detailBtn" href="javascript:void(0)" onclick="openDatail('
+											+ '<a class="removeBtn" href="javascript:void(0)" onclick="deleteDate('
 											+ index
 											+ ')">删除</a>'
-											+ '<script>$(".detailBtn").linkbutton({iconCls: "icon-remove"});'
+											+ '<script>$(".removeBtn").linkbutton({iconCls: "icon-remove"});'
 											+ '$(".modifyBtn").linkbutton({iconCls: "icon-edit"});</script>';
 									return oprStr;
 								}
 							} ] ]
 				});
 
-$("#modifyDiv").dialog({
-	title : "用户修改",
-	closable : false,
+$("#modifyTag").dialog({
+	title : "标签修改",
+	closed : true,
 	modal : true,
 });
-
-$("#modifyDiv").dialog("close");
-
-$("#modifyForm").form(
+$("#addTag").dialog({
+	title : "标签添加",
+	closed : true,
+	modal : true,
+});
+$("#modifyTagForm").form(
 		{
 			url : "tag/modify",
 			success : function(data) {
 				if (data == "") {
-					$.messager.alert('用户修改主', '当前用户没有修改用户的权限 ！', 'warning');
-					$("#modifyDiv").dialog("close"); // 关闭修改框
+					$.messager.alert('标签修改', '当前用户没有修改用户的权限 ！', 'warning');
+					$("#modifyTag").dialog("close"); // 关闭修改框
 					return;
 				}
 
 				if (data.trim() == "true") {
-					$("#modifyDiv").dialog("close"); // 关闭修改框
+					$("#modifyTag").dialog("close"); // 关闭修改框
 					$("#tagList").datagrid("reload"); // 刷新修改数据
 				} else {
 					$.messager.show({
@@ -74,25 +77,84 @@ $("#modifyForm").form(
 				}
 			}
 		});
-
+$("#addTagForm").form(
+		{
+			url : "tag/add",
+			success : function(data) {
+				if (data.trim()>0) {
+					$("#addTag").dialog("close"); // 关闭添加框
+					$("#tagList").datagrid("reload"); // 刷新修改数据
+				} else {
+					$.messager.show({
+						title : '添加标签',
+						msg : '添加标签失败！！！',
+						showType : 'show',
+						style : {
+							top : document.body.scrollTop
+									+ document.documentElement.scrollTop,
+						}
+					});
+				}
+			}
+		});
 $(".closeBtn").linkbutton({
 	iconCls : "icon-cancel",
 	onClick : function() {
-		$("#modifyDiv").dialog("close");
+		$("#modifyTag").dialog("close");
 	}
 });
 
 $(".updateBtn").linkbutton({
 	iconCls : "icon-ok",
 	onClick : function() {
-		$("#modifyForm").submit();
+		$("#modifyTagForm").submit();
+	}
+});
+$(".addBtn").linkbutton({
+	iconCls : "icon-add",
+	onClick : function() {
+		$("#addTag").dialog("open");
+
+	}
+});
+$(".updBtn").linkbutton({
+	iconCls : "icon-reload",
+	onClick : function() {
+		$("#tagList").datagrid("reload");
 	}
 });
 
+$(".submitBtn").linkbutton({
+	iconCls : "icon-ok",
+	onClick : function() {
+		$("#addTagForm").submit();
+	}
+});
 function openUpdate(index) {
-	$("#modifyDiv").dialog("open");
+	$("#modifyTag").dialog("open");
 	var row = $("#tagList").datagrid("getRows")[index];
-	$("#id").val(row.tagid);
-	$("#name").val(row.tagname);
+	$("#Tid").val(row.tagid);
+	$("#Tname").val(row.tagname);
 
+}
+function deleteDate(index) {
+	// 删除时先获取选择行
+	var row = $("#tagList").datagrid("getRows")[index];
+	var tagid = row.tagid;
+	// 选择要删除的行
+	$.messager.confirm("提示", "你确定要删除吗?", function(r) {
+		if (r) {
+			$.post("tag/delete", {
+				tagid : tagid
+			}, function(data) {
+				if (data > 0) {
+					$("#tagList").datagrid("reload"); // 刷新修改数据
+				} else {
+					alert("删除失败失败");
+				}
+			});
+			// 将选择到的行存入数组并用,分隔转换成字符串，
+			// 本例只是前台操作没有与数据库进行交互所以此处只是弹出要传入后台的id
+		}
+	});
 }

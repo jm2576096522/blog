@@ -6,23 +6,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yc.ssm.us.entity.B_comment;
+import com.yc.ssm.us.entity.PaginationBean;
 import com.yc.ssm.us.mapper.B_commentMapper;
 import com.yc.ssm.us.service.B_commentService;
-import com.yc.ssm.us.service.B_userService;
 
-@Service("b_commentService") // 业务处理层 相当于配置中的 <bean id="userService"
-								// class="com.yc.mybatis.us.service.impl.UserServiceImpl">
+@Service("b_commentService")
 public class B_commentServiceImpl implements B_commentService {
-	@Autowired // 相当于spring.xml中的<property name="userMapper" ref="userMapper" />
+	@Autowired
 	private B_commentMapper b_commentMapper;
 
-	@Autowired // 相当于spring.xml中的<property name="userMapper" ref="userMapper" />
-	private B_userService b_userService;
-
 	@Override
-	public List<B_comment> listComment(int caid) {
-		return b_commentMapper.listComment(caid);
+	public PaginationBean<B_comment> partComment(String page, String rows) {
+		PaginationBean<B_comment> pb = new PaginationBean<>();
+		if (page != null) {
+			pb.setCurrPage(Integer.parseInt(page));
+		}
+		if (rows != null) {
+			pb.setPageSize(Integer.parseInt(rows));
+		}
+		pb=b_commentMapper.partComment(pb);
+		return pb;
 	}
+
 
 /*	@Override
 	public boolean addComment(B_comment b_comment) {
@@ -33,5 +38,26 @@ public class B_commentServiceImpl implements B_commentService {
 		}
 		return b_commentMapper.addComment(b_comment);
 	}*/
+
+	@Override
+	public boolean modifyComment(B_comment b_comment) {
+		return b_commentMapper.modifyComment(b_comment);
+	}
+
+	@Override
+	public boolean insertComment(B_comment b_comment) {
+		return b_commentMapper.insertComment(b_comment);
+	}
+
+	@Override
+	public List<B_comment> findCommentByUsid(Integer usid) {
+		return b_commentMapper.findCommentByUsid(usid);
+	}
+
+	@Override
+	public List<B_comment> findCommentByCaid(Integer caid) {
+		return b_commentMapper.findCommentByCaid(caid);
+	}
+
 
 }

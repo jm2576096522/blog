@@ -21,7 +21,7 @@ public class B_typeHandler {
 	@Autowired
 	private B_typeService b_typeService;
 
-
+	// 分页显示文章类型
 	@RequestMapping(value = "list", method = RequestMethod.POST)
 	@ResponseBody
 	public PaginationBean<B_type> list(String rows, String page) {
@@ -29,6 +29,7 @@ public class B_typeHandler {
 		return b_typeService.partType(page, rows);// 异步数据响应
 	}
 
+	// 修改文章类型
 	@RequestMapping("modify")
 	@ResponseBody
 	public boolean modify(B_type b_type) {
@@ -36,11 +37,19 @@ public class B_typeHandler {
 		return b_typeService.modifyType(b_type);// 异步数据响应
 	}
 
+	// 添加文章类型
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@ResponseBody
 	public int insertUser(B_type b_type) {
 		LogManager.getLogger().debug("我是add type的处理");
 		return b_typeService.insertType(b_type);
+	}
+	// 删除文章类型
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	@ResponseBody
+	public int deleteType(String tid) {
+		LogManager.getLogger().debug("我是delete admin的处理");
+		return b_typeService.deleteType(tid);
 	}
 
 }

@@ -8,22 +8,32 @@ $("#adminList")
 					fitColumns : true,
 					singleSelect : true,
 					pageList : [ 5, 10, 15, 20, 25, 30 ],
+					toolbar : '#admin',
+					idField : 'adid',
 					columns : [ [
 							{
 								field : 'adid',
 								title : '编号',
 								width : 100,
-								align : 'center'
+								align : 'center',
+								sortable : true
 							},
 							{
 								field : 'adname',
 								title : '用户名',
 								width : 100,
-								align : 'center'
+								align : 'center',
+								sortable : true
 							},
 							{
 								field : 'adpassword',
 								title : '密码',
+								width : 100,
+								align : 'center'
+							},
+							{
+								field : 'admail',
+								title : '邮箱',
 								width : 100,
 								align : 'center'
 							},
@@ -36,33 +46,62 @@ $("#adminList")
 									var oprStr = '<a class="modifyBtn" href="javascript:void(0)" onclick="openUpdate('
 											+ index
 											+ ')">修改</a>'
-											+ '<script>$(".detailBtn").linkbutton({iconCls: "icon-search"});'
+											+ '<a class="removeBtn" href="javascript:void(0)"onclick="deleteDate('
+											+ index
+											+ ')">删除</a>'
+											+ '<script>$(".removeBtn").linkbutton({iconCls: "icon-remove"});'
 											+ '$(".modifyBtn").linkbutton({iconCls: "icon-edit"});</script>';
 									return oprStr;
 								}
 							} ] ]
 				});
 
-$("#modifyDiv").dialog({
-	title : "用户修改",
-	closable : false,
+$("#modifyAdmin").dialog({
+	title : "管理员修改",
+	closed : true,
+	modal : true,
+});
+$("#addAdmin").dialog({
+	title : "管理员添加",
+	closed : true,
 	modal : true,
 });
 
-$("#modifyDiv").dialog("close");
+function deleteDate(index) {
 
-$("#modifyForm").form(
+	// 删除时先获取选择行
+	var row = $("#adminList").datagrid("getRows")[index];
+	var adid = row.adid;
+	// 选择要删除的行
+	$.messager.confirm("提示", "你确定要删除吗?", function(r) {
+		if (r) {
+			$.post("admin/delete", {
+				adid : adid
+			}, function(data) {
+				if (data > 0) {
+					$("#adminList").datagrid("reload"); // 刷新修改数据
+				} else {
+					alert("删除失败失败");
+				}
+			});
+			// 将选择到的行存入数组并用,分隔转换成字符串，
+			// 本例只是前台操作没有与数据库进行交互所以此处只是弹出要传入后台的id
+		}
+	});
+}
+
+$("#modifyAdminForm").form(
 		{
 			url : "admin/modify",
 			success : function(data) {
 				if (data == "") {
-					$.messager.alert('用户修改主', '当前用户没有修改用户的权限 ！', 'warning');
-					$("#modifyDiv").dialog("close"); // 关闭修改框
+					$.messager.alert('管理员修改', '当前用户没有修改管理员的权限 ！', 'warning');
+					$("#modifyAdmin").dialog("close"); // 关闭修改框
 					return;
 				}
 
 				if (data.trim() == "true") {
-					$("#modifyDiv").dialog("close"); // 关闭修改框
+					$("#modifyAdmin").dialog("close"); // 关闭修改框
 					$("#adminList").datagrid("reload"); // 刷新修改数据
 				} else {
 					$.messager.show({
@@ -77,26 +116,66 @@ $("#modifyForm").form(
 				}
 			}
 		});
-
+$("#addAdminForm").form(
+		{
+			url : "admin/add",
+			success : function(data) {
+				if (data.trim() > 0) {
+					$("#addAdmin").dialog("close"); // 关闭添加框
+					$("#adminList").datagrid("reload"); // 刷新添加数据
+				} else {
+					$.messager.show({
+						title : '添加信息',
+						msg : '添加信息失败！！！',
+						showType : 'show',
+						style : {
+							top : document.body.scrollTop
+									+ document.documentElement.scrollTop,
+						}
+					});
+				}
+			}
+		});
 $(".closeBtn").linkbutton({
 	iconCls : "icon-cancel",
 	onClick : function() {
-		$("#modifyDiv").dialog("close");
+		$("#modifyAdmin").dialog("close");
+		$("#addAdmin").dialog("close");
+
+	}
+});
+$(".addBtn").linkbutton({
+	iconCls : "icon-add",
+	onClick : function() {
+		$("#addAdmin").dialog("open");
+
+	}
+});
+$(".updBtn").linkbutton({
+	iconCls : "icon-reload",
+	onClick : function() {
+		$("#adminList").datagrid("reload");
 	}
 });
 
+$(".submitBtn").linkbutton({
+	iconCls : "icon-ok",
+	onClick : function() {
+		$("#addAdminForm").submit();
+	}
+});
 $(".updateBtn").linkbutton({
 	iconCls : "icon-ok",
 	onClick : function() {
-		$("#modifyForm").submit();
+		$("#modifyAdminForm").submit();
 	}
 });
 
 function openUpdate(index) {
-	$("#modifyDiv").dialog("open");
+	$("#modifyAdmin").dialog("open");
 	var row = $("#adminList").datagrid("getRows")[index];
-	$("#id").val(row.adid);
-	$("#name").val(row.adname);
-	$("#password").val(row.adpassword);
-
+	$("#aid").val(row.adid);
+	$("#aname").val(row.adname);
+	$("#apassword").val(row.adpassword);
+	$("#amail").val(row.admail);
 }

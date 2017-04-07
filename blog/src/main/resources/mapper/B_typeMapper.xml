@@ -22,12 +22,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where
 		rn>(${currPage}-1)*${pageSize}
 	</select>
-	
+
 	<insert id="insertType">
 		insert into b_type values(seq_tid.nextval,#{tname})
 	</insert>
-	
-	
 
 	<update id="modifyType" parameterType="B_type">
 		update b_type
@@ -38,4 +36,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</set>
 		where tid=#{tid}
 	</update>
+
+	<delete id="deleteType">
+		delete from b_type where tid=#{tid}
+	</delete>
 </mapper>

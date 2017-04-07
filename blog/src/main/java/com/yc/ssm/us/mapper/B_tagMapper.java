@@ -10,10 +10,12 @@ public interface B_tagMapper {
 
 	boolean findTag(String tagname);
 
-	boolean insertTag(B_tag b_tag);
+	int insertTag(B_tag b_tag);
 
 	boolean modifyTag(B_tag b_tag);
 
 	PaginationBean<B_tag> partTag(PaginationBean<B_tag> pb);
+
+	int deleteTag(int tagid);
 
 }

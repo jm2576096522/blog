@@ -9,20 +9,12 @@ import com.yc.ssm.us.entity.PaginationBean;
 import com.yc.ssm.us.entity.B_article;
 import com.yc.ssm.us.mapper.B_articleMapper;
 import com.yc.ssm.us.service.B_articleService;
-import com.yc.ssm.us.service.B_tagService;
-import com.yc.ssm.us.service.B_userService;
 
 @Service("b_articleService") 
 
 public class B_articleServiceImpl implements B_articleService {
 	@Autowired 
 	private B_articleMapper b_articleMapper;
-
-	@Autowired 
-	private B_tagService b_tagService;
-	
-	@Autowired 
-	private B_userService b_userService;
 
 	@Override
 	public List<B_article> listArticles(String tagname) {
@@ -75,6 +67,12 @@ public class B_articleServiceImpl implements B_articleService {
 		}
 		pb=b_articleMapper.partArticle(pb);
 		return pb;
+	}
+
+	@Override
+	public int deleteArticle(String aid) {
+		int aid1=Integer.parseInt(aid);
+		return b_articleMapper.deleteArticle(aid1);
 	}
 
 }

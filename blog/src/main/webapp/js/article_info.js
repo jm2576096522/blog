@@ -1,14 +1,14 @@
-
 $("#articleList")
 		.datagrid(
 				{
 					url : "article/list",
 					pagination : true,
-					fit:true,
-					border:false,
+					fit : true,
+					border : false,
 					fitColumns : true,
 					singleSelect : true,
 					pageList : [ 5, 10, 15, 20, 25, 30 ],
+					toolbar : '#article',
 					columns : [ [
 							{
 								field : 'aid',
@@ -75,113 +75,66 @@ $("#articleList")
 									var oprStr = '<a class="detailBtn" href="javascript:void(0)" onclick="openDatail('
 											+ index
 											+ ')">详情</a>&nbsp;&nbsp;'
-											+ '<a class="modifyBtn" href="javascript:void(0)" onclick="openUpdate('
+											+ '<a class="removeBtn" href="javascript:void(0)" onclick="deleteDate('
 											+ index
 											+ ')">删除</a>'
 											+ '<script>$(".detailBtn").linkbutton({iconCls: "icon-search"});'
-											+ '$(".modifyBtn").linkbutton({iconCls: "icon-remove"});</script>';
+											+ '$(".removeBtn").linkbutton({iconCls: "icon-remove"});</script>';
 									return oprStr;
 								}
 							} ] ]
 				});
 
-$("#modifyDiv").dialog({
-	title : "用户修改",
-	closable : false,
-	modal : true,
-});
-
-$("#modifyDiv").dialog("close");
-
-$("#modifyForm").form(
-		{
-			url : "blog/modify",
-			success : function(data) {
-				if (data == "") {
-					$.messager.alert('用户修改主', '当前用户没有修改用户的权限 ！', 'warning');
-					$("#modifyDiv").dialog("close"); // 关闭修改框
-					return;
-				}
-
-				if (data.trim() == "true") {
-					$("#modifyDiv").dialog("close"); // 关闭修改框
-					$("#articleList").datagrid("reload"); // 刷新修改数据
-				} else {
-					$.messager.show({
-						title : '修改信息',
-						msg : '修改失败！！！',
-						showType : 'show',
-						style : {
-							top : document.body.scrollTop
-									+ document.documentElement.scrollTop,
-						}
-					});
-				}
-			}
-		});
-
 $(".closeBtn").linkbutton({
 	iconCls : "icon-cancel",
 	onClick : function() {
-		$("#modifyDiv").dialog("close");
-		$("#detailsDiv").dialog("close");
+		$("#detailsArticle").dialog("close");
 	}
 });
 
-$(".updateBtn").linkbutton({
-	iconCls : "icon-ok",
-	onClick : function() {
-		$("#modifyForm").submit();
-	}
-});
-
-function openUpdate(index) {
-	$("#modifyDiv").dialog("open");
+function deleteDate(index) {
+	// 删除时先获取选择行
 	var row = $("#articleList").datagrid("getRows")[index];
-	$("#id").val(row.usid);
-	$("#email").val(row.uemail);
-	$("#name").val(row.uname);
-	$("#password").val(row.upassword);
-	$("#birthday").val(row.ubirthday);
-	$("#sex").val(row.usex);
-	$("#profession").val(row.uprofession);
-	$("#persondesc").val(row.upersondesc);
-	$("#address").val(row.uaddress);
-	$("#phone").val(row.uphone);
-	$("#pic").val("");
-	if (row.upic) {
-		$("#upic").attr("src", row.upic);
-	} else {
-		$("#upic").attr("src", "images/not_pic.jpg");
-	}
+
+	var aid = row.aid;
+	// 选择要删除的行
+	$.messager.confirm("提示", "你确定要删除吗?", function(r) {
+		if (r) {
+			$.post("article/delete", {
+				aid : aid
+			}, function(data) {
+				if (data > 0) {
+					$("#articleList").datagrid("reload"); // 刷新修改数据
+				} else {
+					alert("删除失败失败");
+				}
+			});
+			// 将选择到的行存入数组并用,分隔转换成字符串，
+			// 本例只是前台操作没有与数据库进行交互所以此处只是弹出要传入后台的id
+		}
+	});
 }
 
-$("#detailsDiv").dialog({
+$("#detailsArticle").dialog({
 	title : "文章详情",
-	closable : false,
+	closed : true,
 	modal : true,
 });
 
-$("#detailsDiv").dialog("close");
-
 function openDatail(index) {
-	$("#detailsDiv").dialog("open");
+	$("#detailsArticle").dialog("open");
 	var row = $("#articleList").datagrid("getRows")[index];
-	$("#daid").html(row.aid);
-	$("#datitle").html(row.atitle);
-	$("#dtid").html(row.tid);
-	$("#dtagid").html(row.tagid);
-	$("#dusid").html(row.usid);
-	$("#datime").html(row.atime);
-	$("#daviewnum").html(row.aviewnum);
-	$("#dacontent").html(row.acontent);
+	$("#Aaid").html(row.aid);
+	$("#Aatitle").html(row.atitle);
+	$("#Atid").html(row.tid);
+	$("#Atagid").html(row.tagid);
+	$("#Ausid").html(row.usid);
+	$("#Aatime").html(row.atime);
+	$("#Aaviewnum").html(row.aviewnum);
+	$("#Aacontent").html(row.acontent);
 	if (row.apic) {
 		$("#pic").attr("src", row.apic);
 	} else {
 		$("#pic").attr("src", "images/not_pic.jpg");
 	}
-}
-
-function chgPic(obj) {
-	$("#upic").attr("src", window.URL.createObjectURL(obj.files[0]));
 }

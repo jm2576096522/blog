@@ -53,5 +53,13 @@ public class B_adminServiceTest {
 		int result = bad.insertUser(admin);
 		assertNotNull(result);
 	}
-
+	@Test
+	public void testForgetPassword(){
+		B_admin admin = new B_admin();
+		admin.setAdname("admin");
+		admin.setAdmail("2576096522@qq.com");;
+		admin = bad.forgetPassword(admin);
+		System.out.println(admin);
+		assertNotNull(admin);
+	}
 }

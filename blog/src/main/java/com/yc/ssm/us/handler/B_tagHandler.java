@@ -21,6 +21,7 @@ public class B_tagHandler {
 	@Autowired
 	private B_tagService b_tagService;
 
+	// 分页显示标签
 	@RequestMapping(value = "list", method = RequestMethod.POST)
 	@ResponseBody
 	public PaginationBean<B_tag> list(String rows, String page) {
@@ -28,6 +29,7 @@ public class B_tagHandler {
 		return b_tagService.partTag(page, rows);// 异步数据响应
 	}
 
+	// 修改标签
 	@RequestMapping("modify")
 	@ResponseBody
 	public boolean modify(B_tag b_tag) {
@@ -35,11 +37,20 @@ public class B_tagHandler {
 		return b_tagService.modifyTag(b_tag);// 异步数据响应
 	}
 
+	// 添加标签
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean insertTag(B_tag b_tag) {
-		LogManager.getLogger().debug("我是add admin的处理");
+	public int insertTag(B_tag b_tag) {
+		LogManager.getLogger().debug("我是add tag的处理");
 		return b_tagService.insertTag(b_tag);
+	}
+
+	// 删除标签
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	@ResponseBody
+	public int deleteTag(String tagid) {
+		LogManager.getLogger().debug("我是delete type的处理");
+		return b_tagService.deleteTag(tagid);
 	}
 
 }

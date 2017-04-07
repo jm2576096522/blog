@@ -1,7 +1,7 @@
 $("#adminList")
 		.datagrid(
 				{
-					url : "admin/list",
+					url : "comment/list",
 					pagination : true,
 					fit : true,
 					border : false,
@@ -10,20 +10,26 @@ $("#adminList")
 					pageList : [ 5, 10, 15, 20, 25, 30 ],
 					columns : [ [
 							{
-								field : 'adid',
-								title : '编号',
+								field : 'cid',
+								title : '评论编号id',
 								width : 100,
 								align : 'center'
 							},
 							{
-								field : 'adname',
-								title : '用户名',
+								field : 'caid',
+								title : '评论文章id',
 								width : 100,
 								align : 'center'
 							},
 							{
-								field : 'adpassword',
-								title : '密码',
+								field : 'usid',
+								title : '评论者id',
+								width : 100,
+								align : 'center'
+							},
+							{
+								field : 'ctime',
+								title : '评论时间',
 								width : 100,
 								align : 'center'
 							},
@@ -43,26 +49,25 @@ $("#adminList")
 							} ] ]
 				});
 
-$("#modifyDiv").dialog({
+$("#modifyComment").dialog({
 	title : "用户修改",
-	closable : false,
+	closed : true,
 	modal : true,
 });
 
-$("#modifyDiv").dialog("close");
 
 $("#modifyForm").form(
 		{
-			url : "admin/modify",
+			url : "comment/modify",
 			success : function(data) {
 				if (data == "") {
 					$.messager.alert('用户修改主', '当前用户没有修改用户的权限 ！', 'warning');
-					$("#modifyDiv").dialog("close"); // 关闭修改框
+					$("#modifyComment").dialog("close"); // 关闭修改框
 					return;
 				}
 
 				if (data.trim() == "true") {
-					$("#modifyDiv").dialog("close"); // 关闭修改框
+					$("#modifyComment").dialog("close"); // 关闭修改框
 					$("#adminList").datagrid("reload"); // 刷新修改数据
 				} else {
 					$.messager.show({
@@ -81,7 +86,7 @@ $("#modifyForm").form(
 $(".closeBtn").linkbutton({
 	iconCls : "icon-cancel",
 	onClick : function() {
-		$("#modifyDiv").dialog("close");
+		$("#modifyComment").dialog("close");
 	}
 });
 
@@ -93,10 +98,11 @@ $(".updateBtn").linkbutton({
 });
 
 function openUpdate(index) {
-	$("#modifyDiv").dialog("open");
+	$("#modifyComment").dialog("open");
 	var row = $("#adminList").datagrid("getRows")[index];
-	$("#id").val(row.adid);
-	$("#name").val(row.adname);
-	$("#password").val(row.adpassword);
-
+	$("#ocid").val(row.cid);
+	$("#ocaid").val(row.caid);
+	$("#ousid").val(row.usid);
+	$("#occontent").val(row.ccontent);
+	$("#octime").val(row.ctime);
 }

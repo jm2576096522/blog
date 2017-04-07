@@ -23,4 +23,6 @@ public interface B_articleMapper {
 
 	// 写博客
 	int insertArticle(B_article b_article);
+
+	int deleteArticle(int aid);
 }

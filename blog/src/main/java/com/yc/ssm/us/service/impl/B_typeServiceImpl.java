@@ -40,4 +40,10 @@ public class B_typeServiceImpl implements B_typeService {
 		return b_typeMapper.insertType(b_type);
 	}
 
+	@Override
+	public int deleteType(String tid) {
+		int tid1=Integer.parseInt(tid);
+		return b_typeMapper.deleteType(tid1);
+	}
+
 }

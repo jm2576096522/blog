@@ -8,9 +8,12 @@
 </head>
 <body>
 	<table id="typeList"></table>
-
-	<div id="modifyDiv" style="width: 300px; direction: center;">
-		<form id="modifyForm" method="post" enctype="multipart/form-data"
+	<div id="type">
+		<a class="addBtn" href="javascript:void(0)">添加</a> <a class="updBtn"
+			href="javascript:void(0)">刷新</a>
+	</div>
+	<div id="modifyType" style="width: 300px; direction: center;">
+		<form id="modifyTypeForm" method="post" enctype="multipart/form-data"
 			style="margin-left: 20px;">
 			<p>
 				<span>编号：</span> <input id="id" name="tid" class="inputclass" />
@@ -21,6 +24,18 @@
 			<p>
 				<a class="closeBtn" href="javascript:void(0)">关闭</a>&nbsp;&nbsp; <a
 					class="updateBtn" href="javascript:void(0)">修改</a>
+			</p>
+		</form>
+	</div>
+	<div id="addType" style="width: 300px; direction: center;">
+		<form id="addTypeForm" method="post" enctype="multipart/form-data"
+			style="margin-left: 20px;">
+			<p>
+				<span>类型名：</span> <input id="tname" name="tname" class="inputclass" />
+			</p>
+			<p>
+				<a class="closeBtn" href="javascript:void(0)">关闭</a>&nbsp;&nbsp; <a
+					class="submitBtn" href="javascript:void(0)">确定</a>
 			</p>
 		</form>
 	</div>

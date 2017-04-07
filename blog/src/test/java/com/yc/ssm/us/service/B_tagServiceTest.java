@@ -36,8 +36,8 @@ public class B_tagServiceTest {
 	public void testInsertTag() {
 		B_tag tag = new B_tag();
 		tag.setTagname("oracle");
-		boolean result = b_tagService.insertTag(tag);
-		assertEquals(result, true);
+		int result = b_tagService.insertTag(tag);
+		assertNotNull(result);
 	}
 
 }

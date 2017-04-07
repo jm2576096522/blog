@@ -103,9 +103,9 @@ nav {
 
 nav .nav_left {
 	margin-left: 210px;
-	width: 50%;
-	height: 100%;
-	float: left;
+	width:50%;
+	height:100%;
+	float:left;
 }
 
 nav .nav_left li {

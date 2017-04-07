@@ -13,7 +13,8 @@ $("#userList")
 								field : 'usid',
 								title : '编号',
 								width : 80,
-								align : 'center'
+								align : 'center',
+								sortable:true
 							},
 							{
 								field : 'uemail',
@@ -25,13 +26,15 @@ $("#userList")
 								field : 'uname',
 								title : '姓名',
 								width : 100,
-								align : 'center'
+								align : 'center',
+								sortable:true
 							},
 							{
 								field : 'usex',
 								title : '性别',
 								width : 50,
-								align : 'center'
+								align : 'center',
+								sortable:true
 							},
 							{
 								field : 'ubirthday',
@@ -83,10 +86,10 @@ $("#userList")
 								width : 100,
 								align : 'center',
 								formatter : function(value, row, index) {
-									var oprStr = '<a class="detailBtn" href="javascript:void(0)" onclick="openDatail('
+									var oprStr = '<a class="detailBtn" href="javascript:void(0)" onclick="openDatail1('
 											+ index
 											+ ')">详情</a>&nbsp;&nbsp;'
-											+ '<a class="modifyBtn" href="javascript:void(0)" onclick="openUpdate('
+											+ '<a class="modifyBtn" href="javascript:void(0)" onclick="openUpdate1('
 											+ index
 											+ ')">修改</a>'
 											+ '<script>$(".detailBtn").linkbutton({iconCls: "icon-search"});'
@@ -96,13 +99,12 @@ $("#userList")
 							} ] ]
 				});
 
-$("#modifyDiv").dialog({
+$("#modifyUser").dialog({
 	title : "用户修改",
-	closable : false,
+	closed: true,
 	modal : true,
 });
 
-$("#modifyDiv").dialog("close");
 
 $("#modifyForm").form(
 		{
@@ -110,12 +112,12 @@ $("#modifyForm").form(
 			success : function(data) {
 				if (data == "") {
 					$.messager.alert('用户修改主', '当前用户没有修改用户的权限 ！', 'warning');
-					$("#modifyDiv").dialog("close"); // 关闭修改框
+					$("#modifyUser").dialog("close"); // 关闭修改框
 					return;
 				}
 
 				if (data.trim() == "true") {
-					$("#modifyDiv").dialog("close"); // 关闭修改框
+					$("#modifyUser").dialog("close"); // 关闭修改框
 					$("#userList").datagrid("reload"); // 刷新修改数据
 				} else {
 					$.messager.show({
@@ -134,8 +136,8 @@ $("#modifyForm").form(
 $(".closeBtn").linkbutton({
 	iconCls : "icon-cancel",
 	onClick : function() {
-		$("#modifyDiv").dialog("close");
-		$("#detailsDiv").dialog("close");
+		$("#modifyUser").dialog("close");
+		$("#detailsUser").dialog("close");
 	}
 });
 
@@ -146,8 +148,8 @@ $(".updateBtn").linkbutton({
 	}
 });
 
-function openUpdate(index) {
-	$("#modifyDiv").dialog("open");
+function openUpdate1(index) {
+	$("#modifyUser").dialog("open");
 	var row = $("#userList").datagrid("getRows")[index];
 	$("#id").val(row.usid);
 	$("#email").val(row.uemail);
@@ -167,16 +169,15 @@ function openUpdate(index) {
 	}
 }
 
-$("#detailsDiv").dialog({
+$("#detailsUser").dialog({
 	title : "用户详情",
-	closable : false,
+	closed :true,
 	modal : true,
 });
 
-$("#detailsDiv").dialog("close");
 
-function openDatail(index) {
-	$("#detailsDiv").dialog("open");
+function openDatail1(index) {
+	$("#detailsUser").dialog("open");
 	var row = $("#userList").datagrid("getRows")[index];
 	$("#dname").html(row.uname);
 	$("#demail").html(row.uemail);
@@ -187,9 +188,9 @@ function openDatail(index) {
 	$("#daddress").html(row.uaddress);
 	$("#dmobile").html(row.uphone);
 	if (row.upic) {
-		$("#pic").attr("src", row.upic);
+		$("#dpic").attr("src", row.upic);
 	} else {
-		$("#pic").attr("src", "images/not_pic.jpg");
+		$("#dpic").attr("src", "images/not_pic.jpg");
 	}
 }
 

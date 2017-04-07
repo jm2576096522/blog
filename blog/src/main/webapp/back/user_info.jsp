@@ -9,7 +9,7 @@
 <body>
 	<table id="userList"></table>
 
-	<div id="modifyDiv" style="width: 300px; direction: center;">
+	<div id="modifyUser" style="width: 300px; direction: center;">
 		<form id="modifyForm" method="post" enctype="multipart/form-data"
 			style="margin-left: 20px;">
 			<p>
@@ -60,7 +60,7 @@
 		</form>
 	</div>
 
-	<div id="detailsDiv" style="width: 300px;padding: 10px ">
+	<div id="detailsUser" style="width: 300px;padding: 10px ">
 	
 		<p>
 			姓名：<label id="dname"></label>
@@ -88,7 +88,7 @@
 			<textarea id="dpersondesc" style="width: 200px;"></textarea>
 		</p>
 		<p>
-			图片：<img src="images/not_pic.jpg" id="pic" width="100" height="100"
+			图片：<img src="images/not_pic.jpg" id="dpic" width="100" height="100"
 				align="top">
 		</p>
 		<p>
