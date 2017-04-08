@@ -9,44 +9,60 @@
 <link type="text/css" rel="stylesheet" href="easyui/themes/icon.css">
 <link type="text/css" rel="stylesheet"
 	href="easyui/themes/default/easyui.css">
-<link type="text/css" rel="stylesheet" href="css/admin_login.css">
 </head>
 <body>
-	<div id="loginDiv">
-		<form id="loginForm" action="admin/forgetPassword" method="post">
-			<p>
-			<script type="text/javascript">alert('${errorMsg}')</script>
-				<label style="color: red;">${errorMsg}&nbsp;</label>
-			</p>
-			<!-- 问题反馈 -->
+	<div id="forgetDiv">
+		<form id="forgetForm" action="admin/forgetPassword" method="post" >
+			<table cellpadding="5" style="width:300px ;padding-left: 15px; ">
+				<tr align="center">
+					<td colspan="2"><label style="color: red;">${errorMsg}&nbsp;</label></td>
+				</tr>
+				<tr>
+					<td align="right" width="60px">管理员名称</td>
+					<td align="left"><input id="adname" name="adname"
+						class="easyui-validatebox " placeholder="请输入管理员名称"
+						data-options="required:true" /></td>
+				</tr>
 
-			<p>
-				<input name="adname" id="adname" required="required"
-					placeholder="请求管理员名称" class="inputclass" />
-			</p>
-			<p>
-				<input type="email" name="admail" id="admail" required="required"
-					placeholder="请求输入找出密码邮箱" class="inputclass" />
-			</p>
-			<p>
-				<input type="text" id="yzm" name="yzm" class="yzm"
-					style="float: left; width: 50%;" data-validation-message="请输入验证码"
-					placeholder="验证码" required />
-				<button type="button" id="yzmbutton" class="yzmbutton"
-					onClick="getYZM()">点击获取验证码</button>
-			</p>
+				<tr>
+					<td align="right">邮箱</td>
+					<td align="left"><input name="admail" id="admail"
+						class="easyui-validatebox " placeholder="请输入忘记密码邮箱"
+						data-options="required:true,validType:'email'" /></td>
+				</tr>
 
-			<p>
 
-				<a id="btnLogin" onClick="forgetPassword()">找回密码</a>
-			</p>
+				<tr>
+					<td align="right">验证码</td>
+					<td align="left"><input type="text" id="yzm" name="yzm"
+						class="easyui-validatebox yzm" style="float: left; width: 45%;"
+						placeholder="请输入验证码" data-options="required:true" /> <a
+						class="easyui-linkbutton yzmbutton" id="yzmbutton"
+						onClick="getYZM()">发送验证码</a>
+				</tr>
+
+				<tr>
+					<td></td>
+					<td><a id="btnLogin" class="easyui-linkbutton"
+						style="width: 170px;margin-bottom: 20px" onClick="forgetPassword()">忘记密码登录</a></td>
+				</tr>
+			</table>
 		</form>
 	</div>
 	<script type="text/javascript" src="easyui/jquery.min.js"></script>
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
-	<script type="text/javascript" src="js/admin_login.js"></script>
 	<script type="text/javascript">
+		function forgetPassword() {
+			$("#forgetForm").submit();
+		}
+		$("#forgetDiv").dialog({
+			title : "",
+			border : false,
+			modal : true,
+			width : 300,
+			top : 80
+		});
 		var countdown = 0;
 		function getYZM() {
 			countdown = 60;

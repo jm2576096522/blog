@@ -3,10 +3,13 @@ $("#userList")
 				{
 					url : "blog/list",
 					pagination : true,
-					fit:true,
-					border:false,
+					rownumbers:true,
+					fit : true,
+					border : false,
 					fitColumns : true,
 					singleSelect : true,
+					remoteSort:false,
+					multiSort:true,
 					pageList : [ 5, 10, 15, 20, 25, 30 ],
 					columns : [ [
 							{
@@ -14,7 +17,7 @@ $("#userList")
 								title : '编号',
 								width : 80,
 								align : 'center',
-								sortable:true
+								sortable : true
 							},
 							{
 								field : 'uemail',
@@ -27,14 +30,14 @@ $("#userList")
 								title : '姓名',
 								width : 100,
 								align : 'center',
-								sortable:true
+								sortable : true
 							},
 							{
 								field : 'usex',
 								title : '性别',
 								width : 50,
 								align : 'center',
-								sortable:true
+								sortable : true
 							},
 							{
 								field : 'ubirthday',
@@ -86,52 +89,15 @@ $("#userList")
 								width : 100,
 								align : 'center',
 								formatter : function(value, row, index) {
-									var oprStr = '<a class="detailBtn" href="javascript:void(0)" onclick="openDatail1('
+									var oprStr = '<a class="detailBtn" href="javascript:void(0)" onclick="openDatail('
 											+ index
-											+ ')">详情</a>&nbsp;&nbsp;'
-											+ '<a class="modifyBtn" href="javascript:void(0)" onclick="openUpdate1('
-											+ index
-											+ ')">修改</a>'
-											+ '<script>$(".detailBtn").linkbutton({iconCls: "icon-search"});'
-											+ '$(".modifyBtn").linkbutton({iconCls: "icon-edit"});</script>';
+											+ ')">详情</a>'
+											+ '<script>$(".detailBtn").linkbutton({iconCls: "icon-search"})</script>';
 									return oprStr;
 								}
 							} ] ]
 				});
 
-$("#modifyUser").dialog({
-	title : "用户修改",
-	closed: true,
-	modal : true,
-});
-
-
-$("#modifyForm").form(
-		{
-			url : "blog/modify",
-			success : function(data) {
-				if (data == "") {
-					$.messager.alert('用户修改主', '当前用户没有修改用户的权限 ！', 'warning');
-					$("#modifyUser").dialog("close"); // 关闭修改框
-					return;
-				}
-
-				if (data.trim() == "true") {
-					$("#modifyUser").dialog("close"); // 关闭修改框
-					$("#userList").datagrid("reload"); // 刷新修改数据
-				} else {
-					$.messager.show({
-						title : '修改信息',
-						msg : '修改失败！！！',
-						showType : 'show',
-						style : {
-							top : document.body.scrollTop
-									+ document.documentElement.scrollTop,
-						}
-					});
-				}
-			}
-		});
 
 $(".closeBtn").linkbutton({
 	iconCls : "icon-cancel",
@@ -148,35 +114,14 @@ $(".updateBtn").linkbutton({
 	}
 });
 
-function openUpdate1(index) {
-	$("#modifyUser").dialog("open");
-	var row = $("#userList").datagrid("getRows")[index];
-	$("#id").val(row.usid);
-	$("#email").val(row.uemail);
-	$("#name").val(row.uname);
-	$("#password").val(row.upassword);
-	$("#birthday").val(row.ubirthday);
-	$("#sex").val(row.usex);
-	$("#profession").val(row.uprofession);
-	$("#persondesc").val(row.upersondesc);
-	$("#address").val(row.uaddress);
-	$("#phone").val(row.uphone);
-	$("#pic").val("");
-	if (row.upic) {
-		$("#upic").attr("src", row.upic);
-	} else {
-		$("#upic").attr("src", "images/not_pic.jpg");
-	}
-}
 
 $("#detailsUser").dialog({
 	title : "用户详情",
-	closed :true,
+	closed : true,
 	modal : true,
 });
 
-
-function openDatail1(index) {
+function openDatail(index) {
 	$("#detailsUser").dialog("open");
 	var row = $("#userList").datagrid("getRows")[index];
 	$("#dname").html(row.uname);

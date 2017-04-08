@@ -19,9 +19,7 @@
 			<option value="1">java</option>
 			<option value="2">oracle</option>
 			<option value="3">oop</option>
-		</select> 
-		<a class="addBtn" href="javascript:void(0)">添加</a> <a class="updBtn"
-			href="javascript:void(0)">刷新</a>
+		</select>
 	</div>
 
 	<table id="articleList"></table>

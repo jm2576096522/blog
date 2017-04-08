@@ -94,13 +94,7 @@ $("#modifyAdminForm").form(
 		{
 			url : "admin/modify",
 			success : function(data) {
-				if (data == "") {
-					$.messager.alert('管理员修改', '当前用户没有修改管理员的权限 ！', 'warning');
-					$("#modifyAdmin").dialog("close"); // 关闭修改框
-					return;
-				}
-
-				if (data.trim() == "true") {
+				if (data.trim()) {
 					$("#modifyAdmin").dialog("close"); // 关闭修改框
 					$("#adminList").datagrid("reload"); // 刷新修改数据
 				} else {
@@ -176,6 +170,6 @@ function openUpdate(index) {
 	var row = $("#adminList").datagrid("getRows")[index];
 	$("#aid").val(row.adid);
 	$("#aname").val(row.adname);
-	$("#apassword").val(row.adpassword);
+	$("#apassword").textbox('setValue',row.adpassword);
 	$("#amail").val(row.admail);
 }

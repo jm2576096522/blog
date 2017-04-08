@@ -23,9 +23,9 @@
 	<nav class="blog-nav">
 		<ul class="nav_left">
 			<li class="am-active"><a href="homePage.jsp" style="color: #10D07A;">首页</a></li>
-			<li><a href="">博客专栏</a></li>
-			<li><a href="#">博客专家</a></li>
-			<li><a href="#">热度话题</a></li>
+			<li><a >博客专栏</a></li>
+			<li><a >博客专家</a></li>
+			<li><a >热度话题</a></li>
 			<li><a onclick="check_login()">我的博客</a></li>
 		</ul>
 	<%--  <div class="show_loginUser">
@@ -248,7 +248,6 @@
 			<a id="togbook" href="/"></a> <a id="gotop" href="javascript:void(0)"></a>
 		</div>
 	</footer>
-	
 	<script type="text/javascript" src="js/homePage.js"></script>
 </body>
 

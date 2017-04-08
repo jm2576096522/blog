@@ -67,7 +67,6 @@
 						<li>
 							<a href="page/personInfo.jsp">基本信息</a>
 						</li>
-							
 						<li>
 							<a href="page/personInfo_pwd.jsp">密码修改</a>
 						</li>
@@ -86,6 +85,7 @@
 								<input id="upicPath" type="file" name="upicDate" onchange="chgPic(this)"/>
 								<button type="button" id="camera">摄像头</button>
 								<button type="submit" style="margin-top:10px;" id="pic_submit" onclick="upload_img()">上传图片</button>
+
 							</li>
 							
 						</ul>

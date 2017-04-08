@@ -46,7 +46,7 @@ update b_user set uaddress = '湖南省-衡阳市-珠晖区' where usid = 10007;
 insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'123@qq.com','6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2');
 
 select * from b_user;
-
+delete b_user where usid = 10153;
 
 create sequence seq_adid start with 1001;
 -----管理员表

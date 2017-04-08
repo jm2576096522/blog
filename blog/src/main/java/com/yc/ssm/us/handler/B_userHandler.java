@@ -70,7 +70,6 @@ public class B_userHandler {
 		session.setAttribute(ServletUtil.LOGIN_USER,"");
 		LogManager.getLogger().debug("我是退出用户的处理");
 		return "true";
-		
 	}
 
 	// 生成验证码图片
@@ -165,6 +164,7 @@ public class B_userHandler {
 	@ResponseBody
 	public boolean update_pwd(@RequestParam("upassword") String upassword,@RequestParam("old_pwd") String old_pwd){
 		B_user user = new B_user();
+
 		user.setUpassword(upassword);
 		if(!current_user.getUpassword().equals( Encrypt.md5AndSha(old_pwd))){
 			return false;

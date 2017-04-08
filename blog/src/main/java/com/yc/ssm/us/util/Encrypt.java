@@ -14,6 +14,7 @@ public class Encrypt {
 	 */
 	public static void main(String[] args) {
 		System.out.println(Encrypt.md5AndSha("6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2"));
+
 	}
 
 	/**
