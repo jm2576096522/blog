@@ -12,14 +12,4 @@ body {
 	float: left;
 }
 
-#detailsDiv {
-	padding-left: 20px;
-}
 
-#modifyForm {
-	margin: 0px 20px;
-}
-
-input.inputclass {
-	width: 260px;
-}

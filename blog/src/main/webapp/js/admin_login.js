@@ -12,10 +12,3 @@ $('#btnLogin').linkbutton({
 		$("#loginForm").submit();// 表单提交
 	}
 });
-
-$('#resetbtn').linkbutton({
-	iconCls : "icon-mini-refresh",
-	onClick : function() {
-		$("#loginForm").clear;// 表单提交
-	}
-});

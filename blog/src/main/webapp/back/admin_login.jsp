@@ -32,9 +32,11 @@
 						class="easyui-validatebox " data-options="required:true" /></td>
 				</tr>
 				<tr align="center">
-					<td><a id="resetbtn" href="javascript:void(0)">重置</a>&nbsp;&nbsp;
-						<a id="btnLogin" href="javascript:void(0)">登录</a>&nbsp;&nbsp; <a
-						href="back/forgetPassword.jsp">找回密码</a></td>
+					<td>&nbsp;&nbsp;<a href="back/admin_login.jsp"
+						class="easyui-linkbutton" iconCls="icon-reload">重置</a> <a
+						id="btnLogin" href="javascript:void(0)">登录</a> <a
+						href="back/forgetPassword.jsp" class="easyui-linkbutton"
+						plain="true">忘记密码</a></td>
 				</tr>
 			</table>
 		</form>

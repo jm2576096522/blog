@@ -3,10 +3,13 @@ $("#userList")
 				{
 					url : "blog/list",
 					pagination : true,
+					rownumbers:true,
 					fit : true,
 					border : false,
 					fitColumns : true,
 					singleSelect : true,
+					remoteSort:false,
+					multiSort:true,
 					pageList : [ 5, 10, 15, 20, 25, 30 ],
 					columns : [ [
 							{
