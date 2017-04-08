@@ -32,6 +32,7 @@ function myparser(s) {
 $.get("blog/showUserInfo",function(data){
 	if(data.upic){
 		$("#upic").attr("src",data.upic);
+		$("#loginPic").attr("src",data.upic);
 	}else{
 		$("#upic").attr("scr","images/not_pic.jpg");
 	}
@@ -41,6 +42,7 @@ $.get("blog/showUserInfo",function(data){
 		$("#usex2")[0].checked = true;
 	}
 	$("#uname").val(data.uname);
+	$("#loginUname").val(data.uname);
 	$("#ubirthday").datebox('setValue',data.ubirthday);
 
 	$("#uphone").val(data.uphone);
@@ -48,26 +50,28 @@ $.get("blog/showUserInfo",function(data){
 	$("#upersondesc").val(data.upersondesc);
 	var strs = new Array();
 	strs = data.uaddress.split("-");
-	 $("#selProvince_op").html(strs[0]);
-	 $("#selCity_op").html(strs[1])
-	 $("#selDistrict_op").html(strs[2]);
+	$("#selProvince_op").html(strs[0]);
+	$("#selCity_op").html(strs[1])
+	$("#selDistrict_op").html(strs[2]);
+	
 });
 //焦点事件
 $("#selProvince").focus(function(){
 	$("#selProvince_op").html("--请选择省份--");
 	$("#selCity_op").html("--请选择城市--");
-	 $("#selDistrict_op").html("--请选择区/县--");
+	$("#selDistrict_op").html("--请选择区/县--");
 });
 $("#selCity").focus(function(){
 	$("#selProvince_op").html("--请选择省份--");
 	$("#selCity_op").html("--请选择城市--");
-	 $("#selDistrict_op").html("--请选择区/县--");
+	$("#selDistrict_op").html("--请选择区/县--");
 });
 $("#selDistrict").focus(function(){
 	$("#selProvince_op").html("--请选择省份--");
 	$("#selCity_op").html("--请选择城市--");
-	 $("#selDistrict_op").html("--请选择区/县--");
+	$("#selDistrict_op").html("--请选择区/县--");
 });
+
 
 //更改操作
 function updata_userInfo(){
@@ -79,8 +83,20 @@ function updata_userInfo(){
 	getUddress();
 	$.post("blog/update_userInfo",{uname:uname,ubirthday:ubirthday,uphone:uphone,uprofession:uprofession,upersondesc:upersondesc,usex:usex,uaddress:uaddress},
 			function(data){
-			alert("保存成功");
-		},"json");
+		  $.messager.alert("操作提示", "操作成功！","info",function(){
+			  location.reload();
+		  });
+		/*jQuery.messager.show({   
+			title:'温馨提示:',   
+			msg:'保存成功！',   
+			timeout:3000,   
+			showType:'slide',
+			width:300,
+			height:200,
+			});*/
+		/*location.reload();*/
+	},"json");
+
 }
 
 var uaddress ;	//获得地址 变量
@@ -161,5 +177,10 @@ function getUddress(){
 	}else{
 		district = myselect3.options[index3].text
 	}
-	uaddress = pro+'-'+city+'-'+district; 
+	if(pro == "" && city =="" && district ==""){
+		uddress = "";
+	}else{
+		uaddress = pro+'-'+city+'-'+district; 
+	}
+
 }

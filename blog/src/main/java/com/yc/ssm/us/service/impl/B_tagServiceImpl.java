@@ -2,6 +2,7 @@ package com.yc.ssm.us.service.impl;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +26,10 @@ public class B_tagServiceImpl implements B_tagService {
 		return b_tagMapper.findTag(tagname);
 	}
 
+	//添加类别标签
 	@Override
-	public int insertTag(B_tag b_tag) {
+	public int insertTag(B_tag b_tag){
+		LogManager.getLogger().debug("添加类别标签");
 		return b_tagMapper.insertTag(b_tag);
 	}
 
@@ -58,5 +61,11 @@ public class B_tagServiceImpl implements B_tagService {
 	public int deleteTag(String tagid) {
 		int tagid1=Integer.parseInt(tagid);
 		return b_tagMapper.deleteTag(tagid1);
+	}
+	
+	//结合文章表（返回所引用对应类别的文章数）查询所有的标签
+	public	List<B_tag> findAll(){
+		LogManager.getLogger().debug("结合文章表查询所有的标签");
+		return b_tagMapper.findAll();
 	}
 }

@@ -19,9 +19,11 @@ $.get("article/findPerson",function(data){
 function switch_user(){
 	location.href = "login.jsp";
 }
-
 function login_out(){
-	$.get("blog/login_out");
+	$.get("blog/login_out",function(data){
+		
+		location.href = "firstPage.jsp";
+	});
 }
 
 

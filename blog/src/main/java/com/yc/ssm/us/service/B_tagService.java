@@ -8,11 +8,14 @@ import com.yc.ssm.us.entity.PaginationBean;
 public interface B_tagService {
 	// 查询所有标签
 	List<B_tag> findALlTags();
+	
+	//结合文章表（返回所引用对应类别的文章数）查询所有的标签
+	List<B_tag> findAll();
 
 	// 通过标签名查询是否存在标签
 	boolean findTag(String tagname);
 
-	// 插入标签
+	//添加类别标签
 	int insertTag(B_tag b_tag);
 
 	// 修改标签

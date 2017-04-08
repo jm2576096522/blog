@@ -3,14 +3,25 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yc.ssm.us.mapper.B_tagMapper">
-
+	<!-- 查询所有的类别标签 -->
 	<select id="findALlTags" resultType="B_tag">
 		select * from b_tag
 	</select>
+	<!-- 结合文章表（返回所引用对应类别的文章数）查询所有的标签 -->
+	<select id="findAll" resultType="B_tag">
+		select tag.*,nvl(w.articlenum,0) as articlenum from
+		(select g.tagid,count(1) as articlenum from
+		(select t.tagid from b_tag t inner join b_article a on t.tagid = a.tagid ) g
+		group by g.tagid) w
+		right join B_TAG tag on w.tagid = tag.tagid order
+		by w.tagid
+	</select>
+
 	<select id="findTag" parameterType="string" resultType="boolean">
 		select
 		count(1) from b_tag where tagname=#{tagname}
 	</select>
+	<!--  添加类别表签-->
 	<insert id="insertTag" parameterType="B_tag">
 		insert into b_tag
 		values(seq_tagid.nextval,#{tagname})
@@ -44,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</set>
 		where tagid=#{tagid}
 	</update>
-	
+
 	<delete id="deleteTag">
 		delete from b_tag where tagid=#{tagid}
 	</delete>

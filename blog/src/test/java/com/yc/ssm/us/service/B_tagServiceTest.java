@@ -24,6 +24,12 @@ public class B_tagServiceTest {
 		System.out.println(list);
 		assertNotNull(list);
 	}
+	@Test
+	public void testFindALl() {
+		List<B_tag> list = b_tagService.findAll();
+		System.out.println(list);
+		assertNotNull(list);
+	}
 
 	@Test
 	public void testFindTag() {
@@ -35,7 +41,7 @@ public class B_tagServiceTest {
 	@Test
 	public void testInsertTag() {
 		B_tag tag = new B_tag();
-		tag.setTagname("oracle");
+		tag.setTagname("oracle1");
 		int result = b_tagService.insertTag(tag);
 		assertNotNull(result);
 	}

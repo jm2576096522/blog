@@ -1,5 +1,7 @@
 package com.yc.ssm.us.handler;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,6 +53,13 @@ public class B_tagHandler {
 	public int deleteTag(String tagid) {
 		LogManager.getLogger().debug("我是delete type的处理");
 		return b_tagService.deleteTag(tagid);
+	}
+	//结合文章表（返回所引用对应类别的文章数）查询所有的标签
+	@RequestMapping("findAll")
+	@ResponseBody
+	public List<B_tag> findAll(){
+		LogManager.getLogger().debug("结合文章表查询所有的标签的处理");
+		return b_tagService.findAll();
 	}
 
 }

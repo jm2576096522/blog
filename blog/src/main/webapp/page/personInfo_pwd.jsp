@@ -117,7 +117,7 @@
 	                        	<span id="span3"></span>
                         	</li>
 						</ul>
-						<button class="button_reset" type="reset" onClick="cancel()">取消</button>
+						<button class="button_reset" type="reset" onClick="cancel()">重置</button>
 						<button class="button_submit" type="button" onClick="update_pwd()">保存</button>
 					</form>
 				</div> 
@@ -203,10 +203,11 @@
 		}else{
 			$.post("blog/update_pwd",{upassword:new_pwd,old_pwd:old_pwd},function(data){
 				if(data == false){
-					info.innerHTML="密码不正确";
-					info.className="error";
+					$.messager.alert("操作提示", "修改失败！","error",function(){
+						  location.reload();
+					  });
 				}else{
-					alert("更改成功...");
+					$.messager.alert("操作提示", "修改成功！","info");
 				}
 			
 			},"json");

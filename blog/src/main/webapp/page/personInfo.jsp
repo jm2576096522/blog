@@ -47,13 +47,13 @@
 				<li><a href="personPage.jsp">我的文章</a></li>
 				<li><a href="page/blog_add.jsp">写新文章</a></li>
 				<li><a href="page/blogHistory.jsp">博客历史</a></li>
-				<li><a href="#">标签管理</a></li>
-				<li><a href="#">草稿箱</a></li>
+				<li><a href="page/blog_tag.jsp" >标签管理</a></li>
+				<li><a >草稿箱</a></li>
 				<li><a href="page/personInfo.jsp" style="color: #10D07A;">个人信息管理</a></li>
 			</ul>
 			 <div class="show_loginUser" style="float:right;">
-        	<img src="${loginUser.getUpic()}" style="width:50px;height:50px;border-radius:50%;margin-right:10px;">
-        	欢迎  : <input type="text" id="loginUname" style="border:none;width:120px;" value="${loginUser.getUname()}"/>
+        	<img src="${loginUser.getUpic()}" id="loginPic" style="width:50px;height:50px;border-radius:50%;margin-right:10px;">
+        	欢迎  : <input type="text" id="loginUname" style="border:none;width:120px;"/>
       </div>
 		</div>
 	</nav>
@@ -83,8 +83,11 @@
 							<li>
 								<label>头 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;像：</label> 
 								<img src="images/not_pic.jpg" id="upic" width="150" height="150" > <!--圆形样式 style=" border-radius:50%;" -->
-								<input id="upicPath" type="file" name="upicPath" onchange="chgPic(this)"/>
+								<input id="upicPath" type="file" name="upicDate" onchange="chgPic(this)"/>
+								<button type="button" id="camera">摄像头</button>
+								<button type="submit" style="margin-top:10px;" id="pic_submit" onclick="upload_img()">上传图片</button>
 							</li>
+							
 						</ul>
 					</form>
 					<form id="myform" name="myform">	
@@ -146,8 +149,28 @@
 	<script type="text/javascript" src="easyui/jquery.min.js"></script>
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
-	
-	
 	<script type="text/javascript" src="js/personInfo.js"></script>
+	<script type="text/javascript">
+	function upload_img(){
+		$("#form_img").form({
+			url:"blog/update_img",    
+		    success:function(data){ 
+		    	if(data.trim() == "true"){
+		    		 location.reload();
+		    	}else{
+		    		$.messager.show({
+		    			title:'修改信息',
+		    			msg:'上传失败！！！',
+		    			timeout:1000,  
+		    			showType:'slide',
+		    			style:{
+		    				top:document.body.scrollTop+document.documentElement.scrollTop,
+		    			}
+		    		});
+		    	}
+		    } 
+		});
+	}
+	</script>
 </body>
 </html>

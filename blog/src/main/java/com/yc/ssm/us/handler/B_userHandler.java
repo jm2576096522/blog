@@ -35,10 +35,7 @@ public class B_userHandler {
 	@Autowired
 	private B_userService userService;
 
-	
 	private B_user current_user;
-	
-
 
 	//用户登录
 	@RequestMapping(value = "login", method = RequestMethod.POST)
@@ -58,7 +55,6 @@ public class B_userHandler {
 			return "redirect:/login.jsp";
 		} else {
 			session.setAttribute(ServletUtil.LOGIN_USER, user);
-
 			current_user = (B_user) session.getAttribute("loginUser");
 			System.out.println("用户session"+session.getAttribute("loginUser"));
 			return "redirect:/homePage.jsp";
@@ -68,10 +64,12 @@ public class B_userHandler {
 	
 	//用户退出
 	@RequestMapping("login_out")
-	public String login_out(HttpSession session){
+	@ResponseBody
+	public String login_out(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		session.setAttribute(ServletUtil.LOGIN_USER,"");
 		LogManager.getLogger().debug("我是退出用户的处理");
-		session.setAttribute(ServletUtil.LOGIN_USER, "");
-		return "redirect:/homePage.jsp";
+		return "true";
 		
 	}
 
@@ -90,7 +88,6 @@ public class B_userHandler {
 		response.setContentType("image/png");
 		OutputStream os = response.getOutputStream();
 		ImageIO.write(images, "png", os);
-
 	}
 
 	// 用户注册（通过邮箱）
@@ -109,15 +106,13 @@ public class B_userHandler {
 		return userService.partUser(page, rows);// 异步数据响应
 	}
 
-
-	// 修改用户信息
+/*
+	// 修改用户信息（包含图片）
 	@RequestMapping("modify")
-
 	@ResponseBody
 	public boolean modify(@RequestParam("picData") MultipartFile picData, B_user user) {
 		System.out.println("modify:user==>" + user);
 		System.out.println("upicPath ==>> " +picData);
-		
 		String picPath = null;
 		if (picData != null && !picData.isEmpty()) {// 判断是否有文件上传
 			try {
@@ -132,10 +127,32 @@ public class B_userHandler {
 		user.setUpic(picPath);
 		System.out.println("上传图片==》user:" + user);
 		return userService.updateUser(user);// 异步数据响应
+	}*/
+	@RequestMapping(value="update_img",method=RequestMethod.POST)
+	@ResponseBody
+	public boolean update_img(@RequestParam("upicDate") MultipartFile upicDate){
+		Integer usid = current_user.getUsid();
+		System.out.println("upicPath ==>> " +upicDate);
+		String picPath = null;
+		if (upicDate != null && !upicDate.isEmpty()) {// 判断是否有文件上传
+			try {
+				upicDate.transferTo(ServletUtil.getUploadFile(upicDate.getOriginalFilename()));
+				picPath = ServletUtil.VIRTUAL_UPLOAD_DIR + upicDate.getOriginalFilename();
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		B_user buser = new B_user();
+		buser.setUsid(usid);
+		buser.setUpic(picPath);
+		System.out.println("上传图片==》user:" + buser);
+		return userService.updateUser(buser);// 异步数据响应
 	}
 
 	
-	//更改用户信息
+	//更改用户信息（不包含图片）
 	@RequestMapping("update_userInfo")
 	@ResponseBody
 	public boolean update_userInfo(B_user user,HttpSession session){
@@ -144,13 +161,10 @@ public class B_userHandler {
 			return userService.updateUser(user);
 	}
 	//更改用户密码
-
 	@RequestMapping("update_pwd")
 	@ResponseBody
 	public boolean update_pwd(@RequestParam("upassword") String upassword,@RequestParam("old_pwd") String old_pwd){
-
 		B_user user = new B_user();
-
 		user.setUpassword(upassword);
 		if(!current_user.getUpassword().equals( Encrypt.md5AndSha(old_pwd))){
 			return false;
@@ -159,15 +173,14 @@ public class B_userHandler {
 			return userService.updateUser(user);
 		}
 	}
-
-
 	// 显示用户信息
-
 	@RequestMapping("showUserInfo")
 	@ResponseBody
-	public B_user showUserInfo(){
+	public B_user showUserInfo(HttpSession session){
 		Integer usid = current_user.getUsid();
-		return userService.findUserByUsid(usid);
+		current_user = userService.findUserByUsid(usid);
+		session.setAttribute(ServletUtil.LOGIN_USER, current_user);
+		return current_user;
 
 	}
 }

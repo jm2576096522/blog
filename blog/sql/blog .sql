@@ -75,11 +75,11 @@ select 1 , '原创' from dual union
 select 2 , '转载' from dual union
 select 3 , '翻译' from dual;
 
-
------文章标签分类表
+select * from B_TYPE;
+-----文章标签类别表
 create table b_tag(
-       tagid int primary key,       --标签id
-      tagname varchar2(10) not null        --标签名称
+       tagid int primary key,      			 		--标签id
+       tagname varchar2(10) not null unique         --标签名称
 );
 
 --创建序列
@@ -87,8 +87,13 @@ create  sequence seq_tagid start with 1;
 
 select  * from b_tag;
 
-insert into b_tag values(seq_tagid.nextval,'spring_mvc');
+insert into b_tag values(seq_tagid.nextval,'oracle');
+insert into b_tag values(seq_tagid.nextval,'spring');
+insert into b_tag values(seq_tagid.nextval,'jsp');
 insert into b_tag values(seq_tagid.nextval,'java');
+insert into b_tag values(seq_tagid.nextval,'mysql');
+
+
 select count(1) from b_tag where tagname='java'
 
 create sequence seq_aid start with 1;
@@ -109,19 +114,35 @@ to_char(sysdate,'yyyy-MM-dd hh:mm:ss'),'java是面向对象的一种编程，由
 
 updata b_article set apic = "";
 
-insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'java的基本介绍',10002,
+insert into b_article(aid,atitle,tid,tagid,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'java的基本介绍',1,1,10002,
 			'2017-4-1','30','常常是彼此交换名片，然后郑重或是出于礼貌用手机记下对方的电话号'); 
-insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'oracle的基本介绍',10002,
+insert into b_article(aid,atitle,tid,tagid,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'oracle的基本介绍',1,1,10002,
 			'2017-4-1','50','oracle数据库'); 
-insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'spring的基本介绍',10002,
+insert into b_article(aid,atitle,tid,tagid,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'spring的基本介绍',1,2,10002,
 			'2017-4-1','60','spring:一个开源的框架；  包含：IOC(控制反转)/DI（依赖注入） 和 面向切面编程'); 
-insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'aop的作用',10003,
+insert into b_article(aid,atitle,tid,tagid,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'aop的作用',1,3,10003,
 			'2017-4-1','40','主要有两点：1.解决代码的混乱问题2.代码的分散问题'); 
-insert into b_article(aid,atitle,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'事务的特性',10003,
+insert into b_article(aid,atitle,tid,tagid,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'事务的特性',1,4,10003,
 			'2017-4-1','40','1. 原子性 2. 一致性 3. 隔离性  4. 持久性'); 
 select * from b_article;
 
+select count(1) from b_article a inner join b_tag t on a.tagid = t.tagid 
 
+ select a.*,count(*) from (select t.* from b_tag t inner join b_article a on t.tagid = a.tagid) a group by a.tagid;
+
+
+select tag.*,nvl(w.articlenum,0) as articlenum from 
+(select g.tagid,count(1) as articlenum from 
+(select t.tagid from b_tag t inner join b_article a on t.tagid = a.tagid ) g 
+group by g.tagid) w 
+right join B_TAG tag on w.tagid = tag.tagid order by w.tagid 
+
+
+
+
+ 
+
+ 
 -----评论表
 create sequence seq_cid start with 1;
 create table b_comment(
@@ -159,7 +180,7 @@ select  * from b_drafets;--草稿
 drop table b_admin;
 drop table b_article;
 drop table b_type;   
-drop table b_tag;
+drop table b_tag;  
 drop table b_comment;
 drop table b_DRAFETS;
 drop table b_user;
