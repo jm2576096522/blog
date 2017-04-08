@@ -20,11 +20,11 @@
 			<!-- 问题反馈 -->
 			<p>
 				<input name="adname" placeholder="输入管理员名称" required="required"
-					value="admin" class="inputclass" />
+					 class="inputclass" />
 			</p>
 			<p>
 				<input type="password" name="adpassword" placeholder="输入密码"
-					required="required" value="a" class="inputclass" />
+					required="required"  class="inputclass" />
 			</p>
 			<p>
 				<img src="vcode.jpg" title="看不清，换一张" /><input name="vcode"

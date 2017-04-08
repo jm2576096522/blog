@@ -42,8 +42,8 @@
       <li><a href="personPage.jsp" style="color:#10D07A;">我的文章</a></li>
       <li><a href="page/blog_add.jsp">写新文章</a></li>
       <li><a href="page/blogHistory.jsp">博客历史</a></li>
-      <li><a href="#">标签管理</a></li>	
-      <li><a href="#">草稿箱</a></li>
+      <li><a >标签管理</a></li>	
+      <li><a >草稿箱</a></li>
       <li><a href="page/personInfo.jsp">个人信息管理</a></li>
     </ul>
      <div class="show_loginUser" style="float:right;">
@@ -142,6 +142,6 @@
 <script src="assets/js/amazeui.min.js"></script>
 <script type="text/javascript" src="js/personPage.js"></script>
 <script type="text/javascript" src="js/commonUserInfo.js"></script>
-<!-- <script src="assets/js/app.js"></script> -->
+
 </body>
 </html>

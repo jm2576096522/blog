@@ -110,13 +110,7 @@ $("#modifyForm").form(
 		{
 			url : "blog/modify",
 			success : function(data) {
-				if (data == "") {
-					$.messager.alert('用户修改主', '当前用户没有修改用户的权限 ！', 'warning');
-					$("#modifyUser").dialog("close"); // 关闭修改框
-					return;
-				}
-
-				if (data.trim() == "true") {
+				if (data.trim()) {
 					$("#modifyUser").dialog("close"); // 关闭修改框
 					$("#userList").datagrid("reload"); // 刷新修改数据
 				} else {

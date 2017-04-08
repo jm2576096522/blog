@@ -117,7 +117,7 @@
 	                        	<span id="span3"></span>
                         	</li>
 						</ul>
-						<button class="button_reset" type="reset" onClick="cancel()">取消</button>
+						<button class="button_reset" type="reset" onClick="cancel()">重置</button>
 						<button class="button_submit" type="button" onClick="update_pwd()">保存</button>
 					</form>
 				</div> 

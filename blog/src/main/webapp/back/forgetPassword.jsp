@@ -15,7 +15,6 @@
 	<div id="loginDiv">
 		<form id="loginForm" action="admin/forgetPassword" method="post">
 			<p>
-			<script type="text/javascript">alert('${errorMsg}')</script>
 				<label style="color: red;">${errorMsg}&nbsp;</label>
 			</p>
 			<!-- 问题反馈 -->

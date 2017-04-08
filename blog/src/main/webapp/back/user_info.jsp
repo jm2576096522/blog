@@ -17,7 +17,7 @@
 					readonly="true" class="inputclass" />
 			</p>
 			<p>
-				<span>邮箱：</span> <input id="email" name="uemail" class="inputclass" />
+				<span>邮箱：</span> <input id="email" name="uemail" class="easyui-validatebox" validType="email" />
 			</p>
 			<p>
 				<span>密码：</span> <input id="password" name="upassword"
@@ -38,7 +38,7 @@
 					class="inputclass" />
 			</p>
 			<p>
-				<span>电话：</span> <input id="phone" name="uphone" class="inputclass" />
+				<span>电话：</span> <input type="tel"  id="phone" name="uphone" class="inputclass" />
 			</p>
 			<p>
 				<span>职业：</span> <input id="profession" name="uprofession"

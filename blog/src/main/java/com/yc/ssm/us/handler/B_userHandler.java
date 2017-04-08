@@ -71,7 +71,7 @@ public class B_userHandler {
 	public String login_out(HttpSession session){
 		LogManager.getLogger().debug("我是退出用户的处理");
 		session.setAttribute(ServletUtil.LOGIN_USER, "");
-		return "redirect:/homePage.jsp";
+		return "redirect:/firstPage.jsp";
 		
 	}
 
@@ -150,7 +150,8 @@ public class B_userHandler {
 	public boolean update_pwd(@RequestParam("upassword") String upassword,@RequestParam("old_pwd") String old_pwd){
 
 		B_user user = new B_user();
-
+		System.out.println("我是老密码："+old_pwd);
+		System.out.println("我是老密码："+upassword);
 		user.setUpassword(upassword);
 		if(!current_user.getUpassword().equals( Encrypt.md5AndSha(old_pwd))){
 			return false;

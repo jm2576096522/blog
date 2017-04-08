@@ -47,8 +47,8 @@
 				<li><a href="personPage.jsp">我的文章</a></li>
 				<li><a href="page/blog_add.jsp">写新文章</a></li>
 				<li><a href="page/blogHistory.jsp">博客历史</a></li>
-				<li><a href="#">标签管理</a></li>
-				<li><a href="#">草稿箱</a></li>
+				<li><a >标签管理</a></li>
+				<li><a >草稿箱</a></li>
 				<li><a href="page/personInfo.jsp" style="color: #10D07A;">个人信息管理</a></li>
 			</ul>
 			 <div class="show_loginUser" style="float:right;">
@@ -67,7 +67,6 @@
 						<li>
 							<a href="page/personInfo.jsp">基本信息</a>
 						</li>
-							
 						<li>
 							<a href="page/personInfo_pwd.jsp">密码修改</a>
 						</li>
@@ -83,7 +82,7 @@
 							<li>
 								<label>头 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;像：</label> 
 								<img src="images/not_pic.jpg" id="upic" width="150" height="150" > <!--圆形样式 style=" border-radius:50%;" -->
-								<input id="upicPath" type="file" name="upicPath" onchange="chgPic(this)"/>
+								<input id="upicPath" type="file" d name="upicPath" onchange="chgPic(this)"/>
 							</li>
 						</ul>
 					</form>
@@ -146,8 +145,6 @@
 	<script type="text/javascript" src="easyui/jquery.min.js"></script>
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
-	
-	
 	<script type="text/javascript" src="js/personInfo.js"></script>
 </body>
 </html>
