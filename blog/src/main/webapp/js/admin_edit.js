@@ -170,6 +170,6 @@ function openUpdate(index) {
 	var row = $("#adminList").datagrid("getRows")[index];
 	$("#aid").val(row.adid);
 	$("#aname").val(row.adname);
-	$("#apassword").val(row.adpassword);
+	$("#apassword").textbox('setValue',row.adpassword);
 	$("#amail").val(row.admail);
 }

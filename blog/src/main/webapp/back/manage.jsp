@@ -1,26 +1,30 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 <base href="${deployName}">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link type="text/css" rel="stylesheet" href="easyui/themes/icon.css">
-<link type="text/css" rel="stylesheet"href="easyui/themes/default/easyui.css">
+<link type="text/css" rel="stylesheet"
+	href="easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="easyui/demo/demo.css">
 <link href="css/manage.css" rel="stylesheet" type="text/css">
 <title>博客后台管理</title>
 </head>
 
 <body class="easyui-layout">
-	<div data-options="region:'north' ,title:'欢迎【 <span>${loginAdmin.adname}</span>】进入博客管理系统'"
-		style="height: 110px;background: #E9F1FF;">
+	<div
+		data-options="region:'north' ,title:'欢迎【 <span>${loginAdmin.adname}</span>】进入博客管理系统'"
+		style="height: 110px; background: #E9F1FF;">
 		<div class="logo" align="center">
-			<img height="80px"  src="images/plot2.png">
+			<img height="80px" src="images/plot2.png">
 		</div>
 	</div>
 	<div data-options="region:'south'" style="height: 55px;">
-		<div class="copyright" style=" background: #E9F1FF;line-height: 52px; text-align: center; " >Copyright © baidu.com 版权所有 |
-			京xxx备xxxxxxxxx号</div>
+		<div class="copyright"
+			style="background: #E9F1FF; line-height: 52px; text-align: center;">Copyright
+			© baidu.com 版权所有 | 京xxx备xxxxxxxxx号</div>
 	</div>
 	<div data-options="region:'east',title:'工具栏'" style="width: 182px;">
 		<br> <input id="ss"></input>
@@ -69,11 +73,11 @@
 			</div>
 		</div>
 	</div>
-
 	<script type="text/javascript" src="easyui/jquery.min.js"></script>
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script src="js/validatebox.js" type="text/javascript"></script>
+	
 	<script type="text/javascript" src="js/manage.js"></script>
-
 </body>
 </html>
