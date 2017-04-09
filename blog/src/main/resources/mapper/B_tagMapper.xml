@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where
 		rn>(${currPage}-1)*${pageSize}
 	</select>
-
+	<!-- 更改类别标签信息 -->
 	<update id="modifyTag" parameterType="B_tag">
 		update b_tag
 		<set>
@@ -54,8 +54,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</set>
 		where tagid=#{tagid}
-	</update>
-
+	</update>	
+	<!--删除类别标签  -->
 	<delete id="deleteTag">
 		delete from b_tag where tagid=#{tagid}
 	</delete>

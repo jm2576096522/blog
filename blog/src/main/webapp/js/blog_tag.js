@@ -1,77 +1,92 @@
 /**
  * 类别管理
  */
-$(function() {  
-	$("#table_content").datagrid(
-			{
-				url :"tag/findAll",
-				fit : true,
-				border : false,
-				fitColumns : true,
-				singleSelect : true,
-				toolbar : '#tag',
-				idField : 'tagid',
-				columns : [ [
-				             {
-				            	 title : '编号',
-				            	 field : 'tagid',
-				            	 width : 100,
-				            	 align : 'left',
-				            	 hidden:true
-				             },
-				             {
-				            	 title : '类别',
-				            	 field : 'tagname',
-				            	 width : 100,
-				            	 align : 'center',
+$(function(){
+	$('#table_content').datagrid({
+		fit : true,
+		border : false,
+		fitColumns : true,
+		singleSelect : true,
+		url:'tag/findAll',
+		columns:[[
+		          {field:'tagid',title:'编号',hidden:false},
+		          {field:'tagname',title:'类别',width:180,editor:'text',align : 'center'},
+		          {field:'articlenum',title:'文章',width:80,align:'right',align : 'center'},
+		          {field:'action',title:'操作',width:80,align:'center',
+		        	  formatter:function(value,row,index){
+		        		  if (row.editing){
+		        			  var s = '<a style="margin-right:10px; font-size:15px;" onclick="saverow('+index+')">Save</a> ';
+		        			  var c = '<a style="font-size:15px;" onclick="cancelrow('+index+')">Cancel</a>';
+		        			  return s+c;
+		        		  }else{
+		        			  var e = '<a style="margin-right:10px; font-size:15px;" onclick="editrow('+index+')">Edit</a> ';
+		        			  var d = '<a style="font-size:15px;" onclick="deleterow('+index+')">Delete</a>';
+		        			  return e+d;
+		        		  }
+		        	  }
+		          }
+		          ]],
+		          onBeforeEdit:function(index,row){
+		        	  row.editing = true;
+		        	  $('#table_content').datagrid('updateRow',{index: index});
+		          },
+		          onAfterEdit:function(index,row){
+		        	  row.editing = false;
+		        	  $('#table_content').datagrid('updateRow',{index: index});
+		        	  //save
+		        	  alert(12);
+		        	  var tagid = row.tagid;
+		        	  var tagname = row.tagname;
+		        	  $.get("tag/modify",{tagid:tagid,tagname:tagname},function(data){
+		        		  $.messager.alert("操作提示","保存成功","info");
+		        	  });
+		          },
+					onCancelEdit:function(index,row){
+						row.editing = false;
+						 $('#table_content').datagrid('updateRow',{index: index});
+						 
+						 alert(12);
+					}
+	});
+});
 
-				             },
-				             {
-				            	 title : '文章',
-				            	 field : 'articlenum',
-				            	 width : 100,
-				            	 align : 'center',
-
-				             },
-				             {
-				            	 field : 'opr',
-				            	 title : '操作',
-				            	 width : 100,
-				            	 align : 'center',
-				            	 formatter : function(value, row, index) {
-				            		 var oprStr = '<a style="margin-right:10px; font-size:14px;" href="javascript:void(0)" onclick="openUpdate('
-				            			 + index
-				            			 + ')">修改</a>'
-				            			 + "|" +'<a style="margin-left:10px; font-size:14px;" href="javascript:void(0)"onclick="deleteDate('
-				            			 + index
-				            			 + ')">删除</a>'
-				            			 + '<script>$(".removeBtn").linkbutton({iconCls: "icon-remove"});'
-				            			 + '$(".modifyBtn").linkbutton({iconCls: "icon-edit"});</script>';
-				            		 return oprStr;
-				            	 }
-				             } ] ],
-
-			});
-}); 
-function openUpdate(index){
-	alert(index);
+function editrow(editIndex){
+	$('#table_content').datagrid('beginEdit', editIndex);
 }
-function deleteDate(index){
 
+function saverow(editIndex){
+	$('#table_content').datagrid('endEdit', editIndex);
+}
+function deleterow(editIndex){
+			var rows = $('#table_content').datagrid('getRows');
+			var row = rows[editIndex];
+			var tagid = row.tagid;
+			var articlenum = row.articlenum;
+			if(articlenum == 0){
+				$('#table_content').datagrid('deleteRow',editIndex);
+				$.get("tag/delete",{tagid:tagid},function(data){
+		      		  $.messager.alert("操作提示","保存成功","info");
+					});
+			}else{
+				$.messager.alert("错误提示","文章数目不为空","error");
+			}
+			
+	
+}
+function cancelrow(editIndex){
+	$('#table_content').datagrid('cancelEdit',editIndex);
 }
 
 function tag_add(){
 	var newTag = $("#add_tag").val();
-
+	
 	if(newTag == ""){
-		$.messager.alert("失败提示", "类别不能为空！","error");
+		$.messager.alert("失败提示","类别不能为空","error");
 	}else{
 		$.post("tag/add",{tagname:newTag},function(){
-			$.messager.alert("操作提示", "添加成功！","info",function(){
-				  location.reload();
-			  });
-		
-	});
-}
-
+			$.messager.alert("操作提示","添加成功","info",function(){
+				location.reload();
+			});
+		});
+	}
 }

@@ -38,7 +38,7 @@ public class B_tagServiceImpl implements B_tagService {
 		return b_tagMapper.findALlTags();
 	}
 
-
+	//更改类别标签
 	@Override
 	public boolean modifyTag(B_tag b_tag) {
 		return b_tagMapper.modifyTag(b_tag);
@@ -56,11 +56,10 @@ public class B_tagServiceImpl implements B_tagService {
 		pb = b_tagMapper.partTag(pb);
 		return pb;
 	}
-
+	//删除类别标签
 	@Override
-	public int deleteTag(String tagid) {
-		int tagid1=Integer.parseInt(tagid);
-		return b_tagMapper.deleteTag(tagid1);
+	public int deleteTag(int tagid){
+		return b_tagMapper.deleteTag(tagid);
 	}
 	
 	//结合文章表（返回所引用对应类别的文章数）查询所有的标签

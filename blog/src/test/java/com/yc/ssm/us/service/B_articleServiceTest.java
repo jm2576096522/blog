@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.yc.ssm.us.entity.B_article;
+import com.yc.ssm.us.entity.PaginationBean;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring.xml")
@@ -43,6 +44,14 @@ public class B_articleServiceTest {
 		System.out.println(list);
 		assertNotNull(list);
 	
+	}
+	@Test
+	public void testPartArticle(){
+		PaginationBean<B_article> partArticle = bart.partArticle("10", "5");
+		
+		System.out.println(partArticle);
+		assertNotNull(partArticle);
+		
 	}
 
 }

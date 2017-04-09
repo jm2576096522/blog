@@ -16,8 +16,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select bt.*, bu.uname from b_article bt inner join b_user
 		bu on bt.usid = bu.usid where bu.usid = #{usid}
 	</select>
-
-
 	<select id="listArticles" parameterType="String" resultType="B_article">
 		select *
 		from b_article

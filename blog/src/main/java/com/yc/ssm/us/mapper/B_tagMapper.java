@@ -20,7 +20,7 @@ public interface B_tagMapper {
 	boolean modifyTag(B_tag b_tag);
 
 	PaginationBean<B_tag> partTag(PaginationBean<B_tag> pb);
-
+	//删除类别标签
 	int deleteTag(int tagid);
 
 }
