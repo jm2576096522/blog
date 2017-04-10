@@ -32,7 +32,7 @@ public class B_type {
 
 	@Override
 	public String toString() {
-		return "b_type [tid=" + tid + ", tname=" + tname + "]";
+		return "\nb_type [tid=" + tid + ", tname=" + tname + "]";
 	}
 
 

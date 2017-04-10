@@ -26,6 +26,10 @@
 <meta name="msapplication-TileColor" content="#0e90d2">
 <link rel="stylesheet" href="assets/css/amazeui.min.css">
 <link rel="stylesheet" href="assets/css/app.css">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
+<!-- <link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="easyui/demo/demo.css"> -->
 </head>
 
 <body id="blog-article-sidebar">
@@ -49,7 +53,7 @@
 				<li><a href="homePage.jsp">首页</a></li>
 				<li><a href="article.jsp">我的文章</a></li>
 				<li><a href="page/blog_add.jsp">写新文章</a></li>
-				<li><a href="page/blogHistory.jsp" style="color: #10D07A;">博客历史</a></li>
+				<li><a href="page/blogHistory.jsp" style="color: #10D07A;">文章管理</a></li>
 				<li><a href="javaScript:void(0)">标签管理</a></li>
 				<li><a href="javaScript:void(0)">草稿箱</a></li>
 				<li><a href="page/personInfo.jsp">个人信息管理</a></li>
@@ -67,148 +71,114 @@
 	<hr>
 	<!-- content srart -->
 	<div class="am-g am-g-fixed blog-fixed blog-content">
-		<div class="am-u-sm-12">
-			<h1 class="blog-text-center">-- 历史纪录 --</h1>
-			<div class="timeline-year">
-				<h1>2015</h1>
-				<hr>
-				<ul>
-					<h3>10月</h3>
-					<hr>
-					<li><span class="am-u-sm-4 am-u-md-2 timeline-span">2015/10/18</span>
-						<span class="am-u-sm-8 am-u-md-6"><a
-							href="page/show_article.jsp">君埋泉下泥销骨，我寄人间雪满头</a></span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">风又起</span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">amazeui</span></li>
-					<li><span class="am-u-sm-4 am-u-md-2 timeline-span">2015/10/10</span>
-						<span class="am-u-sm-8 am-u-md-6"><a
-							href="page/show_article.jsp">不为无益之事，何以遣有涯之生。</a></span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">灯火阑珊</span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">LWXYFER</span></li>
-					<li><span class="am-u-sm-4 am-u-md-2 timeline-span">2015/10/5</span>
-						<span class="am-u-sm-8 am-u-md-6"><a
-							href="page/show_article.jsp">一想到你，我这张丑脸上就泛起微笑</a></span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">凌晨四点钟</span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">二师兄</span></li>
-				</ul>
-				<br>
-				<ul>
-					<br>
-					<h3>9月</h3>
-					<hr>
-					<li><span class="am-u-sm-4 am-u-md-2 timeline-span">时间</span>
-						<span class="am-u-sm-8 am-u-md-6"><a href="#">我的标题</a></span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">分类目录</span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">作者</span></li>
-					<li><span class="am-u-sm-4 am-u-md-2 timeline-span">时间</span>
-						<span class="am-u-sm-8 am-u-md-6"><a href="#">我的标题</a></span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">分类目录</span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">作者</span></li>
-					<li><span class="am-u-sm-4 am-u-md-2 timeline-span">时间</span>
-						<span class="am-u-sm-8 am-u-md-6"><a href="#">我的标题</a></span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">分类目录</span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">作者</span></li>
-				</ul>
-				<br>
-				<ul>
-					<br>
-					<h3>8月</h3>
-					<hr>
-					<li><span class="am-u-sm-4 am-u-md-2 timeline-span">时间</span>
-						<span class="am-u-sm-8 am-u-md-6"><a href="#">我的标题</a></span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">分类目录</span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">作者</span></li>
-					<li><span class="am-u-sm-4 am-u-md-2 timeline-span">时间</span>
-						<span class="am-u-sm-8 am-u-md-6"><a href="#">我的标题</a></span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">分类目录</span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">作者</span></li>
-					<li><span class="am-u-sm-4 am-u-md-2 timeline-span">时间</span>
-						<span class="am-u-sm-8 am-u-md-6"><a href="#">我的标题</a></span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">分类目录</span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">作者</span></li>
-				</ul>
-			</div>
-			<div class="timeline-year">
-				<h1>2014</h1>
-				<hr>
-				<ul>
-					<h3>9月</h3>
-					<hr>
-					<li><span class="am-u-sm-4 am-u-md-2 timeline-span">2015/10/18</span>
-						<span class="am-u-sm-8 am-u-md-6"><a href="#">君埋泉下泥销骨，我寄人间雪满头</a></span>
-						<span class="am-u-sm-4 am-u-md-2 am-hide-sm-only">风又起</span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">amazeui</span></li>
-					<li><span class="am-u-sm-4 am-u-md-2 timeline-span">2015/10/10</span>
-						<span class="am-u-sm-8 am-u-md-6"><a href="#">不为无益之事，何以遣有涯之生。</a></span>
-						<span class="am-u-sm-4 am-u-md-2 am-hide-sm-only">灯火阑珊</span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">LWXYFER</span></li>
-					<li><span class="am-u-sm-4 am-u-md-2 timeline-span">2015/10/5</span>
-						<span class="am-u-sm-8 am-u-md-6"><a href="#">一想到你，我这张丑脸上就泛起微笑</a></span>
-						<span class="am-u-sm-4 am-u-md-2 am-hide-sm-only">凌晨四点钟</span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">二师兄</span></li>
-				</ul>
-				<br>
-				<ul>
-					<br>
-					<h3>8月</h3>
-					<hr>
-					<li><span class="am-u-sm-4 am-u-md-2 timeline-span">时间</span>
-						<span class="am-u-sm-8 am-u-md-6"><a href="#">我的标题</a></span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">分类目录</span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">作者</span></li>
-					<li><span class="am-u-sm-4 am-u-md-2 timeline-span">时间</span>
-						<span class="am-u-sm-8 am-u-md-6"><a href="#">我的标题</a></span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">分类目录</span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">作者</span></li>
-					<li><span class="am-u-sm-4 am-u-md-2 timeline-span">时间</span>
-						<span class="am-u-sm-8 am-u-md-6"><a href="#">我的标题</a></span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">分类目录</span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">作者</span></li>
-				</ul>
-				<br>
-				<ul>
-					<br>
-					<h3>7月</h3>
-					<hr>
-					<li><span class="am-u-sm-4 am-u-md-2 timeline-span">时间</span>
-						<span class="am-u-sm-8 am-u-md-6"><a href="#">我的标题</a></span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">分类目录</span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">作者</span></li>
-					<li><span class="am-u-sm-4 am-u-md-2 timeline-span">时间</span>
-						<span class="am-u-sm-8 am-u-md-6"><a href="#">我的标题</a></span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">分类目录</span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">作者</span></li>
-					<li><span class="am-u-sm-4 am-u-md-2 timeline-span">时间</span>
-						<span class="am-u-sm-8 am-u-md-6"><a href="#">我的标题</a></span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">分类目录</span> <span
-						class="am-u-sm-4 am-u-md-2 am-hide-sm-only">作者</span></li>
-				</ul>
-			</div>
-
-
-			<hr>
+		
+		<hr>
 		</div>
-
-
+		<div class="am-g am-g-fixed blog-fixed" style="margin-top:2%;">
+		<div class="easyui-layout" style="width: 100%; height: 300px; margin: 0px auto">
+			<div id="history_content">
+			
+			</div>
+		</div>
 	</div>
+
+
 	<!-- content end -->
-	<footer class="blog-footer">
+	<footer class="blog-footer" style="margin-top: 400px;">
 
 		<div class="blog-text-center">© 2015 AllMobilize, Inc. Licensed
 			under MIT license. Made with love By LWXYFER</div>
 	</footer>
 
-
-
-	<!--[if (gte IE 9)|!(IE)]><!-->
 	<script src="assets/js/jquery.min.js"></script>
-	<!--<![endif]-->
-	<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
-<![endif]-->
 	<script src="assets/js/amazeui.min.js"></script>
-	<!-- <script src="assets/js/app.js"></script> -->
+	
+	<script type="text/javascript">
+	/**
+	 * 类别管理
+	 */
+	$(function(){
+		$('#history_content').datagrid({
+			pagination : true,
+			fit : true,
+			border : false,
+			fitColumns : true,
+			singleSelect : true,
+			pageList : [ 5, 10, 15, 20, 25, 30 ],
+			url:'article/findAllById',
+			columns:[[
+			          {field:'aid',title:'编号',hidden:false},
+			          {field:'atitle',title:'标题',width:180,align : 'center'},
+			          {field:'aviewnum',title:'阅读',width:180,align : 'center'},
+			          {field:'commonnum',title:'评论',width:180,align : 'center'},
+			          {field:'action',title:'操作',width:80,align:'center',
+			        	  formatter:function(value,row,index){
+			        		  '<a style="margin-right:10px; font-size:15px;" onclick="saverow('+index+')">编辑</a> ';
+			        		   '<a style="font-size:15px;" onclick="cancelrow('+index+')">置顶</a>';
+			        		 '<a style="margin-right:10px; font-size:15px;" onclick="editrow('+index+')">删除</a> ';
+			        			'<a style="font-size:15px;" onclick="deleterow('+index+')">分类</a>';
+			         	 }
+			          }
+			          ]],
+			          onBeforeEdit:function(index,row){
+			        	  row.editing = true;
+			        	  $('#table_content').datagrid('updateRow',{index: index});
+			          },
+			          onAfterEdit:function(index,row){
+			        	  row.editing = false;
+			        	  $('#table_content').datagrid('updateRow',{index: index});
+			        	  //save
+			        	  var tagid = row.tagid;
+			        	  var tagname = row.tagname;
+			        	  $.get("tag/modify",{tagid:tagid,tagname:tagname},function(data){
+			        		  $.messager.alert("操作提示","保存成功","info");
+			        	  });
+			          },
+						onCancelEdit:function(index,row){
+							row.editing = false;
+							 $('#table_content').datagrid('updateRow',{index: index});
+						}
+		});
+	});
+
+	function editrow(editIndex){
+		$('#table_content').datagrid('beginEdit', editIndex);
+	}
+	function saverow(editIndex){
+		$('#table_content').datagrid('endEdit', editIndex);
+	}
+	function deleterow(editIndex){
+				var rows = $('#table_content').datagrid('getRows');
+				var row = rows[editIndex];
+				var tagid = row.tagid;
+				var articlenum = row.articlenum;
+				if(articlenum == 0){
+					$('#table_content').datagrid('deleteRow',editIndex);
+					$.get("tag/delete",{tagid:tagid},function(data){
+			      		  $.messager.alert("操作提示","保存成功","info");
+						});
+				}else{
+					$.messager.alert("错误提示","文章数目不为空","error");
+				}
+	}
+	function cancelrow(editIndex){
+		$('#table_content').datagrid('cancelEdit',editIndex);
+	}
+
+	function tag_add(){
+		var newTag = $("#add_tag").val();
+		
+		if(newTag == ""){
+			$.messager.alert("失败提示","类别不能为空","error");
+		}else{
+			$.post("tag/add",{tagname:newTag},function(){
+				$.messager.alert("操作提示","添加成功","info",function(){
+					location.reload();
+				});
+			});
+		}
+	}
+	</script>
+	
 </body>
 </html>

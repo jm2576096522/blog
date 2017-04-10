@@ -55,6 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where rn>(${currPage}-1)*${pageSize}
 	</select>
 
+	<!-- 修改博客文章 -->
 	<update id="modifyArticle" parameterType="B_article">
 		update B_article
 		<set>
@@ -71,11 +72,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</set>
 		where aid=#{aid}
 	</update>
-
+	<!-- 新建博客文章 -->
 	<insert id="insertArticle" parameterType="B_article">
-		insert into b_article
-		values(seq_aid.nextval,#{atitle},#{tid},#{tagname},#{uname},to_char(sysdate,'yyyy-MM-dd
-		hh:mm:ss'),#{acontent},#{apic},#{aviewnum})
+		insert into b_article (aid,atitle,tid,tagid,usid,atime,acontent,apic)
+		values(seq_aid.nextval,#{atitle},#{tid},#{tagid},#{usid},to_char(sysdate,'yyyy-MM-dd
+		hh:mm:ss'),#{acontent},#{apic})
 	</insert>
 
 	<delete id="deleteArticle">

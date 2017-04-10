@@ -17,6 +17,7 @@ create table b_user(
        uprofession varchar2(20),          --用户的职业背景
        upersondesc varchar2(200)        --用户个人描述
 );
+
 insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'1506173890@qq.com','a');
 update  b_user set upassword = '6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2';
 
@@ -124,7 +125,22 @@ insert into b_article(aid,atitle,tid,tagid,usid,atime,aviewnum,acontent) values(
 			'2017-4-1','40','主要有两点：1.解决代码的混乱问题2.代码的分散问题'); 
 insert into b_article(aid,atitle,tid,tagid,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'事务的特性',1,4,10003,
 			'2017-4-1','40','1. 原子性 2. 一致性 3. 隔离性  4. 持久性'); 
+			
+insert into b_article(aid,atitle,tid,tagid,usid,atime,aviewnum,acontent,apic) values(seq_aid.nextval,'事务的特性',1,4,10003,
+			'2017-4-1','40','1. 原子性 2. 一致性 3. 隔离性  4. 持久性',''); 
 select * from b_article;
+
+delete from B_ARTICLE where atime = '2017-4-1'
+
+
+select b.* from (select substr(atime,0,7) num from B_ARTICLE) b group by b.num;
+
+
+--查询当前时间
+select to_char(sysdate,'yyyy-MM-dd hh:mm:ss') from dual;
+
+--修改字段属性，aviewnum 默认值为0
+alter table b_article modify (aviewnum varchar2(10) default '0');
 
 select count(1) from b_article a inner join b_tag t on a.tagid = t.tagid 
 
@@ -137,10 +153,6 @@ select tag.*,nvl(w.articlenum,0) as articlenum from
 group by g.tagid) w 
 right join B_TAG tag on w.tagid = tag.tagid order by w.tagid 
 
-
-
-
- 
 
  
 -----评论表

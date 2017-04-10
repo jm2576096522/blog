@@ -61,5 +61,13 @@ public class B_tagHandler {
 		LogManager.getLogger().debug("结合文章表查询所有的标签的处理");
 		return b_tagService.findAll();
 	}
+	
+	//获得所有的类别标签
+	@RequestMapping("findAllTags")
+	@ResponseBody
+	public List<B_tag> findALlTags() {
+		LogManager.getLogger().debug("获得所有的类别标签");
+		return b_tagService.findALlTags();
+	}
 
 }

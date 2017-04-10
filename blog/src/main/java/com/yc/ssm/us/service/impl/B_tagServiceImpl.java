@@ -32,7 +32,7 @@ public class B_tagServiceImpl implements B_tagService {
 		LogManager.getLogger().debug("添加类别标签");
 		return b_tagMapper.insertTag(b_tag);
 	}
-
+	//获得所有的类别标签
 	@Override
 	public List<B_tag> findALlTags() {
 		return b_tagMapper.findALlTags();

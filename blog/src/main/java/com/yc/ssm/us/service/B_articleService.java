@@ -23,8 +23,8 @@ public interface B_articleService {
 	// 删除博客文章
 	int deleteArticle(String aid);
 
-	/*
-	 * // 添加博客文章 boolean addArticle(B_article b_article);
-	 */
+	// 添加博客文章
+	boolean insertArticle(B_article b_article);
+	 
 
 }

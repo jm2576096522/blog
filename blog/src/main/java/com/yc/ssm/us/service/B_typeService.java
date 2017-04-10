@@ -1,5 +1,7 @@
 package com.yc.ssm.us.service;
 
+import java.util.List;
+
 import com.yc.ssm.us.entity.B_type;
 import com.yc.ssm.us.entity.PaginationBean;
 
@@ -14,5 +16,9 @@ public interface B_typeService {
 	int insertType(B_type b_type);
 
 	int deleteType(String tid);
+	
+	//查询所有的类型
+	List<B_type> findAll();
+
 
 }

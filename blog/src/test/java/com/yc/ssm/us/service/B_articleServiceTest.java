@@ -48,10 +48,23 @@ public class B_articleServiceTest {
 	@Test
 	public void testPartArticle(){
 		PaginationBean<B_article> partArticle = bart.partArticle("10", "5");
-		
 		System.out.println(partArticle);
 		assertNotNull(partArticle);
 		
+	}
+	//新建博客
+	@Test
+	public void testInsertArticle() {
+		B_article article = new B_article();
+		article.setAtitle("eclispe");
+		article.setTid(2);
+		article.setTagid(1);
+		article.setUsid(10007);
+		article.setAcontent("java的一个集成开发环境");
+		article.setApic("");
+		boolean result = bart.insertArticle(article);
+		System.out.println(result);
+		assertEquals(result, true);
 	}
 
 }
