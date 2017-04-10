@@ -32,8 +32,11 @@ public class B_tagServiceTest {
 	}
 
 	@Test
-	public void testFindTag() {
-		boolean result = b_tagService.findTag("oracle");
+	public void testModifyTag() {
+		B_tag btag = new B_tag();
+		btag.setTagid(7);
+		btag.setTagname("你好");
+		boolean result = b_tagService.modifyTag(btag);
 		System.out.println(result);
 		assertEquals(result, true);
 	}
@@ -43,6 +46,12 @@ public class B_tagServiceTest {
 		B_tag tag = new B_tag();
 		tag.setTagname("oracle1");
 		int result = b_tagService.insertTag(tag);
+		assertNotNull(result);
+	}
+	@Test
+	public void testDeleteTag() {
+		int tagid = 11;
+		int result = b_tagService.deleteTag(tagid);
 		assertNotNull(result);
 	}
 

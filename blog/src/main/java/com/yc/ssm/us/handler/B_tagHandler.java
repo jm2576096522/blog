@@ -48,9 +48,9 @@ public class B_tagHandler {
 	}
 
 	// 删除标签
-	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	@RequestMapping("delete")
 	@ResponseBody
-	public int deleteTag(String tagid) {
+	public int deleteTag(int tagid) {
 		LogManager.getLogger().debug("我是delete type的处理");
 		return b_tagService.deleteTag(tagid);
 	}
