@@ -48,23 +48,30 @@
 	<div id="addAdmin" style="width: 300px; direction: center;">
 		<form id="addAdminForm" method="post" enctype="multipart/form-data"
 			style="margin-left: 20px;">
-			<p>
-				<span>用户名：</span> <input id="aname" name="adname"
-					class="easyui-validatebox " data-options="required:true" />
-			</p>
-			<p>
-				<span>密码：</span> <input id="apassword" name="adpassword"
-					class="easyui-passwordbox " data-options="required:true" />
-			</p>
-			<p>
-				<span>邮箱：</span> <input id="amail" name="admail"
-					class="easyui-validatebox "
-					data-options="required:true,validType:'email'" />
-			</p>
-			<p>
-				<a class="closeBtn" href="javascript:void(0)">关闭</a>&nbsp;&nbsp; <a
-					class="submitBtn" href="javascript:void(0)">确定</a>
-			</p>
+
+			<table cellpadding="10">
+				<tr>
+					<td align="right">用户名：</td>
+					<td><input id="aname" name="adname"
+						class="easyui-validatebox " data-options="required:true" /></td>
+				</tr>
+				<tr>
+					<td align="right">密码：</td>
+					<td><input id="apassword" name="adpassword"
+						class="easyui-passwordbox " data-options="required:true" /></td>
+				</tr>
+				<tr>
+					<td align="right">邮箱：</td>
+					<td><input id="amail" name="admail"
+						class="easyui-validatebox "
+						data-options="required:true,validType:'email'" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><a class="closeBtn"
+						href="javascript:void(0)">关闭</a>&nbsp;&nbsp; <a class="submitBtn"
+						href="javascript:void(0)">确定</a></td>
+				</tr>
+			</table>
 		</form>
 	</div>
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>

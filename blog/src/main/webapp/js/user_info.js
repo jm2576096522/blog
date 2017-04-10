@@ -49,7 +49,8 @@ $("#userList")
 								field : 'uaddress',
 								title : '地址',
 								width : 100,
-								align : 'center'
+								align : 'center',
+								sortable : true
 							},
 							{
 								field : 'uphone',

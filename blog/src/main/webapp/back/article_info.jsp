@@ -8,18 +8,10 @@
 </head>
 <body>
 	<div id="article">
-		<span style="text-align: center;">按文章类型查询:</span> <select id="cc"
-			class="easyui-combobox" name="dept" style="width: 100px;">
-			<option value="1">原创</option>
-			<option value="2">转载</option>
-			<option value="2">翻译</option>
-		</select> <span style="text-align: center; padding-left: 30px;">按文章标签查询:</span>
-		<select id="cc1" class="easyui-combobox" name="dept"
-			style="width: 100px;">
-			<option value="1">java</option>
-			<option value="2">oracle</option>
-			<option value="3">oop</option>
-		</select>
+		<input id="mkid" class="easyui-combobox" /> <input
+			id="zhbid" class="easyui-combobox" /> <a href="#"
+			href="javascript:void(0)" class="easyui-linkbutton"
+			iconCls="icon-search" onclick="">查询</a>
 	</div>
 
 	<table id="articleList"></table>
@@ -60,5 +52,6 @@
 		</p>
 	</div>
 	<script type="text/javascript" src="js/article_info.js"></script>
+
 </body>
 </html>

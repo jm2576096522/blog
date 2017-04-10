@@ -12,10 +12,10 @@
 </head>
 <body>
 	<div id="forgetDiv">
-		<form id="forgetForm" action="admin/forgetPassword" method="post" >
-			<table cellpadding="5" style="width:300px ;padding-left: 15px; ">
+		<form id="forgetForm" action="admin/forgetPassword" method="post">
+			<table cellpadding="5" style="width: 300px; padding-left: 15px;">
 				<tr align="center">
-					<td colspan="2"><label style="color: red;">${errorMsg}&nbsp;</label></td>
+					<td colspan="2"><label style="color: red;">${errorAdminMsg}&nbsp;</label></td>
 				</tr>
 				<tr>
 					<td align="right" width="60px">管理员名称</td>
@@ -42,9 +42,10 @@
 				</tr>
 
 				<tr>
-					<td></td>
-					<td><a id="btnLogin" class="easyui-linkbutton"
-						style="width: 170px;margin-bottom: 20px" onClick="forgetPassword()">忘记密码登录</a></td>
+					<td colspan="2" align="center"><a id="btnLogin"
+						class="easyui-linkbutton"
+						style="width: 170px; margin-bottom: 20px"
+						onClick="forgetPassword()">忘记密码登录</a></td>
 				</tr>
 			</table>
 		</form>

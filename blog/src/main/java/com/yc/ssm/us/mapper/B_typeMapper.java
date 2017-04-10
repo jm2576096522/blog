@@ -1,5 +1,7 @@
 package com.yc.ssm.us.mapper;
 
+import java.util.List;
+
 import com.yc.ssm.us.entity.B_type;
 import com.yc.ssm.us.entity.PaginationBean;
 
@@ -15,5 +17,7 @@ public interface B_typeMapper {
 
 	// 删除类型
 	int deleteType(int tid);
+
+	List<B_type> findTypeAll();
 
 }

@@ -22,7 +22,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where
 		rn>(${currPage}-1)*${pageSize}
 	</select>
-
+	<select id="findTypeAll" resultType="B_type">
+		select * from b_type
+	</select>
 	<insert id="insertType">
 		insert into b_type values(seq_tid.nextval,#{tname})
 	</insert>

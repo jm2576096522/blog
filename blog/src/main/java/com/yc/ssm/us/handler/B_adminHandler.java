@@ -30,7 +30,7 @@ public class B_adminHandler {
 		LogManager.getLogger().debug("login:admin===>" + b_admin);
 		b_admin = b_adminService.login(b_admin);
 		if (b_admin == null) {
-			request.setAttribute(ServletUtil.ERROR_MESSAGE, "用户名或密码错误！！！");
+			request.setAttribute(ServletUtil.ERROR_AdminMESSAGE, "管理员名称或密码错误！！！");
 			return "redirect:/back/admin_login.jsp";
 		} else {
 			request.getSession().setAttribute(ServletUtil.LOGIN_ADMIN, b_admin);
@@ -76,7 +76,7 @@ public class B_adminHandler {
 		LogManager.getLogger().debug("forgetPassword:admin===>" + b_admin);
 		b_admin = b_adminService.forgetPassword(b_admin);
 		if (b_admin == null) {
-			request.setAttribute(ServletUtil.ERROR_MESSAGE, "管理员名称或者邮箱错误！！！");
+			request.setAttribute(ServletUtil.ERROR_AdminMESSAGE, "管理员名称或者邮箱错误！！！");
 			return "redirect:/back/forgetPassword.jsp";
 		} else {
 			request.getSession().setAttribute(ServletUtil.LOGIN_ADMIN, b_admin);

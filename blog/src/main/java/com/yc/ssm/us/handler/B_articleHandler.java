@@ -15,16 +15,27 @@ import com.yc.ssm.us.entity.B_article;
 import com.yc.ssm.us.entity.B_user;
 import com.yc.ssm.us.entity.PaginationBean;
 import com.yc.ssm.us.service.B_articleService;
+import com.yc.ssm.us.service.B_tagService;
+import com.yc.ssm.us.service.B_typeService;
+import com.yc.ssm.us.service.B_userService;
 
 @Controller
 @RequestMapping("article")
-public class B_articleHandler {
+public class B_articleHandler<T> {
 	public B_articleHandler() {
 		LogManager.getLogger().debug("我进入了articleHandler");
 	}
 
 	@Autowired
 	private B_articleService articleService;
+
+	@Autowired
+	private B_userService b_userService;
+
+	@Autowired
+	private B_tagService b_tagService;
+	@Autowired
+	private B_typeService b_typeService;
 
 	// 文章查询
 	@RequestMapping("find")
@@ -59,4 +70,21 @@ public class B_articleHandler {
 		LogManager.getLogger().debug("我是delete admin的处理");
 		return articleService.deleteArticle(aid);
 	}
+
+	//后台数据对文章的条件查询
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	@ResponseBody
+	public List<T> comboselect(String mkid) {
+		if (mkid.trim().equals("uname")) {
+			return (List<T>) b_userService.findUserAll();
+		} else if (mkid.trim().equals("tname")) {
+			return (List<T>) b_typeService.findTypeAll();
+		} else if (mkid.trim().equals("tagname")) {
+			return (List<T>) b_tagService.findAll();
+		} else {
+			return (List<T>) articleService.findArticle();
+		}
+	}
+
 }

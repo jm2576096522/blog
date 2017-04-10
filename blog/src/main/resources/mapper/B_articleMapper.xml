@@ -7,8 +7,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!--查询所有的文章 -->
 	<select id="findArticle" resultType="B_article">
-		select bt.*, bu.uname from
-		b_article bt inner join b_user bu on bt.usid = bu.usid
+		select ba.*,
+		bu.uname,bt.tagname,bty.tname from b_article ba
+		inner join b_user bu on ba.usid = bu.usid
+		inner join b_tag bt on ba.tagid=bt.tagid
+		inner join b_type bty on ba.tid =bty.tid
 	</select>
 	<!-- 通过用户id查询个人文章 -->
 	<select id="findPersonArticle" parameterType="Integer"
@@ -37,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose>
 	</select>
 
-
+	<!-- 分页查询文章 -->
 	<resultMap type="PaginationBean" id="PaginationBeanMap">
 		<collection property="rows"
 			column="{pageSize=pageSize,currPage=currPage}" ofType="B_article"
@@ -51,7 +54,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="getPartArticle" resultType="B_article"> select * from (select
 		n.*,rownum
-		rn from (select * from b_article order by 1 )n where
+		rn from (select ba.*, bu.uname,bt.tagname,bty.tname from
+		b_article ba
+		inner join b_user bu on ba.usid = bu.usid
+		inner join b_tag bt on ba.tagid=bt.tagid
+		inner join b_type bty on ba.tid =bty.tid order by 1 )n where
 		${currPage}*${pageSize}>=rownum)
 		t
 		where rn>(${currPage}-1)*${pageSize}

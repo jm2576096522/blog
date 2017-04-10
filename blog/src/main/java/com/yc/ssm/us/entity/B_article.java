@@ -3,6 +3,7 @@ package com.yc.ssm.us.entity;
 import java.io.Serializable;
 
 public class B_article implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	private Integer aid;
 	private String atitle;
@@ -14,12 +15,62 @@ public class B_article implements Serializable {
 	private String apic;
 	private String aviewnum;
 
-	
-	private String uname;
-	
+	private String uname;// 用户名
+	private String tname;// 文章所属类型
+	private String tagname;// 文章标签类别
+
+	public B_article() {
+	}
+
+	public B_article(Integer aid, String atitle, Integer tid, Integer tagid, Integer usid, String atime,
+			String acontent, String apic, String aviewnum) {
+		this.aid = aid;
+		this.atitle = atitle;
+		this.tid = tid;
+		this.tagid = tagid;
+		this.usid = usid;
+		this.atime = atime;
+		this.acontent = acontent;
+		this.apic = apic;
+		this.aviewnum = aviewnum;
+	}
+
+	public B_article(Integer aid, String atitle, Integer tid, Integer tagid, Integer usid, String atime,
+			String acontent, String apic, String aviewnum, String uname, String tname, String tagname) {
+		this.aid = aid;
+		this.atitle = atitle;
+		this.tid = tid;
+		this.tagid = tagid;
+		this.usid = usid;
+		this.atime = atime;
+		this.acontent = acontent;
+		this.apic = apic;
+		this.aviewnum = aviewnum;
+		this.uname = uname;
+		this.tname = tname;
+		this.tagname = tagname;
+	}
+
+	public String getTname() {
+		return tname;
+	}
+
+	public void setTname(String tname) {
+		this.tname = tname;
+	}
+
+	public String getTagname() {
+		return tagname;
+	}
+
+	public void setTagname(String tagname) {
+		this.tagname = tagname;
+	}
+
 	public String getUname() {
 		return uname;
 	}
+
 	public void setUname(String uname) {
 		this.uname = uname;
 	}
@@ -96,27 +147,11 @@ public class B_article implements Serializable {
 		this.aviewnum = aviewnum;
 	}
 
-	public B_article() {
-	}
-
-	public B_article(Integer aid, String atitle, Integer tid, Integer tagid, Integer usid, String atime,
-			String acontent, String apic, String aviewnum) {
-		this.aid = aid;
-		this.atitle = atitle;
-		this.tid = tid;
-		this.tagid = tagid;
-		this.usid = usid;
-		this.atime = atime;
-		this.acontent = acontent;
-		this.apic = apic;
-		this.aviewnum = aviewnum;
-	}
-
 	@Override
 	public String toString() {
-		return "\nB_article [aid=" + aid + ", atitle=" + atitle + ", tid=" + tid + ", tagid=" + tagid + ", usid=" + usid
-				+ ", atime=" + atime + ", acontent=" + acontent + ", apic=" + apic + ", aviewnum=" + aviewnum
-				+ ", uname=" + uname + "]";
+		return "\nB_article [aid=" + aid + "   atitle=" + atitle + ", tid=" + tid + "   tname=" + tname + ", tagid="
+				+ tagid + "   tagname=" + tagname + ", usid=" + usid + "  uname=" + uname + ", atime=" + atime
+				+ ", acontent=" + acontent + ", apic=" + apic + ", aviewnum=" + aviewnum + "]";
 	}
-	
+
 }

@@ -1,5 +1,7 @@
 package com.yc.ssm.us.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.yc.ssm.us.entity.B_type;
@@ -44,6 +46,11 @@ public class B_typeServiceImpl implements B_typeService {
 	public int deleteType(String tid) {
 		int tid1=Integer.parseInt(tid);
 		return b_typeMapper.deleteType(tid1);
+	}
+
+	@Override
+	public List<B_type> findTypeAll() {
+		return b_typeMapper.findTypeAll();
 	}
 
 }
