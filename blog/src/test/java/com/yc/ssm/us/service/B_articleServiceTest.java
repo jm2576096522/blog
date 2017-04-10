@@ -56,13 +56,5 @@ public class B_articleServiceTest {
 		System.out.println(lists);
 		assertNotNull(lists);
 	}
-	@Test
-	public void testPartArticle(){
-		PaginationBean<B_article> partArticle = bart.partArticle("10", "5");
-		
-		System.out.println(partArticle);
-		assertNotNull(partArticle);
-		
-	}
 
 }
