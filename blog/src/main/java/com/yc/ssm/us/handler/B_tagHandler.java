@@ -26,9 +26,13 @@ public class B_tagHandler {
 	// 分页显示标签
 	@RequestMapping(value = "list", method = RequestMethod.POST)
 	@ResponseBody
-	public PaginationBean<B_tag> list(String rows, String page) {
+	/*public PaginationBean<B_tag> list(String rows, String page) {
 		LogManager.getLogger().debug("list:row==>" + rows + ",page==>" + page);
 		return b_tagService.partTag(page, rows);// 异步数据响应
+	}*/
+	public List<B_tag> list(String rows, String page) {
+		LogManager.getLogger().debug("list:row==>" + rows + ",page==>" + page);
+		return b_tagService.findAll();// 异步数据响应
 	}
 
 	// 修改标签

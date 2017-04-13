@@ -66,8 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="B_article">
 		select ba.*,
 		bu.uname,bt.tagname,bty.tname from b_article ba
-		left join
-		b_user bu on ba.usid = bu.usid
+		left join b_user bu on ba.usid = bu.usid
 		left join b_tag bt on ba.tagid=bt.tagid
 		left join b_type bty on ba.tid =bty.tid
 		<choose>
@@ -81,7 +80,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</when>
 		</choose>
 	</select>
-
+	
+	
 	<!-- 分页查询文章 -->
 	<resultMap type="PaginationBean" id="PaginationBeanMap">
 		<collection property="rows"
