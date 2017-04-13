@@ -17,9 +17,9 @@ public class B_articleServiceImpl implements B_articleService {
 	private B_articleMapper b_articleMapper;
 
 	@Override
-	public List<B_article> listArticles(String tagname) {
+	public List<B_article> listArticleBytagname(String tagname) {
 		// 通过标签名查询博客文章
-		return b_articleMapper.listArticles(tagname);
+		return b_articleMapper.listArticleBytagname(tagname);
 	}
 
 	@Override
@@ -73,6 +73,16 @@ public class B_articleServiceImpl implements B_articleService {
 	public int deleteArticle(String aid) {
 		int aid1=Integer.parseInt(aid);
 		return b_articleMapper.deleteArticle(aid1);
+	}
+
+	@Override
+	public List<B_article> findArticleByuname(String uname) {
+		return b_articleMapper.listArticleByuname(uname);
+	}
+
+	@Override
+	public List<B_article> findArticleBytname(String tname) {
+		return b_articleMapper.listArticleBytname(tname);
 	}
 
 }

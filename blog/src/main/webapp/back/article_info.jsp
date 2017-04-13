@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 	isELIgnored="false"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,12 +9,10 @@
 </head>
 <body>
 	<div id="article">
-		<input id="mkid" class="easyui-combobox" /> <input
-			id="zhbid" class="easyui-combobox" /> <a href="#"
-			href="javascript:void(0)" class="easyui-linkbutton"
-			iconCls="icon-search" onclick="">查询</a>
+		<input id="mkid" class="easyui-combobox" /> <input id="zhbid"
+			class="easyui-combobox" /> <a href="javascript:void(0)"
+			class="searchBtn">查询</a>
 	</div>
-
 	<table id="articleList"></table>
 
 	<div id="detailsArticle" style="width: 300px; padding: 10px">
@@ -52,6 +51,6 @@
 		</p>
 	</div>
 	<script type="text/javascript" src="js/article_info.js"></script>
-
+	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
 </body>
 </html>

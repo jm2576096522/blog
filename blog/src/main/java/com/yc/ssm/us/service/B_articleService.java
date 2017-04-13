@@ -13,7 +13,13 @@ public interface B_articleService {
 	List<B_article> findPersonArticle(Integer usid);
 
 	// 通过标签名查询博客文章
-	List<B_article> listArticles(String tagname);
+	List<B_article> listArticleBytagname(String tagname);
+
+	// 通过用户昵称查找博客文章
+	List<B_article> findArticleByuname(String uname);
+
+	// 通过文章类型名查找文章
+	List<B_article> findArticleBytname(String tname);
 
 	// 分页显示文章
 	PaginationBean<B_article> partArticle(String page, String rows);
@@ -21,6 +27,7 @@ public interface B_articleService {
 	// 修改博客文章
 	int modifyArticle(B_article b_article);// 更新博客信息
 	// 删除博客文章
+
 	int deleteArticle(String aid);
 
 	/*

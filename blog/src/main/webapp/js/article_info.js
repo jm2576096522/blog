@@ -13,7 +13,7 @@ $("#articleList")
 							{
 								field : 'aid',
 								title : '文章编号',
-								width : 80,
+								width : 60,
 								align : 'center'
 							},
 							{
@@ -25,13 +25,13 @@ $("#articleList")
 							{
 								field : 'tname',
 								title : '文章类型',
-								width : 50,
+								width : 60,
 								align : 'center'
 							},
 							{
 								field : 'tagname',
 								title : '文章标签',
-								width : 100,
+								width : 60,
 								align : 'center'
 							},
 							{
@@ -43,12 +43,12 @@ $("#articleList")
 							{
 								field : 'atime',
 								title : '创作时间',
-								width : 80,
+								width : 100,
 								align : 'center'
 							},
 							{
 								field : 'aviewnum',
-								title : '文章浏览量',
+								title : '浏览量',
 								width : 50,
 								align : 'center'
 							},
@@ -69,7 +69,7 @@ $("#articleList")
 							{
 								field : 'opr',
 								title : '操作',
-								width : 100,
+								width : 80,
 								align : 'center',
 								formatter : function(value, row, index) {
 									var oprStr = '<a class="detailBtn" href="javascript:void(0)" onclick="openDatail('
@@ -84,11 +84,151 @@ $("#articleList")
 								}
 							} ] ]
 				});
+$('#mkid')
+		.combobox(
+				{
+					editable : false,
+					valueField : 'mkid',
+					textField : 'mkmch',
+					data : [ {
+						mkid : 'all',
+						mkmch : '查询全部'
+					}, {
+						mkid : 'tname',
+						mkmch : '按文章类型查询'
+					}, {
+						mkid : 'uname',
+						mkmch : '按用户名查询'
+					}, {
+						mkid : 'tagname',
+						mkmch : '按文章标签查询'
+					} ],
+					onSelect : function(record) {
+						$
+								.get(
+										'article?mkid=' + record.mkid,
+										function(data) {
+											if (record.mkid.trim() == 'all') {
+												$('#zhbid').combobox({
+													disabled : true,
+												});
+												url = "article/list"
+												// alert("ALL提交前的url:" + url);
+												$("#articleList").datagrid(
+														"reload", url);
+											} else {
+												_time_out = null
+												$("#zhbid")
+														.combobox(
+																{
+																	disabled : false,
+																	valueField : record.mkid,
+																	textField : record.mkid,
+																	editable : true,
+																	mode : 'remote',
+																	data : data,
+																	keyHandler : {
+																		query : function(
+																				q) {
+																			if (_time_out) {
+																				clearTimeout(_time_out);
+																			}
+																			_time_out = setTimeout(
+																					function() {
+																						var opts = $(
+																								"#zhbid")
+																								.combobox(
+																										'options');
+																						var data = $(
+																								"#zhbid")
+																								.combobox(
+																										'getData');
+
+																						// alert(JSON.stringify(name));
+																						var value = $(
+																								"#zhbid")
+																								.combobox(
+																										'textbox')
+																								.val();
+																						// alert(",
+																						// value:"+
+																						// value);
+																						$
+																								.each(
+																										data,
+																										function(
+																												k,
+																												node) {
+																											if (node[opts.textField]
+																													.indexOf(value) >= 0) {
+																												var item = $(
+																														"#zhbid")
+																														.combobox(
+																																'panel')
+																														.panel(
+																																'body')
+																														.find(
+																																'div')
+																														.filter(
+																																function() {
+																																	return $(
+																																			this)
+																																			.html() == node[opts.textField];
+																																});
+																												if (item) {
+																													clearTimeout(_time_out);
+																													_time_out = null;
+																													$(
+																															"#zhbid")
+																															.combobox(
+																																	'panel')
+																															.panel(
+																																	'body')
+																															.scrollTop(
+																																	item
+																																			.position().top);
+																													$(
+																															"#zhbid")
+																															.combobox(
+																																	'select',
+																																	node[opts.valueField]);
+																													return false;
+																												}
+																											}
+																										});
+																						clearTimeout(_time_out);
+																						_time_out = null;
+																					},
+																					500);
+																		}
+																	}
+
+																}).combobox(
+																'clear');
+											}
+										}, "json");
+					}
+				});
+$('#zhbid').combobox({
+	disabled : true
+});
 
 $(".closeBtn").linkbutton({
 	iconCls : "icon-cancel",
 	onClick : function() {
 		$("#detailsArticle").dialog("close");
+	}
+});
+$(".searchBtn").linkbutton({
+	iconCls : "icon-search",
+	onClick : function() {
+		var name = $("#mkid").combobox('getValues');
+		// alert(JSON.stringify(name));
+		var param = $("#zhbid").combobox('getValues');
+		 alert("参数" + param);
+		url = "article/findByParam?name=" + name + "&param=" + param;
+		// alert("条件查询的URL" + url);
+		$("#articleList").datagrid("reload", url);
 	}
 });
 
@@ -138,41 +278,3 @@ function openDatail(index) {
 		$("#pic").attr("src", "images/not_pic.jpg");
 	}
 }
-$(function() {
-	var _mkid = $('#mkid').combobox({
-		editable : false,
-		valueField : 'mkid',
-		textField : 'mkmch',
-		data : [ {
-			mkid : 'all',
-			mkmch : '查询全部'
-		}, {
-			mkid : 'tname',
-			mkmch : '按文章类型查询'
-		}, {
-			mkid : 'uname',
-			mkmch : '按用户名查询'
-		}, {
-			mkid : 'tagname',
-			mkmch : '按文章标签查询'
-		} ],
-		onSelect : function(record) {
-			$.get('article?mkid=' + record.mkid, function(data) {
-				$("#zhbid").combobox({
-					disabled : false,
-					valueField : 'zhbid',
-					textField :  record.mkid,
-					editable : true,
-					required : true,
-					mode : 'remote',
-					data : data
-				});
-			}, "json");
-		}
-	});
-	var _zhbid = $('#zhbid').combobox({
-		disabled : true,
-		valueField : 'zhbid',
-		textField : 'zhbmch',
-	});
-});
