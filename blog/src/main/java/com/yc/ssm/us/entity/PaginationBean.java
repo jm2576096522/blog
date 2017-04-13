@@ -18,6 +18,7 @@ public class PaginationBean<T> {
 	private Integer total; // 数据的总条数
 	private Integer totalPage; // 总页数
 	private List<T> rows; // 当前页的数据
+	
 
 	public PaginationBean() {
 	}

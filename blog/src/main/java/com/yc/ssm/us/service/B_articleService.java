@@ -14,6 +14,9 @@ public interface B_articleService {
 
 	// 通过标签名查询博客文章
 	List<B_article> listArticleBytagname(String tagname);
+	
+	// 查询博客文章(通过文章id)
+	B_article findArticleByAid(Integer aid);
 
 	// 通过用户昵称查找博客文章
 	List<B_article> findArticleByuname(String uname);
@@ -23,15 +26,20 @@ public interface B_articleService {
 
 	// 分页显示文章
 	PaginationBean<B_article> partArticle(String page, String rows);
+	
+	// 通过用户id分页
+	List<B_article> partArticleById(B_article b_article);
+	
+	//查询用户id所作的文章数及总页数
+	B_article findArticleNum(B_article b_article);
 
 	// 修改博客文章
 	int modifyArticle(B_article b_article);// 更新博客信息
 	// 删除博客文章
+	int deleteArticle(Integer aid);
 
-	int deleteArticle(String aid);
-
-	/*
-	 * // 添加博客文章 boolean addArticle(B_article b_article);
-	 */
+	// 添加博客文章
+	boolean insertArticle(B_article b_article);
+	 
 
 }

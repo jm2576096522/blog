@@ -10,8 +10,6 @@
 <link href="css/index.css" rel="stylesheet">
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/sliders.js"></script>
-
-
 </head>
 <body>
 	<header class="blog-header">
@@ -249,6 +247,8 @@
 		</div>
 	</footer>
 	<script type="text/javascript" src="js/homePage.js"></script>
+		
+
 </body>
 
 </html>

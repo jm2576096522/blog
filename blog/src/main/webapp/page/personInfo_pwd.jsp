@@ -67,7 +67,7 @@
 				<li><a href="homePage.jsp">首页</a></li>
 				<li><a href="personPage.jsp">我的文章</a></li>
 				<li><a href="page/blog_add.jsp">写新文章</a></li>
-				<li><a href="page/blogHistory.jsp">博客历史</a></li>
+				<li><a href="page/blogManager.jsp">文章管理</a></li>
 				<li><a href="#">标签管理</a></li>
 				<li><a href="#">草稿箱</a></li>
 				<li><a href="page/personInfo.jsp" style="color: #10D07A;">个人信息管理</a></li>

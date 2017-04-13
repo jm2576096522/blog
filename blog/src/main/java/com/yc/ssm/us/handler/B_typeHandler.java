@@ -1,5 +1,7 @@
 package com.yc.ssm.us.handler;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,6 +52,13 @@ public class B_typeHandler {
 	public int deleteType(String tid) {
 		LogManager.getLogger().debug("我是delete admin的处理");
 		return b_typeService.deleteType(tid);
+	}
+	//查询所有的文章类型
+	@RequestMapping("findAll")
+	@ResponseBody
+	public List<B_type> findAllType(){
+		LogManager.getLogger().debug("我是查询所有的文章类型");
+		return b_typeService.findAll();
 	}
 
 }

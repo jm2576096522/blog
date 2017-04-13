@@ -43,9 +43,9 @@
 			<li><a href="homePage.jsp">首页</a></li>
 			<li><a href="article.jsp" style="color: #10D07A;">我的文章</a></li>
 			<li><a href="page/blog_add.jsp">写新文章</a></li>
-			<li><a href="page/blogHistory.jsp">博客历史</a></li>
-			<li><a href="#">标签管理</a></li>
-			<li><a href="#">草稿箱</a></li>
+			<li><a href="page/blogManager.jsp">文章管理</a></li>
+			<li><a href="page/blog_tag.jsp">标签管理</a></li>
+			<li><a >草稿箱</a></li>
 			<li><a href="page/personInfo.jsp">个人信息管理</a></li>
 		</ul>
 		<div class="show_loginUser" style="float:right;">

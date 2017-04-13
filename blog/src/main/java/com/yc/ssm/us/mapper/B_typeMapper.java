@@ -17,6 +17,9 @@ public interface B_typeMapper {
 
 	// 删除类型
 	int deleteType(int tid);
+	
+	//查询所有的类型
+	List<B_type> findAll();
 
 	List<B_type> findTypeAll();
 

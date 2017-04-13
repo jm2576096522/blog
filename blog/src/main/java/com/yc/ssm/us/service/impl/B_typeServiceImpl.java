@@ -2,6 +2,7 @@ package com.yc.ssm.us.service.impl;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.yc.ssm.us.entity.B_type;
@@ -47,6 +48,13 @@ public class B_typeServiceImpl implements B_typeService {
 		int tid1=Integer.parseInt(tid);
 		return b_typeMapper.deleteType(tid1);
 	}
+	
+	//查询所有的类型
+	public List<B_type> findAll(){
+		LogManager.getLogger().debug("查询所有的类型");
+		return b_typeMapper.findAll();
+	}
+
 
 	@Override
 	public List<B_type> findTypeAll() {

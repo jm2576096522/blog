@@ -2,6 +2,7 @@ package com.yc.ssm.us.service.impl;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,35 +28,40 @@ public class B_articleServiceImpl implements B_articleService {
 		return b_articleMapper.modifyArticle(b_article);
 	}
 
-	/*@Override
-	public boolean addArticle(B_article b_article) {
-		b_article.setTagname(b_article.getTagname().replace(" ", ""));// 标签去空格
-		// 1.添加博客文章或者更新
-		String[] tagnames = b_article.getTagname().split(",");
-		for (String tagname : tagnames) {
-			LogManager.getLogger().debug(tagname);
-			if (!b_tagService.findTag(tagname)) {// 判断是否存在标签
-				// 不存在，增加书签
-				b_tagService.insertTag(tagname);
-			}
-		}
+	//添加新文章
+	@Override
+	public boolean insertArticle(B_article b_article) {
+		b_article.setAtitle(b_article.getAtitle().replace(" ", ""));// 标签去空格
+		LogManager.getLogger().debug("添加新文章：");
 		return b_articleMapper.insertArticle(b_article) > 0;
-	}*/
+	}
 
 	//通过用户id查询查询个人文章
 	@Override
 	public List<B_article> findPersonArticle(Integer usid) {
-		System.out.println("我是通过usid查询来的");
+		LogManager.getLogger().debug("我是通过usid查询来的");
 		return b_articleMapper.findPersonArticle(usid);
+	}
+	// 查询博客文章(通过文章id)
+	public B_article findArticleByAid(Integer aid){
+		LogManager.getLogger().debug(" 查询博客文章(通过文章id)");
+		return b_articleMapper.findArticleByAid(aid);
+	}
+	
+	//查询用户id所作的文章数及总页数
+	@Override
+	public B_article findArticleNum(B_article b_article){
+		LogManager.getLogger().debug("查询用户id所作的文章数及总页数");
+		return b_articleMapper.findArticleNum(b_article);
 	}
 
 	@Override
 	public List<B_article> findArticle() {
-		System.out.println("我是articleService里的：");
+		LogManager.getLogger().debug("我是articleService里的：");
 		return b_articleMapper.findArticle();
 		
 	}
-
+	//文章分页查询
 	@Override
 	public PaginationBean<B_article> partArticle(String page, String rows) {
 		PaginationBean<B_article> pb = new PaginationBean<>();
@@ -68,11 +74,16 @@ public class B_articleServiceImpl implements B_articleService {
 		pb=b_articleMapper.partArticle(pb);
 		return pb;
 	}
-
+	// 通过用户id分页
+	public List<B_article> partArticleById(B_article b_article){
+		LogManager.getLogger().debug("通过用户id分页");
+		return b_articleMapper.partArticleById(b_article);
+	}
+	//删除博客文章
 	@Override
-	public int deleteArticle(String aid) {
-		int aid1=Integer.parseInt(aid);
-		return b_articleMapper.deleteArticle(aid1);
+	public int deleteArticle(Integer aid) {
+		LogManager.getLogger().debug("删除博客文章");
+		return b_articleMapper.deleteArticle(aid);
 	}
 
 	@Override
