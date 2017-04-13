@@ -47,7 +47,7 @@
 				<li><a href="homePage.jsp">首页</a></li>
 				<li><a href="personPage.jsp">我的文章</a></li>
 				<li><a href="page/blog_add.jsp" style="color: #10D07A;">写新文章</a></li>
-				<li><a href="page/blogHistory.jsp">博客历史</a></li>
+				<li><a href="page/blogManager.jsp">文章管理</a></li>
 				<li><a href="page/blog_tag.jsp">标签管理</a></li>
 				<li><a>草稿箱</a></li>
 				<li><a href="page/personInfo.jsp">个人信息管理</a></li>
@@ -77,7 +77,7 @@
 				<h2 class="blog-comment" align="center">新建博客</h2>
 				<fieldset>
 					<div class="am-form-group am-u-sm-4 blog-clear-left">
-						<label>标题</label><input type="text" name="atitle" placeholder="标题">
+						<label>标题</label><input type="text" id="atitle" name="atitle" placeholder="标题">
 					</div>
 					<div class="am-form-group am-u-sm-4">
 						<label>标签 </label> <select name="tagid" id="tag">
@@ -101,11 +101,8 @@
 						<label> 上传图片 </label><input type="file" id="upicDate"
 							name="upicDate" placeholder="选择文件" onchange="chgPic(this)">
 					</p>
-					<p>
-						<button type="submit" class="am-btn am-btn-default"
-							onclick="add_article()">提交</button>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<button type="reset" class="am-btn am-btn-default">重置</button>
+					<p id="controlNav">
+						
 					</p>
 				</fieldset>
 			</form>
@@ -175,13 +172,29 @@
 
 	<script type="text/javascript">
 		UE.getEditor('econtent');// 使用副文本编辑工具
-
+		
+		var aid = "<%=request.getParameter("aid")%>";
+		if(aid != "null"){
+			findArticleByAid();
+			var navStr ="" ;
+			navStr +="<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='update_article()'>更改文章</button>";
+			navStr +="<button type='button' class='am-btn am-btn-default' onclick='backFirst()'>取消</button>";
+			$("#controlNav").html(navStr);
+		}else{
+			var navStr ="";
+			navStr +="<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='add_article()'>发表文章</button>";
+			navStr +="<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='saveArticle()'>立即保存</button>";
+			navStr +="<button type='reset' class='am-btn am-btn-default'>重置</button>";
+			$("#controlNav").html(navStr);
+		}
+		/* 获取类别标签的请求 */
 		$.get("tag/findAllTags", function(data) {
 			for (var i = 0; i < data.length; i++) {
 				var option = "<option value='" + data[i].tagid + "'>" + data[i].tagname + "</option>";
 				$("#tag").append(option);
 			}
 		});
+		/* 获取类型标签的请求 */
 		$.get("type/findAll", function(data) {
 			for (var i = 0; i < data.length; i++) {
 				var option = "<option value='" + data[i].tid + "'>"
@@ -189,11 +202,12 @@
 				$("#type").append(option);
 			}
 		});
+		/* 图片更改 */
 		function chgPic(obj){
 			var picStr = "<img src='"+window.URL.createObjectURL(obj.files[0])+"' style='width: 400px; height: 200px;'>";
 			$("#show_img").html(picStr);
 		}
-		
+		/* 添加文章的请求 */
 		function add_article(){
 			$("#add_form").form({
 				url:"article/addArticle",
@@ -206,6 +220,54 @@
 				}
 			});
 		}
+		/* 更改文章的请求 */
+		function update_article(){
+			$("#add_form").form({
+				url:"article/updateArticle",
+				success:function(data){
+			    	if(data.trim() == "true"){
+			    		 $.messager.alert("操作提示", "更改成功...","info");
+			    	}else{
+			    		 $.messager.alert("操作提示", "更改失败！！","error");
+			    	}
+				}
+			});
+		}
+		
+		function saveArticle(){
+			/* $("#add_form").form({
+				url:"article/addArticle",
+				success:function(data){
+			    	if(data.trim() == "true"){
+			    		 $.messager.alert("操作提示", "添加成功...","info");
+			    	}else{
+			    		 $.messager.alert("操作提示", "添加失败！！","error");
+			    	}
+				}
+			}); */
+		}
+		
+		// 如果url 拼接有aid 
+		function findArticleByAid(){
+			$.post("article/findArticleByAid",{aid:aid},function(data){
+				$("#atitle").val(data.atitle);
+				$("#tag").val(data.tagname);
+				$("#type").val(data.tname);
+				$("#acontent").val(data.acontent);
+				if(data.apic != null){
+					var picStr = "<img src='"+data.apic+"' style='width: 400px; height: 200px;'>";
+					$("#show_img").html(picStr);
+				}else{
+					var picStr = "<img src='images/not_pic.jpg'>";
+					$("#show_img").html(picStr);
+				}
+			});
+		}
+		//点击取消，返回
+		function backFirst(){
+			location.href="page/blogManager.jsp";
+		}
+		
 	</script>
 </body>
 

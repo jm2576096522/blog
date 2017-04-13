@@ -12,7 +12,7 @@ $("#articleList")
 					columns : [ [
 							{
 								field : 'aid',
-								title : '编号',
+								title : '文章编号',
 								width : 80,
 								align : 'center'
 							},
@@ -23,19 +23,19 @@ $("#articleList")
 								align : 'center'
 							},
 							{
-								field : 'tid',
+								field : 'tname',
 								title : '文章类型',
 								width : 50,
 								align : 'center'
 							},
 							{
-								field : 'tagid',
-								title : '标签',
+								field : 'tagname',
+								title : '文章标签',
 								width : 100,
 								align : 'center'
 							},
 							{
-								field : 'usid',
+								field : 'uname',
 								title : '文章作者',
 								width : 80,
 								align : 'center'
@@ -54,7 +54,7 @@ $("#articleList")
 							},
 							{
 								field : 'apic',
-								title : '图片',
+								title : '文章图片',
 								width : 100,
 								align : 'center',
 								formatter : function(value, row, index) {
@@ -126,9 +126,9 @@ function openDatail(index) {
 	var row = $("#articleList").datagrid("getRows")[index];
 	$("#Aaid").html(row.aid);
 	$("#Aatitle").html(row.atitle);
-	$("#Atid").html(row.tid);
-	$("#Atagid").html(row.tagid);
-	$("#Ausid").html(row.usid);
+	$("#Atid").html(row.tname);
+	$("#Atagid").html(row.tagname);
+	$("#Ausid").html(row.uname);
 	$("#Aatime").html(row.atime);
 	$("#Aaviewnum").html(row.aviewnum);
 	$("#Aacontent").html(row.acontent);
@@ -138,3 +138,41 @@ function openDatail(index) {
 		$("#pic").attr("src", "images/not_pic.jpg");
 	}
 }
+$(function() {
+	var _mkid = $('#mkid').combobox({
+		editable : false,
+		valueField : 'mkid',
+		textField : 'mkmch',
+		data : [ {
+			mkid : 'all',
+			mkmch : '查询全部'
+		}, {
+			mkid : 'tname',
+			mkmch : '按文章类型查询'
+		}, {
+			mkid : 'uname',
+			mkmch : '按用户名查询'
+		}, {
+			mkid : 'tagname',
+			mkmch : '按文章标签查询'
+		} ],
+		onSelect : function(record) {
+			$.get('article?mkid=' + record.mkid, function(data) {
+				$("#zhbid").combobox({
+					disabled : false,
+					valueField : 'zhbid',
+					textField :  record.mkid,
+					editable : true,
+					required : true,
+					mode : 'remote',
+					data : data
+				});
+			}, "json");
+		}
+	});
+	var _zhbid = $('#zhbid').combobox({
+		disabled : true,
+		valueField : 'zhbid',
+		textField : 'zhbmch',
+	});
+});

@@ -2,6 +2,7 @@ package com.yc.ssm.us.service.impl;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +58,13 @@ public class B_commentServiceImpl implements B_commentService {
 	@Override
 	public List<B_comment> findCommentByCaid(Integer caid) {
 		return b_commentMapper.findCommentByCaid(caid);
+	}
+	
+	//查询指定文章的评论数
+	@Override
+	public int selectCommentNum(Integer caid){
+		LogManager.getLogger().debug("查询指定文章的评论数"+caid);
+		return b_commentMapper.selectCommentNum(caid);
 	}
 
 

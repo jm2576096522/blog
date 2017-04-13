@@ -91,6 +91,66 @@ $.extend($.fn.layout.methods, {
 	}
 });
 
+// 验证重复输入的密码是否跟密码相同
+$.extend($.fn.validatebox.defaults.rules, {
+	equals : {
+		validator : function(value, param) {
+			return value == $(param[0]).val();
+		},
+		message : '密码不匹配，请重新输入.'
+	}
+});
+
+$("#personalInfo").dialog({
+	title : "密码修改",
+	closed : true,
+	modal : true,
+	border : false,
+	closable : false,
+});
+
+$('#modifyPwdBtn').linkbutton({
+	iconCls : 'icon-ok',
+	width : 80,
+	onClick : function() {
+		$("#modifyPwdForm").submit();
+	}
+});
+
+$('#closeBtn').linkbutton({
+	iconCls : 'icon-cancel',
+	width : 80,
+	onClick : function() {
+		$("#personalInfo").dialog("close");
+	}
+});
+
+$('#ss').searchbox({
+	searcher : function(value, name) {
+		alert(value + "," + name)
+	},
+	prompt : '请输入要查找的内容'
+});
+
+$("#modifyPwdForm").form(
+		{
+			url : "admin/modifyPwd",
+			success : function(data) {
+				if (data.trim()) {
+					$("#modifyPwdForm").dialog("close"); // 关闭修改框
+				} else {
+					$.messager.show({
+						title : '修改密码',
+						msg : '修改密码失败！！！',
+						showType : 'show',
+						style : {
+							top : document.body.scrollTop
+									+ document.documentElement.scrollTop,
+						}
+					});
+				}
+			}
+		});
 function full() {
 	$("body").layout("full");
 	$("#center_content").addClass("panel-fit");
@@ -100,9 +160,36 @@ function unfull() {
 	$("body").layout("unfull");
 }
 
-$('#ss').searchbox({
-	searcher : function(value, name) {
-		alert(value + "," + name)
-	},
-	prompt : '请输入要查找的内容'
-});
+function reLogin() {
+	// 显示重新登录确认框
+	$.messager.confirm('', '您是否确定要切换用户吗？', function(r) {
+		if (r) {
+			// 切换用户操作;
+			location.href = "back/admin_login.jsp";
+		}
+	});
+}
+
+function aboutUs() {
+	// 显示关于我们的dialog
+	$.messager
+			.alert(
+					'',
+					'<table><tr><td align="right">手机：</td><td>18473435230</td></tr><tr><td  align="right">QQ：</td><td>2576096522</td></tr><tr><td align="right">版本所有：</td><td>姜媚</td></tr></table>',
+					'info');
+}
+
+function logoutFun() {
+	// 显示退出系统确认框
+	$.messager.confirm('', '您确定要退出系统吗？', function(r) {
+		if (r) {
+			// 退出系统操作;
+			location.replace("back/admin_login.jsp");
+		}
+	});
+}
+
+function userInfoFun() {
+	// 显示修改密码框
+	$('#personalInfo').dialog('open');
+}

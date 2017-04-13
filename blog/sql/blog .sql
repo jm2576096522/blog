@@ -113,8 +113,15 @@ create table b_article(
 insert into b_article values(seq_aid.nextval,'java编程',1,1,10001,
 to_char(sysdate,'yyyy-MM-dd hh:mm:ss'),'java是面向对象的一种编程，由属性和方法组成。Java对c的有点是不适用指针，实现跨区域','',0);
 
-updata b_article set apic = "";
+-----更改时间
+updata b_article set atime = to_char((select sysdate from dual),'yyyy-MM-dd hh:mm:ss') where aid = 122;
+select to_char(sysdate,'yyyy-MM-dd hh:mm:ss')  from dual;
 
+-------------------------------更改数据库时区操作
+select dbtimezone from dual;
+alter database set time_zone = '+08:00';
+----------------------------------------------
+select to_char(sysdate,'yyyy-MM-dd hh:mm:ss') hr from dual;
 insert into b_article(aid,atitle,tid,tagid,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'java的基本介绍',1,1,10002,
 			'2017-4-1','30','常常是彼此交换名片，然后郑重或是出于礼貌用手机记下对方的电话号'); 
 insert into b_article(aid,atitle,tid,tagid,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'oracle的基本介绍',1,1,10002,
@@ -132,8 +139,7 @@ select * from b_article;
 
 delete from B_ARTICLE where atime = '2017-4-1'
 
-
-select b.* from (select substr(atime,0,7) num from B_ARTICLE) b group by b.num;
+select count(1) total,ceil(count(1)/5) from B_ARTICLE where usid =10007;
 
 
 --查询当前时间
@@ -142,30 +148,55 @@ select to_char(sysdate,'yyyy-MM-dd hh:mm:ss') from dual;
 --修改字段属性，aviewnum 默认值为0
 alter table b_article modify (aviewnum varchar2(10) default '0');
 
-select count(1) from b_article a inner join b_tag t on a.tagid = t.tagid 
+select count(1) from b_article a inner join b_tag t on a.tagid = t.tagid
 
- select a.*,count(*) from (select t.* from b_tag t inner join b_article a on t.tagid = a.tagid) a group by a.tagid;
+------------------分页查询所有（通过个人id）
+select * from ( select n.*,rownum rn
+		from(
+		select bar.* ,nvl(w.commentnum,0) as commentnum  from
+		(select
+		d.caid,count(1) as commentnum from (select caid from B_COMMENT b
+		inner join B_ARTICLE ba on ba.aid = b.caid) d group by d.caid) w
+		right join
+		B_ARTICLE bar on w.caid = bar.aid order by bar.atime desc) n where
+		5>=rownum
+		and n.usid = 10007 ) t where rn>0
 
-
-select tag.*,nvl(w.articlenum,0) as articlenum from 
-(select g.tagid,count(1) as articlenum from 
-(select t.tagid from b_tag t inner join b_article a on t.tagid = a.tagid ) g 
-group by g.tagid) w 
-right join B_TAG tag on w.tagid = tag.tagid order by w.tagid 
-
+select count(1) from (select b.caid , b.* from B_COMMENT b inner join B_ARTICLE ba on ba.aid = b.caid) d group by d.caid  ;		
 
  
 -----评论表
 create sequence seq_cid start with 1;
 create table b_comment(
        cid int primary key,               --评论id
-       caid int references b_article(aid),--评论文章id
+       caid int references b_article(aid) on delete cascade,--评论文章id
        usid int references b_user(usid),     --评论者id
        ccontent varchar2(800),            --评论内容
        ctime varchar2(20)              --评论时间
 );
+--------插入评论表数据
+insert into B_COMMENT values(seq_cid.nextval,22,10007,'这篇文章非常棒！！','2017-4-11 21:55:33');
+insert into B_COMMENT values(seq_cid.nextval,22,10007,'这篇文章是真的！！','2017-4-13 21:55:33');
+insert into B_COMMENT values(seq_cid.nextval,41,10007,'这篇文章非常棒12！！','2017-4-12 21:55:33');
+insert into B_COMMENT values(seq_cid.nextval,46,10007,'这篇文章非常棒123！！','2017-4-11 21:55:33');
 
-select * from B_ARTICLE;
+------删除文章表的同时删除评论
+delete from B_ARTICLE where aid = 41 ;
+select * from (select
+		n.*,rownum rn from (select ba.*, bu.uname,bt.tagname,bty.tname from
+		b_article ba
+		inner join b_user bu on ba.usid = bu.usid
+		inner join b_tag bt on ba.tagid=bt.tagid
+		inner join b_type bty on ba.tid =bty.tid order by 1 )n where
+		5>=rownum and n.usid = 10007) t where rn>1
+		
+select count(1) from (select b.caid , b.* from B_COMMENT b inner join B_ARTICLE ba on ba.aid = b.caid) d group by d.caid  ;		
+
+---------连接评论表获取评论数，指定用户
+select * from ( select n.*,rownum rn from(
+select bar.* ,nvl(w.commentnum,0) as commentnum from
+(select d.caid,count(1) as commentnum from (select caid from B_COMMENT b inner join B_ARTICLE ba on ba.aid = b.caid) d group by d.caid) w 
+right join B_ARTICLE bar on w.caid = bar.aid order by w.caid) n where 5>=rownum and n.usid =10007) t where rn>0;
 
 create sequence seq_drid start with 1;
 -----草稿箱
@@ -180,6 +211,7 @@ create table b_drafets(
        drpic varchar2(200)        --文章图片  
       
 );
+
 select * from B_ADMIN;--管理员
 select * from B_COMMENT;--评论
 select  * from b_article;--文章

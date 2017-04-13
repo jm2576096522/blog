@@ -24,6 +24,9 @@ public interface B_commentService {
 
 	// 通过文章id查询评论
 	List<B_comment> findCommentByCaid(Integer caid);
+	
+	//查询指定文章的评论数
+	int selectCommentNum(Integer caid);
 
 
 }

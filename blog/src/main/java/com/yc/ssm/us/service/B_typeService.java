@@ -21,4 +21,6 @@ public interface B_typeService {
 	List<B_type> findAll();
 
 
+	List<B_type> findTypeAll();
+
 }

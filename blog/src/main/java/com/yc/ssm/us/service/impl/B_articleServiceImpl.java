@@ -42,6 +42,18 @@ public class B_articleServiceImpl implements B_articleService {
 		LogManager.getLogger().debug("我是通过usid查询来的");
 		return b_articleMapper.findPersonArticle(usid);
 	}
+	// 查询博客文章(通过文章id)
+	public B_article findArticleByAid(Integer aid){
+		LogManager.getLogger().debug(" 查询博客文章(通过文章id)");
+		return b_articleMapper.findArticleByAid(aid);
+	}
+	
+	//查询用户id所作的文章数及总页数
+	@Override
+	public B_article findArticleNum(B_article b_article){
+		LogManager.getLogger().debug("查询用户id所作的文章数及总页数");
+		return b_articleMapper.findArticleNum(b_article);
+	}
 
 	@Override
 	public List<B_article> findArticle() {
@@ -49,7 +61,7 @@ public class B_articleServiceImpl implements B_articleService {
 		return b_articleMapper.findArticle();
 		
 	}
-
+	//文章分页查询
 	@Override
 	public PaginationBean<B_article> partArticle(String page, String rows) {
 		PaginationBean<B_article> pb = new PaginationBean<>();
@@ -62,11 +74,16 @@ public class B_articleServiceImpl implements B_articleService {
 		pb=b_articleMapper.partArticle(pb);
 		return pb;
 	}
-
+	// 通过用户id分页
+	public List<B_article> partArticleById(B_article b_article){
+		LogManager.getLogger().debug("通过用户id分页");
+		return b_articleMapper.partArticleById(b_article);
+	}
+	//删除博客文章
 	@Override
-	public int deleteArticle(String aid) {
-		int aid1=Integer.parseInt(aid);
-		return b_articleMapper.deleteArticle(aid1);
+	public int deleteArticle(Integer aid) {
+		LogManager.getLogger().debug("删除博客文章");
+		return b_articleMapper.deleteArticle(aid);
 	}
 
 }

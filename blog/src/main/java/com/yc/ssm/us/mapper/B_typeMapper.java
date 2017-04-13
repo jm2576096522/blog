@@ -21,4 +21,6 @@ public interface B_typeMapper {
 	//查询所有的类型
 	List<B_type> findAll();
 
+	List<B_type> findTypeAll();
+
 }

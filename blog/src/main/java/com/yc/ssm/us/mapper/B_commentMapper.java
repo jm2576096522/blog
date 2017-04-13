@@ -16,5 +16,8 @@ public interface B_commentMapper {
 	List<B_comment> findCommentByUsid(Integer usid);
 
 	List<B_comment> findCommentByCaid(Integer caid);
+	
+	//查询指定文章的评论数
+	int selectCommentNum(Integer caid);
 
 }

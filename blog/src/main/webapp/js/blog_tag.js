@@ -9,7 +9,7 @@ $(function(){
 		singleSelect : true,
 		url:'tag/findAll',
 		columns:[[
-		          {field:'tagid',title:'编号',hidden:false},
+		          {field:'tagid',title:'编号',hidden:true},
 		          {field:'tagname',title:'类别',width:180,editor:'text',align : 'center'},
 		          {field:'articlenum',title:'文章',width:80,align:'right',align : 'center'},
 		          {field:'action',title:'操作',width:80,align:'center',

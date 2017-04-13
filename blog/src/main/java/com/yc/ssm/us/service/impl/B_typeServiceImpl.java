@@ -56,4 +56,9 @@ public class B_typeServiceImpl implements B_typeService {
 	}
 
 
+	@Override
+	public List<B_type> findTypeAll() {
+		return b_typeMapper.findTypeAll();
+	}
+
 }

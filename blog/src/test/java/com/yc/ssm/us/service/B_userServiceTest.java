@@ -2,8 +2,6 @@ package com.yc.ssm.us.service;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,15 +29,12 @@ public class B_userServiceTest {
 		assertNotNull(buser);
 	}
 
-
 	@Test
 	public void testPartUser() {
 		PaginationBean<B_user> tb = bus.partUser("2", "3");
 		System.out.println(tb);
 		assertNotNull(tb);
 	}
-
-	
 
 	@Test
 	public void testfindUser() {
@@ -64,5 +59,5 @@ public class B_userServiceTest {
 		System.out.println(result);
 		assertNotNull(result);
 	}
-	
+
 }
