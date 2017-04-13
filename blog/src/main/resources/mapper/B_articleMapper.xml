@@ -9,33 +9,75 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findArticle" resultType="B_article">
 		select ba.*,
 		bu.uname,bt.tagname,bty.tname from b_article ba
-		inner join b_user bu on
+		left join b_user bu on
 		ba.usid = bu.usid
-		inner join b_tag bt on ba.tagid=bt.tagid
-		inner join
-		b_type bty on ba.tid =bty.tid
+		left join b_tag bt on ba.tagid=bt.tagid
+		left join b_type bty on ba.tid =bty.tid
 	</select>
 	<!-- 通过用户id查询个人文章 -->
 	<select id="findPersonArticle" parameterType="Integer"
 		resultType="B_article">
-		select bt.*, bu.uname from b_article bt inner join b_user
+		select bt.*, bu.uname from b_article bt left join b_user
 		bu on bt.usid = bu.usid where bu.usid = #{usid}
 	</select>
-	<select id="listArticles" parameterType="String" resultType="B_article">
-		select *
-		from b_article
+
+	<!-- 通过用户名查找 -->
+	<select id="listArticleByuname" parameterType="String"
+		resultType="B_article">
+		select ba.*,
+		bu.uname,bt.tagname,bty.tname from b_article ba
+		left join
+		b_user bu on ba.usid = bu.usid
+		left join b_tag bt on ba.tagid=bt.tagid
+		left join b_type bty on ba.tid =bty.tid
 		<choose>
-			<when test="_parameter!= '-0' and _parameter!='-1'">
-				where tagname like '%,${_parameter},%'
-				or tagname like
-				'%,${_parameter}'
-				or tagname like
-				'${_parameter},%'
-				or tagname like
+			<when test="_parameter!= null ">
+				where bu.uname like '%${_parameter}%'
+				or bu.uname like
+				'%${_parameter}'
+				or bu.uname like
 				'${_parameter}%'
 			</when>
-			<when test="_parameter=='-1'">
-				where tagname is null
+		</choose>
+	</select>
+	<!-- 通过类型名查找 -->
+	<select id="listArticleBytname" parameterType="String"
+		resultType="B_article">
+		select ba.*,
+		bu.uname,bt.tagname,bty.tname from b_article ba
+		left join
+		b_user bu on ba.usid = bu.usid
+		left join b_tag bt on
+		ba.tagid=bt.tagid
+		left join b_type bty on ba.tid =bty.tid
+		<choose>
+			<when test="_parameter!= null ">
+				where bty.tname like '%${_parameter}%'
+				or bty.tname
+				like
+				'%${_parameter}'
+				or bty.tname like
+				'${_parameter}%'
+			</when>
+		</choose>
+	</select>
+	<!--通过标签名查询 -->
+	<select id="listArticleBytagname" parameterType="String"
+		resultType="B_article">
+		select ba.*,
+		bu.uname,bt.tagname,bty.tname from b_article ba
+		left join
+		b_user bu on ba.usid = bu.usid
+		left join b_tag bt on ba.tagid=bt.tagid
+		left join b_type bty on ba.tid =bty.tid
+		<choose>
+			<when test="_parameter!= null ">
+				where bt.tagname like '%${_parameter}%'
+				or bt.tagname
+				like
+				'%${_parameter}'
+				or bt.tagname like
+				'${_parameter}%'
 			</when>
 		</choose>
 	</select>
@@ -67,12 +109,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		rn from (select ba.*,
 		bu.uname,bt.tagname,bty.tname from
 		b_article ba
-		inner join b_user bu on
-		ba.usid = bu.usid
-		inner join b_tag
+		left join b_user bu on ba.usid = bu.usid
+		left join b_tag
 		bt on ba.tagid=bt.tagid
-		inner join
-		b_type bty on ba.tid =bty.tid order
+		left join b_type bty on ba.tid =bty.tid order
 		by 1 )n where
 		${currPage}*${pageSize}>=rownum)
 		t

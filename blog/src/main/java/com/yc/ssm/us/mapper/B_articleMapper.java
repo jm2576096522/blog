@@ -24,13 +24,21 @@ public interface B_articleMapper {
 	List<B_article> partArticleById(B_article b_article);
 	//查询用户id所作的文章数及总页数
 	B_article findArticleNum(B_article b_article);
+	List<B_article> listArticleBytagname(String tagname);
+
 
 	// 更新博客文章
 	int modifyArticle(B_article b_article);
 
 	// 写博客
 	int insertArticle(B_article b_article);
-	//删除文章
+
+	// 删除文章
 	int deleteArticle(int aid);
 
+	// 通过用户名查找文章
+	List<B_article> listArticleByuname(String uname);
+
+	// 通过文章类型查找文章
+	List<B_article> listArticleBytname(String tname);
 }

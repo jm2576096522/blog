@@ -21,8 +21,8 @@ public class B_articleServiceTest {
 
 	// 条件查询文章
 	@Test
-	public void testListArticles() {
-		List<B_article> articles = bart.listArticles("java");
+	public void testListArticleBytagname() {
+		List<B_article> articles = bart.listArticleBytagname("java");
 		System.out.println("查询结果==》");
 		for (B_article b_article : articles) {
 			System.out.println(b_article);

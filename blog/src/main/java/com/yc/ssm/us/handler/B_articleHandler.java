@@ -1,6 +1,7 @@
 package com.yc.ssm.us.handler;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -129,7 +130,7 @@ public class B_articleHandler<T> {
 		return articleService.insertArticle(b_article);
 	}
 
-	//后台数据对文章的条件查询
+	// 后台数据对文章的条件查询
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	@ResponseBody
@@ -143,6 +144,22 @@ public class B_articleHandler<T> {
 		} else {
 			return (List<T>) articleService.findArticle();
 		}
+	}
+
+	// 后台通过条件查询(name为条件查询参数名 ，param为条件查询的参数值 例如:{name: tname,param:'原创')
+	@RequestMapping(value = "findByParam", method = RequestMethod.POST)
+	@ResponseBody
+	public List<B_article> findArticleByParam(String name, String param) throws UnsupportedEncodingException {
+		param = new String(param.getBytes("ISO-8859-1"), "UTF-8");
+		LogManager.getLogger().debug("条件查询  neme:" + name + ",param :" + param);
+		if (name.trim().equals("uname")) {
+			return articleService.findArticleByuname(param);
+		} else if (name.trim().equals("tname")) {
+			return articleService.findArticleBytname(param);
+		} else if (name.trim().equals("tagname")) {
+			return articleService.listArticleBytagname(param);
+		}
+		return articleService.findArticle();
 	}
 
 }
