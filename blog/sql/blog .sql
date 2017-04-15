@@ -229,19 +229,20 @@ select bar.* ,nvl(w.commentnum,0) as commentnum from
 (select d.caid,count(1) as commentnum from (select caid from B_COMMENT b inner join B_ARTICLE ba on ba.aid = b.caid) d group by d.caid) w 
 right join B_ARTICLE bar on w.caid = bar.aid order by w.caid) n where 5>=rownum and n.usid =10007) t where rn>0;
 
-create sequence seq_drid start with 1;
+create sequence seq_drid start with 1 increment by 1;
 -----草稿箱
 create table b_drafets(
        drid int primary key,      --草稿箱id  
-       usid int references b_user(usid),     --文章作者      
-       drtitle varchar2(20),      --文章的标题         
-       drtype varchar2(20),       --文章所属类型（原创，转载，翻译）
-       drtag varchar2(20),        --文章标签
+       usid int references b_user(usid) on delete cascade,     --文章作者      
+       drtitle varchar2(60),      --文章的标题         
+       drtypeid int,       --文章所属类型（原创，转载，翻译）
+       drtagid int,        --文章标签
        drtime varchar2(30),       --文章创作时间
        drcontent varchar2(800),   --文章文本内容
-       drpic varchar2(200)        --文章图片  
-      
+       drpic varchar2(600)        --文章图片  
 );
+
+insert into b_drafets values(seq_drid.nextval,10007,'你好',1,2,'2017-04-12','hello world!','/upload/a1.jpg');
 
 select * from B_ADMIN;--管理员
 select * from B_COMMENT;--评论
@@ -267,7 +268,5 @@ drop sequence seq_cid;
 drop sequence seq_drid;
 drop sequence seq_tid;
 drop sequence seq_tagid;
-
--------------------------------------------当查询b_comment 表时的触发器
 
 

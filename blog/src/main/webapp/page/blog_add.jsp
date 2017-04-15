@@ -5,12 +5,12 @@
 <head>
 <base href="${deployName}">
 <meta charset="utf-8">
-
 <title>新建博客</title>
 <link rel="stylesheet" href="assets/css/amazeui.min.css">
 <link rel="stylesheet" href="assets/css/app.css">
 <link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
 <script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 </head>
 
@@ -144,11 +144,8 @@
 
 	<script type="text/javascript" src="easyui/jquery.min.js"></script>
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
-	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
-	<script type="text/javascript" charset="utf-8"
-		src="ueditor/ueditor.config.js"></script>
-	<script type="text/javascript" charset="utf-8"
-		src="ueditor/ueditor.all.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.min.js"></script>
 	<script type="text/javascript" src="js/commonUserInfo.js"></script>
 
 	<script type="text/javascript">
@@ -221,18 +218,20 @@
 				}
 			});
 		}
-		
+		/* 保存到草稿箱 */
 		function saveArticle(){
-			/* $("#add_form").form({
-				url:"article/addArticle",
+		 $("#add_form").form({
+				url:"drafets/addDrafet",
 				success:function(data){
 			    	if(data.trim() == "true"){
-			    		 $.messager.alert("操作提示", "添加成功...","info");
+			    		 $.messager.alert("操作提示", "保存成功...","info",function(){
+			    			 location.href="page/blogManager.jsp";
+			    		 });
 			    	}else{
-			    		 $.messager.alert("操作提示", "添加失败！！","error");
+			    		 $.messager.alert("操作提示", "保存失败！！","error");
 			    	}
 				}
-			}); */
+			});  
 		}
 		
 		// 如果url 拼接有aid 

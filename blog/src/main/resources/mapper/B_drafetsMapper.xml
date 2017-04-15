@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射文件的命名空间namespace的值是与之对应的映射接口的全类名 -->
+<mapper namespace="com.yc.ssm.us.mapper.B_drafetsMapper">
+	
+	<!-- 添加草稿 -->
+	<insert id="addDrafet" parameterType="B_article">
+		insert into b_drafets values(seq_drid.nextval,#{usid},#{atitle},#{tid},#{tagid},to_char(sysdate,'yyyy-MM-dd
+		hh24:mm:ss'),#{acontent},'')
+	</insert>	
+</mapper>
