@@ -42,12 +42,19 @@ public class B_articleHandler<T> {
 	@Autowired
 	private B_typeService b_typeService;
 
-	// 文章查询
+	// 所有的文章查询
 	@RequestMapping("find")
 	@ResponseBody
 	public List<B_article> findArticle() {
-		System.out.println("我进来了。。。");
+		LogManager.getLogger().debug("我进来了。。。");
 		return articleService.findArticle();
+	}
+	//首页按评论数显示热度文章
+	@RequestMapping("findByHot")
+	@ResponseBody
+	public List<B_article> findArticleByHot(B_article b_article) {
+		LogManager.getLogger().debug("B_articleHandler+首页按评论数显示热度文章");
+		return articleService.findArticleByHot(b_article);
 	}
 
 	// 查询个人文章（用户id）
@@ -56,7 +63,7 @@ public class B_articleHandler<T> {
 	public List<B_article> findPersonArticle(Integer usid, HttpSession session) {
 		B_user user = (B_user) session.getAttribute("loginUser");
 		usid = user.getUsid();
-		System.out.println("我是个人的文章。。。");
+		LogManager.getLogger().debug("我是个人的文章。。。");
 		return articleService.findPersonArticle(usid);
 	}
 	// 查询博客文章(通过文章id)
@@ -82,20 +89,46 @@ public class B_articleHandler<T> {
 		B_user user = (B_user) session.getAttribute("loginUser");
 		Integer usid = user.getUsid();
 		b_article.setUsid(usid);
-		System.out.println("我是通过id分页查询的文章。。。");
+		LogManager.getLogger().debug("我是通过id分页查询的文章。。。");
 		return articleService.partArticleById(b_article);
 	}
-	//指定用户id分页查询文章
+	//查询用户id所作的文章数及总页数
 	@RequestMapping(value = "listNum", method = RequestMethod.POST)
 	@ResponseBody
 	public B_article listNum(B_article b_article,HttpSession session) {
 		B_user user = (B_user) session.getAttribute("loginUser");
 		Integer usid = user.getUsid();
 		b_article.setUsid(usid);
-		System.out.println("我是通过id分页查询的文章。。。");
+		LogManager.getLogger().debug("查询用户id所作的文章数及总页数");
 		return articleService.findArticleNum(b_article);
 	}
+	//查询文章的所有总数和总页数
+		@RequestMapping(value = "articleTotal", method = RequestMethod.POST)
+		@ResponseBody
+		public B_article articleTotal() {
+			LogManager.getLogger().debug("查询文章的所有总数和总页数");
+			return articleService.findArticleTotal();
+		}
 
+	//更改博客文章
+	@RequestMapping(value = "updateArticle", method = RequestMethod.POST)
+	@ResponseBody
+	public int modifyArticle(@RequestParam("upicDate") MultipartFile upicDate,B_article b_article) {
+		LogManager.getLogger().debug("更改博客文章：");
+		String picPath = null;
+		if (upicDate != null && !upicDate.isEmpty()) {// 判断是否有文件上传
+			try {
+				upicDate.transferTo(ServletUtil.getUploadFile(upicDate.getOriginalFilename()));
+				picPath = ServletUtil.VIRTUAL_UPLOAD_DIR + upicDate.getOriginalFilename();
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			b_article.setApic(picPath);
+		}
+		return articleService.modifyArticle(b_article);
+	}
 
 	// 删除文章
 	@RequestMapping(value = "delete", method = RequestMethod.POST)
@@ -122,7 +155,7 @@ public class B_articleHandler<T> {
 			}
 			b_article.setApic(picPath);
 		}else{
-			System.out.println("我是空的");
+			LogManager.getLogger().debug("我是空的");
 			b_article.setApic("");
 		}
 		b_article.setUsid(usid);

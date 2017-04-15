@@ -171,7 +171,7 @@
 	<script type="text/javascript" src="js/commonUserInfo.js"></script>
 
 	<script type="text/javascript">
-		UE.getEditor('econtent');// 使用副文本编辑工具
+		UE.getEditor('acontent');// 使用副文本编辑工具
 		
 		var aid = "<%=request.getParameter("aid")%>";
 		if(aid != "null"){
@@ -179,6 +179,7 @@
 			var navStr ="" ;
 			navStr +="<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='update_article()'>更改文章</button>";
 			navStr +="<button type='button' class='am-btn am-btn-default' onclick='backFirst()'>取消</button>";
+			navStr +="<input type='text' name='aid' style='width:100px;display:none;' value='"+aid+"'/> ";
 			$("#controlNav").html(navStr);
 		}else{
 			var navStr ="";
@@ -213,7 +214,9 @@
 				url:"article/addArticle",
 				success:function(data){
 			    	if(data.trim() == "true"){
-			    		 $.messager.alert("操作提示", "添加成功...","info");
+			    		 $.messager.alert("操作提示", "添加成功...","info",function(){
+			    			 location.reload();
+			    		 });
 			    	}else{
 			    		 $.messager.alert("操作提示", "添加失败！！","error");
 			    	}
@@ -225,11 +228,15 @@
 			$("#add_form").form({
 				url:"article/updateArticle",
 				success:function(data){
-			    	if(data.trim() == "true"){
-			    		 $.messager.alert("操作提示", "更改成功...","info");
+				  	if(data.trim() > 0){
+			    		 $.messager.alert("操作提示", "更改成功...","info",function(){
+			    			 location.href="page/blogManager.jsp";
+			    		 });
 			    	}else{
-			    		 $.messager.alert("操作提示", "更改失败！！","error");
-			    	}
+			    		 $.messager.alert("操作提示", "更改失败！！","error",function(){
+			    			 location.reload();
+			    		 });
+			    	} 
 				}
 			});
 		}

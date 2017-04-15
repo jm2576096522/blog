@@ -6,8 +6,10 @@ import com.yc.ssm.us.entity.B_article;
 import com.yc.ssm.us.entity.PaginationBean;
 
 public interface B_articleService {
-	// 首页显示博客的热度文章
+	// 查询所有的文章
 	List<B_article> findArticle();
+	//首页按评论数显示热度文章
+	List<B_article> findArticleByHot(B_article b_article);
 
 	// 通过用户id查询个人文章
 	List<B_article> findPersonArticle(Integer usid);
@@ -32,6 +34,10 @@ public interface B_articleService {
 	
 	//查询用户id所作的文章数及总页数
 	B_article findArticleNum(B_article b_article);
+	
+
+	//查询文章的所有总数和总页数
+	B_article findArticleTotal();
 
 	// 修改博客文章
 	int modifyArticle(B_article b_article);// 更新博客信息

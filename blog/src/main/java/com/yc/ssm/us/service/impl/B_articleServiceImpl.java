@@ -17,14 +17,22 @@ public class B_articleServiceImpl implements B_articleService {
 	@Autowired 
 	private B_articleMapper b_articleMapper;
 
+	//首页按评论数显示热度文章
+	@Override
+	public List<B_article> findArticleByHot(B_article b_article){
+		LogManager.getLogger().debug("首页按评论数显示热度文章");
+		return b_articleMapper.findArticleByHot(b_article);
+	}
+	
 	@Override
 	public List<B_article> listArticleBytagname(String tagname) {
 		// 通过标签名查询博客文章
 		return b_articleMapper.listArticleBytagname(tagname);
 	}
-
+	//更改博客文章
 	@Override
 	public int modifyArticle(B_article b_article) {
+		LogManager.getLogger().debug("更改博客文章：");
 		return b_articleMapper.modifyArticle(b_article);
 	}
 
@@ -54,7 +62,14 @@ public class B_articleServiceImpl implements B_articleService {
 		LogManager.getLogger().debug("查询用户id所作的文章数及总页数");
 		return b_articleMapper.findArticleNum(b_article);
 	}
-
+	
+	//查询文章的所有总数和总页数
+	@Override
+	public B_article findArticleTotal(){
+		LogManager.getLogger().debug("查询文章的所有总数和总页数");
+		return b_articleMapper.findArticleTotal();
+	}
+	//查询所有的文章
 	@Override
 	public List<B_article> findArticle() {
 		LogManager.getLogger().debug("我是articleService里的：");

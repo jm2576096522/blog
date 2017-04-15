@@ -1,19 +1,75 @@
-$.get("article/find",function(data){
+var currPage = 1;
+var pageSize = 6;
+var totalPage;
+
+pageHotArticle();  //页面初始化
+
+function pageHotArticle(){
+	$.get("article/findByHot",{currPage:currPage,pageSize:pageSize},function(data){
 		var articleStr = "";
 		for (var i = 0; i < data.length; i++){
 			articleStr +='<div class="blogs">';
 			articleStr +='<figure><img src="'+data[i].apic+'"></figure>';
 			articleStr +='<ul><h3><a href="/">'+data[i].atitle+'</a></h3>';
-			articleStr +='<p id="con_text" class="con_text">'+data[i].acontent+'</p>';
+			articleStr +='<div id="con_text" class="con_text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+data[i].acontent+'</div>';
 			articleStr +='<p class="autor"><span class="lm f_l"><a href="/">'+data[i].uname+'</a></span>';
 			articleStr +='<span class="dtime f_l">'+data[i].atime+'</span>';
 			articleStr +='<span class="viewnum f_r"><a href="/">浏览（'+data[i].aviewnum+'）</a></span>';
-			articleStr +='<span class="pingl f_r"><a href="/">评论（'+data[i].aviewnum+'）</a></span></p>';
+			articleStr +='<span class="pingl f_r"><a href="/">评论（'+data[i].commentnum+'）</a></span></p>';
 			articleStr +='</ul></div>';
 		}
 		$("#content").html(articleStr);
-},"json");
+	},"json");
+}
 
+
+function loadMoreArticle(){
+	pageSize = 10;
+	pageHotArticle();
+	$("#loadMore").css("display","none");
+	
+	$.post("article/articleTotal",function(data){
+		 var ulStr = "";
+		 ulStr +="<li ><a onclick='prePage()'>&laquo; Prev</a></li>";
+		 ulStr +="<li ><a onclick='firstPage()'>首页</a></li>";
+		 ulStr +="<li><a>"+currPage+"/"+data.totalPage+"</a></li>";
+		 ulStr +="<li><a>共:"+data.total+"条</a></li>";
+		 ulStr +="<li ><a onclick='lastPage()'>尾页</a></li>";
+		 ulStr +="<li ><a onclick='nextPage()'>Next &raquo;</a></li>";
+		 totalPage = data.totalPage;
+		 $("#myUI").html(ulStr);
+	 });
+}
+
+/* 下一页 */
+function nextPage(){
+	if(currPage == totalPage){
+		currPage = currPage;
+	}else{
+		currPage += 1;
+		loadMoreArticle();
+		
+	}
+}
+/* 上一页 */
+function prePage(){
+	if(currPage == 1){
+		currPage = currPage;
+	}else{
+		currPage -= 1;
+		loadMoreArticle();
+	}
+}
+/* 首页 */
+function firstPage(){
+	currPage = 1;
+	loadMoreArticle();
+}
+/* 尾页 */
+function lastPage(){
+	currPage = totalPage;
+	loadMoreArticle();
+}
 
 function check_login(){
 	if($("#user_usid").val() == ""){

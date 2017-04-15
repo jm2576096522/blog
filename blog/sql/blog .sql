@@ -114,13 +114,29 @@ insert into b_article values(seq_aid.nextval,'java编程',1,1,10001,
 to_char(sysdate,'yyyy-MM-dd hh:mm:ss'),'java是面向对象的一种编程，由属性和方法组成。Java对c的有点是不适用指针，实现跨区域','',0);
 
 -----更改时间
-updata b_article set atime = to_char((select sysdate from dual),'yyyy-MM-dd hh:mm:ss') where aid = 122;
-select to_char(sysdate,'yyyy-MM-dd hh:mm:ss')  from dual;
+update b_article set atime = to_char(sysdate,'yyyy-MM-dd hh24:mm:ss') where aid = 122;
+
+select to_char(sysdate,'yyyy-MM-dd hh24:mm:ss')  from dual;
 
 -------------------------------更改数据库时区操作
 select dbtimezone from dual;
+select systimestamp from dual; 
 alter database set time_zone = '+08:00';
+
+select sessiontimezone from dual;
 ----------------------------------------------
+
+------------------------------------文章热度查询
+	select * from (select bar.*,bu.uname,bt.tagname,bty.tname,nvl(w.commentnum,0) as commentnum from b_article bar
+		left join b_user bu on bar.usid = bu.usid
+		left join b_tag bt on bar.tagid=bt.tagid
+		left join b_type bty on bar.tid =bty.tid
+		left join (select d.caid,count(1) as commentnum from (
+			select caid from B_COMMENT b inner join B_ARTICLE ba on ba.aid = b.caid) d group by d.caid) w
+			on w.caid = bar.aid order by bar.aviewnum desc) where rownum <=6;
+			
+	
+
 select to_char(sysdate,'yyyy-MM-dd hh:mm:ss') hr from dual;
 insert into b_article(aid,atitle,tid,tagid,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'java的基本介绍',1,1,10002,
 			'2017-4-1','30','常常是彼此交换名片，然后郑重或是出于礼貌用手机记下对方的电话号'); 
@@ -140,6 +156,7 @@ select * from b_article;
 delete from B_ARTICLE where atime = '2017-4-1'
 
 select count(1) total,ceil(count(1)/5) from B_ARTICLE where usid =10007;
+
 
 
 --查询当前时间
@@ -175,8 +192,8 @@ create table b_comment(
        ctime varchar2(20)              --评论时间
 );
 --------插入评论表数据
-insert into B_COMMENT values(seq_cid.nextval,22,10007,'这篇文章非常棒！！','2017-4-11 21:55:33');
-insert into B_COMMENT values(seq_cid.nextval,22,10007,'这篇文章是真的！！','2017-4-13 21:55:33');
+insert into B_COMMENT values(seq_cid.nextval,122,10007,'这篇文章非常棒！！','2017-4-11 21:55:33');
+insert into B_COMMENT values(seq_cid.nextval,123,10007,'这篇文章是真的！！','2017-4-13 21:55:33');
 insert into B_COMMENT values(seq_cid.nextval,41,10007,'这篇文章非常棒12！！','2017-4-12 21:55:33');
 insert into B_COMMENT values(seq_cid.nextval,46,10007,'这篇文章非常棒123！！','2017-4-11 21:55:33');
 

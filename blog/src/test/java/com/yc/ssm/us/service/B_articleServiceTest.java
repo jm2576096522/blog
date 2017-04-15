@@ -42,9 +42,10 @@ public class B_articleServiceTest {
 	@Test
 	public void testModifyArticle() {
 		B_article b_article = new B_article();
-		b_article.setAid(1004);
+		b_article.setAid(122);
 		b_article.setAcontent("java的一个集成开发环境");
 		b_article.setAtitle("eclispe");
+		b_article.setApic("/upload/22-1.jpg");
 		bart.modifyArticle(b_article);
 	}
 
@@ -55,6 +56,16 @@ public class B_articleServiceTest {
 		System.out.println(list);
 		assertNotNull(list);
 	}
+	//首页按评论数显示热度文章
+		@Test
+		public void testFindArticleByHot() {
+			B_article b_article = new B_article();
+			b_article.setCurrPage(1);
+			b_article.setPageSize(5);
+			List<B_article> list = bart.findArticleByHot(b_article);
+			System.out.println(list);
+			assertNotNull(list);
+		}
 
 	// 分页查询
 	@Test
@@ -86,6 +97,14 @@ public class B_articleServiceTest {
 		System.out.println(lists);
 		assertNotNull(lists);
 	}
+	//查询文章的所有总数和总页数
+		@Test
+		public void testFindArticleTotal() {
+			B_article lists = bart.findArticleTotal();
+			System.out.println(lists);
+			assertNotNull(lists);
+		}
+	
 	//新建博客
 	@Test
 	public void testInsertArticle() {

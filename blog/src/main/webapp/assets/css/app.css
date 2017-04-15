@@ -131,7 +131,27 @@ body {
 	 background-color:#0c79b1;
 }
 
+/* 文章内容省略显示 */
+.con_text{
+	height:120px;
+	line-height:20px;
+	overflow:hidden;  /** 隐藏超出的内容 **/
+	text-overflow:ellipsis;
+	display:-webkit-box; 	/** 将对象作为伸缩盒子模型显示 **/
+	-webkit-line-clamp:3; /** 显示的行数 **/
+	-webkit-box-orient:vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+}
+/* 评论和浏览 */
+.viewnum {
+	background: url(../../images/newsbg04.png) no-repeat left center
+}
 
+.pingl {
+	background: url(../../images/newsbg03.png) no-repeat left center
+}
+.f_r {
+	float: right
+}
 
 
 /**

@@ -62,29 +62,10 @@
 
 <!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed">
+	<!-- 文章内容区 -->
     <div class="am-u-md-8 am-u-sm-12">
-
-	<article class="am-g blog-entry-article">
-            <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
-                <img src="assets/i/f10.jpg" alt="" class="am-u-sm-12">
-            </div>
-            <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
-                <span><a href="" class="blog-color">article &nbsp;</a></span>
-                <span> @amazeUI &nbsp;</span>
-                <span>2015/10/9</span>
-                <h1><a href="">总在思考一句积极的话</a></h1>
-                <p>那时候刚好下着雨，柏油路面湿冷冷的，还闪烁着青、黄、红颜色的灯火。
-                </p>
-                <p><a href="" class="blog-continue">continue reading</a></p>
-            </div>
-    </article>
-    
     <div id="personArticle"></div>
-        
-        <ul class="am-pagination">
-  			<li class="am-pagination-prev"><a href="">&laquo; Prev</a></li>
- 			 <li class="am-pagination-next"><a href="">Next &raquo;</a></li>
-		</ul>
+    <ul class="am-pagination" style="width:100%;text-align: center;margin-top:30px;" id="myUI"></ul>
     </div>
 
     <div class="am-u-md-4 am-u-sm-12 blog-sidebar">
