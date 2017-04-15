@@ -82,10 +82,7 @@ function check_login(){
 
 //文章详情
 function articleDetail(index){
-	alert(12);
 	$.post("article/updateAviewNum",{aid:index},function(data){
-		alert(data);
+		location.href="article.jsp?aid="+index;
 	});
-/*	location.href="article.jsp?aid="+index;*/
-	
 }

@@ -135,5 +135,12 @@ public class B_articleServiceTest {
 		System.out.println(list);
 		assertNotNull(list);
 	}
-
+	//<!-- 更改指定博客的浏览量 -->
+	@Test
+	public void testUpdateAviewNum(){
+		Integer aid = 122;
+		int result = bart.updateAviewNum(aid);
+		System.out.println(result);
+		assertNotNull(result);
+	} 
 }

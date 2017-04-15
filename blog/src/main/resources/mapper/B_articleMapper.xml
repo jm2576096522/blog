@@ -195,6 +195,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	<!-- 更改指定博客的浏览量 -->
 	<update id="updateAviewNum" parameterType="Integer">
-		update B_ARTICLE set aviewnum = (aviewnum+1) where aid ={aid}
+		update B_ARTICLE set aviewnum = (aviewnum+1) where aid = #{aid}
 	</update>
 </mapper>

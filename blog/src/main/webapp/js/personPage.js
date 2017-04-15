@@ -91,5 +91,7 @@ function login_out(){
 
 //文章详情
 function articleDetail(index){
-	location.href="article.jsp?aid="+index;
+	$.post("article/updateAviewNum",{aid:index},function(data){
+		location.href="article.jsp?aid="+index;
+	});
 }
