@@ -1,9 +1,25 @@
 package com.yc.ssm.us.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class B_article implements Serializable {
+
+	@Override
+	public String toString() {
+		return "\nB_article [aid=" + aid + ", atitle=" + atitle + ", tid=" + tid + ", tagid=" + tagid + ", usid=" + usid
+				+ ", atime=" + atime + ", acontent=" + acontent + ", apic=" + apic + ", aviewnum=" + aviewnum
+				+ ", uname=" + uname + ", tname=" + tname + ", tagname=" + tagname + ", commentnum=" + commentnum
+				+ ", articleNum=" + articleNum + ", currPage=" + currPage + ", pageSize=" + pageSize + ", total="
+				+ total + ", totalPage=" + totalPage + "]";
+	}
+
+	public Integer getArticleNum() {
+		return articleNum;
+	}
+
+	public void setArticleNum(Integer articleNum) {
+		this.articleNum = articleNum;
+	}
 
 	private static final long serialVersionUID = 1L;
 	private Integer aid;
@@ -20,6 +36,7 @@ public class B_article implements Serializable {
 	private String tname;// 文章所属类型
 	private String tagname;// 文章标签类别
 	private Integer commentnum; //评论数
+	private Integer articleNum;//文章数
 	
 	private Integer currPage = 1; // 当前页
 	private Integer pageSize = 10; // 每页的数据条数
@@ -166,15 +183,7 @@ public class B_article implements Serializable {
 		this.aviewnum = aviewnum;
 	}
 
-	@Override
-	public String toString() {
-		return "\nB_article [aid=" + aid + ", atitle=" + atitle + ", tid=" + tid + ", tagid=" + tagid + ", usid=" + usid
-				+ ", atime=" + atime + ", acontent=" + acontent + ", apic=" + apic + ", aviewnum=" + aviewnum
-				+ ", uname=" + uname + ", tname=" + tname + ", tagname=" + tagname + ", commentnum=" + commentnum
-				+ ", currPage=" + currPage + ", pageSize=" + pageSize + ", total=" + total + ", totalPage=" + totalPage
-				+ "]";
-	}
-
+	
 
 
 	

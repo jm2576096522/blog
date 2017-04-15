@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yc.ssm.us.entity.B_tag;
-import com.yc.ssm.us.entity.PaginationBean;
 import com.yc.ssm.us.service.B_tagService;
 
 @Controller
@@ -34,6 +33,14 @@ public class B_tagHandler {
 		LogManager.getLogger().debug("list:row==>" + rows + ",page==>" + page);
 		return b_tagService.findAll();// 异步数据响应
 	}
+	
+	
+	@RequestMapping(value = "analytics", method = RequestMethod.POST)
+	@ResponseBody
+	public List<B_tag> TagAnalytics() {
+		return b_tagService.TagAnalytics();// 异步数据响应
+	}
+	
 
 	// 修改标签
 	@RequestMapping("modify")

@@ -40,6 +40,8 @@ public interface B_articleService {
 
 	// 添加博客文章
 	boolean insertArticle(B_article b_article);
+
+	List<B_article> ArticleAnalytics();
 	 
 
 }

@@ -71,12 +71,10 @@
 					<li><span>评论管理</span></li>
 				</ul>
 			</div>
-			<div title="统计排行" data-options="iconCls:'icon-mini-add'">
+			<div title="排行榜" data-options="iconCls:'icon-mini-add'">
 				<ul class="treeNav">
-					<li><span>标签排行</span></li>
-					<li><span>用户排行</span></li>
-					<li><span>博客排行</span></li>
-					<li><span>类别排行</span></li>
+					<li><span>文章发表排行</span></li>
+					<li><span>文章标签排行</span></li>
 				</ul>
 			</div>
 		</div>
@@ -153,6 +151,10 @@
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
 	<script src="js/validatebox.js" type="text/javascript"></script>
+	<script type="text/javascript" src="Highcharts/code/highcharts.js"></script>
+<script type="text/javascript" src="Highcharts/code/modules/exporting.js"></script>
+<script type="text/javascript" src="Highcharts/code/modules/data.js"></script>
+	
 	<script type="text/javascript" src="js/manage.js"></script>
 </body>
 </html>

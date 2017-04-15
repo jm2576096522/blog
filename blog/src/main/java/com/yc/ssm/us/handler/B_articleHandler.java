@@ -161,5 +161,12 @@ public class B_articleHandler<T> {
 		}
 		return articleService.findArticle();
 	}
+	
+	//后台查询用户文章发表的排行（文章统计）
+	@RequestMapping(value = "analytics", method = RequestMethod.POST)
+	@ResponseBody
+	public List<B_article> ArticleAnalytics()  {
+		return articleService.ArticleAnalytics();
+	}
 
 }

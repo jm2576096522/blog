@@ -12,13 +12,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		left join b_user bu on
 		ba.usid = bu.usid
 		left join b_tag bt on ba.tagid=bt.tagid
-		left join b_type bty on ba.tid =bty.tid
+		left join
+		b_type bty on ba.tid =bty.tid
 	</select>
 	<!-- 通过用户id查询个人文章 -->
 	<select id="findPersonArticle" parameterType="Integer"
 		resultType="B_article">
 		select bt.*, bu.uname from b_article bt left join b_user
-		bu on bt.usid = bu.usid where bu.usid = #{usid}
+		bu
+		on bt.usid = bu.usid where bu.usid = #{usid}
 	</select>
 
 	<!-- 通过用户名查找 -->
@@ -66,7 +68,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="B_article">
 		select ba.*,
 		bu.uname,bt.tagname,bty.tname from b_article ba
-		left join b_user bu on ba.usid = bu.usid
+		left join
+		b_user bu on ba.usid = bu.usid
 		left join b_tag bt on ba.tagid=bt.tagid
 		left join b_type bty on ba.tid =bty.tid
 		<choose>
@@ -81,10 +84,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose>
 	</select>
 
-	<!-- 	// 查询博客文章(通过文章id) -->
-	<select id="findArticleByAid" parameterType="Integer" resultType="B_article">
+	<!-- // 查询博客文章(通过文章id) -->
+	<select id="findArticleByAid" parameterType="Integer"
+		resultType="B_article">
 		select ba.*,bt.tagname,bty.tname from b_article ba
-		left join b_user bu on
+		left join
+		b_user bu on
 		ba.usid = bu.usid
 		left join b_tag bt on ba.tagid=bt.tagid
 		left join
@@ -111,9 +116,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		b_article ba
 		left join b_user bu on ba.usid = bu.usid
 		left join b_tag
-		bt on ba.tagid=bt.tagid
+		bt
+		on ba.tagid=bt.tagid
 		left join b_type bty on ba.tid =bty.tid order
-		by 1 )n where
+		by 1
+		)n where
 		${currPage}*${pageSize}>=rownum)
 		t
 		where
@@ -121,28 +128,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 分页查询指定usid 的 文章 -->
-	
-	<select id="partArticleById" parameterType="B_article" resultType="B_article">
+
+	<select id="partArticleById" parameterType="B_article"
+		resultType="B_article">
 		select * from ( select n.*,rownum rn
 		from(
-		select bar.* ,nvl(w.commentnum,0) as commentnum from
+		select bar.*
+		,nvl(w.commentnum,0) as commentnum from
 		(select
-		d.caid,count(1) as commentnum from (select caid from B_COMMENT b
+		d.caid,count(1) as
+		commentnum from (select caid from B_COMMENT b
 		inner
-		join B_ARTICLE ba on ba.aid = b.caid) d group by d.caid) w
+		join B_ARTICLE ba on
+		ba.aid = b.caid) d group by d.caid) w
 		right join
-		B_ARTICLE bar on w.caid = bar.aid order by bar.atime desc) n where
+		B_ARTICLE bar on w.caid
+		= bar.aid order by bar.atime desc) n where
 		${currPage}*${pageSize}>=rownum
-		and n.usid = ${usid} ) t where rn>(${currPage}-1)*${pageSize}
-	</select>
-	
-	<!-- 查询用户id所作的文章数及总页数 -->
-	<select id="findArticleNum" parameterType="B_article" resultType="B_article">
-		
-		select count(1) total ,ceil(count(1)/5) totalPage from b_article b where usid = #{usid}
-	
+		and n.usid = ${usid} ) t where
+		rn>(${currPage}-1)*${pageSize}
 	</select>
 
+	<!-- 查询用户id所作的文章数及总页数 -->
+	<select id="findArticleNum" parameterType="B_article"
+		resultType="B_article">
+
+		select count(1) total ,ceil(count(1)/5) totalPage from
+		b_article b where
+		usid = #{usid}
+
+	</select>
+
+	<!-- 查询所有用户所作的文章数的排行（前十） -->
+	<select id="articleAnalytics" resultType="B_article"  >
+		select n.*,rownum from (select bu.usid usid, 
+		bu.uname uname,COUNT(ba.aid) articleNum from b_article ba,b_user bu where ba.usid(+)=bu.usid GROUP BY bu.uname,bu.usid ORDER BY articleNum DESC ) n where 10>=rownum
+	</select>
 
 	<!-- 修改博客文章 -->
 	<update id="modifyArticle" parameterType="B_article">
@@ -150,7 +171,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<set>
 			<if test="atitle!=null"> atitle=#{atitle}, </if>
 			<if test="tagid!=null"> tagid=#{tagid}, </if>
-			<if test="tid!=null">	tid=#{tid},	</if>
+			<if test="tid!=null"> tid=#{tid},	</if>
 			<if test="acontent!=null"> acontent=#{acontent}, </if>
 			<if test="apic!=null"> apic=#{apic}, </if>
 			<if test="aviewnum!=null">aviewnum=#{aviewnum}</if>

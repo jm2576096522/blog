@@ -55,6 +55,20 @@ $(".treeNav").tree({
 				iconCls : "icon-mini-add",
 				closable : true,
 			});
+		} else if (nodeContent == "文章发表排行") {
+			$("#main").tabs('add', {
+				title : nodeContent,
+				href : "back/article_analytics.jsp",
+				iconCls : "icon-mini-add",
+				closable : true,
+			});
+		} else if (nodeContent == "文章标签排行") {
+			$("#main").tabs('add', {
+				title : nodeContent,
+				href : "back/tag_analytics.jsp",
+				iconCls : "icon-mini-add",
+				closable : true,
+			});
 		} else {
 			$("#main").tabs('add', {
 				title : nodeContent,

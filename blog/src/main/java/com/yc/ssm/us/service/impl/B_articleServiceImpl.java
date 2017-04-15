@@ -96,4 +96,9 @@ public class B_articleServiceImpl implements B_articleService {
 		return b_articleMapper.listArticleBytname(tname);
 	}
 
+	@Override
+	public List<B_article> ArticleAnalytics() {
+		return b_articleMapper.articleAnalytics();
+	}
+
 }

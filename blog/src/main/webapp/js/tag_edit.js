@@ -18,7 +18,7 @@ $("#tagList")
 							},
 							{
 								field : 'tagname',
-								title : '用户名',
+								title : '标签名',
 								width : 100,
 								align : 'center'
 							},{
