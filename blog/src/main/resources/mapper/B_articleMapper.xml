@@ -12,7 +12,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		left join b_user bu on
 		ba.usid = bu.usid
 		left join b_tag bt on ba.tagid=bt.tagid
-		left join b_type bty on ba.tid =bty.tid
+		left join
+		b_type bty on ba.tid =bty.tid
 	</select>
 	
 	<!-- 首页按评论数显示热度文章 -->
@@ -33,7 +34,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findPersonArticle" parameterType="Integer"
 		resultType="B_article">
 		select bt.*, bu.uname from b_article bt left join b_user
-		bu on bt.usid = bu.usid where bu.usid = #{usid}
+		bu
+		on bt.usid = bu.usid where bu.usid = #{usid}
 	</select>
 
 	<!-- 通过用户名查找 -->
@@ -98,7 +100,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 	// 查询博客文章(通过文章id) -->
 	<select id="findArticleByAid" parameterType="Integer" resultType="B_article">
-		select ba.*,bt.tagname,bty.tname,bu. from b_article ba
+		select ba.*,bt.tagname,bty.tname,bu.uname from b_article ba
 		left join b_user bu on ba.usid = bu.usid
 		left join b_tag bt on ba.tagid=bt.tagid
 		left join b_type bty on ba.tid =bty.tid where ba.aid = #{aid}
@@ -124,9 +126,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		b_article ba
 		left join b_user bu on ba.usid = bu.usid
 		left join b_tag
-		bt on ba.tagid=bt.tagid
+		bt
+		on ba.tagid=bt.tagid
 		left join b_type bty on ba.tid =bty.tid order
-		by 1 )n where
+		by 1
+		)n where
 		${currPage}*${pageSize}>=rownum)
 		t
 		where
@@ -157,13 +161,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(1) total ,ceil(count(1)/10) totalPage from b_article 
 	</select>
 
+	<!-- 查询所有用户所作的文章数的排行（前十） -->
+	<select id="articleAnalytics" resultType="B_article"  >
+		select n.*,rownum from (select bu.usid usid, 
+		bu.uname uname,COUNT(ba.aid) articleNum from b_article ba,b_user bu where ba.usid(+)=bu.usid GROUP BY bu.uname,bu.usid ORDER BY articleNum DESC ) n where 10>=rownum
+	</select>
+
 	<!-- 修改博客文章 -->
 	<update id="modifyArticle" parameterType="B_article">
 		update B_article
 		<set>
 			<if test="atitle!=null"> atitle=#{atitle}, </if>
 			<if test="tagid!=null"> tagid=#{tagid}, </if>
-			<if test="tid!=null">	tid=#{tid},	</if>
+			<if test="tid!=null"> tid=#{tid},	</if>
 			<if test="acontent!=null"> acontent=#{acontent}, </if>
 			<if test="apic!=null"> apic=#{apic}, </if>
 			<if test="aviewnum!=null">aviewnum=#{aviewnum},</if>

@@ -255,3 +255,4 @@ drop sequence seq_tid;
 drop sequence seq_tagid;
 
 SELECT count(1) from b_user;
+select sysdate from dual;

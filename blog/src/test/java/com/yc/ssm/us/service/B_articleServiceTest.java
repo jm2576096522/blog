@@ -127,5 +127,13 @@ public class B_articleServiceTest {
 		System.out.println(list);
 		assertNotNull(list);
 	}
+	
+	//查询所有用户所作的文章数的排行
+	@Test
+	public void testarticleAnalytics() {
+		List<B_article> list=bart.ArticleAnalytics();
+		System.out.println(list);
+		assertNotNull(list);
+	}
 
 }

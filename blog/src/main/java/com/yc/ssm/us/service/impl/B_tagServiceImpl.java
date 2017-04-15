@@ -67,4 +67,9 @@ public class B_tagServiceImpl implements B_tagService {
 		LogManager.getLogger().debug("结合文章表查询所有的标签");
 		return b_tagMapper.findAll();
 	}
+
+	@Override
+	public List<B_tag> TagAnalytics() {
+		return b_tagMapper.TagAnalytics();
+	}
 }
