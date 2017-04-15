@@ -52,4 +52,7 @@ public interface B_articleMapper {
 
 	// 查询每个用户发表文章的数量（后台数据分析）
 	List<B_article> articleAnalytics();
+	
+	//浏览量的增加
+	int updateAviewNum(Integer aid);
 }

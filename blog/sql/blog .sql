@@ -134,8 +134,9 @@ select sessiontimezone from dual;
 		left join (select d.caid,count(1) as commentnum from (
 			select caid from B_COMMENT b inner join B_ARTICLE ba on ba.aid = b.caid) d group by d.caid) w
 			on w.caid = bar.aid order by bar.aviewnum desc) where rownum <=6;
-			
-	
+-------------------------------------浏览量的自加			
+select aviewnum from b_article where aid = 181;	
+update B_ARTICLE set aviewnum = (aviewnum+1) where aid =181;
 
 select to_char(sysdate,'yyyy-MM-dd hh:mm:ss') hr from dual;
 insert into b_article(aid,atitle,tid,tagid,usid,atime,aviewnum,acontent) values(seq_aid.nextval,'java的基本介绍',1,1,10002,
@@ -183,20 +184,33 @@ select count(1) from (select b.caid , b.* from B_COMMENT b inner join B_ARTICLE 
 
  
 -----评论表
-create sequence seq_cid start with 1;
+create sequence seq_cid start with 1 increment by 1;
 create table b_comment(
        cid int primary key,               --评论id
        caid int references b_article(aid) on delete cascade,--评论文章id
        usid int references b_user(usid),     --评论者id
        ccontent varchar2(800),            --评论内容
-       ctime varchar2(20)              --评论时间
+       ctime varchar2(30)              --评论时间
 );
+-----修改字段
+alter table b_comment modify ctime varchar2(30);
+
 --------插入评论表数据
 insert into B_COMMENT values(seq_cid.nextval,122,10007,'这篇文章非常棒！！','2017-4-11 21:55:33');
 insert into B_COMMENT values(seq_cid.nextval,123,10007,'这篇文章是真的！！','2017-4-13 21:55:33');
 insert into B_COMMENT values(seq_cid.nextval,41,10007,'这篇文章非常棒12！！','2017-4-12 21:55:33');
 insert into B_COMMENT values(seq_cid.nextval,46,10007,'这篇文章非常棒123！！','2017-4-11 21:55:33');
 
+select b.*,rownum from B_COMMENT b;
+
+------------------分页查询评论表
+	select * from (
+		select t.*, rownum rn from (
+		select b.*,bu.uname,bu.upic from b_comment b 
+		inner join b_user bu on bu.usid = b.usid order by b.ctime) t 
+		where 4>=rownum and t.caid = 181 )  
+		where rn>2
+	
 ------删除文章表的同时删除评论
 delete from B_ARTICLE where aid = 41 ;
 select * from (select
@@ -254,5 +268,6 @@ drop sequence seq_drid;
 drop sequence seq_tid;
 drop sequence seq_tagid;
 
-SELECT count(1) from b_user;
-select sysdate from dual;
+-------------------------------------------当查询b_comment 表时的触发器
+
+

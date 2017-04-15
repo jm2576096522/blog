@@ -16,14 +16,14 @@ function listById(){
 			articleStr +='<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">';
 			articleStr +='<img src="'+data[i].apic+'" alt="" style="height:250px;" class="am-u-sm-12"></div>';
 			articleStr +='<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">';
-			articleStr +='<span><a href="" class="blog-color">author:&nbsp;</a></span>';
-			articleStr +='<span>@'+data[i].uname+'&nbsp;</span>';
+			articleStr +='<span>author:&nbsp;</span>';
+			articleStr +='<span>@<a class="blog-color">'+data[i].uname+'&nbsp;</a></span>';
 			articleStr +='<span style="float:right;">'+data[i].atime+'</span>';
 			articleStr +='<h1><a onclick="articleDetail('+data[i].aid+')">'+data[i].atitle+'</a></h1>';
 			articleStr +='<div class="con_text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+data[i].acontent+'</div>';
-			articleStr +='<p><a href="" class="blog-continue">continue reading</a></p>';
-			articleStr +='<span class="viewnum f_r"><a style="padding-left:20px;">浏览（'+data[i].aviewnum+'）</a></span>';
-			articleStr +='<span class="pingl f_r"><a href="/" style="padding-left:20px;">评论（'+data[i].commentnum+'）</a></span></p>';
+			articleStr +='<p><a class="blog-continue">continue reading</a></p>';
+			articleStr +='<span class="viewnum f_r"><a style="padding-left:20px;" onclick="articleDetail('+data[i].aid+')">浏览（'+data[i].aviewnum+'）</a></span>';
+			articleStr +='<span class="pingl f_r"><a style="padding-left:20px;" onclick="articleDetail('+data[i].aid+')">评论（'+data[i].commentnum+'）</a></span></p>';
 			articleStr +='</div></article>';
 		}
 		$("#personArticle").html(articleStr);

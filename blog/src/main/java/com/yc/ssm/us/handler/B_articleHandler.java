@@ -130,6 +130,13 @@ public class B_articleHandler<T> {
 		return articleService.modifyArticle(b_article);
 	}
 
+	//浏览量的增加
+	@RequestMapping(value = "updateAviewNum", method = RequestMethod.POST)
+	@ResponseBody
+	public int updateAviewNum(@RequestParam("aid") Integer aid){
+		return articleService.updateAviewNum(aid);
+	}
+
 	// 删除文章
 	@RequestMapping(value = "delete", method = RequestMethod.POST)
 	@ResponseBody

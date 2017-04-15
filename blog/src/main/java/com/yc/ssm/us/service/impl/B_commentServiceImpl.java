@@ -28,25 +28,10 @@ public class B_commentServiceImpl implements B_commentService {
 		pb=b_commentMapper.partComment(pb);
 		return pb;
 	}
-
-
-/*	@Override
-	public boolean addComment(B_comment b_comment) {
-		int usid = b_comment.getUsid();
-		if (!b_userService.findUserByUsid(usid)) {
-			// 注册
-			// b_userService.insertUser(b_user);
-		}
-		return b_commentMapper.addComment(b_comment);
-	}*/
-
-	@Override
-	public boolean modifyComment(B_comment b_comment) {
-		return b_commentMapper.modifyComment(b_comment);
-	}
-
+	//添加评论
 	@Override
 	public boolean insertComment(B_comment b_comment) {
+		LogManager.getLogger().debug("添加评论...");
 		return b_commentMapper.insertComment(b_comment);
 	}
 
@@ -54,18 +39,18 @@ public class B_commentServiceImpl implements B_commentService {
 	public List<B_comment> findCommentByUsid(Integer usid) {
 		return b_commentMapper.findCommentByUsid(usid);
 	}
-
+	//通过文章id 查询所有的评论（分页）
 	@Override
-	public List<B_comment> findCommentByCaid(Integer caid) {
-		return b_commentMapper.findCommentByCaid(caid);
+	public List<B_comment> findCommentByCaid(B_comment b_comment) {
+		LogManager.getLogger().debug("通过文章id 查询所有的评论（分页）");
+		return b_commentMapper.findCommentByCaid(b_comment);
 	}
 	
-	//查询指定文章的评论数
+	//查询指定文章的评论数(返回评论总数和评论的页码)
 	@Override
-	public int selectCommentNum(Integer caid){
-		LogManager.getLogger().debug("查询指定文章的评论数"+caid);
-		return b_commentMapper.selectCommentNum(caid);
+	public B_comment selectCommentNum(B_comment b_comment){
+		LogManager.getLogger().debug("查询指定文章的评论数(返回评论总数和评论的页码)");
+		return b_commentMapper.selectCommentNum(b_comment);
 	}
-
 
 }

@@ -5,32 +5,14 @@
 <head>
 <base href="${deployName}">
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="">
-<meta name="keywords" content="">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>类别管理</title>
-<meta name="renderer" content="webkit">
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="icon" type="image/png" href="assets/i/favicon.png">
-<meta name="mobile-web-app-capable" content="yes">
-<link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="Amaze UI" />
-<link rel="apple-touch-icon-precomposed"
-	href="assets/i/app-icon72x72@2x.png">
-<meta name="msapplication-TileImage"
-	content="assets/i/app-icon72x72@2x.png">
-<meta name="msapplication-TileColor" content="#0e90d2">
+
 <link rel="stylesheet" href="assets/css/amazeui.min.css">
 <link rel="stylesheet" href="assets/css/app.css">
 <link rel="stylesheet" href="css/personInfo.css">
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
-<!-- <link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
-<link rel="stylesheet" type="text/css" href="easyui/demo/demo.css"> -->
+
 </head>
 <body id="blog">
 	<header class="am-g am-g-fixed blog-fixed blog-text-center blog-header">
@@ -83,9 +65,6 @@
 	</footer>
  	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jquery.easyui.min.js"></script> 
-
-	<!-- <script type="text/javascript" src="http://www.jeasyui.net/Public/js/easyui/jquery.easyui.min.js"></script>
- -->
 	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
 	<script type="text/javascript" src="js/blog_tag.js"></script>
 </body>

@@ -4,21 +4,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 映射文件的命名空间namespace的值是与之对应的映射接口的全类名 -->
 <mapper namespace="com.yc.ssm.us.mapper.B_commentMapper">
-	<select id="findCommentByCaid" resultType="B_comment">
-		select * from
-		b_comment
-		where caid=#{caid}
+	<!--根据用户id查询所有的评论  -->
+	<select id="findCommentByUsid" resultType="B_comment">
+		
 	</select>
 	
-	<!-- 查询指定文章的评论数 -->
-	<select id="selectCommentNum" resultType="Integer">
-		select count(1) from b_comment where caid = #{caid}
+	<!-- 查询指定文章的评论数(返回评论总数和评论的页码)-->
+	<select id="selectCommentNum" resultType="B_comment" parameterType="B_comment">
+		select count(1) total ,ceil(count(1)/5) totalPage from b_comment where caid = #{caid}  
 	</select>
-
-	<select id="findCommentByUsid" resultType="B_comment">
-		select * from
-		b_comment
-		where usid=#{usid}
+	<!-- 通过文章id 查询所有的评论（分页） -->
+	<select id="findCommentByCaid" resultType="B_comment" parameterType="B_comment">
+		select * from (
+		select t.*, rownum rn from (
+		select b.*,bu.uname,bu.upic from b_comment b 
+		inner join b_user bu on bu.usid = b.usid order by b.ctime) t 
+		where ${currPage}*${pageSize}>=rownum and t.caid = #{caid} )  
+		where rn>(${currPage}-1)*${pageSize}
 	</select>
 
 	<resultMap type="PaginationBean" id="PaginationBeanMap">
@@ -40,11 +42,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where rn>(${currPage}-1)*${pageSize}
 	</select>
 
-
+	<!-- 添加评论 -->
 	<insert id="insertComment" parameterType="B_comment">
 		insert into b_comment
 		values(seq_cid.nextval,#{caid},#{usid},#{ccontent},to_char(sysdate,'yyyy-MM-dd
-		hh:mm:ss'))
+		hh24:mm:ss'))
 	</insert>
 	<update id="modifyComment" parameterType="B_comment">
 		update b_comment

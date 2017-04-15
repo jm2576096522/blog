@@ -74,7 +74,6 @@ public class B_articleServiceImpl implements B_articleService {
 	public List<B_article> findArticle() {
 		LogManager.getLogger().debug("我是articleService里的：");
 		return b_articleMapper.findArticle();
-		
 	}
 	//文章分页查询
 	@Override
@@ -88,6 +87,12 @@ public class B_articleServiceImpl implements B_articleService {
 		}
 		pb=b_articleMapper.partArticle(pb);
 		return pb;
+	}
+
+	//浏览量的增加
+	public int updateAviewNum(Integer aid){
+		LogManager.getLogger().debug("浏览量的增加");
+		return b_articleMapper.updateAviewNum(aid);
 	}
 	// 通过用户id分页
 	public List<B_article> partArticleById(B_article b_article){

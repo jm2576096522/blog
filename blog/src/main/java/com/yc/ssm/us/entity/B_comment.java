@@ -8,9 +8,75 @@ public class B_comment {
 	private Integer caid;
 	private Integer usid;
 	private String ccontent;
-	private Date ctime;
-
+	private String ctime;
 	
+	private String uname;	//用户昵称
+	private String upic;	//用户图片
+	private Integer rn;  //排行
+	
+	private Integer total; //获取评论总数
+	private Integer pageSize = 5; //每页的大小
+	private Integer currPage = 1; //当前页
+	private Integer totalPage; // 总页数
+	
+	
+	
+	
+	public Integer getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(Integer totalPage) {
+		this.totalPage = totalPage;
+	}
+
+	public Integer getTotal() {
+		return total;
+	}
+
+	public void setTotal(Integer total) {
+		this.total = total;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public Integer getCurrPage() {
+		return currPage;
+	}
+
+	public void setCurrPage(Integer currPage) {
+		this.currPage = currPage;
+	}
+
+	public String getUname() {
+		return uname;
+	}
+
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+
+	public String getUpic() {
+		return upic;
+	}
+
+	public void setUpic(String upic) {
+		this.upic = upic;
+	}
+
+	public Integer getRn() {
+		return rn;
+	}
+
+	public void setRn(Integer rn) {
+		this.rn = rn;
+	}
 
 	public Integer getCaid() {
 		return caid;
@@ -44,30 +110,22 @@ public class B_comment {
 		this.ccontent = ccontent;
 	}
 
-	public Date getCtime() {
+	public String getCtime() {
 		return ctime;
 	}
 
-	public void setCtime(Date ctime) {
+	public void setCtime(String ctime) {
 		this.ctime = ctime;
 	}
 
-
-	public B_comment() {
-	}
-
-	public B_comment(Integer cid, Integer caid, Integer usid, String ccontent, Date ctime) {
-		this.cid = cid;
-		this.caid = caid;
-		this.usid = usid;
-		this.ccontent = ccontent;
-		this.ctime = ctime;
-	}
-	
 	@Override
 	public String toString() {
-		return "\nB_comment [cid=" + cid + ", caid=" + caid + ", usid=" + usid + ", ccontent=" + ccontent + ", ctime="
-				+ ctime + "]";
+		return "B_comment [cid=" + cid + ", caid=" + caid + ", usid=" + usid + ", ccontent=" + ccontent + ", ctime="
+				+ ctime + ", uname=" + uname + ", upic=" + upic + ", rn=" + rn + ", total=" + total + ", pageSize="
+				+ pageSize + ", currPage=" + currPage + ", totalPage=" + totalPage + "]";
 	}
+
+	
+
 
 }

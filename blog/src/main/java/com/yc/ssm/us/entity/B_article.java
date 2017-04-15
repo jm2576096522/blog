@@ -32,7 +32,9 @@ public class B_article implements Serializable {
 	private String apic;
 	private String aviewnum;
 
-	private String uname;// 用户名
+	private String uname;//作者
+	private String upic;//作者头像
+	private String upersondesc; //作者描述
 	private String tname;// 文章所属类型
 	private String tagname;// 文章标签类别
 	private Integer commentnum; //评论数
@@ -45,6 +47,23 @@ public class B_article implements Serializable {
 	private Integer total; // 数据的总条数
 	private Integer totalPage; // 总页数
 	
+	
+	public String getUpic() {
+		return upic;
+	}
+
+	public void setUpic(String upic) {
+		this.upic = upic;
+	}
+
+	public String getUpersondesc() {
+		return upersondesc;
+	}
+
+	public void setUpersondesc(String upersondesc) {
+		this.upersondesc = upersondesc;
+	}
+
 	public Integer getCurrPage() {
 		return currPage;
 	}

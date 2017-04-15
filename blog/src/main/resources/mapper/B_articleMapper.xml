@@ -100,10 +100,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 	// 查询博客文章(通过文章id) -->
 	<select id="findArticleByAid" parameterType="Integer" resultType="B_article">
-		select ba.*,bt.tagname,bty.tname,bu.uname from b_article ba
+		select ba.*,bt.tagname,bty.tname,bu.uname,bu.upic,bu.upersondesc from b_article ba
 		left join b_user bu on ba.usid = bu.usid
 		left join b_tag bt on ba.tagid=bt.tagid
-		left join b_type bty on ba.tid =bty.tid where ba.aid = #{aid}
+		left join b_type bty on ba.tid =bty.tid 
+		where ba.aid = #{aid}
 	</select>
 
 	<!-- 分页查询文章 -->
@@ -188,8 +189,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(seq_aid.nextval,#{atitle},#{tid},#{tagid},#{usid},to_char(sysdate,'yyyy-MM-dd
 		hh24:mm:ss'),#{acontent},#{apic})
 	</insert>
-
+	<!-- 删除博客 -->
 	<delete id="deleteArticle">
 		delete from B_article where aid=#{aid}
 	</delete>
+	<!-- 更改指定博客的浏览量 -->
+	<update id="updateAviewNum" parameterType="Integer">
+		update B_ARTICLE set aviewnum = (aviewnum+1) where aid ={aid}
+	</update>
 </mapper>

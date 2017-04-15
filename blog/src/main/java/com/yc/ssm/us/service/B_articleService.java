@@ -48,6 +48,9 @@ public interface B_articleService {
 	boolean insertArticle(B_article b_article);
 
 	List<B_article> ArticleAnalytics();
+
+	//浏览量的增加
+	int updateAviewNum(Integer aid);
 	 
 
 }

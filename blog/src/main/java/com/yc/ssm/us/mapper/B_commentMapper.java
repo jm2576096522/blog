@@ -9,15 +9,15 @@ public interface B_commentMapper {
 
 	PaginationBean<B_comment> partComment(PaginationBean<B_comment> pb);
 
-	boolean modifyComment(B_comment b_comment);
-
+	//添加评论
 	boolean insertComment(B_comment b_comment);
 
 	List<B_comment> findCommentByUsid(Integer usid);
-
-	List<B_comment> findCommentByCaid(Integer caid);
 	
-	//查询指定文章的评论数
-	int selectCommentNum(Integer caid);
+	//通过文章id 查询所有的评论（分页）
+	List<B_comment> findCommentByCaid(B_comment b_comment);
+	
+	//查询指定文章的评论数(返回评论总数和评论的页码)
+	B_comment selectCommentNum(B_comment b_comment);
 
 }

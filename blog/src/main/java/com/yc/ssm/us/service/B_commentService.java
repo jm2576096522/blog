@@ -9,10 +9,6 @@ public interface B_commentService {
 	// 评论分页
 	PaginationBean<B_comment> partComment(String page, String rows);
 
-	// 修改评论
-	boolean modifyComment(B_comment b_comment);
-
-
 	/*// 添加评论文章
 	boolean addComment(B_comment b_comment);*/
 
@@ -22,11 +18,10 @@ public interface B_commentService {
 	// 通过用户id查询评论
 	List<B_comment> findCommentByUsid(Integer usid);
 
-	// 通过文章id查询评论
-	List<B_comment> findCommentByCaid(Integer caid);
+	// 通过文章id 查询所有的评论（分页）
+	List<B_comment> findCommentByCaid(B_comment b_comment);
 	
-	//查询指定文章的评论数
-	int selectCommentNum(Integer caid);
-
+	//查询指定文章的评论数(返回评论总数和评论的页码)
+	B_comment selectCommentNum(B_comment b_comment);
 
 }

@@ -36,11 +36,17 @@ public class B_commentHandler {
 		return null;
 	}
 
-	// 通过文章id查找评论
+	// 通过文章id 查询所有的评论（分页）
 	@RequestMapping("findCommentByCaid")
 	@ResponseBody
-	public List<B_comment> findCommentByCaid(Integer caid) {
-		return b_commentService.findCommentByCaid(caid);
+	public List<B_comment> findCommentByCaid(B_comment b_comment) {
+		return b_commentService.findCommentByCaid(b_comment);
+	}
+	//查询指定文章的评论数(返回评论总数和评论的页码)
+	@RequestMapping(value = "listNum",method = RequestMethod.POST)
+	@ResponseBody
+	public B_comment selectCommentNum(B_comment b_comment){
+		return b_commentService.selectCommentNum(b_comment);
 	}
 
 	// 分页显示所有评论
@@ -51,22 +57,14 @@ public class B_commentHandler {
 		return b_commentService.partComment(page, rows);// 异步数据响应
 	}
 
-	// 修改评论
-	@RequestMapping("modify")
-	@ResponseBody
-	public boolean modify(B_comment b_comment) {
-		LogManager.getLogger().debug("modify:b_comment==>" + b_comment);
-		return b_commentService.modifyComment(b_comment);// 异步数据响应
-	}
-
 	// 添加评论
-	@RequestMapping(value = "add", method = RequestMethod.POST)
+	@RequestMapping("addComment")
 	@ResponseBody
 	public boolean insertComment(B_comment b_comment, HttpSession session) {
-		if (isLogin(session).equals(b_comment.getUsid())) {
-			return b_commentService.insertComment(b_comment);
-		}
-		return false;
+		B_user currUser = (B_user) session.getAttribute("loginUser");
+		Integer usid = currUser.getUsid();
+		b_comment.setUsid(usid);
+		return b_commentService.insertComment(b_comment);
 	}
 
 	// 判断用户是否登录

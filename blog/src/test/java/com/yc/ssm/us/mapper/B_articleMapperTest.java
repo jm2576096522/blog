@@ -27,4 +27,5 @@ public class B_articleMapperTest {
 		System.out.println(list);
 		assertNotNull(list);
 	}
+	
 }
