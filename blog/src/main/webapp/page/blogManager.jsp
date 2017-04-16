@@ -23,12 +23,6 @@
 	</header>
 	<hr>
 	<nav class="am-g am-g-fixed blog-fixed blog-nav">
-		<button
-			class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only blog-button"
-			data-am-collapse="{target: '#blog-collapse'}">
-			<span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span>
-		</button>
-
 		<div class="am-collapse am-topbar-collapse" id="blog-collapse">
 			<ul class="am-nav am-nav-pills am-topbar-nav">
 				<li><a href="homePage.jsp">首页</a></li>
@@ -36,7 +30,7 @@
 				<li><a href="page/blog_add.jsp">写新文章</a></li>
 				<li><a href="page/blogManager.jsp" style="color: #10D07A;">文章管理</a></li>
 				<li><a href="page/blog_tag.jsp">标签管理</a></li>
-				<li><a href="javaScript:void(0)">草稿箱</a></li>
+				<li><a href="page/blogDrafets.jsp">草稿箱</a></li>
 				<li><a href="page/personInfo.jsp">个人信息管理</a></li>
 			</ul>
 			<div class="show_loginUser" style="float: right;">
@@ -89,9 +83,7 @@
 	<script src="assets/js/amazeui.min.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jquery.easyui.min.js"></script> 
-
 	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
-	
 	<script type="text/javascript" src="js/blogManager.js"></script>
 	
 </body>
