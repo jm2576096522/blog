@@ -150,8 +150,8 @@ $("#modifyPwdForm").form(
 		{
 			url : "admin/modifyPwd",
 			success : function(data) {
-				if (data.trim()) {
-					$("#modifyPwdForm").dialog("close"); // 关闭修改框
+				if (data) {
+					$("#personalInfo").dialog("close"); // 关闭修改框
 				} else {
 					$.messager.show({
 						title : '修改密码',

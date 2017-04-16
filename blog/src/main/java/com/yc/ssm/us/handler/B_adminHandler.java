@@ -1,6 +1,7 @@
 package com.yc.ssm.us.handler;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,18 @@ public class B_adminHandler {
 		LogManager.getLogger().debug("modify:user==>" + user);
 		return b_adminService.modifyUser(user);// 异步数据响应
 	}
-
+	
+	@RequestMapping(value = "modifyPwd", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean modifyPwd(B_admin user,HttpServletRequest request) {
+		LogManager.getLogger().debug("modifyPwd:user==>" + user);
+		boolean result=b_adminService.modifyUser(user);
+		if(result){
+			request.getSession().setAttribute(ServletUtil.LOGIN_ADMIN, user);
+			System.out.println(request.getSession().getAttribute("user"));
+		}
+		return result;// 异步数据响应
+	}
 	// 添加管理员
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@ResponseBody

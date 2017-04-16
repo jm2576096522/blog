@@ -117,12 +117,12 @@
 		<form id="modifyPwdForm" method="post">
 			<table cellpadding="10">
 				<tr align="center">
-					<td colspan="2"><input name="adname" type="hidden"
-						value="${loginAdmin.adname}" /></td>
+					<td colspan="2"><input name="adid" type="hidden"
+						value="${loginAdmin.adid}" /></td>
 				</tr>
 				<tr>
 					<td align="right">原密码:</td>
-					<td><input name="adname" value="${loginAdmin.adpassword}"
+					<td><input  value="${loginAdmin.adpassword}"
 						type="password" class="easyui-validatebox " placeholder="请输入原密码"
 						required="required" /></td>
 				</tr>
