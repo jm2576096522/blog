@@ -23,12 +23,6 @@
 	</header>
 	<hr>
 	<nav class="am-g am-g-fixed blog-fixed blog-nav">
-		<button
-			class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only blog-button"
-			data-am-collapse="{target: '#blog-collapse'}">
-			<span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span>
-		</button>
-
 		<div class="am-collapse am-topbar-collapse" id="blog-collapse">
 			<ul class="am-nav am-nav-pills am-topbar-nav">
 				<li><a href="homePage.jsp">首页</a></li>
@@ -89,9 +83,7 @@
 	<script src="assets/js/amazeui.min.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jquery.easyui.min.js"></script> 
-
 	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
-	
 	<script type="text/javascript" src="js/blogManager.js"></script>
 	
 </body>

@@ -30,7 +30,7 @@
 				<li><a href="page/blog_add.jsp" style="color: #10D07A;">写新文章</a></li>
 				<li><a href="page/blogManager.jsp">文章管理</a></li>
 				<li><a href="page/blog_tag.jsp">标签管理</a></li>
-				<li><a>草稿箱</a></li>
+				<li><a href="page/blogDrafets.jsp">草稿箱</a></li>
 				<li><a href="page/personInfo.jsp">个人信息管理</a></li>
 			</ul>
 			<div class="show_loginUser" style="float: right;">
@@ -152,9 +152,11 @@
 		UE.getEditor('acontent');// 使用副文本编辑工具
 		
 		var aid = "<%=request.getParameter("aid")%>";
+		var drid ="<%=request.getParameter("drid")%>";
+	
 		if(aid != "null"){
-			findArticleByAid();
 			var navStr ="" ;
+			findArticleByAid();
 			navStr +="<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='update_article()'>更改文章</button>";
 			navStr +="<button type='button' class='am-btn am-btn-default' onclick='backFirst()'>取消</button>";
 			navStr +="<input type='text' name='aid' style='width:100px;display:none;' value='"+aid+"'/> ";
@@ -164,8 +166,17 @@
 			navStr +="<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='add_article()'>发表文章</button>";
 			navStr +="<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='saveArticle()'>立即保存</button>";
 			navStr +="<button type='reset' class='am-btn am-btn-default'>重置</button>";
+			if(drid!= "null"){
+				navStr +="<input type='text' name='drid' style='width:100px;' value='"+drid+"'/> ";
+			}
 			$("#controlNav").html(navStr);
 		}
+		
+		/* 如果drid 不为空 */
+		if(drid != "null"){
+			findDrafetsByDrid();
+		}
+		
 		/* 获取类别标签的请求 */
 		$.get("tag/findAllTags", function(data) {
 			for (var i = 0; i < data.length; i++) {
@@ -193,7 +204,15 @@
 				success:function(data){
 			    	if(data.trim() == "true"){
 			    		 $.messager.alert("操作提示", "添加成功...","info",function(){
-			    			 location.reload();
+			    			 if(aid != "null"){
+			    				 location.href="page/blogManager.jsp";
+			    			 }else if(drid != "null"){
+			    				 $.post("drafets/deleteDrafets",{drid:drid},function(data){
+			    					 location.href="page/blogDrafets.jsp";
+			    				 });
+			    			 }else{
+			    				 location.reload();
+			    			 }
 			    		 });
 			    	}else{
 			    		 $.messager.alert("操作提示", "添加失败！！","error");
@@ -225,7 +244,7 @@
 				success:function(data){
 			    	if(data.trim() == "true"){
 			    		 $.messager.alert("操作提示", "保存成功...","info",function(){
-			    			 location.href="page/blogManager.jsp";
+			    			 location.reload();
 			    		 });
 			    	}else{
 			    		 $.messager.alert("操作提示", "保存失败！！","error");
@@ -248,6 +267,21 @@
 					var picStr = "<img src='images/not_pic.jpg'>";
 					$("#show_img").html(picStr);
 				}
+			});
+		}
+		// 如果url 拼接有drid
+		function findDrafetsByDrid(){
+			$.post("drafets/findDrafetByDrid",{drid:drid},function(data){
+				$("#atitle").val(data.drtitle);
+				$("#tag").val(data.drtagid);
+				$("#type").val(data.drtypeid);
+				$("#acontent").val(data.drcontent);
+				if(data.drpic != null){
+					var picStr = "<img src='"+data.drpic+"' style='width: 400px; height: 200px;'>";
+				}else{
+					var picStr = "<img src='images/not_pic.jpg'>";
+				}
+				$("#show_img").html(picStr);
 			});
 		}
 		//点击取消，返回

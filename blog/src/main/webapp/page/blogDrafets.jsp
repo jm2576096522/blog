@@ -23,20 +23,14 @@
 	</header>
 	<hr>
 	<nav class="am-g am-g-fixed blog-fixed blog-nav">
-		<button
-			class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only blog-button"
-			data-am-collapse="{target: '#blog-collapse'}">
-			<span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span>
-		</button>
-
 		<div class="am-collapse am-topbar-collapse" id="blog-collapse">
 			<ul class="am-nav am-nav-pills am-topbar-nav">
 				<li><a href="homePage.jsp">首页</a></li>
 				<li><a href="personPage.jsp">我的文章</a></li>
 				<li><a href="page/blog_add.jsp">写新文章</a></li>
-				<li><a href="page/blogManager.jsp" style="color: #10D07A;">文章管理</a></li>
+				<li><a href="page/blogManager.jsp">文章管理</a></li>
 				<li><a href="page/blog_tag.jsp">标签管理</a></li>
-				<li><a href="javaScript:void(0)">草稿箱</a></li>
+				<li><a href="page/blogDrafets.jsp" style="color: #10D07A;">草稿箱</a></li>
 				<li><a href="page/personInfo.jsp">个人信息管理</a></li>
 			</ul>
 			<div class="show_loginUser" style="float: right;">
@@ -88,7 +82,58 @@
 	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
 	
 	<script type="text/javascript">
+		$.post("drafets/findDrafetsByUsid",function(data){
+			var tableStr ;
+			for(var i=0;i<data.length;i++){
+				tableStr += "<tr><th class='specalt'>"+data[i].drid+"</th>";/*  style='display:none;' */
+				tableStr += "<td class='alt'>"+data[i].drtitle+"</td>";
+				tableStr += "<td class='alt'>"+data[i].drtime+"</td>";
+				tableStr += "<td class='alt'><a style='margin-right:10px; font-size:15px;' onclick='editrow("+data[i].drid+")'>编辑</a>";
+				tableStr += "<a style='margin-right:10px; font-size:15px;' onclick='publishrow("+data[i].drid+")'>立即发表</a>";
+				tableStr += "<a style='margin-right:10px; font-size:15px;' onclick='deleterow("+data[i].drid+")'>删除</a></th>";
+			}
+			$("#table_body").html(tableStr);
+		});
 		
+		/* 编辑 */
+		function editrow(index){
+			window.location.href="page/blog_add.jsp?drid="+index;
+		}
+		/* 删除 */
+		function deleterow(index){
+			$.post("drafets/deleteDrafets",{drid:index},function(data){
+				if(data){
+					$.messager.alert("操作提示","删除成功!","info",function(){
+						location.reload();
+					});
+				}else{
+					$.messager.alert("操作提示","删除失败!","error",function(){
+						location.reload();
+					});
+				}
+				
+			});
+		}
+		/* 立即发表 */
+		function publishrow(index){
+			$.post("drafets/publishArticle",{drid:index},function(data){
+				if(data > 0){
+					$.messager.alert("操作提示","发表成功...","info",function(){
+						$.post("drafets/deleteDrafets",{drid:index},function(mess){
+							if(mess){
+								location.reload();
+							}
+						});
+					});
+				}else{
+					$.messager.alert("操作提示","发表失败!","error",function(){
+						location.href="page/blogDrafets.jsp";
+					});
+				}
+				
+			});
+		}
+
 	</script>
 	
 </body>

@@ -4,22 +4,6 @@ import java.io.Serializable;
 
 public class B_article implements Serializable {
 
-	@Override
-	public String toString() {
-		return "\nB_article [aid=" + aid + ", atitle=" + atitle + ", tid=" + tid + ", tagid=" + tagid + ", usid=" + usid
-				+ ", atime=" + atime + ", acontent=" + acontent + ", apic=" + apic + ", aviewnum=" + aviewnum
-				+ ", uname=" + uname + ", tname=" + tname + ", tagname=" + tagname + ", commentnum=" + commentnum
-				+ ", articleNum=" + articleNum + ", currPage=" + currPage + ", pageSize=" + pageSize + ", total="
-				+ total + ", totalPage=" + totalPage + "]";
-	}
-
-	public Integer getArticleNum() {
-		return articleNum;
-	}
-
-	public void setArticleNum(Integer articleNum) {
-		this.articleNum = articleNum;
-	}
 
 	private static final long serialVersionUID = 1L;
 	private Integer aid;
@@ -47,7 +31,24 @@ public class B_article implements Serializable {
 	private Integer total; // 数据的总条数
 	private Integer totalPage; // 总页数
 	
+	private Integer drid; // 草稿箱id
 	
+	public Integer getDrid() {
+		return drid;
+	}
+
+	public void setDrid(Integer drid) {
+		this.drid = drid;
+	}
+
+	public Integer getArticleNum() {
+		return articleNum;
+	}
+
+	public void setArticleNum(Integer articleNum) {
+		this.articleNum = articleNum;
+	}
+
 	public String getUpic() {
 		return upic;
 	}
@@ -200,6 +201,16 @@ public class B_article implements Serializable {
 
 	public void setAviewnum(String aviewnum) {
 		this.aviewnum = aviewnum;
+	}
+
+	@Override
+	public String toString() {
+		return "\nB_article [aid=" + aid + ", atitle=" + atitle + ", tid=" + tid + ", tagid=" + tagid + ", usid=" + usid
+				+ ", atime=" + atime + ", acontent=" + acontent + ", apic=" + apic + ", aviewnum=" + aviewnum
+				+ ", uname=" + uname + ", upic=" + upic + ", upersondesc=" + upersondesc + ", tname=" + tname
+				+ ", tagname=" + tagname + ", commentnum=" + commentnum + ", articleNum=" + articleNum + ", currPage="
+				+ currPage + ", pageSize=" + pageSize + ", total=" + total + ", totalPage=" + totalPage + ", drid="
+				+ drid + "]";
 	}
 
 	

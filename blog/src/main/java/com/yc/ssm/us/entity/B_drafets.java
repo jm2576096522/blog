@@ -61,7 +61,7 @@ public class B_drafets {
 	}
 	@Override
 	public String toString() {
-		return "B_drafets [drid=" + drid + ", usid=" + usid + ", drtitle=" + drtitle + ", drtypeid=" + drtypeid
+		return "\nB_drafets [drid=" + drid + ", usid=" + usid + ", drtitle=" + drtitle + ", drtypeid=" + drtypeid
 				+ ", drtagid=" + drtagid + ", drtime=" + drtime + ", drcontent=" + drcontent + ", drpic=" + drpic + "]";
 	}
 

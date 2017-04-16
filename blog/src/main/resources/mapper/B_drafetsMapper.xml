@@ -8,6 +8,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 添加草稿 -->
 	<insert id="addDrafet" parameterType="B_article">
 		insert into b_drafets values(seq_drid.nextval,#{usid},#{atitle},#{tid},#{tagid},to_char(sysdate,'yyyy-MM-dd
-		hh24:mm:ss'),#{acontent},'')
+		hh24:mm:ss'),#{acontent},#{apic})
 	</insert>	
+	
+	<!-- 根据用户id查询 -->
+	<select id="findDrafetByUsid" parameterType="Integer" resultType="B_drafets">
+		select * from b_drafets where usid = #{usid}
+	</select>
+	
+	<!-- 根据草稿drid查询-->
+	<select id="findDrafetByDrid" parameterType="Integer" resultType="B_drafets">
+		select * from b_drafets where drid = #{drid}
+	</select>
+	
+	<!-- 删除草稿 -->
+	<delete id="deleteDrafet" parameterType="Integer">
+		delete from b_drafets where drid = #{drid}
+	</delete>
+	
+	<!-- 立即发表 -->
+	<insert id="publishArticle" parameterType="B_drafets">
+		insert into b_article
+		(aid,atitle,tid,tagid,usid,atime,acontent,apic)
+		values(seq_aid.nextval,#{drtitle},#{drtypeid},#{drtagid},#{usid},to_char(sysdate,'yyyy-MM-dd
+		hh24:mm:ss'),#{drcontent},#{drpic})
+	</insert>
 </mapper>

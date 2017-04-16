@@ -1,18 +1,22 @@
 package com.yc.ssm.us.handler;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yc.ssm.us.entity.B_article;
+import com.yc.ssm.us.entity.B_drafets;
 import com.yc.ssm.us.entity.B_user;
 import com.yc.ssm.us.service.B_drafetsService;
 import com.yc.ssm.us.util.ServletUtil;
@@ -51,6 +55,42 @@ public class B_drafetsHander {
 		}else{
 			return false;
 		}
+	}
+	
+	//根据用户id查询
+	@RequestMapping(value = "findDrafetsByUsid" ,method = RequestMethod.POST)
+	@ResponseBody
+	public List<B_drafets> findDrafetByUsid(Integer usid,HttpSession session){
+		B_user currUser = (B_user) session.getAttribute("loginUser");
+		usid = currUser.getUsid();
+		if(usid != null){
+			return drafetsService.findDrafetByUsid(usid);
+		}else{
+			return null;
+		}
+	}
+	
+	//根据草稿drid查询
+	@RequestMapping(value = "findDrafetByDrid" ,method = RequestMethod.POST)
+	@ResponseBody
+	public B_drafets findDrafetByDrid(Integer drid){
+		return drafetsService.findDrafetByDrid(drid);
+	}
+	
+	//删除草稿
+	@RequestMapping(value = "deleteDrafets" ,method = RequestMethod.POST)
+	@ResponseBody
+	public boolean deleteDrafet(Integer drid){
+		return drafetsService.deleteDrafet(drid) > 0;
+	}
+	
+	//立即发表
+	@RequestMapping(value = "publishArticle" ,method = RequestMethod.POST)
+	@ResponseBody
+	public int publishArticle(Integer drid){
+		LogManager.getLogger().debug("立即发表");
+		B_drafets b_drafets = drafetsService.findDrafetByDrid(drid);  //获取草稿
+		return drafetsService.publishArticle(b_drafets);
 	}
 
 }

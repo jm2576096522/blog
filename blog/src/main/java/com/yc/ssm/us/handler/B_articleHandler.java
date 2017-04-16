@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yc.ssm.us.entity.B_article;
+import com.yc.ssm.us.entity.B_drafets;
 import com.yc.ssm.us.entity.B_user;
 import com.yc.ssm.us.entity.PaginationBean;
 import com.yc.ssm.us.service.B_articleService;
+import com.yc.ssm.us.service.B_drafetsService;
 import com.yc.ssm.us.util.ServletUtil;
 import com.yc.ssm.us.service.B_tagService;
 import com.yc.ssm.us.service.B_typeService;
@@ -41,6 +43,10 @@ public class B_articleHandler<T> {
 	private B_tagService b_tagService;
 	@Autowired
 	private B_typeService b_typeService;
+	
+	//草稿的Service
+	@Autowired
+	private B_drafetsService drafetsService;
 
 	// 所有的文章查询
 	@RequestMapping("find")
@@ -149,25 +155,38 @@ public class B_articleHandler<T> {
 	@ResponseBody
 	public boolean insertArticle(@RequestParam("upicDate") MultipartFile upicDate,B_article b_article,HttpSession session){
 		B_user currentUser = (B_user) session.getAttribute("loginUser"); 
-		int usid = currentUser.getUsid();
+		Integer usid = currentUser.getUsid();
 		String picPath = null;
-		if (upicDate != null && !upicDate.isEmpty()) {// 判断是否有文件上传
-			try {
-				upicDate.transferTo(ServletUtil.getUploadFile(upicDate.getOriginalFilename()));
-				picPath = ServletUtil.VIRTUAL_UPLOAD_DIR + upicDate.getOriginalFilename();
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+		Integer drid = b_article.getDrid();
+		
+		if(usid != null ){
+			if (upicDate != null && !upicDate.isEmpty()) {// 判断是否有文件上传
+				try {
+					upicDate.transferTo(ServletUtil.getUploadFile(upicDate.getOriginalFilename()));
+					picPath = ServletUtil.VIRTUAL_UPLOAD_DIR + upicDate.getOriginalFilename();
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				b_article.setApic(picPath);
+			}else{
+				if(drid != null){
+					B_drafets drafets = drafetsService.findDrafetByDrid(drid);
+					String apic = drafets.getDrpic();
+					b_article.setApic(apic);
+				}else{
+					LogManager.getLogger().debug("我是空的");
+					b_article.setApic("");
+				}
 			}
-			b_article.setApic(picPath);
+			b_article.setUsid(usid);
+			LogManager.getLogger().debug("B_articleHandler 添加新文章：");
+			return articleService.insertArticle(b_article);
 		}else{
-			LogManager.getLogger().debug("我是空的");
-			b_article.setApic("");
+			return false;
 		}
-		b_article.setUsid(usid);
-		LogManager.getLogger().debug("B_articleHandler 添加新文章：");
-		return articleService.insertArticle(b_article);
+		
 	}
 
 	// 后台数据对文章的条件查询
