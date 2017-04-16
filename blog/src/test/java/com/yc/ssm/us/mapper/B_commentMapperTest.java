@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.yc.ssm.us.entity.B_article;
 import com.yc.ssm.us.entity.B_comment;
+import com.yc.ssm.us.entity.PaginationBean;
 import com.yc.ssm.us.service.B_commentService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -38,6 +38,13 @@ public class B_commentMapperTest {
 		b_comment.setPageSize(10);
 		b_comment.setCurrPage(1);
 		List<B_comment> list = b_commentService.findCommentByCaid(b_comment);
+		System.out.println(list);
+		assertNotNull(list);
+	}
+	//分页查询所有文章
+	@Test
+	public void testpartComment() {
+		PaginationBean<B_comment> list = b_commentService.partComment("1", "10");
 		System.out.println(list);
 		assertNotNull(list);
 	}

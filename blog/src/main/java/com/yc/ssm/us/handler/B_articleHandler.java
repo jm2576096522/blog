@@ -190,7 +190,7 @@ public class B_articleHandler<T> {
 	@RequestMapping(value = "findByParam", method = RequestMethod.POST)
 	@ResponseBody
 	public List<B_article> findArticleByParam(String name, String param) throws UnsupportedEncodingException {
-		param = new String(param.getBytes("ISO-8859-1"), "UTF-8");
+	//	param = new String(param.getBytes("ISO-8859-1"), "UTF-8");
 		LogManager.getLogger().debug("条件查询  neme:" + name + ",param :" + param);
 		if (name.trim().equals("uname")) {
 			return articleService.findArticleByuname(param);

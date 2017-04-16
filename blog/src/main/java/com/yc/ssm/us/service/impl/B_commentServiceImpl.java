@@ -52,5 +52,10 @@ public class B_commentServiceImpl implements B_commentService {
 		LogManager.getLogger().debug("查询指定文章的评论数(返回评论总数和评论的页码)");
 		return b_commentMapper.selectCommentNum(b_comment);
 	}
+	//删除评论
+	@Override
+	public int deleteComment(Integer cid) {
+		return b_commentMapper.deleteComment(cid);
+	}
 
 }

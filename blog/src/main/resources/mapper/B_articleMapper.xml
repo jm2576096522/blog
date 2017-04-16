@@ -119,7 +119,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		totalPage ,
 		${currPage} currPage,${pageSize} pageSize from b_article
 	</select>
-	<select id="getPartArticle" resultType="B_article">
+	<!-- <select id="getPartArticle" resultType="B_article">
 		select * from (select
 		n.*,rownum
 		rn from (select ba.*,
@@ -136,8 +136,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		t
 		where
 		rn>(${currPage}-1)*${pageSize}
+	</select> -->
+	<select id="getPartArticle" resultType="B_article">
+		select * from (
+		select n.*,rownum rn from (
+		select ba.*,bu.uname,bt.tagname,bty.tname,nvl(bc.commentnum,0) commentnum from
+			b_article ba, b_user bu ,b_tag bt,b_type bty,(select caid,count(usid) commentnum from b_comment group by usid ,caid) bc 
+			where ba.usid = bu.usid(+) and ba.tagid=bt.tagid(+) and ba.aid=bc.caid(+)
+				and ba.tid =bty.tid(+) order by 1)n 
+			where ${currPage}*${pageSize}>=rownum) t
+			where rn>(${currPage}-1)*${pageSize}
 	</select>
-
 	<!-- 分页查询指定usid 的 文章  默认按时间排序-->
 	<select id="partArticleById" parameterType="B_article" resultType="B_article">
 		select * from (

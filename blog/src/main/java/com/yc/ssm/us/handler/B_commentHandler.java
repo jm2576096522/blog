@@ -42,10 +42,11 @@ public class B_commentHandler {
 	public List<B_comment> findCommentByCaid(B_comment b_comment) {
 		return b_commentService.findCommentByCaid(b_comment);
 	}
-	//查询指定文章的评论数(返回评论总数和评论的页码)
-	@RequestMapping(value = "listNum",method = RequestMethod.POST)
+
+	// 查询指定文章的评论数(返回评论总数和评论的页码)
+	@RequestMapping(value = "listNum", method = RequestMethod.POST)
 	@ResponseBody
-	public B_comment selectCommentNum(B_comment b_comment){
+	public B_comment selectCommentNum(B_comment b_comment) {
 		return b_commentService.selectCommentNum(b_comment);
 	}
 
@@ -77,5 +78,13 @@ public class B_commentHandler {
 			return String.valueOf(usid);
 		}
 
+	}
+
+	// 删除评论
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	@ResponseBody
+	public int deleteComment(Integer cid) {
+		LogManager.getLogger().debug("我是delete 的处理");
+		return b_commentService.deleteComment(cid);
 	}
 }

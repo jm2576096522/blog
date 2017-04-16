@@ -11,7 +11,11 @@
 	<div id="article">
 		<input id="mkid" class="easyui-combobox" /> <input id="zhbid"
 			class="easyui-combobox" /> <a href="javascript:void(0)"
-			class="searchBtn">查询</a>
+			class="searchBtn">查询</a> 
+			<a href="javascript:void(0);"
+			class="easyui-linkbutton" iconCls="icon-print" plain="true"
+			onclick="exportExcel()" style="float: right;"> 导出Excel </a>
+
 	</div>
 	<table id="articleList"></table>
 
@@ -37,6 +41,9 @@
 		</p>
 		<p>
 			浏览量：<label id="Aaviewnum"></label>
+		</p>
+		<p>
+			浏览量：<label id="Acommentnum"></label>
 		</p>
 		<p>
 			内容：

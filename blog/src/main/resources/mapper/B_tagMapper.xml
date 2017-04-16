@@ -21,11 +21,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select
 		count(1) from b_tag where tagname=#{tagname}
 	</select>
-	<!--  添加类别表签-->
-	<insert id="insertTag" parameterType="B_tag">
-		insert into b_tag
-		values(seq_tagid.nextval,#{tagname})
-	</insert>
+	
+	<!-- 查询标签对应文章数的排行（前十） -->
+	<select id="TagAnalytics" resultType="B_tag"  >
+		select n.*,rownum from (select  
+		bt.tagname tagname, bt.tagid tagid,COUNT(ba.aid) articleNum from b_article ba,b_tag bt where bt.tagid(+)=ba.tagid GROUP BY bt.tagname,bt.tagid ORDER BY articleNum DESC ) n where 10>=rownum
+	</select>
+
 
 
 	<resultMap type="PaginationBean" id="PaginationBeanMap">
@@ -46,6 +48,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		rn>(${currPage}-1)*${pageSize}
 	</select>
 	<!-- 更改类别标签信息 -->
+	
+		<!--  添加类别表签-->
+	<insert id="insertTag" parameterType="B_tag">
+		insert into b_tag
+		values(seq_tagid.nextval,#{tagname})
+	</insert>
+	
 	<update id="modifyTag" parameterType="B_tag">
 		update b_tag
 		<set>

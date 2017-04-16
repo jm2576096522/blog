@@ -53,6 +53,12 @@ $("#articleList")
 								align : 'center'
 							},
 							{
+								field : 'commentnum',
+								title : '评论数',
+								width : 50,
+								align : 'center'
+							},
+							{
 								field : 'apic',
 								title : '文章图片',
 								width : 100,
@@ -225,7 +231,7 @@ $(".searchBtn").linkbutton({
 		var name = $("#mkid").combobox('getValues');
 		// alert(JSON.stringify(name));
 		var param = $("#zhbid").combobox('getValues');
-		 alert("参数" + param);
+		// alert("参数" + param);
 		url = "article/findByParam?name=" + name + "&param=" + param;
 		// alert("条件查询的URL" + url);
 		$("#articleList").datagrid("reload", url);
@@ -271,10 +277,49 @@ function openDatail(index) {
 	$("#Ausid").html(row.uname);
 	$("#Aatime").html(row.atime);
 	$("#Aaviewnum").html(row.aviewnum);
+	$("#Acommentnum").html(row.commentnum);
 	$("#Aacontent").html(row.acontent);
 	if (row.apic) {
 		$("#pic").attr("src", row.apic);
 	} else {
 		$("#pic").attr("src", "images/not_pic.jpg");
 	}
+}
+
+//导出Excel
+function exportExcel() {
+    var rows = $("#articleList").datagrid("getRows");
+    for (var i = 0; i < rows.length; i++) {    //进行数据处理
+        delete rows[i].articleNum;
+        delete rows[i].currPage;
+        delete rows[i].pageSize;
+        delete rows[i].total;
+        delete rows[i].totalPage;
+    }
+    //替换中文标题
+    var a = JSON.stringify(rows).replace(/aid/g, "文章编号").replace(/atitle/g, "文章标题").replace(/tid/g, "类型id").replace(/tname/g, "类型名")
+   .replace(/tagid/g, "标签id").replace(/tagname/g, "标签名") .replace(/usid/g, "用户id").replace(/uname/g, "用户名").replace(/atime/g, "文章发表时间").replace(/acontent/g, '文章内容')
+   .replace(/apic/g, "图片路径").replace(/aviewnum/g, "浏览量")
+   .replace(/commentnum/g, "评论数");
+    alert(a);
+    var postData = {
+        data: a
+    };
+    
+    $.ajax({
+    	url : "ExportExcel",
+		type : "POST",
+		dataType : "JSON",
+        data: postData,
+        success: function (data) {
+            if (data == "1") {
+                layer.msg("操作成功,文件在桌面！", {
+                    icon: 6,
+                    time: 2000,
+                });
+            } else if (data == "-1") {
+                layer.msg("操作失败！", { icon: 2 });
+            }
+        }
+    });
 }

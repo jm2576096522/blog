@@ -17,15 +17,13 @@ show11();
 function show11() {
     // 获取 CSV 数据并初始化图表
     $.ajax({ 
-		url:"tag/list",
+		url:"tag/analytics",
 		type:"POST",
 		dataType:"JSON",
-		cache: false,
-		async: false,
 		success: function (data) {
 			for(var i=0;i<data.length;i++){
 				var tagname=data[i].tagname;
-				var Num = data[i].articleNum;
+				var Num = data[i].articlenum;
 				jsonXData.push(tagname); //赋值
 				jsonyD1.push(Num);
 			}
@@ -37,6 +35,9 @@ function show11() {
             	categories: jsonXData,
 				lineWidth: 2,
                 gridLineWidth: 1,
+                title: {
+                    text: "标签名称"
+                },
                 labels: {
                     align: 'left',
                     x: 3,
@@ -51,7 +52,6 @@ function show11() {
                     align: 'left',
                     x: 3,
                     y: 16,
-                    format: '{value:.,0f}'
                 },
                 showFirstLabel: false
             }, {    // 第二个坐标轴，放置在右边
@@ -59,13 +59,12 @@ function show11() {
                 gridLineWidth: 0,
                 opposite: true,  // 通过此参数设置坐标轴显示在对立面
                 title: {
-                    text: null
+                	text: "文章数/篇"
                 },
                 labels: {
                     align: 'right',
                     x: -3,
                     y: 16,
-                    format: '{value:.,0f}'
                 },
                 showFirstLabel: false
             }],

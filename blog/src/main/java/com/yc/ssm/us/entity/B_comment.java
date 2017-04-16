@@ -1,15 +1,21 @@
 package com.yc.ssm.us.entity;
-
-import java.util.Date;
-
 public class B_comment {
+
+	public String getAtitle() {
+		return atitle;
+	}
+
+	public void setAtitle(String atitle) {
+		this.atitle = atitle;
+	}
 
 	private Integer cid;
 	private Integer caid;
 	private Integer usid;
-	private String ccontent;
+	private String ccontent;//评论内容
 	private String ctime;
-	
+	 
+	private String atitle;//评论文章标题
 	private String uname;	//用户昵称
 	private String upic;	//用户图片
 	private Integer rn;  //排行
@@ -120,9 +126,9 @@ public class B_comment {
 
 	@Override
 	public String toString() {
-		return "B_comment [cid=" + cid + ", caid=" + caid + ", usid=" + usid + ", ccontent=" + ccontent + ", ctime="
-				+ ctime + ", uname=" + uname + ", upic=" + upic + ", rn=" + rn + ", total=" + total + ", pageSize="
-				+ pageSize + ", currPage=" + currPage + ", totalPage=" + totalPage + "]";
+		return "\nB_comment [cid=" + cid + ", caid=" + caid + ", usid=" + usid + ", ccontent=" + ccontent + ", ctime="
+				+ ctime + ", atitle=" + atitle + ", uname=" + uname + ", upic=" + upic + ", rn=" + rn + ", total="
+				+ total + ", pageSize=" + pageSize + ", currPage=" + currPage + ", totalPage=" + totalPage + "]";
 	}
 
 	

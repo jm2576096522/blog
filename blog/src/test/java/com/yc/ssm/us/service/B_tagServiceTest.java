@@ -25,6 +25,13 @@ public class B_tagServiceTest {
 		assertNotNull(list);
 	}
 	@Test
+	public void testTagAnalytics() {
+		List<B_tag> list = b_tagService.TagAnalytics();
+		System.out.println(list);
+		assertNotNull(list);
+	}
+	
+	@Test
 	public void testFindALl() {
 		List<B_tag> list = b_tagService.findAll();
 		System.out.println(list);

@@ -1,4 +1,4 @@
-$("#adminList")
+$("#commentList")
 		.datagrid(
 				{
 					url : "comment/list",
@@ -7,23 +7,25 @@ $("#adminList")
 					border : false,
 					fitColumns : true,
 					singleSelect : true,
+					remoteSort : false,
+					nowrap : false,
 					pageList : [ 5, 10, 15, 20, 25, 30 ],
 					columns : [ [
 							{
-								field : 'cid',
-								title : '评论编号id',
+								field : 'atitle',
+								title : '文章标题',
 								width : 100,
 								align : 'center'
 							},
 							{
-								field : 'caid',
-								title : '评论文章id',
+								field : 'uname',
+								title : '评论者',
 								width : 100,
 								align : 'center'
 							},
 							{
-								field : 'usid',
-								title : '评论者id',
+								field : 'ccontent',
+								title : '评论内容',
 								width : 100,
 								align : 'center'
 							},
@@ -36,73 +38,43 @@ $("#adminList")
 							{
 								field : 'opr',
 								title : '操作',
-								width : 100,
+								width : 60,
 								align : 'center',
 								formatter : function(value, row, index) {
-									var oprStr = '<a class="modifyBtn" href="javascript:void(0)" onclick="openUpdate('
+									var oprStr = '<a class="deleteBtn" href="javascript:void(0)" onclick="deleteDate('
 											+ index
-											+ ')">修改</a>'
-											+ '<script>$(".detailBtn").linkbutton({iconCls: "icon-search"});'
-											+ '$(".modifyBtn").linkbutton({iconCls: "icon-edit"});</script>';
+											+ ')">删除</a>'
+											+ '<script>$(".deleteBtn").linkbutton({iconCls: "icon-remove"});</script>';
 									return oprStr;
 								}
-							} ] ]
+							} ] ],
+				/*
+				 * view: detailview, detailFormatter: function(rowIndex,
+				 * rowData){ return '<table><tr>' + '<td rowspan=2 style="border:0">' +
+				 * rowData.cid + '"></td>' + '<td style="border:0">' + '<p>Attribute: ' +
+				 * rowData.attr1 + '</p>' + '<p>Status: ' + rowData.status + '</p>' + '</td>' + '</tr></table>'; }
+				 */
 				});
 
-$("#modifyComment").dialog({
-	title : "用户修改",
-	closed : true,
-	modal : true,
-});
-
-
-$("#modifyForm").form(
-		{
-			url : "comment/modify",
-			success : function(data) {
-				if (data == "") {
-					$.messager.alert('用户修改主', '当前用户没有修改用户的权限 ！', 'warning');
-					$("#modifyComment").dialog("close"); // 关闭修改框
-					return;
-				}
-
-				if (data.trim() == "true") {
-					$("#modifyComment").dialog("close"); // 关闭修改框
-					$("#adminList").datagrid("reload"); // 刷新修改数据
+function deleteDate(index) {
+	// 删除时先获取选择行
+	var row = $("#commentList").datagrid("getRows")[index];
+	alert(JSON.stringify(row));
+	var cid = row.cid;
+	// 选择要删除的行
+	$.messager.confirm("提示", "你确定要删除吗?", function(r) {
+		if (r) {
+			$.post("comment/delete", {
+				cid : cid
+			}, function(data) {
+				if (data > 0) {
+					$("#commentList").datagrid("reload"); // 刷新修改数据
 				} else {
-					$.messager.show({
-						title : '修改信息',
-						msg : '修改失败！！！',
-						showType : 'show',
-						style : {
-							top : document.body.scrollTop
-									+ document.documentElement.scrollTop,
-						}
-					});
+					alert("删除失败失败");
 				}
-			}
-		});
-
-$(".closeBtn").linkbutton({
-	iconCls : "icon-cancel",
-	onClick : function() {
-		$("#modifyComment").dialog("close");
-	}
-});
-
-$(".updateBtn").linkbutton({
-	iconCls : "icon-ok",
-	onClick : function() {
-		$("#modifyForm").submit();
-	}
-});
-
-function openUpdate(index) {
-	$("#modifyComment").dialog("open");
-	var row = $("#adminList").datagrid("getRows")[index];
-	$("#ocid").val(row.cid);
-	$("#ocaid").val(row.caid);
-	$("#ousid").val(row.usid);
-	$("#occontent").val(row.ccontent);
-	$("#octime").val(row.ctime);
+			});
+			// 将选择到的行存入数组并用,分隔转换成字符串，
+			// 本例只是前台操作没有与数据库进行交互所以此处只是弹出要传入后台的id
+		}
+	});
 }

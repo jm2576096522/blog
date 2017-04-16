@@ -20,4 +20,7 @@ public interface B_commentMapper {
 	//查询指定文章的评论数(返回评论总数和评论的页码)
 	B_comment selectCommentNum(B_comment b_comment);
 
+	//删除评论
+	int deleteComment(Integer cid);
+
 }

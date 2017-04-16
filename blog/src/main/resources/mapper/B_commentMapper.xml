@@ -4,22 +4,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 映射文件的命名空间namespace的值是与之对应的映射接口的全类名 -->
 <mapper namespace="com.yc.ssm.us.mapper.B_commentMapper">
-	<!--根据用户id查询所有的评论  -->
+	<!--根据用户id查询所有的评论 -->
 	<select id="findCommentByUsid" resultType="B_comment">
-		
+
 	</select>
-	
-	<!-- 查询指定文章的评论数(返回评论总数和评论的页码)-->
-	<select id="selectCommentNum" resultType="B_comment" parameterType="B_comment">
-		select count(1) total ,ceil(count(1)/5) totalPage from b_comment where caid = #{caid}  
+
+	<!-- 查询指定文章的评论数(返回评论总数和评论的页码) -->
+	<select id="selectCommentNum" resultType="B_comment"
+		parameterType="B_comment">
+		select count(1) total ,ceil(count(1)/5) totalPage from
+		b_comment where caid = #{caid}
 	</select>
 	<!-- 通过文章id 查询所有的评论（分页） -->
-	<select id="findCommentByCaid" resultType="B_comment" parameterType="B_comment">
+	<select id="findCommentByCaid" resultType="B_comment"
+		parameterType="B_comment">
 		select * from (
 		select t.*, rownum rn from (
-		select b.*,bu.uname,bu.upic from b_comment b 
-		inner join b_user bu on bu.usid = b.usid order by b.ctime) t 
-		where ${currPage}*${pageSize}>=rownum and t.caid = #{caid} )  
+		select
+		b.*,bu.uname,bu.upic from b_comment b
+		inner join b_user bu on bu.usid =
+		b.usid order by b.ctime) t
+		where ${currPage}*${pageSize}>=rownum and
+		t.caid = #{caid} )
 		where rn>(${currPage}-1)*${pageSize}
 	</select>
 
@@ -36,7 +42,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="getPartComment" resultType="B_comment"> select * from (select
 		n.*,rownum
-		rn from (select * from b_comment order by 1)n where
+		rn from (select bc.*,bu.uname,ba.atitle,bu.upic from
+		b_comment bc,b_user bu,b_article ba where ba.aid(+)=bc.caid and
+		bu.usid(+)=bc.usid order by bc.usid)n where
 		${currPage}*${pageSize}>=rownum)
 		t
 		where rn>(${currPage}-1)*${pageSize}
@@ -46,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertComment" parameterType="B_comment">
 		insert into b_comment
 		values(seq_cid.nextval,#{caid},#{usid},#{ccontent},to_char(sysdate,'yyyy-MM-dd
-		hh24:mm:ss'))
+		hh:mm:ss'))
 	</insert>
 	<update id="modifyComment" parameterType="B_comment">
 		update b_comment
@@ -57,4 +65,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</set>
 		where cid=#{cid}
 	</update>
+	<!-- 删除评论 -->
+	<delete id="deleteComment">
+		delete from b_comment where cid=#{cid}
+	</delete>
 </mapper>

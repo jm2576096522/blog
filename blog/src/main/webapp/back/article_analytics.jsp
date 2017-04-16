@@ -21,8 +21,6 @@ function show() {
 		url:"article/analytics",
 		type:"POST",
 		dataType:"JSON",
-		cache: false,
-		async: false,
 		success: function (data) {
 			//alert(JSON.stringify(data));
 			//alert(data);
@@ -43,6 +41,9 @@ function show() {
             	categories: jsonXData,
 				lineWidth: 2,
                 gridLineWidth: 1,
+                title: {
+                    text: "用户id"
+                },
                 labels: {
                     align: 'left',
                     x: 3,
@@ -57,7 +58,6 @@ function show() {
                     align: 'left',
                     x: 3,
                     y: 16,
-                    format: '{value:.,0f}'
                 },
                 showFirstLabel: false
             }, {    // 第二个坐标轴，放置在右边
@@ -65,13 +65,12 @@ function show() {
                 gridLineWidth: 0,
                 opposite: true,  // 通过此参数设置坐标轴显示在对立面
                 title: {
-                    text: null
+                	text: "文章数/篇"
                 },
                 labels: {
                     align: 'right',
                     x: -3,
                     y: 16,
-                    format: '{value:.,0f}'
                 },
                 showFirstLabel: false
             }],
