@@ -19,13 +19,11 @@
 	<nav class="am-g am-g-fixed blog-fixed blog-nav">
 		<div class="am-collapse am-topbar-collapse" id="blog-collapse">
 			<ul class="am-nav am-nav-pills am-topbar-nav">
-				<li><a href="homePage.jsp">首页</a></li>
-				<li><a href="personPage.jsp" >我的文章</a></li>
-				<li><a href="page/blog_add.jsp">写新文章</a></li>
-				<li><a href="page/blogManager.jsp">文章管理</a></li>
-				<li><a href="page/blog_tag.jsp">类别管理</a></li>
-				<li><a href="page/blogDrafets.jsp">草稿箱</a></li>
-				<li><a href="page/personInfo.jsp">个人信息管理</a></li>
+				<li class="am-active"><a href="homePage.jsp" style="color: #10D07A;">首页</a></li>
+				<li><a>博客专栏</a></li>
+				<li><a>博客专家</a></li>
+				<li><a>热度话题</a></li>
+				<li><a href="personPage.jsp">我的博客</a></li>
 			</ul>
 			<!-- 菜单栏右部分 -->
 			<div id="top_right" class="show_loginUser" style="float: right;">
@@ -142,7 +140,11 @@
 				for (var i = 0; i < data.length; i++){
 					articleStr +='<article class="am-g blog-entry-article">';
 					articleStr +='<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">';
-					articleStr +='<img src="'+data[i].apic+'" alt="" style="height:250px;" class="am-u-sm-12"></div>';
+					if(data[i].apic !=null){
+						articleStr +='<img src="'+data[i].apic+'" alt="" style="height:250px;" class="am-u-sm-12"></div>';
+					}else{
+						articleStr +='<img src="images/not_img1.png" alt="" style="height:250px;" class="am-u-sm-12"></div>';
+					}
 					articleStr +='<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">';
 					articleStr +='<span>author:&nbsp;</span>';
 					articleStr +='<span>@<a class="blog-color">'+data[i].uname+'&nbsp;</a></span>';

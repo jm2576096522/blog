@@ -14,7 +14,11 @@ function listById(){
 		for (var i = 0; i < data.length; i++){
 			articleStr +='<article class="am-g blog-entry-article">';
 			articleStr +='<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">';
-			articleStr +='<img src="'+data[i].apic+'" alt="" style="height:250px;" class="am-u-sm-12"></div>';
+			if(data[i].apic != null){
+				articleStr +='<img src="'+data[i].apic+'" alt="" style="height:250px;" class="am-u-sm-12"></div>';
+			}else{
+				articleStr +='<img src="images/not_img1.png" alt="" style="height:250px;" class="am-u-sm-12"></div>';
+			}
 			articleStr +='<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">';
 			articleStr +='<span>author:&nbsp;</span>';
 			articleStr +='<span>@<a class="blog-color">'+data[i].uname+'&nbsp;</a></span>';

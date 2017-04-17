@@ -1,6 +1,25 @@
 var currPage = 1;
 var pageSize = 6;
 var totalPage;
+var currUser = $("#user_usid").val(); 
+var navStr = '';
+
+if (currUser == ""){
+	navStr += '<ul class="nav_right">';
+	navStr += '<li><a href="register.jsp">注册 </a></li>';
+	navStr += '<li>|</li>';
+	navStr += '<li><a href="login.jsp"> 登录 </a></li></ul>';
+	$("#top_right").html(navStr);
+} else {
+	navStr += '<div style="float:right;height:100%;line-height: 50px;">';
+	navStr += '<span style="color: #10D07A;">已登录</span>';
+	navStr += '<select id="user_select" style="border: none;">';
+	navStr += '<option disabled="disabled" selected="selected">&nbsp;&nbsp;更多</option>';
+	navStr += '<option onclick="switch_user()">切换用户</option>';
+	navStr += '<option onclick="login_out()">退出</option>';
+	navStr += '</select></div>';
+	$("#top_right").html(navStr);
+}
 
 pageHotArticle();  //页面初始化
 
@@ -9,7 +28,11 @@ function pageHotArticle(){
 		var articleStr = "";
 		for (var i = 0; i < data.length; i++){
 			articleStr +='<div class="blogs">';
-			articleStr +='<figure><img src="'+data[i].apic+'"></figure>';
+			if(data[i].apic != null){
+				articleStr +='<figure><img src="'+data[i].apic+'"></figure>';
+			}else{
+				articleStr +='<figure><img src="images/not_img1.png"></figure>';
+			}
 			articleStr +='<ul><h3><a onclick="articleDetail('+data[i].aid+')">'+data[i].atitle+'</a></h3>';
 			articleStr +='<div id="con_text" class="con_text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+data[i].acontent+'</div>';
 			articleStr +='<p class="autor"><span class="lm f_l"><a onclick="userDetail('+data[i].usid+')">'+data[i].uname+'</a></span>';
@@ -71,14 +94,41 @@ function lastPage(){
 
 //文章详情
 function articleDetail(index){
-	$.post("article/updateAviewNum",{aid:index},function(data){
-		location.href="article.jsp?aid="+index;
-	});
+	if($("#user_usid").val() == ""){
+		$.messager.confirm("操作提示","你尚未登陆，请先登录!","info",function(r){
+			if(r){
+				location.href="login.jsp";
+			}
+		});
+	}else{
+		$.post("article/updateAviewNum",{aid:index},function(data){
+			location.href="article.jsp?aid="+index;
+		});
+	}
 }
 //用户详情
 function userDetail(index){
-	if(index != null){
-		location.href="userDetail.jsp?usid="+index;
+	if($("#user_usid").val() == ""){
+		$.messager.confirm("操作提示","你尚未登陆，请先登录!","info",function(r){
+			if(r){
+				location.href="login.jsp";
+			}
+		});
+	}else{
+		if(index != null){
+			location.href="userDetail.jsp?usid="+index;
+		}
 	}
-	
 }
+
+function check_login(){
+	if($("#user_usid").val() == ""){
+		$.messager.alert("操作提示","你尚未登陆，请先登录!","info",function(){
+			location.href="login.jsp";
+		});
+	}else{
+		location.href="personPage.jsp";
+	} 
+}
+
+

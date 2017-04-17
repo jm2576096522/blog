@@ -249,36 +249,6 @@
 	<script type="text/javascript" src="js/homePage.js"></script>
 	<script type="text/javascript" src="js/moreOperation.js"></script>
 
-	<script type="text/javascript">
-		var currUser = $("#user_usid").val(); 
-		var navStr = '';
-		if (currUser == ""){
-			navStr += '<ul class="nav_right">';
-			navStr += '<li><a href="register.jsp">注册 </a></li>';
-			navStr += '<li>|</li>';
-			navStr += '<li><a href="login.jsp"> 登录 </a></li></ul>';
-			$("#top_right").html(navStr);
-		} else {
-			navStr += '<div style="float:right;height:100%;line-height: 50px;">';
-			navStr += '<span style="color: #10D07A;">已登录</span>';
-			navStr += '<select id="user_select" style="border: none;">';
-			navStr += '<option disabled="disabled" selected="selected">&nbsp;&nbsp;更多</option>';
-			navStr += '<option onclick="switch_user()">切换用户</option>';
-			navStr += '<option onclick="login_out()">退出</option>';
-			navStr += '</select></div>';
-			$("#top_right").html(navStr);
-		}
-		function check_login(){
-			if($("#user_usid").val() == ""){
-				$.messager.alert("操作提示","你尚未登陆，请先登录!","info",function(){
-					location.href="login.jsp";
-				});
-			}else{
-				location.href="personPage.jsp";
-			} 
-		}
-	</script>
-
 </body>
 
 </html>
