@@ -49,5 +49,10 @@ public class B_drafetsServiceImpl implements B_drafetsService {
 		LogManager.getLogger().debug("立即发表");
 		return drafetsMapper.publishArticle(b_drafets);
 	}
+	//修改草稿
+	public boolean updateDrafets(B_drafets b_drafets){
+		LogManager.getLogger().debug("修改草稿");
+		return drafetsMapper.updateDrafets(b_drafets);
+	}
 
 }

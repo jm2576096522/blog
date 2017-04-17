@@ -168,11 +168,14 @@
 		}else{
 			var navStr ="";
 			navStr +="<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='add_article()'>发表文章</button>";
-			navStr +="<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='saveArticle()'>立即保存</button>";
-			navStr +="<button type='reset' class='am-btn am-btn-default'>重置</button>";
 			if(drid!= "null"){
+				navStr +="<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='updateDrafets()'>立即保存</button>";
 				navStr +="<input type='text' name='drid' style='width:100px;display:none;' value='"+drid+"'/> ";
+			}else{
+				navStr +="<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='saveArticle()'>立即保存</button>";
 			}
+			navStr +="<button type='reset' class='am-btn am-btn-default'>重置</button>";
+			
 			$("#controlNav").html(navStr);
 		}
 		
@@ -256,6 +259,22 @@
 				}
 			});  
 		}
+		/* 更改草稿箱 */
+		function updateDrafets(){
+			 $("#add_form").form({
+					url:"drafets/updateDrafets",
+					success:function(data){
+				    	if(data.trim() == "true"){
+				    		 $.messager.alert("操作提示", "保存成功...","info",function(){
+				    			 location.reload();
+				    		 });
+				    	}else{
+				    		 $.messager.alert("操作提示", "保存失败！！","error");
+				    	}
+					}
+				});  
+		}
+		
 		
 		// 如果url 拼接有aid 
 		function findArticleByAid(){
