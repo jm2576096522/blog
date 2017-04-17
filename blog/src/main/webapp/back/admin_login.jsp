@@ -17,7 +17,7 @@
 		<form id="loginForm" method="post" action="admin/login">
 			<table cellpadding="5" width=200px align="center">
 				<tr align="center">
-					<td colspan="2"><label style="color: red;">${errorAdminMsg}&nbsp;</label></td>
+					<td colspan="2"><label style="color: red;">${errorMsg}&nbsp;</label></td>
 				</tr>
 				<tr align="center">
 					<td colspan="2"><input name="adname" placeholder="输入管理员名称"

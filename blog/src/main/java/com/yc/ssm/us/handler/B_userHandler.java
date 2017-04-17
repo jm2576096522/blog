@@ -164,7 +164,6 @@ public class B_userHandler {
 	@ResponseBody
 	public boolean update_pwd(@RequestParam("upassword") String upassword,@RequestParam("old_pwd") String old_pwd){
 		B_user user = new B_user();
-
 		user.setUpassword(upassword);
 		if(!current_user.getUpassword().equals( Encrypt.md5AndSha(old_pwd))){
 			return false;

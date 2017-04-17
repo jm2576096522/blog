@@ -122,7 +122,7 @@
 				</tr>
 				<tr>
 					<td align="right">原密码:</td>
-					<td><input  value="${loginAdmin.adpassword}"
+					<td><input id="propwd" name="propwd" value="${loginAdmin.adpassword}"
 						type="password" class="easyui-validatebox " placeholder="请输入原密码"
 						required="required" /></td>
 				</tr>
@@ -130,13 +130,13 @@
 					<td align="right">新密码:</td>
 					<td><input id="pwd" name="adpassword" type="password"
 						class="easyui-validatebox " placeholder="请输入新密码"
-						required="required" /></td>
+						required="required" validType="equals['#propwd']"/></td>
 				</tr>
 				<tr>
 					<td align="right">重复新密码:</td>
 					<td><input id="rpwd" name="rpwd" type="password"
 						class="easyui-validatebox " placeholder="请重新输入原密码"
-						required="required" validType="equals['#pwd']" /></td>
+						required="required" validType="equalTo['#pwd']" /></td>
 				</tr>
 				<tr>
 					<td align="center" colspan="2"><a id="modifyPwdBtn"

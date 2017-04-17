@@ -42,9 +42,9 @@ decode(ceil(dbms_random.value(0, 2)), 1, '男', '女'),
 to_char(add_months(sysdate, dbms_random.value(12*18, 12*50) * -1), 'yyyy-MM-dd'),
 decode(ceil(dbms_random.value(0, 6)), 1, '湖南', 2, '湖北', 3, '广东', 4, '广西', 5, '北京', '上海'),'',
 '180'||ceil(dbms_random.value(10000000,99999999)) ,
-decode(ceil(dbms_random.value(0, 6)), 1, '程序员', 2, '测试员', 3, '分析员', 4, '设计员', 5, '翻译员', '管理员'),'' from dual connect by level <= 150;
+decode(ceil(dbms_random.value(0, 6)), 1, '程序员', 2, '测试员', 3, '分析员', 4, '设计员', 5, '翻译员'),'' from dual connect by level <= 150;
 
-update b_user set uemail=replace(uemail,'qq.com','@qq.com');
+--update b_user set uemail=replace(uemail,'qq.com','@qq.com');
 
 insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'1506173890@qq.com','a');
 update  b_user set upassword = '6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2';
@@ -123,7 +123,7 @@ to_char(sysdate,'yyyy-MM-dd hh:mm:ss'),'java是面向对象的一种编程，由
 -----更改时间
 update b_article set atime = to_char(sysdate,'yyyy-MM-dd hh24:mm:ss') where aid = 122;
 
-select to_char(sysdate,'yyyy-MM-dd hh24:mm:ss')  from dual;
+select to_char(sysdate,'yyyy-MM-dd hh:mm:ss')  from dual;
 
 -------------------------------更改数据库时区操作
 select dbtimezone from dual;

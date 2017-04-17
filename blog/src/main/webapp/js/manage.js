@@ -109,6 +109,12 @@ $.extend($.fn.layout.methods, {
 $.extend($.fn.validatebox.defaults.rules, {
 	equals : {
 		validator : function(value, param) {
+			return value != $(param[0]).val();
+		},
+		message : '新密码与原密码相同，请重新输入.'
+	},
+	equalTo : {
+		validator : function(value, param) {
 			return value == $(param[0]).val();
 		},
 		message : '密码不匹配，请重新输入.'
@@ -151,7 +157,8 @@ $("#modifyPwdForm").form(
 			url : "admin/modifyPwd",
 			success : function(data) {
 				if (data) {
-					$("#personalInfo").dialog("close"); // 关闭修改框
+					$("#personalInfo").dialog("close"); // 关闭修改框	
+					$("#modifyPwdForm").form('clear');
 				} else {
 					$.messager.show({
 						title : '修改密码',
