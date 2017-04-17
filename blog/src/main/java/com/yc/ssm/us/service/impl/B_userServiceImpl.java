@@ -64,9 +64,11 @@ public class B_userServiceImpl implements B_userService {
 	public boolean findUser(Integer usid){
 		return b_userMapper.findUser(usid);
 	}
-
+	
+	//根据用户usid查询用户
 	@Override
 	public B_user findUserByUsid(Integer usid) {
+		LogManager.getLogger().debug("根据用户usid查询用户");
 		return b_userMapper.findUserByUsid(usid);
 	}
 

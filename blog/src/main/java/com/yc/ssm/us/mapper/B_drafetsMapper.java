@@ -21,4 +21,7 @@ public interface B_drafetsMapper {
 	
 	//立即发表
 	int publishArticle(B_drafets b_drafets);
+	
+	//修改草稿
+	boolean updateDrafets(B_drafets b_drafets);
 }

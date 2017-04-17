@@ -5,7 +5,7 @@
 <head>
 <base href="${deployName}">
 <meta charset="utf-8">
-<title>我的博客</title>
+<title>草稿箱</title>
 <link rel="stylesheet" href="assets/css/amazeui.min.css">
 <link rel="stylesheet" href="assets/css/app.css">
 <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -33,11 +33,19 @@
 				<li><a href="page/blogDrafets.jsp" style="color: #10D07A;">草稿箱</a></li>
 				<li><a href="page/personInfo.jsp">个人信息管理</a></li>
 			</ul>
-			<div class="show_loginUser" style="float: right;">
+			<!-- 菜单栏右部分 -->
+			<div id="top_right" class="show_loginUser" style="float: right;">
 				<img src="${loginUser.getUpic()}"
-					style="width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
-				欢迎 : <input type="text" id="loginUname"
-					style="border: none; width: 120px;" value="${loginUser.getUname()}" />
+					style="float: left; width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
+				<div style="float: left; height: 100%; line-height: 50px;">
+					欢迎 : <input type="text" id="loginUname" readonly="readonly"
+						value="${loginUser.getUname()}" /> <select id="user_select"
+						style="border: none;">
+						<option disabled="disabled" selected="selected">&nbsp;&nbsp;更多</option>
+						<option onclick="switch_user()">切换用户</option>
+						<option onclick="login_out()">退出</option>
+					</select>
+				</div>
 			</div>
 		</div>
 	</nav>
@@ -54,7 +62,7 @@
 			<table id="mytable">
 			<thead>
 				 <tr>
-				 	<th scope='col' abbr='编号' class='nobg'>编号</th><!--  style="display:none;" -->
+				 	<th scope='col' abbr='编号' class='nobg' style="display:none;">编号</th><!--  style="display:none;" -->
 				 	<th scope='col' abbr='标题'>文章标题</th>
 				 	<th scope='col' abbr='时间'>创作时间</th>
 				 	<th scope='col' abbr='操作'>操作</th>
@@ -80,12 +88,13 @@
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jquery.easyui.min.js"></script> 
 	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="js/moreOperation.js"></script>
 	
 	<script type="text/javascript">
 		$.post("drafets/findDrafetsByUsid",function(data){
 			var tableStr ;
 			for(var i=0;i<data.length;i++){
-				tableStr += "<tr><th class='specalt'>"+data[i].drid+"</th>";/*  style='display:none;' */
+				tableStr += "<tr><th class='specalt'  style='display:none;'>"+data[i].drid+"</th>";/*  style='display:none;' */
 				tableStr += "<td class='alt'>"+data[i].drtitle+"</td>";
 				tableStr += "<td class='alt'>"+data[i].drtime+"</td>";
 				tableStr += "<td class='alt'><a style='margin-right:10px; font-size:15px;' onclick='editrow("+data[i].drid+")'>编辑</a>";

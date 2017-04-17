@@ -33,16 +33,19 @@
 				<li><a href="page/blogDrafets.jsp">草稿箱</a></li>
 				<li><a href="page/personInfo.jsp">个人信息管理</a></li>
 			</ul>
-			<div class="show_loginUser" style="float: right;">
+			<!-- 菜单栏右部分 -->
+			<div id="top_right" class="show_loginUser" style="float: right;">
 				<img src="${loginUser.getUpic()}"
-					style="width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
-				欢迎 : <input type="text" id="loginUname"
-					style="border: none; width: 90px;" value="${loginUser.getUname()}" />
-				<select id="user_select" style="border: none; width: 20px;">
-					<option value="personPage.jsp"></option>
-					<option onclick="switch_user()">切换用户</option>
-					<option onclick="login_out()">退出</option>
-				</select>
+					style="float: left; width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
+				<div style="float: left; height: 100%; line-height: 50px;">
+					欢迎 : <input type="text" id="loginUname" readonly="readonly"
+						value="${loginUser.getUname()}" /> <select id="user_select"
+						style="border: none;">
+						<option disabled="disabled" selected="selected">&nbsp;&nbsp;更多</option>
+						<option onclick="switch_user()">切换用户</option>
+						<option onclick="login_out()">退出</option>
+					</select>
+				</div>
 			</div>
 		</div>
 	</nav>
@@ -147,6 +150,7 @@
 	<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.config.js"></script>
 	<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.min.js"></script>
 	<script type="text/javascript" src="js/commonUserInfo.js"></script>
+	<script type="text/javascript" src="js/moreOperation.js"></script>
 
 	<script type="text/javascript">
 		UE.getEditor('acontent');// 使用副文本编辑工具
@@ -164,11 +168,14 @@
 		}else{
 			var navStr ="";
 			navStr +="<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='add_article()'>发表文章</button>";
-			navStr +="<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='saveArticle()'>立即保存</button>";
-			navStr +="<button type='reset' class='am-btn am-btn-default'>重置</button>";
 			if(drid!= "null"){
-				navStr +="<input type='text' name='drid' style='width:100px;' value='"+drid+"'/> ";
+				navStr +="<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='updateDrafets()'>立即保存</button>";
+				navStr +="<input type='text' name='drid' style='width:100px;display:none;' value='"+drid+"'/> ";
+			}else{
+				navStr +="<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='saveArticle()'>立即保存</button>";
 			}
+			navStr +="<button type='reset' class='am-btn am-btn-default'>重置</button>";
+			
 			$("#controlNav").html(navStr);
 		}
 		
@@ -252,6 +259,22 @@
 				}
 			});  
 		}
+		/* 更改草稿箱 */
+		function updateDrafets(){
+			 $("#add_form").form({
+					url:"drafets/updateDrafets",
+					success:function(data){
+				    	if(data.trim() == "true"){
+				    		 $.messager.alert("操作提示", "保存成功...","info",function(){
+				    			 location.reload();
+				    		 });
+				    	}else{
+				    		 $.messager.alert("操作提示", "保存失败！！","error");
+				    	}
+					}
+				});  
+		}
+		
 		
 		// 如果url 拼接有aid 
 		function findArticleByAid(){
@@ -275,7 +298,7 @@
 				$("#atitle").val(data.drtitle);
 				$("#tag").val(data.drtagid);
 				$("#type").val(data.drtypeid);
-				$("#acontent").val(data.drcontent);
+				$("#acontent").val(data.drcontent.trim());
 				if(data.drpic != null){
 					var picStr = "<img src='"+data.drpic+"' style='width: 400px; height: 200px;'>";
 				}else{

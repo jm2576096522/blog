@@ -1,12 +1,5 @@
 -------------blog项目 --------
-select * from (
-		select n.*,rownum rn from (
-		select ba.*,bu.uname,bt.tagname,bty.tname,nvl(bc.commentnum,0) from
-			b_article ba, b_user bu ,b_tag bt,b_type bty,(select caid,count(usid) commentnum from b_comment group by usid ,caid) bc 
-			where ba.usid = bu.usid(+) and ba.tagid=bt.tagid(+) and ba.aid=bc.caid(+)
-				and ba.tid =bty.tid(+) order by 1)n 
-			where 10>=rownum) t
-			where rn>0
+
 -------------------------------------
 create sequence seq_usid start with 10001;
 

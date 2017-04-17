@@ -24,10 +24,10 @@ import com.yc.ssm.us.util.ServletUtil;
 @Controller
 @RequestMapping("drafets")
 public class B_drafetsHander {
-	
+
 	@Autowired
 	private B_drafetsService drafetsService;
-	
+
 	//添加草稿
 	@RequestMapping("addDrafet")
 	@ResponseBody
@@ -56,7 +56,7 @@ public class B_drafetsHander {
 			return false;
 		}
 	}
-	
+
 	//根据用户id查询
 	@RequestMapping(value = "findDrafetsByUsid" ,method = RequestMethod.POST)
 	@ResponseBody
@@ -69,28 +69,55 @@ public class B_drafetsHander {
 			return null;
 		}
 	}
-	
+
 	//根据草稿drid查询
 	@RequestMapping(value = "findDrafetByDrid" ,method = RequestMethod.POST)
 	@ResponseBody
 	public B_drafets findDrafetByDrid(Integer drid){
 		return drafetsService.findDrafetByDrid(drid);
 	}
-	
+
 	//删除草稿
 	@RequestMapping(value = "deleteDrafets" ,method = RequestMethod.POST)
 	@ResponseBody
 	public boolean deleteDrafet(Integer drid){
 		return drafetsService.deleteDrafet(drid) > 0;
 	}
-	
+
 	//立即发表
 	@RequestMapping(value = "publishArticle" ,method = RequestMethod.POST)
 	@ResponseBody
 	public int publishArticle(Integer drid){
 		LogManager.getLogger().debug("立即发表");
 		B_drafets b_drafets = drafetsService.findDrafetByDrid(drid);  //获取草稿
+		if(b_drafets.getDrpic() == null){
+			b_drafets.setDrpic("");
+		}
+		System.out.println(b_drafets);
 		return drafetsService.publishArticle(b_drafets);
 	}
+	//修改草稿
+	@RequestMapping(value = "updateDrafets" ,method = RequestMethod.POST)
+	@ResponseBody
+	public boolean updateDrafets(@RequestParam("upicDate") MultipartFile upicDate,B_drafets b_drafets){
+		LogManager.getLogger().debug("修改草稿");
+		String picPath = null;
+		if (upicDate != null && !upicDate.isEmpty()) {// 判断是否有文件上传
+			try {
+				upicDate.transferTo(ServletUtil.getUploadFile(upicDate.getOriginalFilename()));
+				picPath = ServletUtil.VIRTUAL_UPLOAD_DIR + upicDate.getOriginalFilename();
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			b_drafets.setDrpic(picPath);
+		}else{
+			LogManager.getLogger().debug("我是空的");
+			b_drafets.setDrpic("");
+		}
+		return drafetsService.updateDrafets(b_drafets);
+	}
+
 
 }

@@ -32,10 +32,20 @@
 			<li><a href="page/blogDrafets.jsp">草稿箱</a></li>
 			<li><a href="page/personInfo.jsp">个人信息管理</a></li>
 		</ul>
-		<div class="show_loginUser" style="float:right;">
-        	<img src="${loginUser.getUpic()}" style="width:50px;height:50px;border-radius:50%;margin-right:10px;">
-        	欢迎  : <input type="text" id="loginUname" style="border:none;width:120px;" value="${loginUser.getUname()}"/>
-     	 </div>
+		<!-- 菜单栏右部分 -->
+			<div id="top_right" class="show_loginUser" style="float: right;">
+				<img src="${loginUser.getUpic()}"
+					style="float: left; width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
+				<div style="float: left; height: 100%; line-height: 50px;">
+					欢迎 : <input type="text" id="loginUname" readonly="readonly"
+						value="${loginUser.getUname()}" /> <select id="user_select"
+						style="border: none;">
+						<option disabled="disabled" selected="selected">&nbsp;&nbsp;更多</option>
+						<option onclick="switch_user()">切换用户</option>
+						<option onclick="login_out()">退出</option>
+					</select>
+				</div>
+			</div>
 		
 	</nav>
 	<!-- nav end -->
@@ -92,6 +102,7 @@
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jquery.easyui.min.js"></script> 
 	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="js/moreOperation.js"></script>
 	<script type="text/javascript">
 	/**
 	 * 文章的详情

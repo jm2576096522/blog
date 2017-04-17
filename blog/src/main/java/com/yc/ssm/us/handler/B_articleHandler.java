@@ -91,9 +91,12 @@ public class B_articleHandler<T> {
 	//指定用户id分页查询文章
 	@RequestMapping(value = "listById", method = RequestMethod.POST)
 	@ResponseBody
-	public List<B_article> listById(B_article b_article,HttpSession session) {
-		B_user user = (B_user) session.getAttribute("loginUser");
-		Integer usid = user.getUsid();
+	public List<B_article> listById(B_article b_article,HttpSession session){
+		Integer usid = b_article.getUsid();
+		if(usid == null){
+			B_user user = (B_user) session.getAttribute("loginUser");
+			usid = user.getUsid();
+		}
 		b_article.setUsid(usid);
 		LogManager.getLogger().debug("我是通过id分页查询的文章。。。");
 		return articleService.partArticleById(b_article);
@@ -102,8 +105,11 @@ public class B_articleHandler<T> {
 	@RequestMapping(value = "listNum", method = RequestMethod.POST)
 	@ResponseBody
 	public B_article listNum(B_article b_article,HttpSession session) {
-		B_user user = (B_user) session.getAttribute("loginUser");
-		Integer usid = user.getUsid();
+		Integer usid = b_article.getUsid();
+		if(usid == null){
+			B_user user = (B_user) session.getAttribute("loginUser");
+			usid = user.getUsid();
+		}
 		b_article.setUsid(usid);
 		LogManager.getLogger().debug("查询用户id所作的文章数及总页数");
 		return articleService.findArticleNum(b_article);

@@ -33,4 +33,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(seq_aid.nextval,#{drtitle},#{drtypeid},#{drtagid},#{usid},to_char(sysdate,'yyyy-MM-dd
 		hh24:mm:ss'),#{drcontent},#{drpic})
 	</insert>
+	<!-- 修改草稿 -->
+	<update id="updateDrafets" parameterType="B_drafets">
+		update b_drafets 
+			<set>
+			<if test="drtitle!=null">drtitle=#{drtitle}, </if>
+			<if test="drtypeid!=null"> drtypeid=#{drtypeid}, </if>
+			<if test="drtagid!=null"> drtagid=#{drtagid},	</if>
+			<if test="drcontent!=null"> drcontent=#{drcontent}, </if>
+			<if test="drpic!=null"> drpic=#{drpic}, </if>
+			drtime = to_char(sysdate,'yyyy-MM-dd hh24:mm:ss')
+		</set>
+		where drid=#{drid}
+	</update>
 </mapper>
