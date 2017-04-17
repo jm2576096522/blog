@@ -12,7 +12,7 @@ function pageHotArticle(){
 			articleStr +='<figure><img src="'+data[i].apic+'"></figure>';
 			articleStr +='<ul><h3><a onclick="articleDetail('+data[i].aid+')">'+data[i].atitle+'</a></h3>';
 			articleStr +='<div id="con_text" class="con_text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+data[i].acontent+'</div>';
-			articleStr +='<p class="autor"><span class="lm f_l"><a href="/">'+data[i].uname+'</a></span>';
+			articleStr +='<p class="autor"><span class="lm f_l"><a onclick="userDetail('+data[i].usid+')">'+data[i].uname+'</a></span>';
 			articleStr +='<span class="dtime f_l">'+data[i].atime+'</span>';
 			articleStr +='<span class="viewnum f_r"><a onclick="articleDetail('+data[i].aid+')">浏览（'+data[i].aviewnum+'）</a></span>';
 			articleStr +='<span class="pingl f_r"><a onclick="articleDetail('+data[i].aid+')">评论（'+data[i].commentnum+'）</a></span></p>';
@@ -21,8 +21,6 @@ function pageHotArticle(){
 		$("#content").html(articleStr);
 	},"json");
 }
-
-
 function loadMoreArticle(){
 	pageSize = 10;
 	pageHotArticle();
@@ -71,18 +69,16 @@ function lastPage(){
 	loadMoreArticle();
 }
 
-function check_login(){
-	if($("#user_usid").val() == ""){
-		alert("你尚未登陆，请先登录");
-		location.href="login.jsp";
-	}else{
-		location.href="personPage.jsp";
-	}
-}
-
 //文章详情
 function articleDetail(index){
 	$.post("article/updateAviewNum",{aid:index},function(data){
 		location.href="article.jsp?aid="+index;
 	});
+}
+//用户详情
+function userDetail(index){
+	if(index != null){
+		location.href="userDetail.jsp?usid="+index;
+	}
+	
 }

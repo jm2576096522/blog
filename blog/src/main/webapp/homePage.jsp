@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="javax.servlet.http.HttpSession"%>
 <!doctype html>
 <html>
 <head>
@@ -8,6 +10,7 @@
 
 <link href="css/base.css" rel="stylesheet">
 <link href="css/index.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/sliders.js"></script>
 </head>
@@ -20,21 +23,15 @@
 	<hr>
 	<nav class="blog-nav">
 		<ul class="nav_left">
-			<li class="am-active"><a href="homePage.jsp" style="color: #10D07A;">首页</a></li>
-			<li><a >博客专栏</a></li>
-			<li><a >博客专家</a></li>
-			<li><a >热度话题</a></li>
+			<li class="am-active"><a href="homePage.jsp"
+				style="color: #10D07A;">首页</a></li>
+			<li><a>博客专栏</a></li>
+			<li><a>博客专家</a></li>
+			<li><a>热度话题</a></li>
 			<li><a onclick="check_login()">我的博客</a></li>
 		</ul>
-	<%--  <div class="show_loginUser">
-        	<img src="${loginUser.getUpic()}">
-        	欢迎  : <input type="text" id="loginUname" class="loginUname" value="${loginUser.getUname()}"/>
-        	<select id="user_select" style="border:none;width:20px;">
-        		<option value="personPage.jsp"></option>
-        		<option onclick="switch_user()">切换用户</option>
-        		<option onclick="login_out()">退出</option>
-        	</select>
-      </div> --%>
+		<!-- 菜单栏右部分 -->
+		<div id="top_right"></div>
 	</nav>
 	<hr>
 	<article>
@@ -42,10 +39,12 @@
 			<div class="banner">
 				<div id="slide-holder">
 					<div id="slide-runner">
-						<a target="_blank"><img id="slide-img-1" src="images/a1.jpg" alt="" /></a> 
-						<a target="_blank"><img id="slide-img-2" src="images/a2.jpg" alt="" /></a> 
-						<a target="_blank"><img id="slide-img-3" src="images/a3.jpg" alt="" /></a> 
-						<a target="_blank"><img id="slide-img-4" src="images/a4.jpg" alt="" /></a>
+						<a target="_blank"><img id="slide-img-1" src="images/a1.jpg"
+							alt="" /></a> <a target="_blank"><img id="slide-img-2"
+							src="images/a2.jpg" alt="" /></a> <a target="_blank"><img
+							id="slide-img-3" src="images/a3.jpg" alt="" /></a> <a
+							target="_blank"><img id="slide-img-4" src="images/a4.jpg"
+							alt="" /></a>
 						<div id="slide-controls">
 							<p id="slide-client" class="text">
 								<strong></strong><span></span>
@@ -79,29 +78,30 @@
 				</script>
 			</div>
 			<!-- banner代码 结束 -->
-			<div class="topnews" >
+			<div class="topnews">
 				<h2>
 					<b>文章</b>推荐
 				</h2>
 				<!-- 文章区 -->
-				<div id = "content" class="content">
-				 </div>
-				 <div id="loadMore" onclick="loadMoreArticle()">加载更多...</div>
-				<ul class="am-pagination" style="width:100%;text-align: center;margin-top:30px;" id="myUI">
+				<div id="content" class="content"></div>
+				<div id="loadMore" onclick="loadMoreArticle()">加载更多...</div>
+				<ul class="am-pagination"
+					style="width: 100%; text-align: center; margin-top: 30px;"
+					id="myUI">
 				</ul>
 			</div>
 		</div>
 		<div class="r_box f_r">
 			<div class="tit01">
-				<h3>关注我 :
-					<input type="hidden" id="user_usid" style=" border:none;" value="${loginUser.getUsid()}">
+				<h3>
+					关注我 <input type="hidden" id="user_usid" value="${loginUser}">
 				</h3>
 				<div class="gzwm">
 					<ul>
-						<li><a class="xlwb"  target="_blank">新浪微博</a></li>
-						<li><a class="txwb"  target="_blank">腾讯微博</a></li>
+						<li><a class="xlwb" target="_blank">新浪微博</a></li>
+						<li><a class="txwb" target="_blank">腾讯微博</a></li>
 						<li><a class="rss" target="_blank">RSS</a></li>
-						<li><a class="wx" >邮箱</a></li>
+						<li><a class="wx">邮箱</a></li>
 					</ul>
 				</div>
 			</div>
@@ -112,8 +112,10 @@
 			<div class="moreSelect" id="lp_right_select">
 				<script>
 					window.onload = function() {
-						var oLi = document.getElementById("tab").getElementsByTagName("li");
-						var oUl = document.getElementById("ms-main").getElementsByTagName("div");
+						var oLi = document.getElementById("tab")
+								.getElementsByTagName("li");
+						var oUl = document.getElementById("ms-main")
+								.getElementsByTagName("div");
 						for (var i = 0; i < oLi.length; i++) {
 							oLi[i].index = i;
 							oLi[i].onmouseover = function() {
@@ -122,7 +124,7 @@
 								this.className = "cur";
 								for (var n = 0; n < oUl.length; n++)
 									oUl[n].style.display = "none";
-								oUl[this.index].style.display = "block"
+								oUl[this.index].style.display = "block";
 							}
 						}
 					}
@@ -194,29 +196,24 @@
 				<ul>
 					<li><a><img src="images/01.jpg"><b>住在手机里的朋友</b></a>
 						<p>
-							<span class="tulanmu"><a>手机配件</a></span><span
-								class="tutime">2015-02-15</span>
+							<span class="tulanmu"><a>手机配件</a></span><span class="tutime">2015-02-15</span>
 						</p></li>
 					<li><a><img src="images/02.jpg"><b>教你怎样用欠费手机拨打电话</b></a>
 						<p>
-							<span class="tulanmu"><a>手机配件</a></span><span
-								class="tutime">2015-02-15</span>
+							<span class="tulanmu"><a>手机配件</a></span><span class="tutime">2015-02-15</span>
 						</p></li>
 					<li><a title="手机的16个惊人小秘密，据说99.999%的人都不知"><img
 							src="images/03.jpg"><b>手机的16个惊人小秘密，据说...</b></a>
 						<p>
-							<span class="tulanmu"><a>手机配件</a></span><span
-								class="tutime">2015-02-15</span>
+							<span class="tulanmu"><a>手机配件</a></span><span class="tutime">2015-02-15</span>
 						</p></li>
 					<li><a><img src="images/06.jpg"><b>住在手机里的朋友</b></a>
 						<p>
-							<span class="tulanmu"><a>手机配件</a></span><span
-								class="tutime">2015-02-15</span>
+							<span class="tulanmu"><a>手机配件</a></span><span class="tutime">2015-02-15</span>
 						</p></li>
 					<li><a><img src="images/04.jpg"><b>教你怎样用欠费手机拨打电话</b></a>
 						<p>
-							<span class="tulanmu"><a>手机配件</a></span><span
-								class="tutime">2015-02-15</span>
+							<span class="tulanmu"><a>手机配件</a></span><span class="tutime">2015-02-15</span>
 						</p></li>
 				</ul>
 			</div>
@@ -242,13 +239,45 @@
 		<!--r_box end -->
 	</article>
 	<footer>
-		<p class="ft-copyright">© 2015 AllMobilize, Inc. Licensed under MIT license. Made with love By LWXYFER1</p>
+		<p class="ft-copyright">© 2015 AllMobilize, Inc. Licensed under
+			MIT license. Made with love By LWXYFER1</p>
 		<div id="tbox">
 			<a id="togbook"></a> <a id="gotop" href="javascript:void(0)"></a>
 		</div>
 	</footer>
+	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="js/homePage.js"></script>
-		
+	<script type="text/javascript" src="js/moreOperation.js"></script>
+
+	<script type="text/javascript">
+		var currUser = $("#user_usid").val(); 
+		var navStr = '';
+		if (currUser == ""){
+			navStr += '<ul class="nav_right">';
+			navStr += '<li><a href="register.jsp">注册 </a></li>';
+			navStr += '<li>|</li>';
+			navStr += '<li><a href="login.jsp"> 登录 </a></li></ul>';
+			$("#top_right").html(navStr);
+		} else {
+			navStr += '<div style="float:right;height:100%;line-height: 50px;">';
+			navStr += '<span style="color: #10D07A;">已登录</span>';
+			navStr += '<select id="user_select" style="border: none;">';
+			navStr += '<option disabled="disabled" selected="selected">&nbsp;&nbsp;更多</option>';
+			navStr += '<option onclick="switch_user()">切换用户</option>';
+			navStr += '<option onclick="login_out()">退出</option>';
+			navStr += '</select></div>';
+			$("#top_right").html(navStr);
+		}
+		function check_login(){
+			if($("#user_usid").val() == ""){
+				$.messager.alert("操作提示","你尚未登陆，请先登录!","info",function(){
+					location.href="login.jsp";
+				});
+			}else{
+				location.href="personPage.jsp";
+			} 
+		}
+	</script>
 
 </body>
 

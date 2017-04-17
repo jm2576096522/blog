@@ -130,7 +130,15 @@ body {
 .yzmbutton:hover{
 	 background-color:#0c79b1;
 }
-
+/* 用户显示信息 */
+#loginUname{
+	width: 110px;
+	font-size:16px;
+	border:none;
+	overflow: hidden;
+	text-align:left;
+	text-overflow: ellipsis;
+}
 /* 文章内容省略显示 */
 .con_text{
 	height:120px;
@@ -151,6 +159,20 @@ body {
 }
 .f_r {
 	float: right
+}
+
+/* 用户基本信息 */
+#userPersonInfo p{
+	text-align: left;
+	margin-left:20px;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space: nowrap;
+	
+}
+#userPersonInfo p:hover{
+	overflow:visible;
+	white-space: normal;
 }
 
 

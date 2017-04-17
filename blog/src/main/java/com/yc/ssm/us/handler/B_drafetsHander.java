@@ -90,6 +90,10 @@ public class B_drafetsHander {
 	public int publishArticle(Integer drid){
 		LogManager.getLogger().debug("立即发表");
 		B_drafets b_drafets = drafetsService.findDrafetByDrid(drid);  //获取草稿
+		if(b_drafets.getDrpic() == null){
+			b_drafets.setDrpic("");
+		}
+		System.out.println(b_drafets);
 		return drafetsService.publishArticle(b_drafets);
 	}
 

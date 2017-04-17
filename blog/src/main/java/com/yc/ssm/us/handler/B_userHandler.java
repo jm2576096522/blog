@@ -65,11 +65,15 @@ public class B_userHandler {
 	//用户退出
 	@RequestMapping("login_out")
 	@ResponseBody
-	public String login_out(HttpServletRequest request){
-		HttpSession session = request.getSession();
-		session.setAttribute(ServletUtil.LOGIN_USER,"");
-		LogManager.getLogger().debug("我是退出用户的处理");
-		return "true";
+	public boolean login_out(HttpSession session){
+		if(current_user != null){
+			session.setAttribute(ServletUtil.LOGIN_USER,"");
+			LogManager.getLogger().debug("我是退出用户的处理");
+			return true;
+		}else{
+			LogManager.getLogger().debug("我是退出用户的失败处理");
+			return false;
+		}
 	}
 
 	// 生成验证码图片
@@ -104,29 +108,17 @@ public class B_userHandler {
 		System.out.println("list:row==>" + rows + ",page==>" + page);
 		return userService.partUser(page, rows);// 异步数据响应
 	}
-
-/*
-	// 修改用户信息（包含图片）
-	@RequestMapping("modify")
+	
+	//根据用户usid查询用户
+	@RequestMapping(value = "findUserInfoByUsid", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean modify(@RequestParam("picData") MultipartFile picData, B_user user) {
-		System.out.println("modify:user==>" + user);
-		System.out.println("upicPath ==>> " +picData);
-		String picPath = null;
-		if (picData != null && !picData.isEmpty()) {// 判断是否有文件上传
-			try {
-				picData.transferTo(ServletUtil.getUploadFile(picData.getOriginalFilename()));
-				picPath = ServletUtil.VIRTUAL_UPLOAD_DIR + picData.getOriginalFilename();
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		user.setUpic(picPath);
-		System.out.println("上传图片==》user:" + user);
-		return userService.updateUser(user);// 异步数据响应
-	}*/
+	public B_user findUserByUsid(Integer usid){
+		LogManager.getLogger().debug("根据用户usid查询用户");
+		return userService.findUserByUsid(usid);
+	}
+
+
+	// 修改用户图片）
 	@RequestMapping(value="update_img",method=RequestMethod.POST)
 	@ResponseBody
 	public boolean update_img(@RequestParam("upicDate") MultipartFile upicDate){
