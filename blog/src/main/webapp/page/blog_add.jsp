@@ -6,6 +6,7 @@
 <base href="${deployName}">
 <meta charset="utf-8">
 <title>新建博客</title>
+<link rel="icon" type="image/png" href="assets/i/favicon.png">
 <link rel="stylesheet" href="assets/css/amazeui.min.css">
 <link rel="stylesheet" href="assets/css/app.css">
 <link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">

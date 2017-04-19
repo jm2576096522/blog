@@ -77,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getPartComment" resultType="B_comment"> 
 	select * from (select
 		n.*,rownum
-		rn from (select bc.*,bu.uname,ba.atitle,bu.upic from
+		rn from (select bc.*,nvl(bu.uname,'无名氏'),bu.uemail,ba.atitle,bu.upic from
 		b_comment bc,b_user bu,b_article ba where ba.aid(+)=bc.caid and
 		bu.usid(+)=bc.usid order by bc.usid)n where
 		${currPage}*${pageSize}>=rownum)

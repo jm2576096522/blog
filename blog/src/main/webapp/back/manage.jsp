@@ -17,9 +17,8 @@
 <body class="easyui-layout">
 	<div
 		data-options="region:'north' ,title:'欢迎【 <span>${loginAdmin.adname}</span>】进入博客管理系统'"
-		style="height: 110px; background: #E9F1FF; padding-top:20px;">
-		<div
-			style="width: 60%; text-align: center;  float: left;">
+		style="height: 110px; background: #E9F1FF; padding-top: 20px;">
+		<div style="width: 60%; text-align: center; float: left;">
 			<img
 				style="height: 40px; width: 200px; margin: auto auto; float: right"
 				class="logo" alt="公司logo" src="images/plot2.png" />
@@ -122,25 +121,26 @@
 				</tr>
 				<tr>
 					<td align="right">原密码:</td>
-					<td><input  value="${loginAdmin.adpassword}"
-						type="password" class="easyui-validatebox " placeholder="请输入原密码"
-						required="required" /></td>
+					<td><input id="propwd" name="propwd"
+						class="easyui-passwordbox"
+						data-options="prompt:'请输入原密码',required:true" style="width: 150px;" /></td>
 				</tr>
 				<tr>
 					<td align="right">新密码:</td>
-					<td><input id="pwd" name="adpassword" type="password"
-						class="easyui-validatebox " placeholder="请输入新密码"
-						required="required" /></td>
+					<td><input id="pwd" name="adpassword"
+						class="easyui-passwordbox "
+						data-options="prompt:'请输入新密码',required:true"
+						style="width: 150px;" validType="equals['#propwd']" /></td>
 				</tr>
 				<tr>
 					<td align="right">重复新密码:</td>
-					<td><input id="rpwd" name="rpwd" type="password"
-						class="easyui-validatebox " placeholder="请重新输入原密码"
-						required="required" validType="equals['#pwd']" /></td>
+					<td><input id="rpwd" name="rpwd" class="easyui-passwordbox "
+						data-options="prompt:'请重新输入新密码',required:true"
+						style="width: 150px;" validType="equalTo['#pwd']" /></td>
 				</tr>
 				<tr>
-					<td align="center" colspan="2"><a id="modifyPwdBtn"
-						href="javascript:void(0)">修 改</a><a id="closeBtn"
+					<td align="center" colspan="2" style="padding-left: 60px;"><a  id="modifyPwdBtn"
+						href="javascript:void(0)">修 改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a id="closeBtn"
 						href="javascript:void(0)">关 闭</a></td>
 				</tr>
 
@@ -152,9 +152,10 @@
 	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
 	<script src="js/validatebox.js" type="text/javascript"></script>
 	<script type="text/javascript" src="Highcharts/code/highcharts.js"></script>
-<script type="text/javascript" src="Highcharts/code/modules/exporting.js"></script>
-<script type="text/javascript" src="Highcharts/code/modules/data.js"></script>
-	
+	<script type="text/javascript"
+		src="Highcharts/code/modules/exporting.js"></script>
+	<script type="text/javascript" src="Highcharts/code/modules/data.js"></script>
+
 	<script type="text/javascript" src="js/manage.js"></script>
 </body>
 </html>

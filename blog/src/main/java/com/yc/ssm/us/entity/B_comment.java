@@ -1,6 +1,14 @@
 package com.yc.ssm.us.entity;
 public class B_comment {
 
+	public String getUemail() {
+		return uemail;
+	}
+
+	public void setUemail(String uemail) {
+		this.uemail = uemail;
+	}
+
 	public String getAtitle() {
 		return atitle;
 	}
@@ -17,6 +25,7 @@ public class B_comment {
 	 
 	private String atitle;//评论文章标题
 	private String uname;	//用户昵称
+	private String uemail;//用户邮箱
 	private String upic;	//用户图片
 	private Integer rn;  //排行
 	
@@ -126,9 +135,10 @@ public class B_comment {
 
 	@Override
 	public String toString() {
-		return "\nB_comment [cid=" + cid + ", caid=" + caid + ", usid=" + usid + ", ccontent=" + ccontent + ", ctime="
-				+ ctime + ", atitle=" + atitle + ", uname=" + uname + ", upic=" + upic + ", rn=" + rn + ", total="
-				+ total + ", pageSize=" + pageSize + ", currPage=" + currPage + ", totalPage=" + totalPage + "]";
+		return "B_comment [cid=" + cid + ", caid=" + caid + ", usid=" + usid + ", ccontent=" + ccontent + ", ctime="
+				+ ctime + ", atitle=" + atitle + ", uname=" + uname + ", uemail=" + uemail + ", upic=" + upic + ", rn="
+				+ rn + ", total=" + total + ", pageSize=" + pageSize + ", currPage=" + currPage + ", totalPage="
+				+ totalPage + "]";
 	}
 
 	

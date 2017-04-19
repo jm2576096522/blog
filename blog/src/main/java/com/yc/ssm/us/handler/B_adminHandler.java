@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yc.ssm.us.entity.B_admin;
 import com.yc.ssm.us.entity.PaginationBean;
 import com.yc.ssm.us.service.B_adminService;
+import com.yc.ssm.us.util.Encrypt;
 import com.yc.ssm.us.util.ServletUtil;
 
 @Controller
@@ -25,17 +27,34 @@ public class B_adminHandler {
 	@Autowired
 	private B_adminService b_adminService;
 
+	private B_admin current_admin;// 当前管理员
+
 	// 管理员登录
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(B_admin b_admin, HttpServletRequest request) {
 		LogManager.getLogger().debug("login:admin===>" + b_admin);
 		b_admin = b_adminService.login(b_admin);
 		if (b_admin == null) {
-			request.setAttribute(ServletUtil.ERROR_AdminMESSAGE, "管理员名称或密码错误！！！");
-			return "redirect:/back/admin_login.jsp";
+			request.setAttribute(ServletUtil.ERROR_MESSAGE, "管理员名称或密码错误！！！");
+			return "/back/admin_login.jsp";
 		} else {
 			request.getSession().setAttribute(ServletUtil.LOGIN_ADMIN, b_admin);
+			current_admin = (B_admin) request.getSession().getAttribute("loginAdmin");
 			return "redirect:/back/manage.jsp";
+		}
+	}
+
+	// 管理员退出
+	@RequestMapping("login_out")
+	@ResponseBody
+	public boolean login_out(HttpSession session) {
+		if (current_admin != null) {
+			session.setAttribute(ServletUtil.LOGIN_ADMIN, "");
+			LogManager.getLogger().debug("我是退出管理员登录成功的处理");
+			return true;
+		} else {
+			LogManager.getLogger().debug("我是退出管理员登录的失败处理");
+			return false;
 		}
 	}
 
@@ -54,18 +73,23 @@ public class B_adminHandler {
 		LogManager.getLogger().debug("modify:user==>" + user);
 		return b_adminService.modifyUser(user);// 异步数据响应
 	}
-	
+
+	// 修改密码
 	@RequestMapping(value = "modifyPwd", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean modifyPwd(B_admin user,HttpServletRequest request) {
-		LogManager.getLogger().debug("modifyPwd:user==>" + user);
-		boolean result=b_adminService.modifyUser(user);
-		if(result){
-			request.getSession().setAttribute(ServletUtil.LOGIN_ADMIN, user);
-			System.out.println(request.getSession().getAttribute("user"));
+	public boolean modifyPwd(@RequestParam("adpassword") String adpassword, @RequestParam("propwd") String propwd) {
+		B_admin admin = new B_admin();
+		admin.setAdpassword(Encrypt.md5AndSha(adpassword));
+		admin.setAdid(current_admin.getAdid());
+		if (!current_admin.getAdpassword().equals( Encrypt.md5AndSha(propwd))) {
+			return false;
+		} else if (b_adminService.modifyUser(admin)) {
+			current_admin.setAdpassword(Encrypt.md5AndSha(adpassword));
+			return true;
 		}
-		return result;// 异步数据响应
+		return false;
 	}
+
 	// 添加管理员
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@ResponseBody
@@ -88,8 +112,8 @@ public class B_adminHandler {
 		LogManager.getLogger().debug("forgetPassword:admin===>" + b_admin);
 		b_admin = b_adminService.forgetPassword(b_admin);
 		if (b_admin == null) {
-			request.setAttribute(ServletUtil.ERROR_AdminMESSAGE, "管理员名称或者邮箱错误！！！");
-			return "redirect:/back/forgetPassword.jsp";
+			request.setAttribute(ServletUtil.ERROR_MESSAGE, "管理员名称或者邮箱错误！！！");
+			return "/back/forgetPassword.jsp";
 		} else {
 			request.getSession().setAttribute(ServletUtil.LOGIN_ADMIN, b_admin);
 			return "redirect:/back/manage.jsp";

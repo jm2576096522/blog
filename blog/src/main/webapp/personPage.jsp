@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <base href="${deployName}">
 <title>个人主界面</title>
+<link rel="icon" type="image/png" href="assets/i/favicon.png">
 <link rel="stylesheet" href="assets/css/amazeui.min.css">
 <link rel="stylesheet" href="assets/css/app.css">
 </head>

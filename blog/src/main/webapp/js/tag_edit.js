@@ -60,13 +60,7 @@ $("#modifyTagForm").form(
 		{
 			url : "tag/modify",
 			success : function(data) {
-				if (data == "") {
-					$.messager.alert('标签修改', '当前用户没有修改用户的权限 ！', 'warning');
-					$("#modifyTag").dialog("close"); // 关闭修改框
-					return;
-				}
-
-				if (data.trim() == "true") {
+				if (data) {
 					$("#modifyTag").dialog("close"); // 关闭修改框
 					$("#tagList").datagrid("reload"); // 刷新修改数据
 				} else {
@@ -86,8 +80,16 @@ $("#addTagForm").form(
 		{
 			url : "tag/add",
 			success : function(data) {
+				$("#addTag").dialog("close"); // 关闭添加框
 				if (data.trim()>0) {
-					$("#addTag").dialog("close"); // 关闭添加框
+					$.messager.show({
+						msg : '添加标签成功！！！',
+						showType : 'show',
+						style : {
+							top : document.body.scrollTop
+									+ document.documentElement.scrollTop,
+						}
+					});
 					$("#tagList").datagrid("reload"); // 刷新修改数据
 				} else {
 					$.messager.show({
@@ -155,7 +157,15 @@ function deleteDate(index) {
 				if (data > 0) {
 					$("#tagList").datagrid("reload"); // 刷新修改数据
 				} else {
-					alert("删除失败失败");
+					$.messager.show({
+						title : '删除标签',
+						msg : '删除标签失败！！！',
+						showType : 'show',
+						style : {
+							top : document.body.scrollTop
+									+ document.documentElement.scrollTop,
+						}
+					});
 				}
 			});
 			// 将选择到的行存入数组并用,分隔转换成字符串，

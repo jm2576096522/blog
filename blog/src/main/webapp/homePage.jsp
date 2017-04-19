@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <base href="${deployName}">
 <title>博客主页面</title>
-
+<link rel="shortcut icon" href="assets/i/favicon.png" />
 <link href="css/base.css" rel="stylesheet">
 <link href="css/index.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">

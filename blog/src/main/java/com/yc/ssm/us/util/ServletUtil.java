@@ -3,8 +3,8 @@ package com.yc.ssm.us.util;
 import java.io.File;
 
 public class ServletUtil {
+	
 	public static final String ERROR_MESSAGE = "errorMsg";
-	public static final String ERROR_AdminMESSAGE = "errorAdminMsg";
 	public static final String LOGIN_USER = "loginUser";
 	
 	public static final String LOGIN_ADMIN = "loginAdmin";

@@ -6,6 +6,7 @@
 <base href="${deployName}">
 <meta charset="utf-8">
 <title>我的博客</title>
+<link rel="icon" type="image/png" href="assets/i/favicon.png">
 <link rel="stylesheet" href="assets/css/amazeui.min.css">
 <link rel="stylesheet" href="assets/css/app.css">
 <script type="text/javascript" src="js/jquery.min.js"></script>
