@@ -43,6 +43,8 @@ function pageHotArticle(){
 		}
 		$("#content").html(articleStr);
 	},"json");
+	
+	
 }
 function loadMoreArticle(){
 	pageSize = 10;
@@ -131,4 +133,15 @@ function check_login(){
 	} 
 }
 
-
+var tempTid = "";
+//异步加载标签信息
+$.post("tag/list", function(data) {
+	for (var i = 0; i < data.length; i++) {
+		$("#tag").append("<li><a href='?tagid=" + data[i].tagid + "'><b>" + data[i].tagname + "</b></a></li>");
+	}
+	$("#tag a").click(function(){
+		tempTid = this.href.substr(this.href.indexOf("?") + 1);
+		loadMoreArticle();
+		return false;
+	});
+}, "json");

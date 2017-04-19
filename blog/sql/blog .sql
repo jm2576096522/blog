@@ -248,6 +248,22 @@ create table b_drafets(
 
 insert into b_drafets values(seq_drid.nextval,10007,'你好',1,2,'2017-04-12','hello world!','/upload/a1.jpg');
 
+
+--博客专栏
+
+create sequence seq_coid start with 1;
+create table b_column(
+       coid int primary key,               --专栏id
+       cotitle  varchar2(20) not null,      --专栏标题
+     cocontent varchar2(100) ,  --专栏说明
+       usid int references b_user(usid) not null,     --专栏创建者id
+       cotime varchar2(40),                --专栏创建时间
+       coaid varchar2(200),				--专栏里面所有文章的id
+       copic varchar2(600),                --专栏图片  
+       coviewnum  int  default 0        --专栏浏览量
+);
+
+
 select * from B_ADMIN;--管理员
 select * from B_COMMENT;--评论
 select  * from b_article;--文章

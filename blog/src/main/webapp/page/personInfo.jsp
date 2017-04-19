@@ -98,9 +98,10 @@
 								<label>出生日期：</label> 
 								 <input class="easyui-datebox" name="ubirthday" id="ubirthday" data-options="formatter:myformatter,parser:myparser"></input>
 							</li>
+							
 							<li>
 								<label>联系方式：</label> 
-								<input type="text" name="uphone" id="uphone"/>
+								<input class="easyui-textbox"  name="uphone" id="uphone" data-options="prompt:'请输入正确的手机号码。',validType:'phoneNum'"/>
 							</li>
 							<li>
 								<label>所 &nbsp;在 &nbsp;地：</label> 

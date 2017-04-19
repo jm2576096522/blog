@@ -174,21 +174,8 @@
 
 			<div class="cloud">
 				<h3>标签云</h3>
-				<ul>
-					<li><a>个人博客</a></li>
-					<li><a>web开发</a></li>
-					<li><a>前端设计</a></li>
-					<li><a>Html</a></li>
-					<li><a>CSS3</a></li>
-					<li><a>Html5+css3</a></li>
-					<li><a>百度</a></li>
-					<li><a>Javasript</a></li>
-					<li><a>web开发</a></li>
-					<li><a>前端设计</a></li>
-					<li><a>Html</a></li>
-					<li><a>CSS3</a></li>
-					<li><a>Html5+css3</a></li>
-					<li><a>百度</a></li>
+				<ul id="tag">
+				<!--自动获取所有标签  -->
 				</ul>
 			</div>
 			<div class="tuwen">
