@@ -18,8 +18,14 @@ $("#commentList")
 								align : 'center'
 							},
 							{
+								field : 'uemail',
+								title : '评论者邮箱',
+								width : 100,
+								align : 'center'
+							},
+							{
 								field : 'uname',
-								title : '评论者',
+								title : '评论者昵称',
 								width : 100,
 								align : 'center'
 							},

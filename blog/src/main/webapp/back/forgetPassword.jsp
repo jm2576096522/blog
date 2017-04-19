@@ -15,7 +15,7 @@
 		<form id="forgetForm" action="admin/forgetPassword" method="post">
 			<table cellpadding="5" style="width: 300px; padding-left: 15px;">
 				<tr align="center">
-					<td colspan="2"><label style="color: red;">${errorAdminMsg}&nbsp;</label></td>
+					<td colspan="2"><label style="color: red;">${errorMsg}&nbsp;</label></td>
 				</tr>
 				<tr>
 					<td align="right" width="60px">管理员名称</td>
@@ -54,6 +54,12 @@
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
 	<script type="text/javascript">
+	//键盘事件 ，按enter键表单提交
+	$(window).keydown(function(event){
+		if(event.keyCode==13){
+			$("#forgetForm").submit();// 表单提交
+		}
+	});
 		function forgetPassword() {
 			$("#forgetForm").submit();
 		}

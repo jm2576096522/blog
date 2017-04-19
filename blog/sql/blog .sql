@@ -56,13 +56,17 @@ create table b_admin(
        adname varchar2(20) not null unique,      --管理员名称
        adpassword varchar2(20) default 'a'   --管理员密码
 );
-
+ 
  truncate table B_ADMIN;--删除表数据
  alter table b_admin add (admail varchar2(50) not null unique);--添加管理员邮箱（忘记密码登录）
 
 --插入管理员数据
 insert into B_ADMIN values(seq_adid.nextval,'admin','a','2576096522@qq.com');
 select * from B_ADMIN;
+-----修改字段
+alter table B_ADMIN modify adpassword varchar2(50);
+
+update  B_ADMIN set adpassword = '6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2';
 
 -----文章所属类型（原创，转载，翻译） 1 2 3 
 create table b_type(

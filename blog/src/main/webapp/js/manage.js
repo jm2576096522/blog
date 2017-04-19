@@ -159,6 +159,14 @@ $("#modifyPwdForm").form(
 				if (data) {
 					$("#personalInfo").dialog("close"); // 关闭修改框	
 					$("#modifyPwdForm").form('clear');
+					$.messager.show({
+						msg : '修改密码成功！！！',
+						showType : 'show',
+						style : {
+							top : document.body.scrollTop
+									+ document.documentElement.scrollTop,
+						}
+					});
 				} else {
 					$.messager.show({
 						title : '修改密码',
@@ -204,8 +212,11 @@ function logoutFun() {
 	// 显示退出系统确认框
 	$.messager.confirm('', '您确定要退出系统吗？', function(r) {
 		if (r) {
-			// 退出系统操作;
-			location.replace("back/admin_login.jsp");
+			$.get("admin/login_out",function(data){
+				location.href = "back/admin_login.jsp";
+		});
+			/*// 退出系统操作;
+			location.replace("back/admin_login.jsp");*/
 		}
 	});
 }

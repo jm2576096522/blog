@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <base href="${deployName}">
 <title>博客主页面</title>
-
+<link rel="shortcut icon" href="assets/i/favicon.png" />
 <link href="css/base.css" rel="stylesheet">
 <link href="css/index.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
@@ -26,7 +26,7 @@
 			<li class="am-active"><a href="homePage.jsp"
 				style="color: #10D07A;">首页</a></li>
 			<li><a>博客专栏</a></li>
-			<li><a>博客专家</a></li>
+			<li><a href="blog_expert.jsp">博客专家</a></li>
 			<li><a>热度话题</a></li>
 			<li><a onclick="check_login()">我的博客</a></li>
 		</ul>

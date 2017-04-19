@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yc.ssm.us.entity.B_admin;
 import com.yc.ssm.us.entity.PaginationBean;
 import com.yc.ssm.us.service.B_adminService;
+import com.yc.ssm.us.util.Encrypt;
 import com.yc.ssm.us.util.ServletUtil;
 
 @Controller
@@ -32,15 +33,28 @@ public class B_adminHandler {
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(B_admin b_admin, HttpServletRequest request) {
 		LogManager.getLogger().debug("login:admin===>" + b_admin);
-		HttpSession session = request.getSession();
 		b_admin = b_adminService.login(b_admin);
 		if (b_admin == null) {
 			request.setAttribute(ServletUtil.ERROR_MESSAGE, "管理员名称或密码错误！！！");
-			return "forward:/back/admin_login.jsp";
+			return "/back/admin_login.jsp";
 		} else {
-			session.setAttribute(ServletUtil.LOGIN_ADMIN, b_admin);
-			current_admin = (B_admin) session.getAttribute("loginAdmin");
+			request.getSession().setAttribute(ServletUtil.LOGIN_ADMIN, b_admin);
+			current_admin = (B_admin) request.getSession().getAttribute("loginAdmin");
 			return "redirect:/back/manage.jsp";
+		}
+	}
+
+	// 管理员退出
+	@RequestMapping("login_out")
+	@ResponseBody
+	public boolean login_out(HttpSession session) {
+		if (current_admin != null) {
+			session.setAttribute(ServletUtil.LOGIN_ADMIN, "");
+			LogManager.getLogger().debug("我是退出管理员登录成功的处理");
+			return true;
+		} else {
+			LogManager.getLogger().debug("我是退出管理员登录的失败处理");
+			return false;
 		}
 	}
 
@@ -65,13 +79,12 @@ public class B_adminHandler {
 	@ResponseBody
 	public boolean modifyPwd(@RequestParam("adpassword") String adpassword, @RequestParam("propwd") String propwd) {
 		B_admin admin = new B_admin();
-		System.out.println(adpassword + "====" + current_admin.getAdid() + "---" + propwd);
-		admin.setAdpassword(adpassword);
+		admin.setAdpassword(Encrypt.md5AndSha(adpassword));
 		admin.setAdid(current_admin.getAdid());
-		if (!current_admin.getAdpassword().equals(propwd)) {
+		if (!current_admin.getAdpassword().equals( Encrypt.md5AndSha(propwd))) {
 			return false;
 		} else if (b_adminService.modifyUser(admin)) {
-			current_admin.setAdpassword(adpassword);
+			current_admin.setAdpassword(Encrypt.md5AndSha(adpassword));
 			return true;
 		}
 		return false;
@@ -100,7 +113,7 @@ public class B_adminHandler {
 		b_admin = b_adminService.forgetPassword(b_admin);
 		if (b_admin == null) {
 			request.setAttribute(ServletUtil.ERROR_MESSAGE, "管理员名称或者邮箱错误！！！");
-			return "forward:/back/forgetPassword.jsp";
+			return "/back/forgetPassword.jsp";
 		} else {
 			request.getSession().setAttribute(ServletUtil.LOGIN_ADMIN, b_admin);
 			return "redirect:/back/manage.jsp";

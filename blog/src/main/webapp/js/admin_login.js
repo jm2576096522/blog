@@ -12,3 +12,9 @@ $('#btnLogin').linkbutton({
 		$("#loginForm").submit();// 表单提交
 	}
 });
+//键盘事件 ，按enter键表单提交
+$(window).keydown(function(event){
+	if(event.keyCode==13){
+		$("#loginForm").submit();// 表单提交
+	}
+});

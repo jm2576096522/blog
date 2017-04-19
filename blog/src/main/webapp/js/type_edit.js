@@ -55,19 +55,13 @@ $("#modifyTypeForm").form(
 		{
 			url : "type/modify",
 			success : function(data) {
-				if (data == "") {
-					$.messager.alert('类型修改', '当前用户没有修改用户的权限 ！', 'warning');
-					$("#modifyType").dialog("close"); // 关闭修改框
-					return;
-				}
-
-				if (data.trim() == "true") {
+				if (data.trim()) {
 					$("#modifyType").dialog("close"); // 关闭修改框
 					$("#typeList").datagrid("reload"); // 刷新修改数据
 				} else {
 					$.messager.show({
-						title : '修改信息',
-						msg : '修改失败！！！',
+						title : '修改类型',
+						msg : '修改类型失败！！！',
 						showType : 'show',
 						style : {
 							top : document.body.scrollTop
@@ -86,8 +80,8 @@ $("#addTypeForm").form(
 					$("#typeList").datagrid("reload"); // 刷新添加数据
 				} else {
 					$.messager.show({
-						title : '添加信息',
-						msg : '添加信息失败！！！',
+						title : '添加类型',
+						msg : '添加类型失败！！！',
 						showType : 'show',
 						style : {
 							top : document.body.scrollTop
