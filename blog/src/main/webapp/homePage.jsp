@@ -26,7 +26,7 @@
 			<li class="am-active"><a href="homePage.jsp"
 				style="color: #10D07A;">首页</a></li>
 			<li><a>博客专栏</a></li>
-			<li><a href="blog_expert.jsp">博客专家</a></li>
+			<li><a onclick="check_login2()">博客专家</a></li>
 			<li><a>热度话题</a></li>
 			<li><a onclick="check_login()">我的博客</a></li>
 		</ul>

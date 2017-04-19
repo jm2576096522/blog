@@ -30,7 +30,7 @@ public class B_commentMapperTest {
 		System.out.println(list);
 		assertNotNull(list);
 	}
-	
+	//通过caid分页查询
 	@Test
 	public void testFindCommentByCaid() {
 		B_comment b_comment = new B_comment();
@@ -38,6 +38,17 @@ public class B_commentMapperTest {
 		b_comment.setPageSize(10);
 		b_comment.setCurrPage(1);
 		List<B_comment> list = b_commentService.findCommentByCaid(b_comment);
+		System.out.println(list);
+		assertNotNull(list);
+	}
+	//通过usid分页查询
+	@Test
+	public void testFindCommentByUsid() {
+		B_comment b_comment = new B_comment();
+		b_comment.setUsid(10007);
+		b_comment.setPageSize(10);
+		b_comment.setCurrPage(1);
+		List<B_comment> list = b_commentService.findCommentByUsid(b_comment);
 		System.out.println(list);
 		assertNotNull(list);
 	}

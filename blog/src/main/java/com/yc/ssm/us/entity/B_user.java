@@ -16,6 +16,27 @@ public class B_user implements Serializable {
 	private String uphone;
 	private String uprofession;
 	private String upersondesc;
+	
+	
+	private Integer articlenum;  //该用户所写的文章总数
+	private Integer aviewtotal;	//该用户的总浏览量
+	
+
+	public Integer getArticlenum() {
+		return articlenum;
+	}
+
+	public void setArticlenum(Integer articlenum) {
+		this.articlenum = articlenum;
+	}
+
+	public Integer getAviewtotal() {
+		return aviewtotal;
+	}
+
+	public void setAviewtotal(Integer aviewtotal) {
+		this.aviewtotal = aviewtotal;
+	}
 
 	public Integer getUsid() {
 		return usid;
@@ -106,11 +127,13 @@ public class B_user implements Serializable {
 	}
 	public B_user() {
 	}
+
 	@Override
 	public String toString() {
-		return "\nB_user [usid=" + usid + ", uemail=" + uemail + ", upassword=" + upassword + ", uname=" + uname
+		return "B_user [usid=" + usid + ", uemail=" + uemail + ", upassword=" + upassword + ", uname=" + uname
 				+ ", usex=" + usex + ", ubirthday=" + ubirthday + ", uaddress=" + uaddress + ", upic=" + upic
-				+ ", uphone=" + uphone + ", uprofession=" + uprofession + ", upersondesc=" + upersondesc + "]";
+				+ ", uphone=" + uphone + ", uprofession=" + uprofession + ", upersondesc=" + upersondesc
+				+ ", articlenum=" + articlenum + ", aviewtotal=" + aviewtotal + "]";
 	}
-
+	
 }

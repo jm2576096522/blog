@@ -14,13 +14,13 @@ function listById(){
 	$.post("article/listById",{currPage:currPage,pageSize:pageSize},function(data){
 		var tableStr ;
 		for(var i=0;i<data.length;i++){
-			tableStr += "<tr><th class='specalt' style='display:none;'>"+data[i].aid+"</th>";
+			tableStr += "<tr><td class='specalt' style='display:none;'>"+data[i].aid+"</td>";
 			tableStr += "<td class='alt'>"+data[i].atitle+"</td>";
 			tableStr += "<td class='alt'>"+data[i].atime+"</td>";
 			tableStr += "<td class='alt'>"+data[i].aviewnum+"</td>";
 			tableStr += "<td class='alt'>"+data[i].commentnum+"</td>";
 			tableStr += "<td class='alt'><a style='margin-right:10px; font-size:15px;' onclick='editrow("+data[i].aid+")'>编辑</a>";
-			tableStr += "<a style='margin-right:10px; font-size:15px;' onclick='deleterow("+data[i].aid+")'>删除</a></th>";
+			tableStr += "<a style='margin-right:10px; font-size:15px;' onclick='deleterow("+data[i].aid+")'>删除</a></td></tr>";
 		}
 		$("#table_body").html(tableStr);
 	});}

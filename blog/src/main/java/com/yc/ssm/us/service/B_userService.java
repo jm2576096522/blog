@@ -25,8 +25,9 @@ public interface B_userService {
 	int insertUser(B_user b_user);
 
 	// 通过用户id查找用户
-
 	B_user findUserByUsid(Integer usid);
+	//查询所有的博客专家
+	List<B_user> findProfessor();
 	
 
 }

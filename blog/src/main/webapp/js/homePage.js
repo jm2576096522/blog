@@ -132,6 +132,15 @@ function check_login(){
 		location.href="personPage.jsp";
 	} 
 }
+function check_login2(){
+	if($("#user_usid").val() == ""){
+		$.messager.alert("操作提示","你尚未登陆，请先登录!","info",function(){
+			location.href="login.jsp";
+		});
+	}else{
+		location.href="blogProfessor.jsp";
+	} 
+}
 
 var tempTid = "";
 //异步加载标签信息
