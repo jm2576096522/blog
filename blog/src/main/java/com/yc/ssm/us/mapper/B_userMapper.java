@@ -22,4 +22,7 @@ public interface B_userMapper {
 	//查询所有的用户
 	List<B_user> findUserAll();
 	
+	//查询所有的博客专家
+	List<B_user> findProfessor();
+ 	
 }

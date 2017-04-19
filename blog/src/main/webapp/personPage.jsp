@@ -25,6 +25,7 @@
 				<li><a href="page/blog_add.jsp">写新文章</a></li>
 				<li><a href="page/blogManager.jsp">文章管理</a></li>
 				<li><a href="page/blog_tag.jsp">类别管理</a></li>
+				<li><a href="page/blogComment.jsp">评论管理</a></li>
 				<li><a href="page/blogDrafets.jsp">草稿箱</a></li>
 				<li><a href="page/personInfo.jsp">个人信息管理</a></li>
 			</ul>

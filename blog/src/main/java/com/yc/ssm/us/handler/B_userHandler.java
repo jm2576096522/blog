@@ -3,6 +3,7 @@ package com.yc.ssm.us.handler;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -49,10 +50,10 @@ public class B_userHandler {
 		System.out.println("user的值是：" + user);
 		if (user == null) {
 			request.setAttribute(ServletUtil.ERROR_MESSAGE, "用户名或密码错误！！！");
-			return "redirect:/login.jsp";
+			return "forward:/login.jsp";
 		} else if (imageCode.equalsIgnoreCase(yzm) == false) {
 			request.setAttribute(ServletUtil.ERROR_MESSAGE, "验证码错误！！！");
-			return "redirect:/login.jsp";
+			return "forward:/login.jsp";
 		} else {
 			session.setAttribute(ServletUtil.LOGIN_USER, user);
 			current_user = (B_user) session.getAttribute("loginUser");
@@ -61,7 +62,7 @@ public class B_userHandler {
 
 		}
 	}
-	
+
 	//用户退出
 	@RequestMapping("login_out")
 	@ResponseBody
@@ -108,7 +109,7 @@ public class B_userHandler {
 		System.out.println("list:row==>" + rows + ",page==>" + page);
 		return userService.partUser(page, rows);// 异步数据响应
 	}
-	
+
 	//根据用户usid查询用户
 	@RequestMapping(value = "findUserInfoByUsid", method = RequestMethod.POST)
 	@ResponseBody
@@ -142,14 +143,14 @@ public class B_userHandler {
 		return userService.updateUser(buser);// 异步数据响应
 	}
 
-	
+
 	//更改用户信息（不包含图片）
 	@RequestMapping("update_userInfo")
 	@ResponseBody
 	public boolean update_userInfo(B_user user,HttpSession session){
-			user.setUsid(current_user.getUsid());
-			System.out.println("user:"+user);
-			return userService.updateUser(user);
+		user.setUsid(current_user.getUsid());
+		System.out.println("user:"+user);
+		return userService.updateUser(user);
 	}
 	//更改用户密码
 	@RequestMapping("update_pwd")
@@ -173,6 +174,12 @@ public class B_userHandler {
 		current_user = userService.findUserByUsid(usid);
 		session.setAttribute(ServletUtil.LOGIN_USER, current_user);
 		return current_user;
+	}
 
+	//查询所有的博客专家
+	@RequestMapping(value ="professor" ,method=RequestMethod.POST)
+	@ResponseBody
+	public List<B_user> findProfessor(){
+		return userService.findProfessor();
 	}
 }

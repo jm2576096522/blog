@@ -51,7 +51,8 @@
 				<li><a href="personPage.jsp">我的文章</a></li>
 				<li><a href="page/blog_add.jsp">写新文章</a></li>
 				<li><a href="page/blogManager.jsp">文章管理</a></li>
-				<li><a href="page/blog_tag.jsp" >标签管理</a></li>
+				<li><a href="page/blog_tag.jsp">类别管理</a></li>
+				<li><a href="page/blogComment.jsp">评论管理</a></li>
 				<li><a href="page/blogDrafets.jsp">草稿箱</a></li>
 				<li><a href="page/personInfo.jsp" style="color: #10D07A;">个人信息管理</a></li>
 			</ul>

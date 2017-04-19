@@ -41,6 +41,11 @@ public class B_userServiceImpl implements B_userService {
 		pb=b_userMapper.partUser(pb);
 		return pb;
 	}
+	//查询所有的博客专家
+	public List<B_user> findProfessor(){
+		LogManager.getLogger().debug("查询所有的博客专家");
+		return b_userMapper.findProfessor();
+	}
 
 	//用户信息修改
 	@Override

@@ -8,6 +8,7 @@ public class ServletUtil {
 	public static final String LOGIN_USER = "loginUser";
 	
 	public static final String LOGIN_ADMIN = "loginAdmin";
+	public static final String PicPath = "picPath";
 	
 	public static final String VIRTUAL_UPLOAD_DIR ="/upload/";
 

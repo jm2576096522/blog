@@ -47,6 +47,17 @@
       <param-value>classpath:springmvc.xml</param-value>
     </init-param>
   </servlet>
+  <!--拍照的图片上传  -->
+  <servlet>
+    <servlet-name>UploadServlet</servlet-name>
+    <servlet-class>com.yc.ssm.us.handler.UploadServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>UploadServlet</servlet-name>
+    <url-pattern>/uploadServlet</url-pattern>
+  </servlet-mapping>
+  
   <servlet-mapping>
     <servlet-name>dispatcherServlet</servlet-name>
     <url-pattern>/</url-pattern>

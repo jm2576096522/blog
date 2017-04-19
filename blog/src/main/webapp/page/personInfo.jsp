@@ -29,7 +29,8 @@
 				<li><a href="personPage.jsp">我的文章</a></li>
 				<li><a href="page/blog_add.jsp">写新文章</a></li>
 				<li><a href="page/blogManager.jsp">文章管理</a></li>
-				<li><a href="page/blog_tag.jsp" >标签管理</a></li>
+				<li><a href="page/blog_tag.jsp">类别管理</a></li>
+				<li><a href="page/blogComment.jsp">评论管理</a></li>
 				<li><a href="page/blogDrafets.jsp">草稿箱</a></li>
 				<li><a href="page/personInfo.jsp" style="color: #10D07A;">个人信息管理</a></li>
 			</ul>
@@ -75,11 +76,9 @@
 								<label>头 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;像：</label> 
 								<img src="images/not_pic.jpg" id="upic" width="150" height="150" > <!--圆形样式 style=" border-radius:50%;" -->
 								<input id="upicPath" type="file" name="upicDate" onchange="chgPic(this)"/>
-								<button type="button" id="camera">摄像头</button>
+								<button type="button" id="camera" onclick="open_camera()">摄像头</button>
 								<button type="submit" style="margin-top:10px;" id="pic_submit" onclick="upload_img()">上传图片</button>
-
 							</li>
-							
 						</ul>
 					</form>
 					<form id="myform" name="myform">	
@@ -145,6 +144,10 @@
 	<script type="text/javascript" src="js/moreOperation.js"></script>
 	
 	<script type="text/javascript">
+	function open_camera(){
+		location.href="page/camera.jsp";
+	}
+	
 	function upload_img(){
 		$("#form_img").form({
 			url:"blog/update_img",    

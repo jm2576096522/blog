@@ -1,5 +1,11 @@
 -------------blog项目 --------
 
+文章数大于10 ，浏览量大于20 ，  返回文章总数， 总浏览量 aviewnum  用户基本信息
+select * from b_user bu inner join
+(select usid,count(1) articlenum ,sum(aviewnum) aviewtotal from b_article group by usid) t on t.usid = bu.usid
+where t.articlenum>10 and t.aviewtotal>20;
+select sum(aviewnum) from b_article where usid = 10007;
+
 -------------------------------------
 create sequence seq_usid start with 10001;
 
@@ -17,6 +23,7 @@ create table b_user(
        uprofession varchar2(20),          --用户的职业背景
        upersondesc varchar2(200)        --用户个人描述
 );
+select * from b_user;
 
 insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'1506173890@qq.com','a');
 update  b_user set upassword = '6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2';
@@ -192,6 +199,13 @@ create table b_comment(
        ccontent varchar2(800),            --评论内容
        ctime varchar2(30)              --评论时间
 );
+select b.*,t.*,bu.uname from b_comment b inner join (select aid,atime from B_ARTICLE where usid = 10007) t on b.caid = t.aid
+								inner join B_USER bu on b.usid = bu.usid;
+
+select count(1) from (select * from B_COMMENT b inner join (select aid from B_ARTICLE where usid = 10007) t	on b.caid = t.aid);
+
+select * from b_comment;
+								
 -----修改字段
 alter table b_comment modify ctime varchar2(30);
 
