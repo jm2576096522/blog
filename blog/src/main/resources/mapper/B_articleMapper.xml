@@ -16,15 +16,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		b_type bty on ba.tid =bty.tid
 	</select>
 	
-	<!-- 首页按评论数显示热度文章 -->
-	<select id="findArticleByHot" resultType="B_article" parameterType="B_article">
+		
+	<!-- 分页显示所有的文章（按时间） -->
+	<select id="findArticleByTime" resultType="B_article" parameterType="B_article">
 		select * from (
 		select t.*, rownum rn  from (select bar.*,bu.uname,bt.tagname,bty.tname,nvl(w.commentnum,0) as commentnum from b_article bar
-		left join b_user bu on bar.usid = bu.usid
+		inner join b_user bu on bar.usid = bu.usid
 		left join b_tag bt on bar.tagid=bt.tagid
 		left join b_type bty on bar.tid =bty.tid
 		left join (select d.caid,count(1) as commentnum from (
-			select caid from B_COMMENT b inner join B_ARTICLE ba on ba.aid = b.caid) d group by d.caid) w
+			select caid from B_COMMENT b right join B_ARTICLE ba on ba.aid = b.caid) d group by d.caid) w
+			on w.caid = bar.aid order by bar.atime desc) t 
+		where ${currPage}*${pageSize}>=rownum)  
+		where rn>(${currPage}-1)*${pageSize}
+	</select>
+	
+	<!-- 首页按浏览量数显示热度文章 -->
+	<select id="findArticleByHot" resultType="B_article" parameterType="B_article">
+		select * from (
+		select t.*, rownum rn  from (select bar.*,bu.uname,bt.tagname,bty.tname,nvl(w.commentnum,0) as commentnum from b_article bar
+		inner join b_user bu on bar.usid = bu.usid
+		left join b_tag bt on bar.tagid=bt.tagid
+		left join b_type bty on bar.tid =bty.tid
+		left join (select d.caid,count(1) as commentnum from (
+			select caid from B_COMMENT b right join B_ARTICLE ba on ba.aid = b.caid) d group by d.caid) w
 			on w.caid = bar.aid order by bar.aviewnum desc) t 
 		where ${currPage}*${pageSize}>=rownum)  
 		where rn>(${currPage}-1)*${pageSize}

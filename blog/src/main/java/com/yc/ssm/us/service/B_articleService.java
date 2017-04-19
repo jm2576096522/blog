@@ -7,7 +7,9 @@ import com.yc.ssm.us.entity.PaginationBean;
 
 public interface B_articleService {
 	// 查询所有的文章
-	List<B_article> findArticle();
+	List<B_article> findArticle( );
+	// 分页显示所有的文章（按时间）
+	List<B_article> findArticleByTime(B_article b_article);
 	//首页按评论数显示热度文章
 	List<B_article> findArticleByHot(B_article b_article);
 

@@ -23,7 +23,7 @@ public class B_articleServiceImpl implements B_articleService {
 		LogManager.getLogger().debug("首页按评论数显示热度文章");
 		return b_articleMapper.findArticleByHot(b_article);
 	}
-	
+
 	@Override
 	public List<B_article> listArticleBytagname(String tagname) {
 		// 通过标签名查询博客文章
@@ -55,14 +55,14 @@ public class B_articleServiceImpl implements B_articleService {
 		LogManager.getLogger().debug(" 查询博客文章(通过文章id)");
 		return b_articleMapper.findArticleByAid(aid);
 	}
-	
+
 	//查询用户id所作的文章数及总页数
 	@Override
 	public B_article findArticleNum(B_article b_article){
 		LogManager.getLogger().debug("查询用户id所作的文章数及总页数");
 		return b_articleMapper.findArticleNum(b_article);
 	}
-	
+
 	//查询文章的所有总数和总页数
 	@Override
 	public B_article findArticleTotal(){
@@ -75,6 +75,13 @@ public class B_articleServiceImpl implements B_articleService {
 		LogManager.getLogger().debug("我是articleService里的：");
 		return b_articleMapper.findArticle();
 	}
+	//分页显示所有的文章（按时间）
+	@Override
+	public List<B_article> findArticleByTime(B_article b_article) {
+		LogManager.getLogger().debug("我是articleService里的：");
+		return b_articleMapper.findArticleByTime(b_article);
+	}
+	
 	//文章分页查询
 	@Override
 	public PaginationBean<B_article> partArticle(String page, String rows) {

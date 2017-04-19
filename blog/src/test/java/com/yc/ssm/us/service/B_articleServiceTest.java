@@ -52,6 +52,7 @@ public class B_articleServiceTest {
 	// 查找所有文章
 	@Test
 	public void testFindArticle() {
+		
 		List<B_article> list = bart.findArticle();
 		System.out.println(list);
 		assertNotNull(list);
@@ -60,8 +61,8 @@ public class B_articleServiceTest {
 		@Test
 		public void testFindArticleByHot() {
 			B_article b_article = new B_article();
-			b_article.setCurrPage(1);
-			b_article.setPageSize(5);
+			b_article.setCurrPage(3);
+			b_article.setPageSize(10);
 			List<B_article> list = bart.findArticleByHot(b_article);
 			System.out.println(list);
 			assertNotNull(list);

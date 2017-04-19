@@ -51,10 +51,18 @@ public class B_articleHandler<T> {
 	// 所有的文章查询
 	@RequestMapping("find")
 	@ResponseBody
-	public List<B_article> findArticle() {
+	public List<B_article> findArticle(){
 		LogManager.getLogger().debug("我进来了。。。");
 		return articleService.findArticle();
 	}
+	// 分页显示所有的文章（按时间）
+	@RequestMapping("findArticle")
+	@ResponseBody
+	public List<B_article> findArticleByTime(B_article b_article){
+		LogManager.getLogger().debug("我进来了。。。");
+		return articleService.findArticleByTime(b_article);
+	}
+	
 	//首页按评论数显示热度文章
 	@RequestMapping("findByHot")
 	@ResponseBody
