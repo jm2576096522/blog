@@ -61,14 +61,14 @@ create sequence seq_adid start with 1001;
 create table b_admin(
        adid int primary key,              --管理员id 
        adname varchar2(20) not null unique,      --管理员名称
-       adpassword varchar2(20) default 'a'   --管理员密码
+       adpassword varchar2(40) default 'a'   --管理员密码
 );
  
  truncate table B_ADMIN;--删除表数据
  alter table b_admin add (admail varchar2(50) not null unique);--添加管理员邮箱（忘记密码登录）
 
 --插入管理员数据
-insert into B_ADMIN values(seq_adid.nextval,'admin','a','2576096522@qq.com');
+insert into B_ADMIN values(seq_adid.nextval,'admin','a'),'2576096522@qq.com');
 select * from B_ADMIN;
 -----修改字段
 alter table B_ADMIN modify adpassword varchar2(50);
@@ -129,6 +129,21 @@ update b_article set atime = to_char(sysdate,'yyyy-MM-dd hh24:mm:ss') where aid 
 
 select to_char(sysdate,'yyyy-MM-dd hh:mm:ss')  from dual;
 
+	select * from (
+		select t.*, rownum rn  from (select bar.*,bu.uname,bt.tagname,bty.tname,nvl(w.commentnum,0) as commentnum from b_article bar
+		inner join b_user bu on bar.usid = bu.usid
+		left join b_tag bt on bar.tagid=bt.tagid
+		left join b_type bty on bar.tid =bty.tid
+		left join (select d.caid,count(1) as commentnum from (
+			select caid from B_COMMENT b right join B_ARTICLE ba on ba.aid = b.caid) d group by d.caid) w
+			on w.caid = bar.aid order by bar.atime desc) t 
+		where 30>=rownum)  
+		where rn>20
+		
+		
+	
+	
+	
 -------------------------------更改数据库时区操作
 select dbtimezone from dual;
 select systimestamp from dual; 
