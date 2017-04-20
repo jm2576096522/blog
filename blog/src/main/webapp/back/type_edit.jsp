@@ -9,8 +9,7 @@
 <body>
 	<table id="typeList"></table>
 	<div id="type">
-		<a class="addBtn" href="javascript:void(0)">添加</a> <a class="updBtn"
-			href="javascript:void(0)">刷新</a>
+		<br/>
 	</div>
 	<div id="modifyType" style="width: 300px; direction: center;">
 		<form id="modifyTypeForm" method="post" enctype="multipart/form-data"

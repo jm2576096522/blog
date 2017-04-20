@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>标签列表</title>
+<title>标签类别列表</title>
 </head>
 <body>
 	<table id="tagList"></table>
 	<div id="tag">
-		<br>
+		<br/>
 	</div>
 	<div id="modifyTag" style="width: 300px; direction: center;">
 		<form id="modifyTagForm" method="post" enctype="multipart/form-data"
