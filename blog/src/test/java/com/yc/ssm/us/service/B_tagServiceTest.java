@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,14 @@ public class B_tagServiceTest {
 	}
 	
 	@Test
-	public void testFindALl() {
-		List<B_tag> list = b_tagService.findAll();
-		System.out.println(list);
+	public void testFindAll() {
+		B_tag tag = new B_tag();
+		tag.setTusid(1);
+		List<B_tag> list = b_tagService.findAllByUsid(tag);
+		LogManager.getLogger().debug(list);
 		assertNotNull(list);
 	}
+
 
 	@Test
 	public void testModifyTag() {

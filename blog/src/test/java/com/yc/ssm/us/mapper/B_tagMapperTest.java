@@ -22,9 +22,11 @@ public class B_tagMapperTest {
 	
 	@Test
 	public void testFindAll() {
-		List<B_tag> tag = tagService.findAll();
-		LogManager.getLogger().debug(tag);
-		assertNotNull(tag);
+		B_tag tag = new B_tag();
+		tag.setTusid(1);
+		List<B_tag> list = tagService.findAllByUsid(tag);
+		LogManager.getLogger().debug(list);
+		assertNotNull(list);
 		
 	}
 

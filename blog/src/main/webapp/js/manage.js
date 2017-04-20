@@ -34,14 +34,14 @@ $(".treeNav").tree({
 				iconCls : "icon-mini-add",
 				closable : true,
 			});
-		} else if (nodeContent == "类别管理") {
+		} else if (nodeContent == "类型管理") {
 			$("#main").tabs('add', {
 				title : nodeContent,
 				href : "back/type_edit.jsp",
 				iconCls : "icon-mini-add",
 				closable : true,
 			});
-		} else if (nodeContent == "标签管理") {
+		} else if (nodeContent == "类别管理") {
 			$("#main").tabs('add', {
 				title : nodeContent,
 				href : "back/tag_edit.jsp",

@@ -116,13 +116,17 @@
 		function findComment(){
 			$.post("comment/findComment",{currPage:currPage,pageSize:pageSize},function(data){
 				var tableStr;
-				for(var i=0;i<data.length;i++){
-					tableStr += "<tr><td class='alt' style='text-align: left;border:none;'>"+
-						"<b style='color:red;margin-right:10px;'>RE :</b><a onclick='findArticle("+data[i].caid+")'>"+data[i].atitle+"</a></td>";
-					tableStr += "<td class='alt' style='border:none;'><a onclick='userDetail("+data[i].usid+")'>@ :"+data[i].uname+"</td>";
-					tableStr += "<td class='alt' style='border:none;'>"+data[i].ctime+"</td>";
-					tableStr += "<td class='alt' style='border:none;'><a style='margin-right:10px; font-size:15px;' onclick='deleteComment2("+data[i].cid+")'>删除</a></th></tr>";
-					tableStr += "<tr><td colspan='4' style='text-align:left;border:none;'>"+data[i].ccontent+"</td><tr>";
+				if(data ==""){
+					tableStr +="<tr><td colspan='4' style='text-align:center;border:none;'>暂无文章或尚未有评论</td></tr>";
+				}else{
+					for(var i=0;i<data.length;i++){
+						tableStr += "<tr><td class='alt' style='text-align: left;border:none;'>"+
+							"<b style='color:red;margin-right:10px;'>RE :</b><a onclick='findArticle("+data[i].caid+")'>"+data[i].atitle+"</a></td>";
+						tableStr += "<td class='alt' style='border:none;'><a onclick='userDetail("+data[i].usid+")'>@ :"+data[i].uname+"</td>";
+						tableStr += "<td class='alt' style='border:none;'>"+data[i].ctime+"</td>";
+						tableStr += "<td class='alt' style='border:none;'><a style='margin-right:10px; font-size:15px;' onclick='deleteComment2("+data[i].cid+")'>删除</a></th></tr>";
+						tableStr += "<tr><td colspan='4' style='text-align:left;border:none;'>"+data[i].ccontent+"</td><tr>";
+					}
 				}
 				$("#table_body").html(tableStr);
 			});

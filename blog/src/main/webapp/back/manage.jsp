@@ -65,8 +65,8 @@
 			<div title="博客管理" data-options="iconCls:'icon-mini-add'">
 				<ul class="treeNav">
 					<li><span>查询博客</span></li>
+					<li><span>类型管理</span></li>
 					<li><span>类别管理</span></li>
-					<li><span>标签管理</span></li>
 					<li><span>评论管理</span></li>
 				</ul>
 			</div>

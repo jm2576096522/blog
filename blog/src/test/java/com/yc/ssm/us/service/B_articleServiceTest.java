@@ -48,6 +48,17 @@ public class B_articleServiceTest {
 		b_article.setApic("/upload/22-1.jpg");
 		bart.modifyArticle(b_article);
 	}
+	
+	//按标题查询文章
+	@Test
+	public void testFindArticleByAtitle(){
+		B_article b_article = new B_article();
+		b_article.setUsid(10001);
+		b_article.setAtitle("生");
+		List<B_article> list = bart.findArticleByAtitle(b_article);
+		System.out.println(list);
+		assertNotNull(list);
+	}
 
 	// 查找所有文章
 	@Test

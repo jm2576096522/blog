@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="assets/css/amazeui.min.css">
 <link rel="stylesheet" href="assets/css/app.css">
 <script type="text/javascript" src="js/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="css/blogManager.css">
 </head>
 
@@ -56,34 +57,50 @@
 	<hr>
 	<!-- content srart -->
 	<div class="am-g am-g-fixed blog-fixed blog-content">
-		
+
 		<hr>
-		</div>
-		<div class="am-g am-g-fixed blog-fixed" style="margin-top:2%;">
-		<div class="easyui-layout" style="width: 100%; height: 300px; margin: 0px auto">
-			<table id="mytable">
-			<thead>
-				 <tr>
-				 	<th scope='col' abbr='编号' class='nobg' style="display:none;">编号</th>
-				 	<th scope='col' abbr='标题'>文章标题</th>
-				 	<th scope='col' abbr='时间'>创作时间</th>
-				 	<th scope='col' abbr='浏览量'>浏览量</th>
-				 	<th scope='col' abbr='评论数'>评论数</th>
-				 	<th scope='col' abbr='操作'>操作</th>
-				 </tr>
-			 </thead>
-			 <tbody id="table_body">
-			 	
-			 </tbody>
+	</div>
+	<div class="am-g am-g-fixed blog-fixed" style="margin-top: 2%;">
+		<div class="easyui-layout"
+			style="width: 100%; min-height: 400px; margin: 0px auto">
+			<span style="margin-left: 100px;">类别： <select id="tag"
+				style="width: 100px;">
+					<option onclick="start()">全部</option>
+			</select>
+			</span> <span style="margin-left: 50px;"> 类型： <select id="type"
+				style="width: 100px;">
+					<option onclick="start()">全部</option>
+			</select>
+			</span>
+			<span style="margin-left:50px;">
+				文章标题：
+				<input type="text" id="atitle">
+				<button type="button" onclick="findArticleByAtitle()"> 查询 </button>
+			</span>
+			<table id="mytable" style="margin-top: 30px;">
+				<thead>
+					<tr>
+						<th scope='col' abbr='编号' class='nobg' style="display: none;">编号</th>
+						<th scope='col' abbr='标题'>文章标题</th>
+						<th scope='col' abbr='时间'>创作时间</th>
+						<th scope='col' abbr='浏览量'>浏览量</th>
+						<th scope='col' abbr='评论数'>评论数</th>
+						<th scope='col' abbr='操作'>操作</th>
+					</tr>
+				</thead>
+				<tbody id="table_body">
+
+				</tbody>
 			</table>
-			 <ul class="am-pagination" style="width:100%;text-align: center;margin-top:30px;" id="myUI">
+			<ul class="am-pagination"
+				style="width: 100%; text-align: center; margin-top: 30px;" id="myUI">
 			</ul>
 		</div>
 	</div>
 
 
 	<!-- content end -->
-	<footer class="blog-footer" style="margin-top: 200px;">
+	<footer class="blog-footer" style="margin-top: 100px;">
 
 		<div class="blog-text-center">© 2015 AllMobilize, Inc. Licensed
 			under MIT license. Made with love By LWXYFER</div>
@@ -92,10 +109,25 @@
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/amazeui.min.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/jquery.easyui.min.js"></script> 
+	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
 	<script type="text/javascript" src="js/blogManager.js"></script>
 	<script type="text/javascript" src="js/moreOperation.js"></script>
-	
+	<script type="text/javascript">
+		//焦点事件
+		$("#tag").focus(function() {
+			$("#type").val("全部");
+			$("#atitle").val("");
+		});
+		$("#type").focus(function() {
+			$("#tag").val("全部");
+			$("#atitle").val("");
+		});
+		$("#atitle").focus(function(){
+			$("#tag").val("全部");
+			$("#type").val("全部");
+		});
+	</script>
+
 </body>
 </html>

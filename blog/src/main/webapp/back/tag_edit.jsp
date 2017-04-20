@@ -9,8 +9,7 @@
 <body>
 	<table id="tagList"></table>
 	<div id="tag">
-		<a class="addBtn" href="javascript:void(0)">添加</a> <a class="updBtn"
-			href="javascript:void(0)">刷新</a>
+		<br>
 	</div>
 	<div id="modifyTag" style="width: 300px; direction: center;">
 		<form id="modifyTagForm" method="post" enctype="multipart/form-data"
@@ -40,7 +39,6 @@
 			</p>
 		</form>
 	</div>
-
 	<script type="text/javascript" src="js/tag_edit.js"></script>
 </body>
 </html>

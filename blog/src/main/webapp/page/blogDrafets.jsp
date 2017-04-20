@@ -95,13 +95,17 @@
 	<script type="text/javascript">
 		$.post("drafets/findDrafetsByUsid",function(data){
 			var tableStr ;
-			for(var i=0;i<data.length;i++){
-				tableStr += "<tr><th class='specalt'  style='display:none;'>"+data[i].drid+"</th>";/*  style='display:none;' */
-				tableStr += "<td class='alt'>"+data[i].drtitle+"</td>";
-				tableStr += "<td class='alt'>"+data[i].drtime+"</td>";
-				tableStr += "<td class='alt'><a style='margin-right:10px; font-size:15px;' onclick='editrow("+data[i].drid+")'>编辑</a>";
-				tableStr += "<a style='margin-right:10px; font-size:15px;' onclick='publishrow("+data[i].drid+")'>立即发表</a>";
-				tableStr += "<a style='margin-right:10px; font-size:15px;' onclick='deleterow("+data[i].drid+")'>删除</a></th>";
+			if(data ==""){
+				tableStr +="<tr><td colspan='4' style='text-align:center;'>暂无草稿</td></tr>";
+			}else{
+				for(var i=0;i<data.length;i++){
+					tableStr += "<tr><th class='specalt'  style='display:none;'>"+data[i].drid+"</th>";/*  style='display:none;' */
+					tableStr += "<td class='alt'>"+data[i].drtitle+"</td>";
+					tableStr += "<td class='alt'>"+data[i].drtime+"</td>";
+					tableStr += "<td class='alt'><a style='margin-right:10px; font-size:15px;' onclick='editrow("+data[i].drid+")'>编辑</a>";
+					tableStr += "<a style='margin-right:10px; font-size:15px;' onclick='publishrow("+data[i].drid+")'>立即发表</a>";
+					tableStr += "<a style='margin-right:10px; font-size:15px;' onclick='deleterow("+data[i].drid+")'>删除</a></th>";
+				}
 			}
 			$("#table_body").html(tableStr);
 		});

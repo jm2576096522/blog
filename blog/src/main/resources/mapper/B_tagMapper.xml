@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findALlTags" resultType="B_tag">
 		select * from b_tag
 	</select>
-	<!-- 结合文章表（返回所引用对应类别的文章数）查询所有的标签 -->
+	<!-- 结合文章表 查询所有的标签 -->
 	<select id="findAll" resultType="B_tag">
 		select tag.*,nvl(w.articlenum,0) as articlenum from
 		(select g.tagid,count(1) as articlenum from
@@ -16,10 +16,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		right join B_TAG tag on w.tagid = tag.tagid order
 		by w.tagid
 	</select>
+	
+	<!-- 结合文章表（返回所引用对应类别的文章数）查询  （个人 的tusid） 所有的标签 -->
+	<select id="findAllByUsid" resultType="B_tag" parameterType="B_tag">
+		select tag.*,nvl(w.articlenum,0) as articlenum from
+		(select g.tagid,count(1) as articlenum from
+		(select t.tagid from b_tag t inner join b_article a on t.tagid = a.tagid ) g
+		group by g.tagid) w
+		right join B_TAG tag on w.tagid = tag.tagid where tag.tusid = #{tusid} order
+		by w.tagid
+	</select>
 
 	<select id="findTag" parameterType="string" resultType="boolean">
-		select
-		count(1) from b_tag where tagname=#{tagname}
+		select count(1) from b_tag where tagname=#{tagname}
 	</select>
 	
 	<!-- 查询标签对应文章数的排行（前十） -->
@@ -52,7 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!--  添加类别表签-->
 	<insert id="insertTag" parameterType="B_tag">
 		insert into b_tag
-		values(seq_tagid.nextval,#{tagname})
+		values(seq_tagid.nextval,#{tusid},#{tagname})
 	</insert>
 	
 	<update id="modifyTag" parameterType="B_tag">

@@ -75,13 +75,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		${currPage} currPage,${pageSize} pageSize from b_comment
 	</select>
 	<select id="getPartComment" resultType="B_comment"> 
-	select * from (select
-		n.*,rownum
-		rn from (select bc.*,nvl(bu.uname,'无名氏'),bu.uemail,ba.atitle,bu.upic from
-		b_comment bc,b_user bu,b_article ba where ba.aid(+)=bc.caid and
-		bu.usid(+)=bc.usid order by bc.usid)n where
-		${currPage}*${pageSize}>=rownum)
-		t
+	select * from (
+		select n.*,rownum rn from 
+		(select bc.*,nvl(bu.uname,'无名氏') uname,bu.uemail,ba.atitle,bu.upic from
+			b_comment bc,b_user bu,b_article ba 
+		where ba.aid(+)=bc.caid and bu.usid(+)=bc.usid order by bc.usid)n 
+		where ${currPage}*${pageSize}>=rownum) t
 		where rn>(${currPage}-1)*${pageSize}
 	</select>
 

@@ -21,7 +21,14 @@ $("#tagList")
 								title : '标签名',
 								width : 100,
 								align : 'center'
-							},{
+							},
+							{
+								field : 'tusid',
+								title : '用户编号',
+								width : 100,
+								align : 'center'
+							},
+							{
 								field : 'articlenum',
 								title : '文章数量',
 								width : 100,
@@ -51,11 +58,11 @@ $("#modifyTag").dialog({
 	closed : true,
 	modal : true,
 });
-$("#addTag").dialog({
+/*$("#addTag").dialog({
 	title : "标签添加",
 	closed : true,
 	modal : true,
-});
+});*/
 $("#modifyTagForm").form(
 		{
 			url : "tag/modify",

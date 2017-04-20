@@ -86,15 +86,6 @@ function updata_userInfo(){
 		  $.messager.alert("操作提示", "操作成功！","info",function(){
 			  location.reload();
 		  });
-		/*jQuery.messager.show({   
-			title:'温馨提示:',   
-			msg:'保存成功！',   
-			timeout:3000,   
-			showType:'slide',
-			width:300,
-			height:200,
-			});*/
-		/*location.reload();*/
 	},"json");
 
 }

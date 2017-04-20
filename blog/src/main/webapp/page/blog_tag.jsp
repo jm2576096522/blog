@@ -53,8 +53,12 @@
 	</nav>
 	<hr>
 	<div class="am-g am-g-fixed blog-fixed" style="margin-top:2%;">
-		<div class="easyui-layout" style="width: 100%; height: 300px; margin: 0px auto">
-			<div id="table_content">
+		<div class="easyui-layout" style="width: 100%; min-height:200px;max-height:350px; margin: 0px auto">
+			<hr>
+				<span id="con_top" style="font-size: 18px;margin-left: 30px;letter-spacing: 3px;color: navy;">类别管理</span>
+			<hr>
+			<br/>
+			<div id="table_content" >
 			</div>
 		</div>
 		<input type="text" id="add_tag" name="tagname" style="margin-top:30px;width:30%;border-radius:6px;	">

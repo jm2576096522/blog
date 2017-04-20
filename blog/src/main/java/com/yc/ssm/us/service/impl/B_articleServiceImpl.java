@@ -50,6 +50,12 @@ public class B_articleServiceImpl implements B_articleService {
 		LogManager.getLogger().debug("我是通过usid查询来的");
 		return b_articleMapper.findPersonArticle(usid);
 	}
+
+	// 指定用户id分页查询文章(by 类型)
+	public List<B_article> findArticleByType(B_article b_article){
+		return b_articleMapper.findArticleByType(b_article);
+	}
+
 	// 查询博客文章(通过文章id)
 	public B_article findArticleByAid(Integer aid){
 		LogManager.getLogger().debug(" 查询博客文章(通过文章id)");
@@ -61,6 +67,20 @@ public class B_articleServiceImpl implements B_articleService {
 	public B_article findArticleNum(B_article b_article){
 		LogManager.getLogger().debug("查询用户id所作的文章数及总页数");
 		return b_articleMapper.findArticleNum(b_article);
+	}
+	//查询用户id所作的文章数及总页数 (以  类型分类)
+	public B_article findArticleNumByType(B_article b_article){
+		return b_articleMapper.findArticleNumByType(b_article);
+	}
+
+	// 指定用户id分页查询文章(by 类别)
+	public List<B_article> findArticleByTag(B_article b_article){
+		return b_articleMapper.findArticleByTag(b_article);
+	}
+
+	//查询用户id所作的文章数及总页数 (以  类别（tag）分类)
+	public B_article findArticleNumByTag(B_article b_article){
+		return b_articleMapper.findArticleNumByTag(b_article);
 	}
 
 	//查询文章的所有总数和总页数
@@ -81,7 +101,7 @@ public class B_articleServiceImpl implements B_articleService {
 		LogManager.getLogger().debug("我是articleService里的：");
 		return b_articleMapper.findArticleByTime(b_article);
 	}
-	
+
 	//文章分页查询
 	@Override
 	public PaginationBean<B_article> partArticle(String page, String rows) {
@@ -126,6 +146,16 @@ public class B_articleServiceImpl implements B_articleService {
 	@Override
 	public List<B_article> ArticleAnalytics() {
 		return b_articleMapper.articleAnalytics();
+	}
+
+	//个人文章的模糊查询
+	public List<B_article> findArticleByAtitle(B_article b_article){
+		return b_articleMapper.findArticleByAtitle(b_article);
+	}
+
+	//查询用户id所作的文章数及总页数 (以  atitle 标题）分类)
+	public B_article findArticleNumByAtitle(B_article b_article){
+		return b_articleMapper.findArticleNumByAtitle(b_article);
 	}
 
 }

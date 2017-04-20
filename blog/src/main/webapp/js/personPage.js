@@ -35,7 +35,7 @@ function listById(){
 }
 
 function listNum(){
-	$.post("article/listNum",function(data){
+	$.post("article/listNum",{pageSize:pageSize},function(data){
 		var ulStr = "";
 		ulStr +="<li ><a onclick='prePage()'>&laquo; Prev</a></li>";
 		ulStr +="<li ><a onclick='firstPage()'>首页</a></li>";

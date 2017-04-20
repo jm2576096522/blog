@@ -4,10 +4,16 @@ public class B_tag {
 	
 	private Integer tagid;
 	private String tagname;
-	
+	private Integer tusid;
 	private Integer articlenum;
-	
-	
+
+	public Integer getTusid() {
+		return tusid;
+	}
+
+	public void setTusid(Integer tusid) {
+		this.tusid = tusid;
+	}
 
 	public Integer getarticlenum() {
 		return articlenum;
@@ -33,27 +39,10 @@ public class B_tag {
 		this.tagname = tagname;
 	}
 
-	public B_tag() {
-	}
-	
-	public B_tag(Integer tagid, String tagname) {
-		this.tagid = tagid;
-		this.tagname = tagname;
-	}
-	
-	
-
-	public B_tag(Integer tagid, String tagname, Integer articlenum) {
-		super();
-		this.tagid = tagid;
-		this.tagname = tagname;
-		this.articlenum = articlenum;
-	}
-
 	@Override
 	public String toString() {
-		return "\nB_tag [tagid=" + tagid + ", tagname=" + tagname + ", articlenum=" + articlenum + "]";
+		return "B_tag [tagid=" + tagid + ", tagname=" + tagname + ", tusid=" + tusid + ", articlenum=" + articlenum
+				+ "]";
 	}
-
 	
 }

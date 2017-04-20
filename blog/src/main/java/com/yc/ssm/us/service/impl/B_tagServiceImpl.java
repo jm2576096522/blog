@@ -62,10 +62,15 @@ public class B_tagServiceImpl implements B_tagService {
 		return b_tagMapper.deleteTag(tagid);
 	}
 	
-	//结合文章表（返回所引用对应类别的文章数）查询所有的标签
-	public	List<B_tag> findAll(){
-		LogManager.getLogger().debug("结合文章表查询所有的标签");
+	//结合文章表查询所有的标签
+	public List<B_tag> findAll(){
 		return b_tagMapper.findAll();
+	}
+	
+	// 结合文章表（返回所引用对应类别的文章数）查询用户个人 id 的标签
+	public	List<B_tag> findAllByUsid(B_tag b_tag){
+		LogManager.getLogger().debug("结合文章表查询所有的标签");
+		return b_tagMapper.findAllByUsid(b_tag);
 	}
 
 	@Override
