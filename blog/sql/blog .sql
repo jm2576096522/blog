@@ -60,8 +60,9 @@ create sequence seq_adid start with 1001;
 -----管理员表
 create table b_admin(
        adid int primary key,              --管理员id 
-       adname varchar2(20) not null unique,      --管理员名称
-       adpassword varchar2(40) default 'a'   --管理员密码
+       adname varchar2(30) not null unique,      --管理员名称
+       adpassword varchar2(50) default '6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2',   --管理员密码 (默认值为 a)
+       admail varchar2(50) not null unique --添加管理员邮箱（忘记密码登录）
 );
  
  truncate table B_ADMIN;--删除表数据
@@ -91,8 +92,12 @@ select * from B_TYPE;
 -----文章标签类别表
 create table b_tag(
        tagid int primary key,      			 		--标签id
+       tusid int references b_user(usid),			--用户id
        tagname varchar2(10) not null unique         --标签名称
 );
+-----------为文章表签表添加一个字段
+alter table b_tag add tusid int references b_user(usid);
+-----------------------------------
 
 --创建序列
 create  sequence seq_tagid start with 1;
@@ -322,4 +327,14 @@ drop sequence seq_drid;
 drop sequence seq_tid;
 drop sequence seq_tagid;
 
+select * from b_article  where atitle like '%设计%';
+select b.*,nvl(n.articlenum,0) from B_TYPE b left join (select tid,count(1) articlenum from b_article group by tid) n on b.tid = n.tid
+select tid,count(1) articlenum from b_article group by tid
 
+
+select tag.*,nvl(w.articlenum,0) as articlenum from
+		(select g.tagid,count(1) as articlenum from
+		(select t.tagid from b_tag t inner join b_article a on t.tagid = a.tagid ) g
+		group by g.tagid) w
+		right join B_TAG tag on w.tagid = tag.tagid order
+		by w.tagid

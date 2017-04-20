@@ -47,12 +47,15 @@ $(function(){
 	});
 });
 
+//修改类别标签
 function editrow(editIndex){
 	$('#table_content').datagrid('beginEdit', editIndex);
 }
 function saverow(editIndex){
 	$('#table_content').datagrid('endEdit', editIndex);
 }
+
+//删除类别标签
 function deleterow(editIndex){
 			var rows = $('#table_content').datagrid('getRows');
 			var row = rows[editIndex];
@@ -71,9 +74,9 @@ function cancelrow(editIndex){
 	$('#table_content').datagrid('cancelEdit',editIndex);
 }
 
+//添加类别标签
 function tag_add(){
 	var newTag = $("#add_tag").val();
-	
 	if(newTag == ""){
 		$.messager.alert("失败提示","类别不能为空","error");
 	}else{

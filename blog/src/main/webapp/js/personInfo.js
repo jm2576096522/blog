@@ -79,25 +79,12 @@ function updata_userInfo() {
 	var uprofession = $("#uprofession").val();
 	var upersondesc = $("#upersondesc").val();
 	getUddress();
-	$.post("blog/update_userInfo", {
-		uname : uname,
-		ubirthday : ubirthday,
-		uphone : uphone,
-		uprofession : uprofession,
-		upersondesc : upersondesc,
-		usex : usex,
-		uaddress : uaddress
-	}, function(data) {
-		$.messager.alert("操作提示", "操作成功！", "info", function() {
-			location.reload();
-		});
-		/*
-		 * jQuery.messager.show({ title:'温馨提示:', msg:'保存成功！', timeout:3000,
-		 * showType:'slide', width:300, height:200, });
-		 */
-		/* location.reload(); */
-	}, "json");
-
+	$.post("blog/update_userInfo",{uname:uname,ubirthday:ubirthday,uphone:uphone,uprofession:uprofession,upersondesc:upersondesc,usex:usex,uaddress:uaddress},
+			function(data){
+		  $.messager.alert("操作提示", "操作成功！","info",function(){
+			  location.reload();
+		  });
+	},"json");
 }
 
 var uaddress; // 获得地址 变量

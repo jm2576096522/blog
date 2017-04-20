@@ -17,10 +17,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getPartType" resultType="B_type">
 		select * from (select
 		n.*,rownum rn from
-		(select * from b_type order by 1)n where
+		(select b.*,nvl(w.articlenum,0) articlenum from B_TYPE b 
+		left join (select tid,count(1) articlenum from b_article group by tid) w on b.tid = w.tid
+		order by 1 )n where
 		${currPage}*${pageSize}>=rownum) t
-		where
-		rn>(${currPage}-1)*${pageSize}
+		where rn>(${currPage}-1)*${pageSize}
 	</select>
 	<select id="findTypeAll" resultType="B_type">
 		select * from b_type

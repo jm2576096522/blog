@@ -5,6 +5,18 @@ public class B_type {
 	private Integer tid;
 	private String tname;
 	
+	private Integer articlenum; //类型所对应的文章数
+	
+	
+	
+	public Integer getArticlenum() {
+		return articlenum;
+	}
+
+	public void setArticlenum(Integer articlenum) {
+		this.articlenum = articlenum;
+	}
+
 	public Integer getTid() {
 		return tid;
 	}

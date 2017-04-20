@@ -45,22 +45,22 @@
 </style>
 </head>
 <body onLoad="init(this)" oncontextmenu="return false"  style="-moz-user-select: none;">
-	<div style="text-align: center;">
+	<form id="form_img" enctype="multipart/form-data">
 		<video id="navy_video" width="320px" height="240px" autoplay class="borderstyle"></video>
 		<input id="snap" type="button" value="拍照"/>
-		<button onclick="convertCanvasToImage()">保存</button>
+		<button type="button" onclick="convertCanvasToImage()">保存</button>
 		<div id="camera_errbox">
 			<b>请点击“允许”按钮，授权网页访问您的摄像头！</b>
 			<div>若您并未看到任何授权提示，则表示您的浏览器不支持Media Capture或您的机器没有连接摄像头设备。</div>
 		</div>
 		<canvas id="canvas" width="160px" height="120px" class="borderstyle"></canvas>
-	</div>
+	</form>
 	<script type="text/javascript">
 	function convertCanvasToImage() {
 		var pic = document.getElementById("canvas").toDataURL("image/png");
 		pic = pic.replace(/^data:image\/(png|jpg);base64,/, "")
 		$.ajaxFileUpload({
-			url:'uploadServlet',
+			url:'camera/add',
 			//fileElementId:'canvas',
 			data:{imageData:pic},
 			dataType:'json',

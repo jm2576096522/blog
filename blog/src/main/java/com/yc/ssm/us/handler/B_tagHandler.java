@@ -2,6 +2,8 @@ package com.yc.ssm.us.handler;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yc.ssm.us.entity.B_tag;
+import com.yc.ssm.us.entity.B_user;
 import com.yc.ssm.us.service.B_tagService;
 
 @Controller
@@ -25,7 +28,7 @@ public class B_tagHandler {
 	// 分页显示标签
 	@RequestMapping(value = "list", method = RequestMethod.POST)
 	@ResponseBody
-	/*public PaginationBean<B_tag> list(String rows, String page) {
+/*	public PaginationBean<B_tag> list(String rows, String page) {
 		LogManager.getLogger().debug("list:row==>" + rows + ",page==>" + page);
 		return b_tagService.partTag(page, rows);// 异步数据响应
 	}*/
@@ -53,7 +56,10 @@ public class B_tagHandler {
 	// 添加标签
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@ResponseBody
-	public int insertTag(B_tag b_tag) {
+	public int insertTag(B_tag b_tag,HttpSession session) {
+		B_user currUser = (B_user) session.getAttribute("loginUser");
+		Integer usid = currUser.getUsid();
+		b_tag.setTusid(usid);
 		LogManager.getLogger().debug("我是add tag的处理");
 		return b_tagService.insertTag(b_tag);
 	}
@@ -68,9 +74,12 @@ public class B_tagHandler {
 	//结合文章表（返回所引用对应类别的文章数）查询所有的标签
 	@RequestMapping("findAll")
 	@ResponseBody
-	public List<B_tag> findAll(){
+	public List<B_tag> findAllByUsid(B_tag b_tag,HttpSession session){
+		B_user currUser = (B_user) session.getAttribute("loginUser");
+		Integer usid = currUser.getUsid();
+		b_tag.setTusid(usid);
 		LogManager.getLogger().debug("结合文章表查询所有的标签的处理");
-		return b_tagService.findAll();
+		return b_tagService.findAllByUsid(b_tag);
 	}
 	
 	//获得所有的类别标签

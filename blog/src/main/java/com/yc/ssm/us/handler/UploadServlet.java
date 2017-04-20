@@ -16,20 +16,32 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspFactory;
 import javax.servlet.jsp.PageContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.yc.ssm.us.entity.B_user;
+import com.yc.ssm.us.service.B_userService;
 import com.yc.ssm.us.util.ServletUtil;
 import com.yc.ssm.us.util.UploadUtil;
 
 import sun.misc.BASE64Decoder;
-
+@Controller
 @SuppressWarnings({ "serial", "restriction" })
+@RequestMapping("camera")
 public class UploadServlet extends HttpServlet {
+	
+	@Autowired
+	private B_userService userService;
 	private PrintWriter out;
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request,response);
-	}
-
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@RequestMapping(value="add",method = RequestMethod.POST)
+	@ResponseBody
+	public void camere(HttpServletRequest request, HttpServletResponse response,@RequestParam("imageData") MultipartFile imageData) throws ServletException, IOException {
 		try {
 			out=response.getWriter();
 			UploadUtil uploadUtil=new UploadUtil();
@@ -41,10 +53,21 @@ public class UploadServlet extends HttpServlet {
 			//64位解码  
 			byte[] buffer=base64.decodeBuffer(map.get("imageData"));
 
-			//写进文件  
+			String picPath = null;
+			if (imageData != null && !imageData.isEmpty()) {// 判断是否有文件上传
+				try {
+					imageData.transferTo(ServletUtil.getUploadFile(imageData.getOriginalFilename()));
+					picPath = ServletUtil.VIRTUAL_UPLOAD_DIR + imageData.getOriginalFilename();
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			/*//写进文件  
 			String filPath="../dataInfo/"+new Date().getTime()+""+new Random().nextInt(100000)+".png";
-			filPath=this.getServletContext().getRealPath(filPath);
-			FileOutputStream fos=new FileOutputStream(filPath); 
+			filPath=this.getServletContext().getRealPath(filPath);*/
+			FileOutputStream fos=new FileOutputStream(picPath); 
 			fos.write(buffer);  
 			fos.flush();  
 			fos.close();  
