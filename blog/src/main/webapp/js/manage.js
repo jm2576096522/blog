@@ -27,7 +27,7 @@ $(".treeNav").tree({
 				iconCls : "icon-mini-add",
 				closable : true,
 			});
-		} else if (nodeContent == "查询博客") {
+		} else if (nodeContent == "查询文章") {
 			$("#main").tabs('add', {
 				title : nodeContent,
 				href : "back/article_info.jsp",
@@ -52,6 +52,13 @@ $(".treeNav").tree({
 			$("#main").tabs('add', {
 				title : nodeContent,
 				href : "back/comment_edit.jsp",
+				iconCls : "icon-mini-add",
+				closable : true,
+			});
+		} else if (nodeContent == "板块管理") {
+			$("#main").tabs('add', {
+				title : nodeContent,
+				href : "back/column_edit.jsp",
 				iconCls : "icon-mini-add",
 				closable : true,
 			});

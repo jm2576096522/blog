@@ -68,6 +68,7 @@ $("#addAdmin").dialog({
 	title : "管理员添加",
 	closed : true,
 	modal : true,
+	
 });
 
 function deleteDate(index) {
@@ -84,7 +85,14 @@ function deleteDate(index) {
 				if (data > 0) {
 					$("#adminList").datagrid("reload"); // 刷新修改数据
 				} else {
-					alert("删除失败失败");
+					$.messager.show({
+						msg : '删除失败！！！',
+						showType : 'show',
+						style : {
+							top : document.body.scrollTop
+									+ document.documentElement.scrollTop,
+						}
+					});
 				}
 			});
 			// 将选择到的行存入数组并用,分隔转换成字符串，

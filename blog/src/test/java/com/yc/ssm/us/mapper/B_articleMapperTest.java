@@ -2,6 +2,7 @@ package com.yc.ssm.us.mapper;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -27,5 +28,19 @@ public class B_articleMapperTest {
 		System.out.println(list);
 		assertNotNull(list);
 	}
-	
+
+	// 查询板块文章id对应的文章信息
+	@Test
+	public void testFindlistArticleByCoaid() {
+		String coaid = "4,5,9";
+		String[]array=coaid.split(",");
+		List<String> listcoaid = new ArrayList<String>();
+		for (String str : array) {
+			listcoaid.add(str);
+		}
+		List<B_article> list = article.listArticleByCoaid(listcoaid);
+		System.out.println(list);
+		assertNotNull(list);
+	}
+
 }

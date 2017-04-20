@@ -11,32 +11,33 @@ import com.yc.ssm.us.entity.B_article;
 import com.yc.ssm.us.mapper.B_articleMapper;
 import com.yc.ssm.us.service.B_articleService;
 
-@Service("b_articleService") 
+@Service("b_articleService")
 
 public class B_articleServiceImpl implements B_articleService {
-	@Autowired 
+	@Autowired
 	private B_articleMapper b_articleMapper;
 
-	//首页按评论数显示热度文章
+	// 首页按评论数显示热度文章
 	@Override
-	public List<B_article> findArticleByHot(B_article b_article){
+	public List<B_article> findArticleByHot(B_article b_article) {
 		LogManager.getLogger().debug("首页按评论数显示热度文章");
 		return b_articleMapper.findArticleByHot(b_article);
 	}
-	
+
 	@Override
 	public List<B_article> listArticleBytagname(String tagname) {
 		// 通过标签名查询博客文章
 		return b_articleMapper.listArticleBytagname(tagname);
 	}
-	//更改博客文章
+
+	// 更改博客文章
 	@Override
 	public int modifyArticle(B_article b_article) {
 		LogManager.getLogger().debug("更改博客文章：");
 		return b_articleMapper.modifyArticle(b_article);
 	}
 
-	//添加新文章
+	// 添加新文章
 	@Override
 	public boolean insertArticle(B_article b_article) {
 		b_article.setAtitle(b_article.getAtitle().replace(" ", ""));// 标签去空格
@@ -44,38 +45,41 @@ public class B_articleServiceImpl implements B_articleService {
 		return b_articleMapper.insertArticle(b_article) > 0;
 	}
 
-	//通过用户id查询查询个人文章
+	// 通过用户id查询查询个人文章
 	@Override
 	public List<B_article> findPersonArticle(Integer usid) {
 		LogManager.getLogger().debug("我是通过usid查询来的");
 		return b_articleMapper.findPersonArticle(usid);
 	}
+
 	// 查询博客文章(通过文章id)
-	public B_article findArticleByAid(Integer aid){
+	public B_article findArticleByAid(Integer aid) {
 		LogManager.getLogger().debug(" 查询博客文章(通过文章id)");
 		return b_articleMapper.findArticleByAid(aid);
 	}
-	
-	//查询用户id所作的文章数及总页数
+
+	// 查询用户id所作的文章数及总页数
 	@Override
-	public B_article findArticleNum(B_article b_article){
+	public B_article findArticleNum(B_article b_article) {
 		LogManager.getLogger().debug("查询用户id所作的文章数及总页数");
 		return b_articleMapper.findArticleNum(b_article);
 	}
-	
-	//查询文章的所有总数和总页数
+
+	// 查询文章的所有总数和总页数
 	@Override
-	public B_article findArticleTotal(){
+	public B_article findArticleTotal() {
 		LogManager.getLogger().debug("查询文章的所有总数和总页数");
 		return b_articleMapper.findArticleTotal();
 	}
-	//查询所有的文章
+
+	// 查询所有的文章
 	@Override
 	public List<B_article> findArticle() {
 		LogManager.getLogger().debug("我是articleService里的：");
 		return b_articleMapper.findArticle();
 	}
-	//文章分页查询
+
+	// 文章分页查询
 	@Override
 	public PaginationBean<B_article> partArticle(String page, String rows) {
 		PaginationBean<B_article> pb = new PaginationBean<>();
@@ -85,40 +89,51 @@ public class B_articleServiceImpl implements B_articleService {
 		if (rows != null) {
 			pb.setPageSize(Integer.parseInt(rows));
 		}
-		pb=b_articleMapper.partArticle(pb);
+		pb = b_articleMapper.partArticle(pb);
 		return pb;
 	}
 
-	//浏览量的增加
-	public int updateAviewNum(Integer aid){
+	// 浏览量的增加
+	public int updateAviewNum(Integer aid) {
 		LogManager.getLogger().debug("浏览量的增加");
 		return b_articleMapper.updateAviewNum(aid);
 	}
+
 	// 通过用户id分页
-	public List<B_article> partArticleById(B_article b_article){
+	public List<B_article> partArticleById(B_article b_article) {
 		LogManager.getLogger().debug("通过用户id分页");
 		return b_articleMapper.partArticleById(b_article);
 	}
-	//删除博客文章
+
+	// 删除博客文章
 	@Override
 	public int deleteArticle(Integer aid) {
 		LogManager.getLogger().debug("删除博客文章");
 		return b_articleMapper.deleteArticle(aid);
 	}
 
+	// 通过用户名查询文章
 	@Override
 	public List<B_article> findArticleByuname(String uname) {
 		return b_articleMapper.listArticleByuname(uname);
 	}
 
+	// 通过标签名查询文章
 	@Override
 	public List<B_article> findArticleBytname(String tname) {
 		return b_articleMapper.listArticleBytname(tname);
 	}
 
+	// 文章排行分析
 	@Override
 	public List<B_article> ArticleAnalytics() {
 		return b_articleMapper.articleAnalytics();
+	}
+
+	//查询板块文章
+	@Override
+	public List<B_article> listArticleByCoaid(List<String> listcoaid) {
+		return b_articleMapper.listArticleByCoaid(listcoaid);
 	}
 
 }

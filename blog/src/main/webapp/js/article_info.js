@@ -3,6 +3,7 @@ $("#articleList")
 				{
 					url : "article/list",
 					pagination : true,
+					rownumbers : true,
 					fit : true,
 					border : false,
 					fitColumns : true,
@@ -10,12 +11,6 @@ $("#articleList")
 					pageList : [ 5, 10, 15, 20, 25, 30 ],
 					toolbar : '#article',
 					columns : [ [
-							{
-								field : 'aid',
-								title : '文章编号',
-								width : 60,
-								align : 'center'
-							},
 							{
 								field : 'atitle',
 								title : '文章标题',
@@ -37,13 +32,13 @@ $("#articleList")
 							{
 								field : 'uname',
 								title : '文章作者',
-								width : 80,
+								width : 100,
 								align : 'center'
 							},
 							{
 								field : 'atime',
 								title : '创作时间',
-								width : 100,
+								width : 110,
 								align : 'center'
 							},
 							{
@@ -75,7 +70,7 @@ $("#articleList")
 							{
 								field : 'opr',
 								title : '操作',
-								width : 80,
+								width : 100,
 								align : 'center',
 								formatter : function(value, row, index) {
 									var oprStr = '<a class="detailBtn" href="javascript:void(0)" onclick="openDatail('
@@ -108,7 +103,10 @@ $('#mkid')
 					}, {
 						mkid : 'tagname',
 						mkmch : '按文章标签查询'
-					} ],
+					} , {
+						mkid : 'cotitle',
+						mkmch : '按板块标题查询'
+					}],
 					onSelect : function(record) {
 						$
 								.get(

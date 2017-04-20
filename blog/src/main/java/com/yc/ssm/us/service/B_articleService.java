@@ -25,7 +25,7 @@ public interface B_articleService {
 
 	// 通过文章类型名查找文章
 	List<B_article> findArticleBytname(String tname);
-
+	
 	// 分页显示文章
 	PaginationBean<B_article> partArticle(String page, String rows);
 	
@@ -51,6 +51,9 @@ public interface B_articleService {
 
 	//浏览量的增加
 	int updateAviewNum(Integer aid);
+	//查询板块的文章
+	List<B_article> listArticleByCoaid(List<String> listcoaid);
+	
 	 
 
 }

@@ -20,7 +20,6 @@
 	<table id="articleList"></table>
 
 	<div id="detailsArticle" style="width: 300px; padding: 10px">
-
 		<p>
 			编号：<label id="Aaid"></label>
 		</p>

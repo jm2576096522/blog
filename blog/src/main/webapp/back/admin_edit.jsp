@@ -23,7 +23,7 @@
 				<tr>
 					<td>用户名：</td>
 					<td><input id="aname" name="adname" class="easyui-validatebox"
-						data-options="required:true,validType:'length[3,10]'" /></td>
+						data-options="required:true,validType:'length[2,10]'" /></td>
 				</tr>
 				<tr>
 					<td>密码：</td>

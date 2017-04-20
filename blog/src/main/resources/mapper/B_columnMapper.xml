@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射文件的命名空间namespace的值是与之对应的映射接口的全类名 -->
+<mapper namespace="com.yc.ssm.us.mapper.B_columnMapper">
+	<!-- 分页查询板块 -->
+	<resultMap type="PaginationBean" id="PaginationBeanMap">
+		<collection property="rows"
+			column="{pageSize=pageSize,currPage=currPage}" ofType="B_column"
+			select="getPartColumn" />
+	</resultMap>
+	<select id="partColumn" parameterType="PaginationBean"
+		resultMap="PaginationBeanMap">
+		select count(1) total ,ceil(count(1)/${pageSize})
+		totalPage ,
+		${currPage} currPage,${pageSize} pageSize from b_column
+	</select>
+	<select id="getPartColumn" resultType="B_column">
+		select * from (
+		select
+		n.*,rownum rn from (
+		select bc.*,bu.uname,bu.uemail from
+		b_column bc, b_user bu
+		where bc.usid = bu.usid(+) order by 1)n
+		where ${currPage}*${pageSize}>=rownum) t
+		where rn>(${currPage}-1)*${pageSize}
+	</select>
+
+	<!-- 查询所有板块 -->
+	<select id="findColumnAll" resultType="B_column">
+		select bc.*,bu.uname,bu.uemail from
+		b_column bc, b_user bu
+		where bc.usid = bu.usid(+)
+	</select>
+	
+	
+	<!--通过板块名查询 -->
+	<select id="findCoaidByCotitle" parameterType="String"
+		resultType="String">
+		select bc.coaid from b_column bc where bc.cotitle=#{cotitle}
+	</select>
+	<!-- 新建板块 -->
+	<insert id="addColumn" parameterType="B_column">
+		insert into b_column
+		(coid,cotitle,coaid,cotime,usid,cocontent,copic)
+		values(seq_coid.nextval,#{cotitle},#{coaid},to_char(sysdate,'yyyy-MM-dd
+		hh:mm:ss'),(select bu.usid from b_user bu where
+		bu.uemail=#{uemail}),#{cocontent},#{copic})
+	</insert>
+
+	<!-- 删除板块 -->
+	<delete id="deleteColumn">
+		delete from b_column where coid=#{coid}
+	</delete>
+</mapper>

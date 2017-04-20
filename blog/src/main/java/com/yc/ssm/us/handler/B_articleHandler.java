@@ -2,6 +2,7 @@ package com.yc.ssm.us.handler;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -20,6 +21,7 @@ import com.yc.ssm.us.entity.B_drafets;
 import com.yc.ssm.us.entity.B_user;
 import com.yc.ssm.us.entity.PaginationBean;
 import com.yc.ssm.us.service.B_articleService;
+import com.yc.ssm.us.service.B_columnService;
 import com.yc.ssm.us.service.B_drafetsService;
 import com.yc.ssm.us.util.ServletUtil;
 import com.yc.ssm.us.service.B_tagService;
@@ -43,8 +45,10 @@ public class B_articleHandler<T> {
 	private B_tagService b_tagService;
 	@Autowired
 	private B_typeService b_typeService;
-	
-	//草稿的Service
+	@Autowired
+	private B_columnService b_columnService;
+
+	// 草稿的Service
 	@Autowired
 	private B_drafetsService drafetsService;
 
@@ -55,7 +59,8 @@ public class B_articleHandler<T> {
 		LogManager.getLogger().debug("我进来了。。。");
 		return articleService.findArticle();
 	}
-	//首页按评论数显示热度文章
+
+	// 首页按评论数显示热度文章
 	@RequestMapping("findByHot")
 	@ResponseBody
 	public List<B_article> findArticleByHot(B_article b_article) {
@@ -72,10 +77,11 @@ public class B_articleHandler<T> {
 		LogManager.getLogger().debug("我是个人的文章。。。");
 		return articleService.findPersonArticle(usid);
 	}
+
 	// 查询博客文章(通过文章id)
-	@RequestMapping(value="findArticleByAid",method = RequestMethod.POST)
+	@RequestMapping(value = "findArticleByAid", method = RequestMethod.POST)
 	@ResponseBody
-	public B_article findArticleByAid(String aid){
+	public B_article findArticleByAid(String aid) {
 		LogManager.getLogger().debug(" 查询博客文章(通过文章id)");
 		int articleId = Integer.parseInt(aid);
 		return articleService.findArticleByAid(articleId);
@@ -88,12 +94,13 @@ public class B_articleHandler<T> {
 		LogManager.getLogger().debug("list:row==>" + rows + ",page==>" + page);
 		return articleService.partArticle(page, rows);// 异步数据响应
 	}
-	//指定用户id分页查询文章
+
+	// 指定用户id分页查询文章
 	@RequestMapping(value = "listById", method = RequestMethod.POST)
 	@ResponseBody
-	public List<B_article> listById(B_article b_article,HttpSession session){
+	public List<B_article> listById(B_article b_article, HttpSession session) {
 		Integer usid = b_article.getUsid();
-		if(usid == null){
+		if (usid == null) {
 			B_user user = (B_user) session.getAttribute("loginUser");
 			usid = user.getUsid();
 		}
@@ -101,12 +108,13 @@ public class B_articleHandler<T> {
 		LogManager.getLogger().debug("我是通过id分页查询的文章。。。");
 		return articleService.partArticleById(b_article);
 	}
-	//查询用户id所作的文章数及总页数
+
+	// 查询用户id所作的文章数及总页数
 	@RequestMapping(value = "listNum", method = RequestMethod.POST)
 	@ResponseBody
-	public B_article listNum(B_article b_article,HttpSession session) {
+	public B_article listNum(B_article b_article, HttpSession session) {
 		Integer usid = b_article.getUsid();
-		if(usid == null){
+		if (usid == null) {
 			B_user user = (B_user) session.getAttribute("loginUser");
 			usid = user.getUsid();
 		}
@@ -114,18 +122,19 @@ public class B_articleHandler<T> {
 		LogManager.getLogger().debug("查询用户id所作的文章数及总页数");
 		return articleService.findArticleNum(b_article);
 	}
-	//查询文章的所有总数和总页数
-		@RequestMapping(value = "articleTotal", method = RequestMethod.POST)
-		@ResponseBody
-		public B_article articleTotal() {
-			LogManager.getLogger().debug("查询文章的所有总数和总页数");
-			return articleService.findArticleTotal();
-		}
 
-	//更改博客文章
+	// 查询文章的所有总数和总页数
+	@RequestMapping(value = "articleTotal", method = RequestMethod.POST)
+	@ResponseBody
+	public B_article articleTotal() {
+		LogManager.getLogger().debug("查询文章的所有总数和总页数");
+		return articleService.findArticleTotal();
+	}
+
+	// 更改博客文章
 	@RequestMapping(value = "updateArticle", method = RequestMethod.POST)
 	@ResponseBody
-	public int modifyArticle(@RequestParam("upicDate") MultipartFile upicDate,B_article b_article) {
+	public int modifyArticle(@RequestParam("upicDate") MultipartFile upicDate, B_article b_article) {
 		LogManager.getLogger().debug("更改博客文章：");
 		String picPath = null;
 		if (upicDate != null && !upicDate.isEmpty()) {// 判断是否有文件上传
@@ -142,10 +151,10 @@ public class B_articleHandler<T> {
 		return articleService.modifyArticle(b_article);
 	}
 
-	//浏览量的增加
+	// 浏览量的增加
 	@RequestMapping(value = "updateAviewNum", method = RequestMethod.POST)
 	@ResponseBody
-	public int updateAviewNum(@RequestParam("aid") Integer aid){
+	public int updateAviewNum(@RequestParam("aid") Integer aid) {
 		return articleService.updateAviewNum(aid);
 	}
 
@@ -156,16 +165,18 @@ public class B_articleHandler<T> {
 		LogManager.getLogger().debug("我是delete 的处理");
 		return articleService.deleteArticle(aid);
 	}
-	//添加新文章
+
+	// 添加新文章
 	@RequestMapping(value = "addArticle", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean insertArticle(@RequestParam("upicDate") MultipartFile upicDate,B_article b_article,HttpSession session){
-		B_user currentUser = (B_user) session.getAttribute("loginUser"); 
+	public boolean insertArticle(@RequestParam("upicDate") MultipartFile upicDate, B_article b_article,
+			HttpSession session) {
+		B_user currentUser = (B_user) session.getAttribute("loginUser");
 		Integer usid = currentUser.getUsid();
 		String picPath = null;
 		Integer drid = b_article.getDrid();
-		
-		if(usid != null ){
+
+		if (usid != null) {
 			if (upicDate != null && !upicDate.isEmpty()) {// 判断是否有文件上传
 				try {
 					upicDate.transferTo(ServletUtil.getUploadFile(upicDate.getOriginalFilename()));
@@ -176,12 +187,12 @@ public class B_articleHandler<T> {
 					e.printStackTrace();
 				}
 				b_article.setApic(picPath);
-			}else{
-				if(drid != null){
+			} else {
+				if (drid != null) {
 					B_drafets drafets = drafetsService.findDrafetByDrid(drid);
 					String apic = drafets.getDrpic();
 					b_article.setApic(apic);
-				}else{
+				} else {
 					LogManager.getLogger().debug("我是空的");
 					b_article.setApic("");
 				}
@@ -189,23 +200,25 @@ public class B_articleHandler<T> {
 			b_article.setUsid(usid);
 			LogManager.getLogger().debug("B_articleHandler 添加新文章：");
 			return articleService.insertArticle(b_article);
-		}else{
+		} else {
 			return false;
 		}
-		
+
 	}
 
 	// 后台数据对文章的条件查询
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	@ResponseBody
-	public List<T> comboselect(String mkid){
+	public List<T> comboselect(String mkid) {
 		if (mkid.trim().equals("uname")) {
 			return (List<T>) b_userService.findUserAll();
 		} else if (mkid.trim().equals("tname")) {
 			return (List<T>) b_typeService.findTypeAll();
 		} else if (mkid.trim().equals("tagname")) {
 			return (List<T>) b_tagService.findAll();
+		} else if (mkid.trim().equals("cotitle")) {
+			return (List<T>) b_columnService.findColumnAll();
 		} else {
 			return (List<T>) articleService.findArticle();
 		}
@@ -214,8 +227,9 @@ public class B_articleHandler<T> {
 	// 后台通过条件查询(name为条件查询参数名 ，param为条件查询的参数值 例如:{name: tname,param:'原创')
 	@RequestMapping(value = "findByParam", method = RequestMethod.POST)
 	@ResponseBody
-	public List<B_article> findArticleByParam(String name, String param) throws UnsupportedEncodingException {
-	//	param = new String(param.getBytes("ISO-8859-1"), "UTF-8");
+	public List<B_article> findArticleByParam(String name, String param, String rows, String page)
+			throws UnsupportedEncodingException {
+		// param = new String(param.getBytes("ISO-8859-1"), "UTF-8");
 		LogManager.getLogger().debug("条件查询  neme:" + name + ",param :" + param);
 		if (name.trim().equals("uname")) {
 			return articleService.findArticleByuname(param);
@@ -223,14 +237,27 @@ public class B_articleHandler<T> {
 			return articleService.findArticleBytname(param);
 		} else if (name.trim().equals("tagname")) {
 			return articleService.listArticleBytagname(param);
+		} else if (name.trim().equals("cotitle")) {
+			// 先通过板块标题查询板块文章的id
+			String coaid = b_columnService.findCoaidByCotitle(param);
+			if (coaid.equals("") || coaid == null) {
+				return articleService.findArticle();
+			}
+			String[] array = coaid.split(",");
+			List<String> listcoaid = new ArrayList<String>();
+			for (String str : array) {
+				listcoaid.add(str);
+			}
+			// 通过板块文章id 查询文章信息
+			return articleService.listArticleByCoaid(listcoaid);
 		}
 		return articleService.findArticle();
 	}
-	
-	//后台查询用户文章发表的排行（文章统计）
+
+	// 后台查询用户文章发表的排行（文章统计）
 	@RequestMapping(value = "analytics", method = RequestMethod.POST)
 	@ResponseBody
-	public List<B_article> ArticleAnalytics()  {
+	public List<B_article> ArticleAnalytics() {
 		return articleService.ArticleAnalytics();
 	}
 
