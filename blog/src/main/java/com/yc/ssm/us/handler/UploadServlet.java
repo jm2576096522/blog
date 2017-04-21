@@ -41,7 +41,7 @@ public class UploadServlet extends HttpServlet {
 
 	@RequestMapping(value="add",method = RequestMethod.POST)
 	@ResponseBody
-	public void camere(HttpServletRequest request, HttpServletResponse response,@RequestParam("imageData") MultipartFile imageData) throws ServletException, IOException {
+	public void camere(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			out=response.getWriter();
 			UploadUtil uploadUtil=new UploadUtil();
@@ -53,21 +53,11 @@ public class UploadServlet extends HttpServlet {
 			//64位解码  
 			byte[] buffer=base64.decodeBuffer(map.get("imageData"));
 
-			String picPath = null;
-			if (imageData != null && !imageData.isEmpty()) {// 判断是否有文件上传
-				try {
-					imageData.transferTo(ServletUtil.getUploadFile(imageData.getOriginalFilename()));
-					picPath = ServletUtil.VIRTUAL_UPLOAD_DIR + imageData.getOriginalFilename();
-				} catch (IllegalStateException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			/*//写进文件  
+			
+			//写进文件  
 			String filPath="../dataInfo/"+new Date().getTime()+""+new Random().nextInt(100000)+".png";
-			filPath=this.getServletContext().getRealPath(filPath);*/
-			FileOutputStream fos=new FileOutputStream(picPath); 
+			filPath=this.getServletContext().getRealPath(filPath);
+			FileOutputStream fos=new FileOutputStream(filPath); 
 			fos.write(buffer);  
 			fos.flush();  
 			fos.close();  
