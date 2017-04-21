@@ -43,8 +43,8 @@ $.get("blog/showUserInfo", function(data) {
 	$("#uname").val(data.uname);
 	$("#loginUname").val(data.uname);
 	$("#ubirthday").datebox('setValue', data.ubirthday);
-
-	$("#uphone").val(data.uphone);
+	
+	$("#uphone").textbox('setValue',data.uphone);
 	$("#uprofession").val(data.uprofession);
 	$("#upersondesc").val(data.upersondesc);
 	var strs = new Array();

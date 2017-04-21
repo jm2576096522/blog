@@ -238,6 +238,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(1) total ,ceil(count(1)/${pageSize}) totalPage from b_article b where usid = #{usid} and atitle like #{atitle}
 	</select>
 
+
 	<!-- 查询文章的所有总数和总页数 -->
 	<select id="findArticleTotal" resultType="B_article">
 		select count(1) total
