@@ -17,4 +17,6 @@ public interface B_columnMapper {
 	
 	//通过板块标题查询板块所有文章id
 	String findCoaidByCotitle(String cotitle);
+	//通过板块id查询板块所有文章id
+	String findCoaidByCoid(String coid);
 }

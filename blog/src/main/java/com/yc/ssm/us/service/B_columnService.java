@@ -21,4 +21,7 @@ public interface B_columnService {
 	// 通过板块名查询板块文章id
 	String findCoaidByCotitle(String cotitle);
 
+	// 通过板块id查询文章id
+	String findCoaidByCoid(String coid);
+
 }

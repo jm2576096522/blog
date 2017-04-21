@@ -47,6 +47,11 @@ public class B_columnServiceImpl implements B_columnService {
 	public String findCoaidByCotitle(String cotitle) {
 		return b_columnMapper.findCoaidByCotitle(cotitle);
 	}
+
+	@Override
+	public String findCoaidByCoid(String coid) {
+		return b_columnMapper.findCoaidByCoid(coid);
+	}
 	
 	
 }

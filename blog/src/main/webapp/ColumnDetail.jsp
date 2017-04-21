@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <base href="${deployName}">
-<title>个人主界面</title>
+<title>板块主界面</title>
 <link rel="icon" type="image/png" href="assets/i/favicon.png">
 <link rel="stylesheet" href="assets/css/amazeui.min.css">
 <link rel="stylesheet" href="assets/css/app.css">
@@ -109,13 +109,13 @@
 	<script type="text/javascript" src="js/moreOperation.js"></script>
 	
 	<script type="text/javascript">
-		var usid = "<%=request.getParameter("usid")%>";
+		var coid = "<%=request.getParameter("coid")%>";
 		var currPage = 1;
 		var pageSize = 5;
 		var totalPage;
-		
-		if(usid != "null"){
-			$.post("blog/findUserInfoByUsid",{usid:usid},function(data){
+		findUserArticleByCoid();
+		/* if(coid != "null"){
+			$.post("blog/findUserInfoByCoid",{coid:coid},function(data){
 				var userInfoStr = "";
 				if(data.upic == null){
 					userInfoStr +='<img src="images/not_pic.jpg" class="blog-entry-img">';
@@ -131,12 +131,13 @@
 				$("#userPersonInfo").html(userInfoStr);
 			},'json');
 			
-			findUserArticleByUsid();
+			findUserArticleByCoid();
 			listNum();
 			
-		}
-		function findUserArticleByUsid(){
-			$.post("article/listById",{currPage:currPage,pageSize:pageSize,usid:usid},function(data){
+		} */
+		function findUserArticleByCoid(){
+			$.post("article/listByCoid?coid="+coid,function(data){
+				//alert(JSON.stringify(data));
 				var articleStr = "";
 				for (var i = 0; i < data.length; i++){
 					articleStr +='<article class="am-g blog-entry-article">';
@@ -161,7 +162,7 @@
 			},"json");
 		}
 		function listNum(){
-			$.post("article/listNum",{usid:usid},function(data){
+			$.post("article/listNum",{coid:coid},function(data){
 				var ulStr = "";
 				ulStr +="<li ><a onclick='prePage()'>&laquo; Prev</a></li>";
 				ulStr +="<li ><a onclick='firstPage()'>首页</a></li>";
@@ -179,7 +180,7 @@
 				currPage = currPage;
 			}else{
 				currPage += 1;
-				findUserArticleByUsid();
+				findUserArticleByCoid();
 				listNum();
 
 			}
@@ -190,20 +191,20 @@
 				currPage = currPage;
 			}else{
 				currPage -= 1;
-				findUserArticleByUsid();
+				findUserArticleByCoid();
 				listNum();
 			}
 		}
 		/* 首页 */
 		function firstPage(){
 			currPage = 1;
-			findUserArticleByUsid();
+			findUserArticleByCoid();
 			listNum();
 		}
 		/* 尾页 */
 		function lastPage(){
 			currPage = totalPage;
-			findUserArticleByUsid();
+			findUserArticleByCoid();
 			listNum();
 		}
 

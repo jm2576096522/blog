@@ -26,7 +26,7 @@
 	<nav class="am-g am-g-fixed blog-fixed blog-nav">
 		<ul class="am-nav am-nav-pills am-topbar-nav">
 			<li class="am-active"><a href="homePage.jsp" >首页</a></li>
-			<li><a>博客专栏</a></li>
+			<li><a href="blogColumn.jsp">博客专栏</a></li>
 			<li><a href="blogProfessor.jsp" style="color: #10D07A;">博客专家</a></li>
 			<li><a>热度话题</a></li>
 			<li><a href="personPage.jsp">我的博客</a></li>

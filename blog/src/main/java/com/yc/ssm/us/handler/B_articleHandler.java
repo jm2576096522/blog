@@ -55,19 +55,20 @@ public class B_articleHandler<T> {
 	// 所有的文章查询
 	@RequestMapping("find")
 	@ResponseBody
-	public List<B_article> findArticle(){
+	public List<B_article> findArticle() {
 		LogManager.getLogger().debug("我进来了。。。");
 		return articleService.findArticle();
 	}
+
 	// 分页显示所有的文章（按时间）
 	@RequestMapping("findArticle")
 	@ResponseBody
-	public List<B_article> findArticleByTime(B_article b_article){
+	public List<B_article> findArticleByTime(B_article b_article) {
 		LogManager.getLogger().debug("我进来了。。。");
 		return articleService.findArticleByTime(b_article);
 	}
 
-	//首页按评论数显示热度文章
+	// 首页按评论数显示热度文章
 	@RequestMapping("findByHot")
 	@ResponseBody
 	public List<B_article> findArticleByHot(B_article b_article) {
@@ -115,13 +116,30 @@ public class B_articleHandler<T> {
 		LogManager.getLogger().debug("我是通过id分页查询的文章。。。");
 		return articleService.partArticleById(b_article);
 	}
-	
-	//指定用户id分页查询文章(by 类型)
+
+	// 指定板块id分页查询文章
+	@RequestMapping(value = "listByCoid", method = RequestMethod.POST)
+	@ResponseBody
+	public List<B_article> listByCoid(String coid) {
+		String coaid = b_columnService.findCoaidByCoid(coid);
+		if (coaid.equals("") || coaid == null) {
+			return articleService.findArticle();
+		}
+		String[] array = coaid.split(",");
+		List<String> listcoaid = new ArrayList<String>();
+		for (String str : array) {
+			listcoaid.add(str);
+		}
+		// 通过板块文章id 查询文章信息
+		return articleService.listArticleByCoaid(listcoaid);
+	}
+
+	// 指定用户id分页查询文章(by 类型)
 	@RequestMapping(value = "findArticleByType", method = RequestMethod.POST)
 	@ResponseBody
-	public List<B_article> findArticleByType(B_article b_article,HttpSession session){
+	public List<B_article> findArticleByType(B_article b_article, HttpSession session) {
 		Integer usid = b_article.getUsid();
-		if(usid == null){
+		if (usid == null) {
 			B_user user = (B_user) session.getAttribute("loginUser");
 			usid = user.getUsid();
 		}
@@ -129,7 +147,7 @@ public class B_articleHandler<T> {
 		return articleService.findArticleByType(b_article);
 	}
 
-	//查询用户id所作的文章数及总页数
+	// 查询用户id所作的文章数及总页数
 	@RequestMapping(value = "listNum", method = RequestMethod.POST)
 	@ResponseBody
 	public B_article listNum(B_article b_article, HttpSession session) {
@@ -142,13 +160,13 @@ public class B_articleHandler<T> {
 		LogManager.getLogger().debug("查询用户id所作的文章数及总页数");
 		return articleService.findArticleNum(b_article);
 	}
-	
-	//指定用户id分页查询文章(by 类型) 的文章数及总页数
+
+	// 指定用户id分页查询文章(by 类型) 的文章数及总页数
 	@RequestMapping(value = "findArticleNumByType", method = RequestMethod.POST)
 	@ResponseBody
-	public B_article findArticleNumByType(B_article b_article,HttpSession session) {
+	public B_article findArticleNumByType(B_article b_article, HttpSession session) {
 		Integer usid = b_article.getUsid();
-		if(usid == null){
+		if (usid == null) {
 			B_user user = (B_user) session.getAttribute("loginUser");
 			usid = user.getUsid();
 		}
@@ -156,13 +174,12 @@ public class B_articleHandler<T> {
 		return articleService.findArticleNumByType(b_article);
 	}
 
-
 	// 指定用户id分页查询文章(by 类别)
 	@RequestMapping(value = "findArticleByTag", method = RequestMethod.POST)
 	@ResponseBody
-	public List<B_article> findArticleByTag(B_article b_article,HttpSession session){
+	public List<B_article> findArticleByTag(B_article b_article, HttpSession session) {
 		Integer usid = b_article.getUsid();
-		if(usid == null){
+		if (usid == null) {
 			B_user user = (B_user) session.getAttribute("loginUser");
 			usid = user.getUsid();
 		}
@@ -170,12 +187,12 @@ public class B_articleHandler<T> {
 		return articleService.findArticleByTag(b_article);
 	}
 
-	//指定用户id分页查询文章(by 类别) 的文章数及总页数
+	// 指定用户id分页查询文章(by 类别) 的文章数及总页数
 	@RequestMapping(value = "findArticleNumByTag", method = RequestMethod.POST)
 	@ResponseBody
-	public B_article findArticleNumByTag(B_article b_article,HttpSession session) {
+	public B_article findArticleNumByTag(B_article b_article, HttpSession session) {
 		Integer usid = b_article.getUsid();
-		if(usid == null){
+		if (usid == null) {
 			B_user user = (B_user) session.getAttribute("loginUser");
 			usid = user.getUsid();
 		}
@@ -183,7 +200,7 @@ public class B_articleHandler<T> {
 		return articleService.findArticleNumByTag(b_article);
 	}
 
-	//查询文章的所有总数和总页数
+	// 查询文章的所有总数和总页数
 	@RequestMapping(value = "articleTotal", method = RequestMethod.POST)
 	@ResponseBody
 	public B_article articleTotal() {
@@ -236,7 +253,7 @@ public class B_articleHandler<T> {
 		String picPath = null;
 		Integer drid = b_article.getDrid();
 
-		if(usid != null ){
+		if (usid != null) {
 			if (upicDate != null && !upicDate.isEmpty()) {// 判断是否有文件上传
 				try {
 					upicDate.transferTo(ServletUtil.getUploadFile(upicDate.getOriginalFilename()));
@@ -264,7 +281,7 @@ public class B_articleHandler<T> {
 			return false;
 		}
 	}
-	
+
 	// 后台数据对文章的条件查询
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -313,18 +330,19 @@ public class B_articleHandler<T> {
 		return articleService.findArticle();
 	}
 
-	//后台查询用户文章发表的排行（文章统计）
+	// 后台查询用户文章发表的排行（文章统计）
 	@RequestMapping(value = "analytics", method = RequestMethod.POST)
 	@ResponseBody
 	public List<B_article> ArticleAnalytics() {
 		return articleService.ArticleAnalytics();
 	}
-	//个人文章的模糊查询
+
+	// 个人文章的模糊查询
 	@RequestMapping(value = "findArticleByAtitle", method = RequestMethod.POST)
 	@ResponseBody
-	public List<B_article> findArticleByAtitle(B_article b_article,HttpSession session){
+	public List<B_article> findArticleByAtitle(B_article b_article, HttpSession session) {
 		Integer usid = b_article.getUsid();
-		if(usid == null){
+		if (usid == null) {
 			B_user user = (B_user) session.getAttribute("loginUser");
 			usid = user.getUsid();
 		}
@@ -332,12 +350,12 @@ public class B_articleHandler<T> {
 		return articleService.findArticleByAtitle(b_article);
 	}
 
-	//查询用户id所作的文章数及总页数 (以  atitle 标题）分类)
+	// 查询用户id所作的文章数及总页数 (以 atitle 标题）分类)
 	@RequestMapping(value = "findArticleNumByAtitle", method = RequestMethod.POST)
 	@ResponseBody
-	public B_article findArticleNumByAtitle(B_article b_article,HttpSession session){
+	public B_article findArticleNumByAtitle(B_article b_article, HttpSession session) {
 		Integer usid = b_article.getUsid();
-		if(usid == null){
+		if (usid == null) {
 			B_user user = (B_user) session.getAttribute("loginUser");
 			usid = user.getUsid();
 		}

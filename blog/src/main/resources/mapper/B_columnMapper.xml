@@ -40,13 +40,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="String">
 		select bc.coaid from b_column bc where bc.cotitle=#{cotitle}
 	</select>
+	<!--通过板块名查询 -->
+	<select id="findCoaidByCoid" parameterType="String"
+		resultType="String">
+		select bc.coaid from b_column bc where bc.coid=#{coid}
+	</select>
 	<!-- 新建板块 -->
 	<insert id="addColumn" parameterType="B_column">
 		insert into b_column
-		(coid,cotitle,coaid,cotime,usid,cocontent,copic)
+		(coid,cotitle,coaid,cotime,usid,cocontent,copic,articlenum)
 		values(seq_coid.nextval,#{cotitle},#{coaid},to_char(sysdate,'yyyy-MM-dd
 		hh:mm:ss'),(select bu.usid from b_user bu where
-		bu.uemail=#{uemail}),#{cocontent},#{copic})
+		bu.uemail=#{uemail}),#{cocontent},#{copic},#{articlenum})
 	</insert>
 
 	<!-- 删除板块 -->

@@ -88,7 +88,7 @@ $("#columnList")
 
 // 板块文章添加
 $.post("article/list", function(data) {
-	$('#caid').combobox('clear'); 
+	$('#caid').combobox('reset');
 	$("#caid").combobox({
 		data : data.rows,
 		valueField : 'aid',
@@ -112,7 +112,6 @@ $.post("blog/list", function(data) {
 	});
 	$('#cuemail').combobox('getValue');
 }, "json");
-
 
 $("#detailsColumn").dialog({
 	title : "板块详情",
@@ -149,7 +148,7 @@ $("#addColumnForm").form(
 $(".addBtn").linkbutton({
 	iconCls : "icon-add",
 	onClick : function() {
-		//$("#addColumnForm").form("reset");
+		$("#addColumnForm").form("reset");
 		$("#addColumn").dialog("open");
 	}
 });

@@ -1,6 +1,8 @@
 package com.yc.ssm.us.handler;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +51,14 @@ public class B_columnHandler {
 			}
 		}
 		b_column.setCopic(picPath);
-		System.out.println("上传图片==》b_column:" + b_column);
+		String coaid=b_column.getCoaid();
+		String[] array = coaid.split(",");
+		List<String> listcoaid = new ArrayList<String>();
+		for (String str : array) {
+			listcoaid.add(str);
+		}
+		b_column.setArticlenum(listcoaid.size());
+		System.out.println("上传图片==》b_column:" + b_column+"----------板块文章数"+b_column.getArticlenum());
 		return columnService.addColumn(b_column);// 异步数据响应
 	}
 	
