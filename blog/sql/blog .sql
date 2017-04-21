@@ -298,6 +298,8 @@ create table b_column(
 insert into b_column values(seq_coid.nextval,'三大框架的实现','三大框架包含：spring,springmvc,mybatis',10007,to_char(sysdate,'yyyy-MM-dd hh:mm:ss'),'','',0);
 insert into b_column values(seq_coid.nextval,'b/s模型','b/s模型包含：jsp,servlet,maven,oracle',10008,to_char(sysdate,'yyyy-MM-dd hh:mm:ss'),'','',0);
 alter table b_column add articlenum int  default 0; --添加字段 文章数
+alter table B_COLUMN modify cotitle varchar2(40);
+
 update B_ARTICLE set aviewnum = (aviewnum+1) where aid =181;
 
 update b_column set coaid='4,5,9' where coid=1

@@ -86,6 +86,45 @@ $("#columnList")
 							} ] ]
 				});
 
+// 板块文章添加
+$.post("article/list", function(data) {
+	$('#caid').combobox('clear'); 
+	$("#caid").combobox({
+		data : data.rows,
+		valueField : 'aid',
+		textField : 'atitle',
+		required : true,
+		multiple : true,
+		panelHeight : 'auto'
+	});
+	$('#caid').combobox('getValue');
+}, "json");
+
+// 板主邮箱
+$.post("blog/list", function(data) {
+	$('#cuemail').combobox('clear');
+	$("#cuemail").combobox({
+		data : data.rows,
+		valueField : 'uemail',
+		textField : 'uemail',
+		required : true,
+		panelHeight : 'auto'
+	});
+	$('#cuemail').combobox('getValue');
+}, "json");
+
+
+$("#detailsColumn").dialog({
+	title : "板块详情",
+	closed : true,
+	modal : true
+});
+
+$("#addColumn").dialog({
+	title : "板块添加",
+	closed : true,
+	modal : true
+});
 $("#addColumnForm").form(
 		{
 			url : "column/add",
@@ -106,12 +145,12 @@ $("#addColumnForm").form(
 				}
 			}
 		});
+
 $(".addBtn").linkbutton({
 	iconCls : "icon-add",
 	onClick : function() {
-		$("#addColumnForm").form("reset");
+		//$("#addColumnForm").form("reset");
 		$("#addColumn").dialog("open");
-
 	}
 });
 $(".updBtn").linkbutton({
@@ -128,30 +167,13 @@ $(".closeBtn").linkbutton({
 	}
 });
 
-$(".updateBtn").linkbutton({
+$(".addColumBtn").linkbutton({
 	iconCls : "icon-ok",
 	onClick : function() {
 		$("#addColumnForm").submit();
 	}
 });
-$("#detailsColumn").dialog({
-	title : "板块详情",
-	closed : true,
-	modal : true
-});
-
-$("#addColumn").dialog({
-	title : "板块添加",
-	closed : true,
-	modal : true
-});
-$('#caid').combobox({    
-    url:'article/list',    
-    valueField:'aid',    
-    textField:'atitle'   
-}); 
 function deleteDate(index) {
-
 	// 删除时先获取选择行
 	var row = $("#columnList").datagrid("getRows")[index];
 	var coid = row.coid;
