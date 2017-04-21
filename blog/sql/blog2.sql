@@ -9,6 +9,7 @@ select * from B_TAG;--标签
 select * from B_TYPE;--类型
 select  * from B_USER;--用户
 select  * from b_drafets;--草稿
+select * from B_COLUMN;   ---专栏
 
 ---------------------删除表和序列-----------
 drop table b_admin;
@@ -126,11 +127,28 @@ create table b_drafets(
        drpic varchar2(600)        --文章图片  
 );
 
+----博客专栏--------
+-----创建序列---
+create sequence seq_coid start with 1 increment by 1;
+-------end-------
+create table b_column(
+       coid int primary key,                 --专栏id
+       cotitle  varchar2(20) not null,       --专栏标题
+       cocontent varchar2(100) ,             --专栏说明
+       usid int references b_user(usid) not null,     --专栏创建者id
+       cotime varchar2(40),                --专栏创建时间
+       coaid varchar2(200),				--专栏里面所有文章的id
+       copic varchar2(600),                --专栏图片  
+       coviewnum  int  default 0        --专栏浏览量
+);
+
 --------------------end create table-----------------------
 
 ------------------test Data -------------
 ---插入测试用户账号
 	insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'123@qq.com','6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2');
+
+	insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'12345678@qq.com','6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2');	
 -----插入管理员账号
 	insert into B_ADMIN values(seq_adid.nextval,'admin','6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2','2576096522@qq.com');
 

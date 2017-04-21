@@ -43,28 +43,31 @@ public class EmailHander {
 		// 开启debug调试
 		props.setProperty("mail.debug", "true");
 		// 发送服务器需要身份验证
-		props.setProperty("mail.smtp.auth", "true");
+		props.setProperty("mail.smtp.auth", "false");
 		// 设置邮件服务器主机名
 		props.setProperty("mail.host", "smtp.163.com");
 		// 发送邮件协议名称
 		props.setProperty("mail.transport.protocol", "smtp");
-
+		
+		props.setProperty("mail.smtp.localhost", "mail.digu.com");
+		
+		props.setProperty("mail.smtp.port", "25");
 		// 设置环境信息
 		Session session = Session.getInstance(props);
 
 		// 创建邮件对象
 		Message msg = new MimeMessage(session);
 		try {
-			msg.setSubject("获取注册Acosta Blog 的验证码");
+			msg.setSubject("Acosta Blog 的验证码");
 			// 设置邮件内容
-			msg.setText("你要注册的Acosta Blog 的验证码为：" + random);
+			msg.setText("Acosta Blog 的验证码为：" + random);
 			// 设置发件人
 			// msg.setFrom(new InternetAddress("13207343611@163.com"));
-			msg.setFrom(new InternetAddress("18773477307@163.com"));
+			msg.setFrom(new InternetAddress("18273474977@163.com"));//
 			Transport transport = session.getTransport();
 			// 连接邮件服务器
-			transport.connect("18773477307@163.com", "ziupkzexofqavuoo");
-			// transport.connect("13207343611@163.com","yuan19961025");
+			transport.connect("18273474977@163.com", "3650711deng");
+			 //transport.connect("13207343611@163.com","yuan19961025");
 
 			// 发送邮件
 			transport.sendMessage(msg, new Address[] { new InternetAddress(Email) });
@@ -82,7 +85,7 @@ public class EmailHander {
 		return random;
 	}
 
-	// 管理员忘记密码的邮箱登录
+/*	// 管理员忘记密码的邮箱登录
 	@RequestMapping("admin")
 	@ResponseBody
 	public String yzm(B_admin user) {
@@ -129,5 +132,5 @@ public class EmailHander {
 			e.printStackTrace();
 		}
 		return random;
-	}
+	}*/
 }

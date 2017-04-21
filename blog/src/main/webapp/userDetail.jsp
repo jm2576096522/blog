@@ -28,7 +28,7 @@
 			</ul>
 			<!-- 菜单栏右部分 -->
 			<div id="top_right" class="show_loginUser" style="float: right;">
-				<img src="${loginUser.getUpic()}"
+				<img src="${loginUser.getUpic()}" id="top_img"
 					style="float: left; width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
 				<div style="float: left; height: 100%; line-height: 50px;">
 					欢迎 : <input type="text" id="loginUname" readonly="readonly"
@@ -109,6 +109,11 @@
 	<script type="text/javascript" src="js/moreOperation.js"></script>
 	
 	<script type="text/javascript">
+		var result = $("#top_img").attr("src");
+		if(result == ""){
+			$("#top_img").attr("src","images/not_pic.jpg");
+		}
+	
 		var usid = "<%=request.getParameter("usid")%>";
 		var currPage = 1;
 		var pageSize = 5;

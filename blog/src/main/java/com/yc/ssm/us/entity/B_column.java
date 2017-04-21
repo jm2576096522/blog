@@ -3,6 +3,19 @@ package com.yc.ssm.us.entity;
 import java.io.Serializable;
 
 public class B_column implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private Integer coid;//板块id
+	private String cotitle;//板块标题
+	private String coaid;//文章id
+	private Integer usid;//板主id(用户)
+	private String cotime;//板块创建时间
+	private String cocontent;//板块描述内容
+	private String copic;//板块图片
+	private Integer coviewnum;//板块浏览量
+	
+	private Integer articlenum;//板块文章数
+	private String uname;//板主昵称
+	private String uemail;//板主邮箱
 
 	public Integer getCoviewnum() {
 		return coviewnum;
@@ -34,13 +47,6 @@ public class B_column implements Serializable {
 
 	public void setArticlenum(Integer articlenum) {
 		this.articlenum = articlenum;
-	}
-
-	@Override
-	public String toString() {
-		return "B_column [coid=" + coid + ", cotitle=" + cotitle + ", coaid=" + coaid + ", usid=" + usid + ", cotime="
-				+ cotime + ", cocontent=" + cocontent + ", copic=" + copic + ", coviewnum=" + coviewnum
-				+ ", articlenum=" + articlenum + ", uname=" + uname + ", uemail=" + uemail + "]";
 	}
 
 	public Integer getCoid() {
@@ -98,24 +104,13 @@ public class B_column implements Serializable {
 	public void setCopic(String copic) {
 		this.copic = copic;
 	}
-
 	
-
-	private static final long serialVersionUID = 1L;
-	private Integer coid;//板块id
-	private String cotitle;//板块标题
-	private String coaid;//文章id
-	private Integer usid;//板主id(用户)
-	private String cotime;//板块创建时间
-	private String cocontent;//板块描述内容
-	private String copic;//板块图片
-	private Integer coviewnum;//板块浏览量
-	
-	private Integer articlenum;//板块文章数
-	private String uname;//板主昵称
-	private String uemail;//板主邮箱
-	
-	public B_column() {
+	@Override
+	public String toString() {
+		return "B_column [coid=" + coid + ", cotitle=" + cotitle + ", coaid=" + coaid + ", usid=" + usid + ", cotime="
+				+ cotime + ", cocontent=" + cocontent + ", copic=" + copic + ", coviewnum=" + coviewnum
+				+ ", articlenum=" + articlenum + ", uname=" + uname + ", uemail=" + uemail + "]";
 	}
+	
 
 }

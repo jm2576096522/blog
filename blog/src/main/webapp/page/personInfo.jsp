@@ -25,7 +25,7 @@
 	<nav class="am-g am-g-fixed blog-fixed blog-nav">
 		
 		<div class="am-collapse am-topbar-collapse" id="blog-collapse">
-			<ul class="am-nav am-nav-pills am-topbar-nav">
+			<ul class="am-nav am-nav-pills am-topbar-nav" id="top_ul">
 				<li><a href="homePage.jsp">首页</a></li>
 				<li><a href="personPage.jsp">我的文章</a></li>
 				<li><a href="page/blog_add.jsp">写新文章</a></li>
@@ -37,7 +37,7 @@
 			</ul>
 			<!-- 菜单栏右部分 -->
 			<div id="top_right" class="show_loginUser" style="float: right;">
-				<img src="${loginUser.getUpic()}"
+				<img src="${loginUser.getUpic()}" id="top_img"
 					style="float: left; width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
 				<div style="float: left; height: 100%; line-height: 50px;">
 					欢迎 : <input type="text" id="loginUname" readonly="readonly"
@@ -146,6 +146,21 @@
 	<script type="text/javascript" src="js/moreOperation.js"></script>
 	
 	<script type="text/javascript">
+	
+	var result = $("#top_img").attr("src");
+	if(result == ""){
+		$("#top_img").attr("src","images/not_pic.jpg");
+	}
+	 $.post("blog/professor",function(data){
+		 var curr = "${loginUser.getUsid()}";
+		 for(var i=0;i<data.length;i++){
+			 if(data[i].usid == curr){
+				 var ulStr ='<li><a href="page/blog_column.jsp">专栏管理</a></li>';
+				 $("#top_ul").append(ulStr);
+			 }
+		 }
+	 });
+	
 	function open_camera(){
 		location.href="page/camera.jsp";
 	}

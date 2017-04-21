@@ -295,7 +295,7 @@ create table b_column(
        copic varchar2(600),                --专栏图片  
        coviewnum  int  default 0        --专栏浏览量
 );
-insert into b_column values(seq_coid.nextval,'三大框架的实现','三大框架包含：spring,springmvc,mybatis',10007,to_char(sysdate,'yyyy-MM-dd hh:mm:ss'),'','',0);
+insert into b_column values(seq_coid.nextval,'三大框架的实现','三大框架包含：spring,springmvc,mybatis',10001,to_char(sysdate,'yyyy-MM-dd hh24:mm:ss'),'','',0);
 insert into b_column values(seq_coid.nextval,'b/s模型','b/s模型包含：jsp,servlet,maven,oracle',10008,to_char(sysdate,'yyyy-MM-dd hh:mm:ss'),'','',0);
 alter table b_column add articlenum int  default 0; --添加字段 文章数
 update B_ARTICLE set aviewnum = (aviewnum+1) where aid =181;

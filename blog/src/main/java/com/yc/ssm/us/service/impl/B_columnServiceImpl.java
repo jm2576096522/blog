@@ -48,5 +48,20 @@ public class B_columnServiceImpl implements B_columnService {
 		return b_columnMapper.findCoaidByCotitle(cotitle);
 	}
 	
+	//添加个人板块
+	@Override
+	public int addColumnByUsid(B_column b_column) {
+		
+		return b_columnMapper.addColumnByUsid(b_column);
+	}
+	//查询个人模板
+	public List<B_column> findColumnByUsid(B_column b_column){
+		return b_columnMapper.findColumnByUsid(b_column);
+	}
+		//删除个人板块
+	public int deleteColumnByCoid(Integer coid){
+		return b_columnMapper.deleteColumnByCoid(coid);
+	}
+	
 	
 }

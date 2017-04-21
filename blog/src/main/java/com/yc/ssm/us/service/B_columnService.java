@@ -21,4 +21,12 @@ public interface B_columnService {
 	// 通过板块名查询板块文章id
 	String findCoaidByCotitle(String cotitle);
 
+	//添加个人板块
+	int addColumnByUsid(B_column b_column);
+	
+	//查询个人模板
+	List<B_column> findColumnByUsid(B_column b_column);
+	//删除个人板块
+	int deleteColumnByCoid(Integer coid);
+
 }
