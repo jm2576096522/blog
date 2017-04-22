@@ -119,7 +119,9 @@
 						tableStr += "<td class='alt'>"+strs.length+"</td>";
 					}
 					tableStr += "<td class='alt'>";
-					tableStr += "<a style='margin-right:10px; font-size:15px;' onclick='deleterow("+data[i].coid+")'>删除</a></td></tr>";
+					tableStr += "<a style='margin-right:10px; font-size:15px;' onclick='addrow("+data[i].coid+")'>【添加/修改】文章</a>";
+					tableStr += "<a style='margin-right:10px; font-size:15px;' onclick='deleterow("+data[i].coid+")'>删除</a>";
+					tableStr += "<a style='margin-right:10px; font-size:15px;' onclick='updaterow("+data[i].coid+")'>修改专栏</a></td></tr>";
 				}
 			}
 			$("#table_body").html(tableStr);
@@ -135,6 +137,15 @@
 					$.messager.alert("操作提示","删除失败...","error");
 				}
 			});
+		}
+		function updaterow(index){
+			if(index != ""){
+				location.href="page/column_add.jsp?coid="+index;
+			}
+		}
+		
+		function addrow(index){
+			location.href="page/columnArticle_add.jsp?coid="+index;
 		}
 	</script>
 	

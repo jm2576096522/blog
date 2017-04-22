@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <base href="${deployName}">
-<title>博客专家</title>
+<title>博客专栏</title>
 <link rel="shortcut icon" href="assets/i/favicon.png" />
 <link href="css/base.css" rel="stylesheet">
 <link href="css/index.css" rel="stylesheet">
@@ -24,13 +24,14 @@
 	<nav class="blog-nav">
 		<ul class="nav_left">
 			<li class="am-active"><a href="homePage.jsp" >首页</a></li>
-			<li><a href="blogColumn.jsp">博客专栏</a></li>
-			<li><a href="blogProfessor.jsp" style="color: #10D07A;">博客专家</a></li>
+			<li><a href="blogColumn.jsp" style="color: #10D07A;">博客专栏</a></li>
+			<li><a href="blogProfessor.jsp" >博客专家</a></li>
+			<li><a>热度话题</a></li>
 			<li><a href="personPage.jsp">我的博客</a></li>
 		</ul>
 		<!-- 菜单栏右部分 -->
 		<div id="top_right" class="show_loginUser" style="float: right;">
-			<img src="${loginUser.getUpic()}" id="top_img"
+			<img src="${loginUser.getUpic()}"
 				style="float: left; width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
 			<div style="float: left; height: 100%; line-height: 50px;">
 				欢迎 : <input type="text" id="loginUname" readonly="readonly"
@@ -46,7 +47,7 @@
 	<hr>
 	<article>
 		<hr>
-		<span id="con_top">推荐专家</span> <span
+		<span id="con_top">推荐专栏</span> <span
 			style="font-size: 18px; float: right; margin-right: 90px;"><a
 			href="rule.jsp" style="color: red;">rule >></a></span>
 		<hr>
@@ -67,33 +68,21 @@
 	<script type="text/javascript" src="js/moreOperation.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript">
-		var result = $("#top_img").attr("src");
-		if(result == ""){
-			$("#top_img").attr("src","images/not_pic.jpg");
-		}
-
-	
-		 $.post("blog/professor",function(data){
+		 $.post("column/list",function(data){
+			 data=data.rows;
 			var proStr ='';
 			for(var i=0;i<data.length;i++){
-				proStr += '<dl class="experts_list">';
-				if(data[i].upic == null){
-					proStr += '<dt><img class="expert_head" src="images/not_img.jpg"></dt>';
+				proStr += '<dl class="experts_list" style="height:280px;">';
+				if(data[i].copic == null){
+					proStr += '<dt><img class="expert_head" src="images/not_pic.jpg"></dt>';
 				}else{
-					proStr += '<dt><img class="expert_head" src="'+data[i].upic+'"></dt>';
+					proStr += '<dt><img class="expert_head" src="'+data[i].copic+'"></dt>';
 				}
-				proStr += '<dd><a class="expert_name" style="font-size:16px;color:#10D07A;" onclick="userDetail('+data[i].usid+')">'+data[i].uname+'</a>';
-				proStr += '<div class="address"><div style="width: 45%; float: left; text-align: right;">';
-				 var strs = new Array();
-				strs = data[i].uaddress.split("-");
-				if(strs[0] != ""){
-					proStr += '<em>'+strs[0]+'</em>&nbsp;&nbsp;<b>|</b></div>';
-				 }else{
-					proStr += '<em>暂无</em>&nbsp;&nbsp;<b>|</b></div>';
-				} 
-				proStr += '<div id="con_pre"><span>'+data[i].uprofession+'</span></div></div>';
-				proStr += '<div class="count_1 fl"><b>'+data[i].articlenum+'</b> <span>文章数</span></div>';
-				proStr += '<div class="count_1 fr"><b>'+data[i].aviewtotal+'</b> <span>阅读量</span></div>';
+				proStr += '<dd><a class="expert_name" style="font-size:16px;color:#10D07A;" onclick="ColumnDetail('+data[i].coid+')">'+data[i].cotitle+'</a>';
+				proStr += '<p style="width:80%;margin:20px auto;font-size:15px;overflow: hidden;text-align:center;text-overflow:ellipsis;white-space:nowrap;">'+data[i].cocontent+'</p>';
+				proStr += '<a class="expert_name" style="font-size:14px;color:#10D07A;" onclick="userDetail('+data[i].usid+')">'+data[i].uname+'</a><span>'+data[i].uemail+'</span><br/><br/>';
+				proStr += '<div class="count_1 fl"><b>'+data[i].articlenum+'</b> <span>板块文章数</span></div>';
+				proStr += '<div class="count_1 fr"><b>'+data[i].coviewnum+'</b> <span>板块阅读量</span></div>';
 				proStr += '</dd></dl>';
 			}
 			$("#content").html(proStr);
@@ -102,6 +91,14 @@
 		//用户详情
 		 function userDetail(index){
 		 	location.href="userDetail.jsp?usid="+index;
+		 }
+		//板块详情
+		 function ColumnDetail(index){
+			if(index != ""){
+				$.post("column/updateAviewNum",{coid:index},function(data){
+					location.href="ColumnDetail.jsp?coid="+index;
+				});
+			}
 		 }
 	</script>
 

@@ -6,10 +6,13 @@
 <base href="${deployName}">
 <meta charset="utf-8">
 <title>专栏管理</title>
+
+<link rel="icon" type="image/png" href="assets/i/favicon.png">
 <link rel="stylesheet" href="assets/css/amazeui.min.css">
 <link rel="stylesheet" href="assets/css/app.css">
 <link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
 <script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 </head>
 
@@ -57,23 +60,21 @@
 	<!-- content srart -->
 
 	<div class="am-g am-g-fixed blog-fixed">
-		<div class="am-u-md-8 am-u-sm-12" style="width:100%;" >
+		<div class="am-u-md-8 am-u-sm-12" style="width: 100%;">
 			<!-- 新建博客 -->
-				<hr>
-				<span id="con_top"
-					style="font-size: 18px; margin-left: 30px; letter-spacing: 3px; color: navy;">专栏添加</span>
-				<hr>
-			<form class="am-form am-g" id="add_form" method="post" style="width:80%;margin:auto;" enctype="multipart/form-data">
-				
-
+			<hr>
+			<span id="con_top"
+				style="font-size: 18px; margin-left: 30px; letter-spacing: 3px; color: navy;">专栏添加</span>
+			<hr>
+			<form class="am-form am-g" id="add_form" method="post"
+				style="width: 80%; margin: auto;" enctype="multipart/form-data">
 				<fieldset>
-						<div class="am-form-group am-u-sm-4 blog-clear-left" style="width:100%;">
-							<label>标题</label><input type="text" style="width:33%;" id="cotitle" name="cotitle"
-								placeholder="标题">
-						</div>
-					
+					<div class="am-form-group am-u-sm-4 blog-clear-left" style="width:100%;">
+						<label>标题</label><input type="text" style="width:33%;" id="cotitle" name="cotitle"
+							placeholder="标题">
+					</div>
 					<div class="am-form-group">
-						<label style="float:left;">专栏描述 </label>
+						<label style="float: left;">专栏描述 </label>
 						<textarea name="cocontent" id="cocontent" rows="15"
 							style="height: 150px;" placeholder="一字千金"></textarea>
 					</div>
@@ -82,14 +83,12 @@
 						<label> 上传图片 </label><input type="file" id="upicData"
 							name="upicData" placeholder="选择文件" onchange="chgPic(this)">
 					</p>
-					<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='add_article()'>添加专栏</button>
-					<button type='reset' class='am-btn am-btn-default' onclick="reset_img()">重置</button>
+					<p id="controlNav"></p>
+					
 				</fieldset>
 			</form>
 		</div>
 	</div>
-
-
 
 	<!-- content end -->
 	<footer class="blog-footer" style="margin-top: 200px;">
@@ -98,23 +97,40 @@
 			under MIT license. Made with love By LWXYFER</div>
 	</footer>
 
+	
 	<script src="assets/js/amazeui.min.js"></script>
 	<script type="text/javascript" src="easyui/jquery.min.js"></script>
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.min.js"></script>
 	<script type="text/javascript" src="js/moreOperation.js"></script>
-	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
+	
 	<script type="text/javascript">
 		var result = $("#top_img").attr("src");
+		var coid = "<%=request.getParameter("coid")%>";
 		if (result == "") {
 			$("#top_img").attr("src", "images/not_pic.jpg");
 		}
-		function column_add() {
-			location.href = "page/column_add.jsp"
+	
+		 if (coid != "null") {
+			var navStr = "";
+			findColumnByCoid();
+			navStr += "<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='update_article()'>更改专栏</button>";
+			navStr += "<button type='button' class='am-btn am-btn-default' onclick='backFirst()'>取消</button>";
+			navStr += "<input type='text' name='coid' style='width:100px;display:none;' value='"+coid+"'/> ";
+			$("#controlNav").html(navStr);
+		} else {
+			var navStr = "";
+			navStr += "<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='add_article()'>添加专栏</button>";
+			navStr += "<button type='reset' class='am-btn am-btn-default' onclick='reset_img()'>重置</button>";
+			$("#controlNav").html(navStr);
 		}
 		
 		/* 图片更改 */
 		function chgPic(obj) {
-			var picStr = "<img src='"+ window.URL.createObjectURL(obj.files[0])+ "' style='width: 400px; height: 200px;'>";
+			var picStr = "<img src='"
+					+ window.URL.createObjectURL(obj.files[0])
+					+ "' style='width: 400px; height: 200px;'>";
 			$("#show_img").html(picStr);
 		}
 		/* 添加文章的请求 */
@@ -124,17 +140,49 @@
 				success : function(data) {
 					if (data.trim() == "true") {
 						$.messager.alert("操作提示", "添加成功...", "info", function() {
-								location.href = "page/blog_column.jsp";
+							location.href = "page/blog_column.jsp";
 						});
-					}else {
+					} else {
 						$.messager.alert("操作提示", "添加失败！！", "error");
 					}
 				}
 			});
 		}
 		/* 清空图片 */
-		function reset_img(){
+		function reset_img() {
 			$("#show_img").html("");
+		}
+		
+		/*如果coid 是存在的  */
+		function findColumnByCoid(){
+			$.post("column/findColumnByCoid",{coid:coid},function(data){
+				$("#cotitle").val(data.cotitle);
+				$("#cocontent").val(data.cocontent);
+				if (data.copic != null) {
+					var picStr = "<img src='"+data.copic+"' style='width: 400px; height: 200px;'>";
+					$("#show_img").html(picStr);
+				} else {
+					var picStr = "<img src='images/not_pic.jpg'>";
+					$("#show_img").html(picStr);
+				}
+			});
+		}
+		/* 更改专栏 */
+		function update_article() {
+			$("#add_form").form({
+				url : "column/updateColumn",
+				success : function(data){
+					if (data > 0){
+						$.messager.alert("操作提示", "更改成功...", "info", function() {
+							location.href = "page/blog_column.jsp";
+						});
+					} else {
+						$.messager.alert("操作提示", "更改失败！！", "error", function() {
+							location.reload();
+						});
+					}
+				}
+			});
 		}
 	</script>
 

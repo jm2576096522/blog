@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<base href="${deployName}">
 <meta charset="UTF-8">
 <title>板块列表</title>
 </head>
 <body>
-
 	<table id="columnList"></table>
 
 	<div id="column">
@@ -53,27 +53,30 @@
 		</p>
 	</div>
 
-	<div id="addColumn" style="width: 400px; ">
+	<div id="addColumn" style="width: 400px;">
 		<form id="addColumnForm" method="post" enctype="multipart/form-data">
 			<table cellpadding="10">
 				<tr>
 					<td>板块标题：</td>
-					<td><input id="ccotitle" name="cotitle" class="inputclass"
-						required="required" /></td>
+					<td><input id="ccotitle" name="cotitle" style="width: 147px"
+						class="easyui-validatebox textbox"
+						data-options="prompt:'请输入板块标题.',required:true,validType:'length[1,20]'" /></td>
 				</tr>
 				<tr>
 					<td>板主邮箱：</td>
-					<td><input id="cuemail" name="uemail" class="inputclass"
-						required="required" /></td>
+					<td><input id="cuemail" name="uemail" style="width: 147px"
+						class="easyui-combobox validatebox "
+						data-options="prompt:'请输入正确的邮箱.',required:true,validType:'email'" /></td>
 				</tr>
 				<tr>
 					<td>板块文章：</td>
-					<td><input id="caid" name="coaid" style="width:147px" /></td>
+					<td><input id="caid" class="easyui-combobox" name="coaid"
+						style="width: 147px" /></td>
 				</tr>
 				<tr>
 					<td>板块说明：</td>
-					<td><textarea id="ccocontent" name="cocontent" class="inputclass" style="width: 250px;" ></textarea>
-					</td>
+					<td><textarea id="ccocontent" name="cocontent"
+							class="inputclass" style="width: 250px;"></textarea></td>
 				</tr>
 				<tr>
 					<td>板块图片：</td>
@@ -83,12 +86,15 @@
 				</tr>
 				<tr>
 					<td align="center" colspan="2"><a class="closeBtn"
-						href="javascript:void(0)">关闭</a>&nbsp;&nbsp; <a class="updateBtn"
+						href="javascript:void(0)">关闭</a>&nbsp;&nbsp; <a class="addColumBtn"
 						href="javascript:void(0)">添加</a></td>
 				</tr>
 			</table>
 		</form>
 	</div>
+	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+	<script src="js/validatebox.js" type="text/javascript"></script>
 	<script type="text/javascript" src="js/column_edit.js"></script>
+
 </body>
 </html>

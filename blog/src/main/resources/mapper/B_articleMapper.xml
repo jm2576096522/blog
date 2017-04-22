@@ -142,14 +142,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--通过板块文章id对应的文章信息 -->
 	<select id="listArticleByCoaid" parameterType="String"
 		resultType="B_article">
-		select ba.*,bu.uname,bt.tagname,bty.tname
+		<!-- select ba.*,bu.uname,bt.tagname,bty.tname
 		from b_article ba,b_user bu,b_tag bt,b_type bty
 		where ba.usid = bu.usid(+) and ba.tagid=bt.tagid(+) and ba.tid =bty.tid(+)
 		and ba.aid in
 		<foreach collection="list" item="listcoaid" index="index"
 			open="(" close=")" separator=",">
 			#{listcoaid}
-		</foreach>
+		</foreach> -->
+		select * from (
+			select bar.*,bu.uname,bt.tagname,bty.tname,nvl(w.commentnum,0) as commentnum from b_article bar
+			inner join b_user bu on bar.usid = bu.usid
+			left join b_tag bt on bar.tagid=bt.tagid
+			left join b_type bty on bar.tid =bty.tid
+			left join (select d.caid,count(1) as commentnum from (
+				select caid from B_COMMENT b right join B_ARTICLE ba on ba.aid = b.caid) d group by d.caid) w
+				on w.caid = bar.aid order by bar.atime desc ) t
+		where t.aid in 
+			<foreach collection="list" item="listcoaid" index="index"
+			open="(" close=")" separator=",">
+			#{listcoaid}
+			</foreach>
 	</select>
 
 	<!-- // 查询博客文章(通过文章id) -->

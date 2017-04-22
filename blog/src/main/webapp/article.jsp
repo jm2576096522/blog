@@ -133,7 +133,7 @@
 			articleStr +='<article class="am-article blog-article-p"><div class="am-article-hd">';
 			articleStr +='<h1 class="am-article-title blog-text-center">'+data.atitle+'</h1>';
 			articleStr +='<p class="am-article-meta blog-text-center">';
-			articleStr +='<span><a href="#" class="blog-color">author &nbsp;</a></span>： <span><a href="#">@'+data.uname+'&nbsp;</a></span>';
+			articleStr +='<span><a>author &nbsp;</a></span>@： <span><a class="blog-color">'+data.uname+'&nbsp;</a></span>';
 			articleStr +='<span style="margin-left:10px;"><a>'+data.atime+'</a></span></p></div>';
 			articleStr +='<div class="am-article-lead">';
 			articleStr +=data.atitle+'／'+data.uname+'<br> <br>';

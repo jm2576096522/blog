@@ -60,8 +60,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 		<!--  添加类别表签-->
 	<insert id="insertTag" parameterType="B_tag">
-		insert into b_tag
-		values(seq_tagid.nextval,#{tusid},#{tagname})
+		insert into b_tag(tagid,tagname,tusid)
+		values(seq_tagid.nextval,#{tagname},#{tusid})
 	</insert>
 	
 	<update id="modifyTag" parameterType="B_tag">

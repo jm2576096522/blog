@@ -169,6 +169,16 @@ function check_login2(){
 	} 
 }
 
+function check_login3(){
+	if($("#user_usid").val() == ""){
+		$.messager.alert("操作提示","你尚未登陆，请先登录!","info",function(){
+			location.href="login.jsp";
+		});
+	}else{
+		location.href="blogColumn.jsp";
+	} 
+}
+
 var tempTid = "";
 //异步加载标签信息
 $.post("tag/list", function(data) {

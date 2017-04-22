@@ -104,13 +104,13 @@
 					</p>
 					<div
 						class="am-btn-group  am-animation-slide-bottom log-animation-delay-b">
-						<p>使用第三方登录</p>
-						<a href="#" class="am-btn am-btn-secondary am-btn-sm"><i
-							class="am-icon-github am-icon-sm"></i>Github</a> <a href="#"
-							class="am-btn am-btn-primary am-btn-sm"><i
-							class="am-icon-stack-overflow am-icon-sm"></i>stackOverflow</a> <a
-							href="#" class="am-btn am-btn-success am-btn-sm"><i
-							class="am-icon-google-plus-square am-icon-sm"></i>Google+</a>
+					
+						<a class="am-btn am-btn-secondary am-btn-sm">
+						<i class="am-icon-github am-icon-sm"></i>Github</a>
+						<a class="am-btn am-btn-primary am-btn-sm">
+						<i class="am-icon-stack-overflow am-icon-sm"></i>stackOverflow</a> 
+						<a class="am-btn am-btn-success am-btn-sm">
+						<i class="am-icon-google-plus-square am-icon-sm"></i>Google+</a>
 					</div>
 				</form>
 			</div>

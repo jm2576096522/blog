@@ -93,6 +93,7 @@
 					<p id="controlNav"></p>
 				</fieldset>
 			</form>
+				
 		</div>
 		<div class="am-u-md-4 am-u-sm-12 blog-sidebar">
 			<div class="blog-sidebar-widget blog-bor">
@@ -160,6 +161,8 @@
 	<script type="text/javascript">
 	
 		var result = $("#top_img").attr("src");
+		
+		
 		if(result == ""){
 			$("#top_img").attr("src","images/not_pic.jpg");
 		}
@@ -228,29 +231,37 @@
 			$("#show_img").html(picStr);
 		}
 		/* 添加文章的请求 */
-		function add_article() {
-			$("#add_form").form({
-				url : "article/addArticle",
-				success : function(data) {
-					if (data.trim() == "true") {
-						$.messager.alert("操作提示", "添加成功...", "info", function() {
-							if (aid != "null") {
-								location.href = "page/blogManager.jsp";
-							} else if (drid != "null") {
-								$.post("drafets/deleteDrafets", {
-									drid : drid
-								}, function(data) {
-									location.href = "page/blogDrafets.jsp";
-								});
-							} else {
-								location.reload();
-							}
-						});
-					} else {
-						$.messager.alert("操作提示", "添加失败！！", "error");
+		function add_article(){
+			var str = $("#atitle").val();
+			var getBLen;
+			getBLen = str.replace(/[^\x00-\xff]/g,"ab").length;
+			if(getBLen >30){
+				$.messager.alert("操作提示","标题过长，应在30个字符以内...","error");
+			}else{
+				$("#add_form").form({
+					url : "article/addArticle",
+					success : function(data) {
+						if (data.trim() == "true") {
+							$.messager.alert("操作提示", "添加成功...", "info", function() {
+								if (aid != "null") {
+									location.href = "page/blogManager.jsp";
+								} else if (drid != "null") {
+									$.post("drafets/deleteDrafets", {
+										drid : drid
+									}, function(data) {
+										location.href = "page/blogDrafets.jsp";
+									});
+								} else {
+									location.reload();
+								}
+							});
+						} else {
+							$.messager.alert("操作提示", "添加失败！！", "error");
+						}
 					}
-				}
-			});
+				});
+			}
+			
 		}
 		/* 清空图片 */
 		function reset_img(){
@@ -306,8 +317,7 @@
 
 		// 如果url 拼接有aid 
 		function findArticleByAid() {
-			$
-					.post(
+			$.post(
 							"article/findArticleByAid",
 							{
 								aid : aid

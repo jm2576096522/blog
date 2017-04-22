@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<base href="${deployName}">
 <meta charset="UTF-8">
 <title>管理员列表</title>
 </head>

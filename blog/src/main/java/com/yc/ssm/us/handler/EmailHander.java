@@ -58,9 +58,9 @@ public class EmailHander {
 		// 创建邮件对象
 		Message msg = new MimeMessage(session);
 		try {
-			msg.setSubject("Acosta Blog 的验证码");
+			msg.setSubject("注册Acosta Blog 的验证码");
 			// 设置邮件内容
-			msg.setText("Acosta Blog 的验证码为：" + random);
+			msg.setText("获取注册Acosta Blog 的验证码为：" + random);
 			// 设置发件人
 			// msg.setFrom(new InternetAddress("13207343611@163.com"));
 			msg.setFrom(new InternetAddress("18273474977@163.com"));//
@@ -85,7 +85,7 @@ public class EmailHander {
 		return random;
 	}
 
-/*	// 管理员忘记密码的邮箱登录
+	// 管理员忘记密码的邮箱登录
 	@RequestMapping("admin")
 	@ResponseBody
 	public String yzm(B_admin user) {
@@ -132,5 +132,5 @@ public class EmailHander {
 			e.printStackTrace();
 		}
 		return random;
-	}*/
+	}
 }

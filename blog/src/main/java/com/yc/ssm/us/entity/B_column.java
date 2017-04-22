@@ -16,6 +16,8 @@ public class B_column implements Serializable {
 	private Integer articlenum;//板块文章数
 	private String uname;//板主昵称
 	private String uemail;//板主邮箱
+	
+	
 
 	public Integer getCoviewnum() {
 		return coviewnum;

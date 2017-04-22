@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <base href="${deployName}">
-<title>个人主界面</title>
+<title>板块主界面</title>
 <link rel="icon" type="image/png" href="assets/i/favicon.png">
 <link rel="stylesheet" href="assets/css/amazeui.min.css">
 <link rel="stylesheet" href="assets/css/app.css">
@@ -27,7 +27,7 @@
 			</ul>
 			<!-- 菜单栏右部分 -->
 			<div id="top_right" class="show_loginUser" style="float: right;">
-				<img src="${loginUser.getUpic()}" id="top_img"
+				<img src="${loginUser.getUpic()}"
 					style="float: left; width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
 				<div style="float: left; height: 100%; line-height: 50px;">
 					欢迎 : <input type="text" id="loginUname" readonly="readonly"
@@ -56,13 +56,13 @@
 		<div class="am-u-md-4 am-u-sm-12 blog-sidebar">
 			<div class="blog-sidebar-widget blog-bor">
 				<h2 class="blog-text-center blog-title">
-					<span>About He/She</span>
+					<span>About Column</span>
 				</h2>
 				<div id="userPersonInfo"></div>
 			</div>
 			<div class="blog-sidebar-widget blog-bor">
 				<h2 class="blog-text-center blog-title">
-					<span>Contact He/She</span>
+					<span>Contact </span>
 				</h2>
 				<p>
 					<a ><span
@@ -108,39 +108,33 @@
 	<script type="text/javascript" src="js/moreOperation.js"></script>
 	
 	<script type="text/javascript">
-		var result = $("#top_img").attr("src");
-		if(result == ""){
-			$("#top_img").attr("src","images/not_pic.jpg");
-		}
-	
-		var usid = "<%=request.getParameter("usid")%>";
+		var coid = "<%=request.getParameter("coid")%>";
 		var currPage = 1;
 		var pageSize = 5;
 		var totalPage;
 		
-		if(usid != "null"){
-			$.post("blog/findUserInfoByUsid",{usid:usid},function(data){
-				var userInfoStr = "";
-				if(data.upic == null){
-					userInfoStr +='<img src="images/not_pic.jpg" class="blog-entry-img">';
+		/* 板块信息栏 */
+		 if(coid != ""){
+			 $.post("column/findColumnByCoid",{coid:coid},function(data){
+				var columnInfoStr = "";
+				if(data.copic == null){
+					columnInfoStr +='<img src="images/not_pic.jpg" class="blog-entry-img">';
 				}else{
-					userInfoStr +='<img src="'+data.upic+'"  class="blog-entry-img">';
+					columnInfoStr +='<img src="'+data.copic+'"  class="blog-entry-img">';
 				}
-				userInfoStr +='<p>昵称 ：'+data.uname+'</p>';
-				userInfoStr +='<p>性别 ：'+data.usex+'</p>';
-				userInfoStr +='<p>所在地 ：'+data.uaddress+'</p>';
-				userInfoStr +='<p>个人职业 ：'+data.uprofession+'</p>';
-				userInfoStr +='<p>个性签名 ：'+data.upersondesc+'</p>';
+				columnInfoStr +='<p>专栏名称 ：'+data.cotitle+'</p>';
+				columnInfoStr +='<p>板主昵称 ：<a onclick="userDetail('+data.usid+')">'+data.uname+'</a></p>';
+				columnInfoStr +='<p>专栏文章数 ：'+data.articlenum+'</p>';
+				columnInfoStr +='<p>专栏创造时间 ：'+data.cotime+'</p>';
+				columnInfoStr +='<p>专栏描述 ：'+data.cocontent+'</p>';
 				
-				$("#userPersonInfo").html(userInfoStr);
+				$("#userPersonInfo").html(columnInfoStr);
 			},'json');
 			
-			findUserArticleByUsid();
-			listNum();
-			
-		}
-		function findUserArticleByUsid(){
-			$.post("article/listById",{currPage:currPage,pageSize:pageSize,usid:usid},function(data){
+		} 
+		/* 板块内容信息栏 */
+		 $.post("article/listByCoid?coid="+coid,function(data){
+				//alert(JSON.stringify(data));
 				var articleStr = "";
 				for (var i = 0; i < data.length; i++){
 					articleStr +='<article class="am-g blog-entry-article">';
@@ -162,54 +156,8 @@
 					articleStr +='</div></article>';
 				}
 				$("#personArticle").html(articleStr);
-			},"json");
-		}
-		function listNum(){
-			$.post("article/listNum",{usid:usid},function(data){
-				var ulStr = "";
-				ulStr +="<li ><a onclick='prePage()'>&laquo; Prev</a></li>";
-				ulStr +="<li ><a onclick='firstPage()'>首页</a></li>";
-				ulStr +="<li><a>"+currPage+"/"+data.totalPage+"</a></li>";
-				ulStr +="<li><a>共:"+data.total+"条</a></li>";
-				ulStr +="<li ><a onclick='lastPage()'>尾页</a></li>";
-				ulStr +="<li ><a onclick='nextPage()'>Next &raquo;</a></li>";
-				totalPage = data.totalPage;
-				$("#myUI").html(ulStr);
-			});
-		}
-		/* 下一页 */
-		function nextPage(){
-			if(currPage == totalPage){
-				currPage = currPage;
-			}else{
-				currPage += 1;
-				findUserArticleByUsid();
-				listNum();
-
-			}
-		}
-		/* 上一页 */
-		function prePage(){
-			if(currPage == 1){
-				currPage = currPage;
-			}else{
-				currPage -= 1;
-				findUserArticleByUsid();
-				listNum();
-			}
-		}
-		/* 首页 */
-		function firstPage(){
-			currPage = 1;
-			findUserArticleByUsid();
-			listNum();
-		}
-		/* 尾页 */
-		function lastPage(){
-			currPage = totalPage;
-			findUserArticleByUsid();
-			listNum();
-		}
+			},"json"); 
+			
 
 		//文章详情
 		function articleDetail(index){
@@ -217,8 +165,10 @@
 				location.href="article.jsp?aid="+index;
 			});
 		}
-	
-			
+		/* 作者详情 */
+		function userDetail(index){
+			location.href="userDetail.jsp?usid="+index;
+		}	
 	</script>
 
 </body>

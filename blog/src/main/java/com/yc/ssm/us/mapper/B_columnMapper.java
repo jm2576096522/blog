@@ -21,6 +21,7 @@ public interface B_columnMapper {
 	
 	//通过板块标题查询板块所有文章id
 	String findCoaidByCotitle(String cotitle);
+
 	
 	//添加个人板块
 	int addColumnByUsid(B_column b_column);
@@ -30,4 +31,19 @@ public interface B_columnMapper {
 	
 	//删除个人板块
 	int deleteColumnByCoid(Integer coid);
+
+	//通过板块id查询板块所有文章id
+	String findCoaidByCoid(String coid);
+	
+	//添加个人板块的文章
+	int addArticleByCoid(B_column b_column);
+	
+	//更改板块的浏览量
+	boolean updateAviewNum(B_column b_column);
+	//查询指定板块
+	B_column findColumnByCoid(Integer coid);
+	
+	//更改板块
+	int updateColumn(B_column b_column);
+
 }

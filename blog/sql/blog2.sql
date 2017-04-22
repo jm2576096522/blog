@@ -139,9 +139,10 @@ create table b_column(
        cotime varchar2(40),                --专栏创建时间
        coaid varchar2(200),				--专栏里面所有文章的id
        copic varchar2(600),                --专栏图片  
-       coviewnum  int  default 0        --专栏浏览量
+       coviewnum  int  default 0,        --专栏浏览量
+       articlenum int default 0
 );
-
+alter table b_column add articlenum int  default 0; --添加字段 文章数
 --------------------end create table-----------------------
 
 ------------------test Data -------------

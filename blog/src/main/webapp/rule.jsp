@@ -26,9 +26,8 @@
 	<nav class="am-g am-g-fixed blog-fixed blog-nav">
 		<ul class="am-nav am-nav-pills am-topbar-nav">
 			<li class="am-active"><a href="homePage.jsp" >首页</a></li>
-			<li><a>博客专栏</a></li>
+			<li><a href="blogColumn.jsp">博客专栏</a></li>
 			<li><a href="blogProfessor.jsp" style="color: #10D07A;">博客专家</a></li>
-			<li><a>热度话题</a></li>
 			<li><a href="personPage.jsp">我的博客</a></li>
 		</ul>
 		<!-- 菜单栏右部分 -->
@@ -65,6 +64,10 @@
 								<li>该博主所发文章数大于10</li>
 								<li>文章的浏览量不小于20</li>
 							</ol>
+							<h2>博客专家福利：</h2>	
+							<ol type="1">
+								<li>允许添加专栏</li>
+							</ol>
 							<h3>注意事项：</h3>
 							<ol type="1">
 								<li>CSDN博客专家如有违反CSDN网站规则的行为，如大量发布广告或软文，对CSDN网站造成不良影响等，将永久取消其CSDN博客专家身份。</li>
@@ -73,13 +76,7 @@
 								<li>博客专家中的“行业名家”是与CSDN网站有合作关系的博客专家级用户。</li>
 								<li>所有博客专家（包括荣誉专家）均为实名制。 </li>
 							</ol>
-							<h3>博客专家福利：</h3>	
-							<ol type="1">
-								<li>博客专家用户头像上显示“专家”勋章。</li>
-								<li>博客专家发布博客时可以直接引用CSDN站外的图片。</li>
-								<li>博客专家的个人博客提供量子恒道统计监测，可随时查看个人博客的数据统计详情。</li>
-								<li>文章获得更多的推荐机会。博客专家所发的文章都会进入文章预选库，我们有专门的编辑负责从中筛选优质内容，并推荐到CSDN首页或其他内容频道；同时博客专家每日发布到博客首页的博文不受次数限制。</li>
-							</ol>
+							
 						</div>
 				</article>
 				
