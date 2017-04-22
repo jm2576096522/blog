@@ -141,7 +141,8 @@ function findArticleByTag(index){
 				tableStr += "<td class='alt'>"+data[i].aviewnum+"</td>";
 				tableStr += "<td class='alt'>"+data[i].commentnum+"</td>";
 				tableStr += "<td class='alt'><a style='margin-right:10px; font-size:15px;' onclick='editrow("+data[i].aid+")'>编辑</a>";
-				tableStr += "<a style='margin-right:10px; font-size:15px;' onclick='deleterow("+data[i].aid+")'>删除</a></td></tr>";
+				tableStr += "<a style='margin-right:10px; font-size:15px;' onclick='deleterow("+data[i].aid+")'>删除</a>";
+				tableStr += "<select style='border:none;'><option>你好</option></select></td></tr>";
 			}
 		}
 		$("#table_body").html(tableStr);

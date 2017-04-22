@@ -24,7 +24,7 @@
 
 	<!-- nav start -->
 	<nav class="am-g am-g-fixed blog-fixed blog-nav">
-		<ul class="am-nav am-nav-pills am-topbar-nav">
+		<ul class="am-nav am-nav-pills am-topbar-nav" id="top_ul">
 			<li><a href="homePage.jsp">首页</a></li>
 			<li><a href="personPage.jsp" style="color: #10D07A;">我的文章</a></li>
 			<li><a href="page/blog_add.jsp">写新文章</a></li>
@@ -36,7 +36,7 @@
 		</ul>
 		<!-- 菜单栏右部分 -->
 			<div id="top_right" class="show_loginUser" style="float: right;">
-				<img src="${loginUser.getUpic()}"
+				<img src="${loginUser.getUpic()}" id="top_img"
 					style="float: left; width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
 				<div style="float: left; height: 100%; line-height: 50px;">
 					欢迎 : <input type="text" id="loginUname" readonly="readonly"
@@ -109,6 +109,20 @@
 	/**
 	 * 文章的详情
 	 */
+	 var result = $("#top_img").attr("src");
+		if(result == ""){
+			$("#top_img").attr("src","images/not_pic.jpg");
+		}
+		 $.post("blog/professor",function(data){
+			 var curr = "${loginUser.getUsid()}";
+			 for(var i=0;i<data.length;i++){
+				 if(data[i].usid == curr){
+					 var ulStr ='<li><a href="page/blog_column.jsp">专栏管理</a></li>';
+					 $("#top_ul").append(ulStr);
+				 }
+			 }
+		 });
+	 
 	var aid = "<%=request.getParameter("aid")%>";
 	var currPage = 1;
 	var pageSize = 5;
@@ -119,7 +133,7 @@
 			articleStr +='<article class="am-article blog-article-p"><div class="am-article-hd">';
 			articleStr +='<h1 class="am-article-title blog-text-center">'+data.atitle+'</h1>';
 			articleStr +='<p class="am-article-meta blog-text-center">';
-			articleStr +='<span><a href="#" class="blog-color">author &nbsp;</a></span>： <span><a href="#">@'+data.uname+'&nbsp;</a></span>';
+			articleStr +='<span><a>author &nbsp;</a></span>@： <span><a class="blog-color">'+data.uname+'&nbsp;</a></span>';
 			articleStr +='<span style="margin-left:10px;"><a>'+data.atime+'</a></span></p></div>';
 			articleStr +='<div class="am-article-lead">';
 			articleStr +=data.atitle+'／'+data.uname+'<br> <br>';

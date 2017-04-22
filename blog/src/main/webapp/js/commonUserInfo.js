@@ -8,9 +8,22 @@ $.get("blog/showUserInfo",function(data){
 	}else{
 		userInfoStr +='<img src="'+data.upic+'" alt="about me" class="blog-entry-img">';
 	}
-	userInfoStr +='<p>昵称 ：'+data.uname+'</p>';
-	userInfoStr +='<p>个人职业 ：'+data.uprofession+'</p>';
-	userInfoStr +='<p>个性签名 ：'+data.upersondesc+'</p>';
+	if(data.uname == null){
+		userInfoStr +='<p>昵称 ：暂无</p>';
+	}else{
+		userInfoStr +='<p>昵称 ：'+data.uname+'</p>';
+	}
+	if(data.uprofession == null){
+		userInfoStr +='<p>个人职业 ：暂无</p>';
+	}else{
+		userInfoStr +='<p>个人职业 ：'+data.uprofession+'</p>';
+	}
+	if(data.upersondesc == null){
+		userInfoStr +='<p>个性签名 ：暂无</p>';
+	}else{
+		userInfoStr +='<p>个性签名 ：'+data.upersondesc+'</p>';
+	}
+	
 	
 	$("#userPersonInfo").html(userInfoStr);
 },'json');

@@ -77,7 +77,8 @@
 				}else{
 					proStr += '<dt><img class="expert_head" src="'+data[i].copic+'"></dt>';
 				}
-				proStr += '<dd><a class="expert_name" style="font-size:16px;color:#10D07A;" onclick="ColumnDetail('+data[i].coid+')">'+data[i].cotitle+'</a><span>'+data[i].cocontent+'</span><br/><br/>';
+				proStr += '<dd><a class="expert_name" style="font-size:16px;color:#10D07A;" onclick="ColumnDetail('+data[i].coid+')">'+data[i].cotitle+'</a>';
+				proStr += '<p style="width:80%;margin:20px auto;font-size:15px;overflow: hidden;text-align:center;text-overflow:ellipsis;white-space:nowrap;">'+data[i].cocontent+'</p>';
 				proStr += '<a class="expert_name" style="font-size:14px;color:#10D07A;" onclick="userDetail('+data[i].usid+')">'+data[i].uname+'</a><span>'+data[i].uemail+'</span><br/><br/>';
 				proStr += '<div class="count_1 fl"><b>'+data[i].articlenum+'</b> <span>板块文章数</span></div>';
 				proStr += '<div class="count_1 fr"><b>'+data[i].coviewnum+'</b> <span>板块阅读量</span></div>';
@@ -92,7 +93,11 @@
 		 }
 		//板块详情
 		 function ColumnDetail(index){
-		 	location.href="ColumnDetail.jsp?coid="+index;
+			if(index != ""){
+				$.post("column/updateAviewNum",{coid:index},function(data){
+					location.href="ColumnDetail.jsp?coid="+index;
+				});
+			}
 		 }
 	</script>
 

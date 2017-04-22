@@ -9,8 +9,10 @@
 <link rel="icon" type="image/png" href="assets/i/favicon.png">
 <link rel="stylesheet" href="assets/css/amazeui.min.css">
 <link rel="stylesheet" href="assets/css/app.css">
-<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
-<script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="easyui/themes/default/easyui.css">
+<script type="text/javascript" charset="utf-8"
+	src="ueditor/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 </head>
@@ -25,7 +27,7 @@
 	<hr>
 	<nav class="am-g am-g-fixed blog-fixed blog-nav">
 		<div class="am-collapse am-topbar-collapse" id="blog-collapse">
-			<ul class="am-nav am-nav-pills am-topbar-nav">
+			<ul class="am-nav am-nav-pills am-topbar-nav" id="top_ul">
 				<li><a href="homePage.jsp">首页</a></li>
 				<li><a href="personPage.jsp">我的文章</a></li>
 				<li><a href="page/blog_add.jsp" style="color: #10D07A;">写新文章</a></li>
@@ -37,7 +39,7 @@
 			</ul>
 			<!-- 菜单栏右部分 -->
 			<div id="top_right" class="show_loginUser" style="float: right;">
-				<img src="${loginUser.getUpic()}"
+				<img src="${loginUser.getUpic()}" id="top_img"
 					style="float: left; width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
 				<div style="float: left; height: 100%; line-height: 50px;">
 					欢迎 : <input type="text" id="loginUname" readonly="readonly"
@@ -63,7 +65,8 @@
 				<h2 class="blog-comment" align="center">新建博客</h2>
 				<fieldset>
 					<div class="am-form-group am-u-sm-4 blog-clear-left">
-						<label>标题</label><input type="text" id="atitle" name="atitle" placeholder="标题">
+						<label>标题</label><input type="text" id="atitle" name="atitle"
+							placeholder="标题">
 					</div>
 					<div class="am-form-group am-u-sm-4">
 						<label>标签 </label> <select name="tagid" id="tag">
@@ -87,11 +90,10 @@
 						<label> 上传图片 </label><input type="file" id="upicDate"
 							name="upicDate" placeholder="选择文件" onchange="chgPic(this)">
 					</p>
-					<p id="controlNav">
-						
-					</p>
+					<p id="controlNav"></p>
 				</fieldset>
 			</form>
+				
 		</div>
 		<div class="am-u-md-4 am-u-sm-12 blog-sidebar">
 			<div class="blog-sidebar-widget blog-bor">
@@ -149,47 +151,67 @@
 
 	<script type="text/javascript" src="easyui/jquery.min.js"></script>
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.config.js"></script>
-	<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.min.js"></script>
+	<script type="text/javascript" charset="utf-8"
+		src="ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8"
+		src="ueditor/ueditor.all.min.js"></script>
 	<script type="text/javascript" src="js/commonUserInfo.js"></script>
 	<script type="text/javascript" src="js/moreOperation.js"></script>
 
 	<script type="text/javascript">
+	
+		var result = $("#top_img").attr("src");
+		
+		
+		if(result == ""){
+			$("#top_img").attr("src","images/not_pic.jpg");
+		}
+		 $.post("blog/professor",function(data){
+			 var curr = "${loginUser.getUsid()}";
+			 for(var i=0;i<data.length;i++){
+				 if(data[i].usid == curr){
+					 var ulStr ='<li><a href="page/blog_column.jsp">专栏管理</a></li>';
+					 $("#top_ul").append(ulStr);
+				 }
+			 }
+		 });
+	
 		UE.getEditor('acontent');// 使用副文本编辑工具
 		
 		var aid = "<%=request.getParameter("aid")%>";
 		var drid ="<%=request.getParameter("drid")%>";
-	
-		if(aid != "null"){
-			var navStr ="" ;
+
+		if (aid != "null") {
+			var navStr = "";
 			findArticleByAid();
-			navStr +="<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='update_article()'>更改文章</button>";
-			navStr +="<button type='button' class='am-btn am-btn-default' onclick='backFirst()'>取消</button>";
-			navStr +="<input type='text' name='aid' style='width:100px;display:none;' value='"+aid+"'/> ";
+			navStr += "<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='update_article()'>更改文章</button>";
+			navStr += "<button type='button' class='am-btn am-btn-default' onclick='backFirst()'>取消</button>";
+			navStr += "<input type='text' name='aid' style='width:100px;display:none;' value='"+aid+"'/> ";
 			$("#controlNav").html(navStr);
-		}else{
-			var navStr ="";
-			navStr +="<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='add_article()'>发表文章</button>";
-			if(drid!= "null"){
-				navStr +="<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='updateDrafets()'>立即保存</button>";
-				navStr +="<input type='text' name='drid' style='width:100px;display:none;' value='"+drid+"'/> ";
-			}else{
-				navStr +="<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='saveArticle()'>立即保存</button>";
+		} else {
+			var navStr = "";
+			navStr += "<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='add_article()'>发表文章</button>";
+			if (drid != "null") {
+				navStr += "<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='updateDrafets()'>立即保存</button>";
+				navStr += "<input type='text' name='drid' style='width:100px;display:none;' value='"+drid+"'/> ";
+			} else {
+				navStr += "<button type='submit' style='margin-right:20px;' class='am-btn am-btn-default' onclick='saveArticle()'>立即保存</button>";
 			}
-			navStr +="<button type='reset' class='am-btn am-btn-default'>重置</button>";
-			
+			navStr += "<button type='reset' class='am-btn am-btn-default' onclick='reset_img()'>重置</button>";
+
 			$("#controlNav").html(navStr);
 		}
-		
+
 		/* 如果drid 不为空 */
-		if(drid != "null"){
+		if (drid != "null") {
 			findDrafetsByDrid();
 		}
-		
+
 		/* 获取类别标签的请求 */
 		$.get("tag/findAllTags", function(data) {
 			for (var i = 0; i < data.length; i++) {
-				var option = "<option value='" + data[i].tagid + "'>" + data[i].tagname + "</option>";
+				var option = "<option value='" + data[i].tagid + "'>"
+						+ data[i].tagname + "</option>";
 				$("#tag").append(option);
 			}
 		});
@@ -202,118 +224,143 @@
 			}
 		});
 		/* 图片更改 */
-		function chgPic(obj){
-			var picStr = "<img src='"+window.URL.createObjectURL(obj.files[0])+"' style='width: 400px; height: 200px;'>";
+		function chgPic(obj) {
+			var picStr = "<img src='"
+					+ window.URL.createObjectURL(obj.files[0])
+					+ "' style='width: 400px; height: 200px;'>";
 			$("#show_img").html(picStr);
 		}
 		/* 添加文章的请求 */
 		function add_article(){
-			$("#add_form").form({
-				url:"article/addArticle",
-				success:function(data){
-			    	if(data.trim() == "true"){
-			    		 $.messager.alert("操作提示", "添加成功...","info",function(){
-			    			 if(aid != "null"){
-			    				 location.href="page/blogManager.jsp";
-			    			 }else if(drid != "null"){
-			    				 $.post("drafets/deleteDrafets",{drid:drid},function(data){
-			    					 location.href="page/blogDrafets.jsp";
-			    				 });
-			    			 }else{
-			    				 location.reload();
-			    			 }
-			    		 });
-			    	}else{
-			    		 $.messager.alert("操作提示", "添加失败！！","error");
-			    	}
-				}
-			});
+			var str = $("#atitle").val();
+			var getBLen;
+			getBLen = str.replace(/[^\x00-\xff]/g,"ab").length;
+			if(getBLen >30){
+				$.messager.alert("操作提示","标题过长，应在30个字符以内...","error");
+			}else{
+				$("#add_form").form({
+					url : "article/addArticle",
+					success : function(data) {
+						if (data.trim() == "true") {
+							$.messager.alert("操作提示", "添加成功...", "info", function() {
+								if (aid != "null") {
+									location.href = "page/blogManager.jsp";
+								} else if (drid != "null") {
+									$.post("drafets/deleteDrafets", {
+										drid : drid
+									}, function(data) {
+										location.href = "page/blogDrafets.jsp";
+									});
+								} else {
+									location.reload();
+								}
+							});
+						} else {
+							$.messager.alert("操作提示", "添加失败！！", "error");
+						}
+					}
+				});
+			}
+			
+		}
+		/* 清空图片 */
+		function reset_img(){
+			$("#show_img").html("");
 		}
 		/* 更改文章的请求 */
-		function update_article(){
+		function update_article() {
 			$("#add_form").form({
-				url:"article/updateArticle",
-				success:function(data){
-				  	if(data.trim() > 0){
-			    		 $.messager.alert("操作提示", "更改成功...","info",function(){
-			    			 location.href="page/blogManager.jsp";
-			    		 });
-			    	}else{
-			    		 $.messager.alert("操作提示", "更改失败！！","error",function(){
-			    			 location.reload();
-			    		 });
-			    	} 
+				url : "article/updateArticle",
+				success : function(data) {
+					if (data.trim() > 0) {
+						$.messager.alert("操作提示", "更改成功...", "info", function() {
+							location.href = "page/blogManager.jsp";
+						});
+					} else {
+						$.messager.alert("操作提示", "更改失败！！", "error", function() {
+							location.reload();
+						});
+					}
 				}
 			});
 		}
 		/* 保存到草稿箱 */
-		function saveArticle(){
-		 $("#add_form").form({
-				url:"drafets/addDrafet",
-				success:function(data){
-			    	if(data.trim() == "true"){
-			    		 $.messager.alert("操作提示", "保存成功...","info",function(){
-			    			 location.reload();
-			    		 });
-			    	}else{
-			    		 $.messager.alert("操作提示", "保存失败！！","error");
-			    	}
+		function saveArticle() {
+			$("#add_form").form({
+				url : "drafets/addDrafet",
+				success : function(data) {
+					if (data.trim() == "true") {
+						$.messager.alert("操作提示", "保存成功...", "info", function() {
+							location.reload();
+						});
+					} else {
+						$.messager.alert("操作提示", "保存失败！！", "error");
+					}
 				}
-			});  
+			});
 		}
 		/* 更改草稿箱 */
-		function updateDrafets(){
-			 $("#add_form").form({
-					url:"drafets/updateDrafets",
-					success:function(data){
-				    	if(data.trim() == "true"){
-				    		 $.messager.alert("操作提示", "保存成功...","info",function(){
-				    			 location.reload();
-				    		 });
-				    	}else{
-				    		 $.messager.alert("操作提示", "保存失败！！","error");
-				    	}
+		function updateDrafets() {
+			$("#add_form").form({
+				url : "drafets/updateDrafets",
+				success : function(data) {
+					if (data.trim() == "true") {
+						$.messager.alert("操作提示", "保存成功...", "info", function() {
+							location.reload();
+						});
+					} else {
+						$.messager.alert("操作提示", "保存失败！！", "error");
 					}
-				});  
-		}
-		
-		
-		// 如果url 拼接有aid 
-		function findArticleByAid(){
-			$.post("article/findArticleByAid",{aid:aid},function(data){
-				$("#atitle").val(data.atitle);
-				$("#tag").val(data.tagname);
-				$("#type").val(data.tname);
-				$("#acontent").val(data.acontent);
-				if(data.apic != null){
-					var picStr = "<img src='"+data.apic+"' style='width: 400px; height: 200px;'>";
-					$("#show_img").html(picStr);
-				}else{
-					var picStr = "<img src='images/not_pic.jpg'>";
-					$("#show_img").html(picStr);
 				}
 			});
+		}
+
+		// 如果url 拼接有aid 
+		function findArticleByAid() {
+			$.post(
+							"article/findArticleByAid",
+							{
+								aid : aid
+							},
+							function(data) {
+								$("#atitle").val(data.atitle);
+								$("#tag").val(data.tagname);
+								$("#type").val(data.tname);
+								$("#acontent").val(data.acontent);
+								if (data.apic != null) {
+									var picStr = "<img src='"+data.apic+"' style='width: 400px; height: 200px;'>";
+									$("#show_img").html(picStr);
+								} else {
+									var picStr = "<img src='images/not_pic.jpg'>";
+									$("#show_img").html(picStr);
+								}
+							});
 		}
 		// 如果url 拼接有drid
-		function findDrafetsByDrid(){
-			$.post("drafets/findDrafetByDrid",{drid:drid},function(data){
-				$("#atitle").val(data.drtitle);
-				$("#tag").val(data.drtagid);
-				$("#type").val(data.drtypeid);
-				$("#acontent").val(data.drcontent.trim());
-				if(data.drpic != null){
-					var picStr = "<img src='"+data.drpic+"' style='width: 400px; height: 200px;'>";
-				}else{
-					var picStr = "<img src='images/not_pic.jpg'>";
-				}
-				$("#show_img").html(picStr);
-			});
+		function findDrafetsByDrid() {
+			$
+					.post(
+							"drafets/findDrafetByDrid",
+							{
+								drid : drid
+							},
+							function(data) {
+								$("#atitle").val(data.drtitle);
+								$("#tag").val(data.drtagid);
+								$("#type").val(data.drtypeid);
+								$("#acontent").val(data.drcontent.trim());
+								if (data.drpic != null) {
+									var picStr = "<img src='"+data.drpic+"' style='width: 400px; height: 200px;'>";
+								} else {
+									var picStr = "<img src='images/not_pic.jpg'>";
+								}
+								$("#show_img").html(picStr);
+							});
 		}
 		//点击取消，返回
-		function backFirst(){
-			location.href="page/blogManager.jsp";
+		function backFirst() {
+			location.href = "page/blogManager.jsp";
 		}
-		
 	</script>
 </body>
 

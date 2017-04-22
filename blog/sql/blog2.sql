@@ -9,7 +9,7 @@ select * from B_TAG;--标签
 select * from B_TYPE;--类型
 select  * from B_USER;--用户
 select  * from b_drafets;--草稿
-select * from b_column;--专栏
+select * from B_COLUMN;   ---专栏
 
 ---------------------删除表和序列-----------
 drop table b_admin;
@@ -141,12 +141,13 @@ create table b_column(
        articlenum int  default 0 -- 文章数
 );
 
-
 --------------------end create table-----------------------
 
 ------------------test Data -------------
 ---插入测试用户账号
 	insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'123@qq.com','6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2');
+
+	insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'12345678@qq.com','6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2');	
 -----插入管理员账号
 	insert into B_ADMIN values(seq_adid.nextval,'admin','6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2','2576096522@qq.com');
 
