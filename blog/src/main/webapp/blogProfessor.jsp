@@ -26,7 +26,6 @@
 			<li class="am-active"><a href="homePage.jsp" >首页</a></li>
 			<li><a href="blogColumn.jsp">博客专栏</a></li>
 			<li><a href="blogProfessor.jsp" style="color: #10D07A;">博客专家</a></li>
-			<li><a>热度话题</a></li>
 			<li><a href="personPage.jsp">我的博客</a></li>
 		</ul>
 		<!-- 菜单栏右部分 -->
@@ -73,7 +72,7 @@
 			for(var i=0;i<data.length;i++){
 				proStr += '<dl class="experts_list">';
 				if(data[i].upic == null){
-					proStr += '<dt><img class="expert_head" src="images/not_img.jpg"></dt>';
+					proStr += '<dt><img class="expert_head" src="images/not_pic.jpg"></dt>';
 				}else{
 					proStr += '<dt><img class="expert_head" src="'+data[i].upic+'"></dt>';
 				}

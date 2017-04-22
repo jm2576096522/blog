@@ -121,7 +121,8 @@ $('#mkid')
 												$("#articleList").datagrid(
 														"reload", url);
 											} else {
-												_time_out = null
+												_time_out = null;
+												//alert(JSON.stringify(data));
 												$("#zhbid")
 														.combobox(
 																{

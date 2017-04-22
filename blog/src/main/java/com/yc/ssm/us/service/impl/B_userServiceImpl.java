@@ -21,8 +21,8 @@ import com.yc.ssm.us.util.Encrypt;
 public class B_userServiceImpl implements B_userService {
 	@Autowired // 相当于spring.xml中的<property name="userMapper" ref="userMapper" />
 	private B_userMapper b_userMapper;
-	
-	//用户登陆
+
+	// 用户登陆
 	public B_user userLogin(B_user b_user) {
 		// user.setPassword(Encrypt.md5AndSha(user.getPassword()));
 		LogManager.getLogger().debug("用户进行登录操作==》" + b_user);
@@ -38,39 +38,41 @@ public class B_userServiceImpl implements B_userService {
 		if (rows != null) {
 			pb.setPageSize(Integer.parseInt(rows));
 		}
-		pb=b_userMapper.partUser(pb);
+		pb = b_userMapper.partUser(pb);
 		return pb;
 	}
-	//查询所有的博客专家
-	public List<B_user> findProfessor(){
+
+	// 查询所有的博客专家
+	public List<B_user> findProfessor() {
 		LogManager.getLogger().debug("查询所有的博客专家");
 		return b_userMapper.findProfessor();
 	}
 
-	//用户信息修改
+	// 用户信息修改
 	@Override
 	public boolean updateUser(B_user b_user) {
-		
-		if(b_user.getUpassword() != null){
+
+		if (b_user.getUpassword() != null) {
 			b_user.setUpassword(Encrypt.md5AndSha(b_user.getUpassword()));
 		}
-		
+
 		LogManager.getLogger().debug("用户进行修改操作==》" + b_user);
 		return b_userMapper.updateUser(b_user) > 0;
 	}
-	
+
 	@Override
 	public int insertUser(B_user b_user) {
 		LogManager.getLogger().debug("我是B_userService里的" + b_user);
 		return b_userMapper.insertUser(b_user);
 	}
-	 //验证登录是否存在
+
+	// 验证登录是否存在
 	@Override
-	public boolean findUser(Integer usid){
+	public boolean findUser(Integer usid) {
 		return b_userMapper.findUser(usid);
 	}
-	
-	//根据用户usid查询用户
+
+	// 根据用户usid查询用户
 	@Override
 	public B_user findUserByUsid(Integer usid) {
 		LogManager.getLogger().debug("根据用户usid查询用户");
@@ -81,6 +83,15 @@ public class B_userServiceImpl implements B_userService {
 	public List<B_user> findUserAll() {
 		return b_userMapper.findUserAll();
 	}
-	
+
+	@Override
+	public List<B_user> findUserByuname(String uname) {
+		return b_userMapper.findUserByuname(uname);
+	}
+
+	@Override
+	public List<B_user> findUserByuemail(String uname) {
+		return b_userMapper.findUserByuemail(uname);
+	}
 
 }

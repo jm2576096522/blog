@@ -36,8 +36,8 @@ public class B_columnHandler {
 		return columnService.partColumn(page, rows);// 异步数据响应
 	}
 
-	//添加板块
-	@RequestMapping(value="add",method = RequestMethod.POST)
+	// 添加板块
+	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@ResponseBody
 	public int addColumn(@RequestParam("picData") MultipartFile picData, B_column b_column) {
 		System.out.println("add:b_column==>" + b_column);
@@ -51,17 +51,16 @@ public class B_columnHandler {
 			}
 		}
 		b_column.setCopic(picPath);
-		String coaid=b_column.getCoaid();
+		String coaid = b_column.getCoaid();
 		String[] array = coaid.split(",");
 		List<String> listcoaid = new ArrayList<String>();
 		for (String str : array) {
 			listcoaid.add(str);
 		}
 		b_column.setArticlenum(listcoaid.size());
-		System.out.println("上传图片==》b_column:" + b_column+"----------板块文章数"+b_column.getArticlenum());
+		System.out.println("上传图片==》b_column:" + b_column + "----------板块文章数" + b_column.getArticlenum());
 		return columnService.addColumn(b_column);// 异步数据响应
 	}
-	
 
 	// 删除板块
 	@RequestMapping(value = "delete", method = RequestMethod.POST)

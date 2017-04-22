@@ -7,6 +7,15 @@
 <title>用户列表</title>
 </head>
 <body>
+	<div id="userinfo">
+		<input id="uinfo1" class="easyui-combobox" /> <input id="uinfo2"
+			class="easyui-combobox" /> <a href="javascript:void(0)"
+			class="searchBtn">查询</a> <a class="updBtn" href="javascript:void(0)">刷新</a><a
+			href="javascript:void(0);" class="easyui-linkbutton"
+			iconCls="icon-print" plain="true" onclick="exportExcel()"
+			style="float: right;"> 导出Excel </a>
+
+	</div>
 	<table id="userList"></table>
 
 	<div id="detailsUser" style="width: 300px; padding: 10px">

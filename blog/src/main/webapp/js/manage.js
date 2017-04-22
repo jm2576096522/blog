@@ -164,7 +164,7 @@ $("#modifyPwdForm").form(
 			url : "admin/modifyPwd",
 			success : function(data) {
 				if (data) {
-					$("#personalInfo").dialog("close"); // 关闭修改框	
+					$("#personalInfo").dialog("close"); // 关闭修改框
 					$("#modifyPwdForm").form('clear');
 					$.messager.show({
 						msg : '修改密码成功！！！',
@@ -210,8 +210,8 @@ function aboutUs() {
 	// 显示关于我们的dialog
 	$.messager
 			.alert(
-					'',
-					'<table><tr><td align="right">手机：</td><td>18473435230</td></tr><tr><td  align="right">QQ：</td><td>2576096522</td></tr><tr><td align="right">版本所有：</td><td>姜媚</td></tr></table>',
+					'联系我们',
+					'<table cellpadding="10"><tr><th >联系人</th><th>手机</th><th>qq</th></tr><tr><td>姜媚</td><td>18473435230</td><td>2576096522</td></tr><tr><td>黄震</td><td>15573483933</td><td>793623923</td></tr><tr><td>袁湘云</td><td>14568541234</td><td>554236522</td></tr></table>',
 					'info');
 }
 
@@ -219,11 +219,12 @@ function logoutFun() {
 	// 显示退出系统确认框
 	$.messager.confirm('', '您确定要退出系统吗？', function(r) {
 		if (r) {
-			$.get("admin/login_out",function(data){
+			$.get("admin/login_out", function(data) {
 				location.href = "back/admin_login.jsp";
-		});
-			/*// 退出系统操作;
-			location.replace("back/admin_login.jsp");*/
+			});
+			/*
+			 * // 退出系统操作; location.replace("back/admin_login.jsp");
+			 */
 		}
 	});
 }

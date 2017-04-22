@@ -3,6 +3,8 @@ package com.yc.ssm.us.handler;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.yc.ssm.us.entity.B_article;
 import com.yc.ssm.us.entity.B_user;
 import com.yc.ssm.us.entity.PaginationBean;
 import com.yc.ssm.us.service.B_userService;
@@ -38,7 +41,7 @@ public class B_userHandler {
 
 	private B_user current_user;
 
-	//用户登录
+	// 用户登录
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String userLogin(B_user user, @RequestParam("yzm") String yzm, HttpServletRequest request) {
 
@@ -57,21 +60,21 @@ public class B_userHandler {
 		} else {
 			session.setAttribute(ServletUtil.LOGIN_USER, user);
 			current_user = (B_user) session.getAttribute("loginUser");
-			System.out.println("用户session"+session.getAttribute("loginUser"));
+			System.out.println("用户session" + session.getAttribute("loginUser"));
 			return "redirect:/homePage.jsp";
 
 		}
 	}
 
-	//用户退出
+	// 用户退出
 	@RequestMapping("login_out")
 	@ResponseBody
-	public boolean login_out(HttpSession session){
-		if(current_user != null){
-			session.setAttribute(ServletUtil.LOGIN_USER,"");
+	public boolean login_out(HttpSession session) {
+		if (current_user != null) {
+			session.setAttribute(ServletUtil.LOGIN_USER, "");
 			LogManager.getLogger().debug("我是退出用户的处理");
 			return true;
-		}else{
+		} else {
 			LogManager.getLogger().debug("我是退出用户的失败处理");
 			return false;
 		}
@@ -110,21 +113,20 @@ public class B_userHandler {
 		return userService.partUser(page, rows);// 异步数据响应
 	}
 
-	//根据用户usid查询用户
+	// 根据用户usid查询用户
 	@RequestMapping(value = "findUserInfoByUsid", method = RequestMethod.POST)
 	@ResponseBody
-	public B_user findUserByUsid(Integer usid){
+	public B_user findUserByUsid(Integer usid) {
 		LogManager.getLogger().debug("根据用户usid查询用户");
 		return userService.findUserByUsid(usid);
 	}
 
-
 	// 修改用户图片）
-	@RequestMapping(value="update_img",method=RequestMethod.POST)
+	@RequestMapping(value = "update_img", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean update_img(@RequestParam("upicDate") MultipartFile upicDate){
+	public boolean update_img(@RequestParam("upicDate") MultipartFile upicDate) {
 		Integer usid = current_user.getUsid();
-		System.out.println("upicPath ==>> " +upicDate);
+		System.out.println("upicPath ==>> " + upicDate);
 		String picPath = null;
 		if (upicDate != null && !upicDate.isEmpty()) {// 判断是否有文件上传
 			try {
@@ -143,42 +145,68 @@ public class B_userHandler {
 		return userService.updateUser(buser);// 异步数据响应
 	}
 
-
-	//更改用户信息（不包含图片）
+	// 更改用户信息（不包含图片）
 	@RequestMapping("update_userInfo")
 	@ResponseBody
-	public boolean update_userInfo(B_user user,HttpSession session){
+	public boolean update_userInfo(B_user user, HttpSession session) {
 		user.setUsid(current_user.getUsid());
-		System.out.println("user:"+user);
+		System.out.println("user:" + user);
 		return userService.updateUser(user);
 	}
-	//更改用户密码
+
+	// 更改用户密码
 	@RequestMapping("update_pwd")
 	@ResponseBody
-	public boolean update_pwd(@RequestParam("upassword") String upassword,@RequestParam("old_pwd") String old_pwd){
+	public boolean update_pwd(@RequestParam("upassword") String upassword, @RequestParam("old_pwd") String old_pwd) {
 		B_user user = new B_user();
 		user.setUpassword(upassword);
-		if(!current_user.getUpassword().equals( Encrypt.md5AndSha(old_pwd))){
+		if (!current_user.getUpassword().equals(Encrypt.md5AndSha(old_pwd))) {
 			return false;
-		}else{
+		} else {
 			user.setUsid(current_user.getUsid());
 			return userService.updateUser(user);
 		}
 	}
+
 	// 显示用户信息
 	@RequestMapping("showUserInfo")
 	@ResponseBody
-	public B_user showUserInfo(HttpSession session){
+	public B_user showUserInfo(HttpSession session) {
 		Integer usid = current_user.getUsid();
 		current_user = userService.findUserByUsid(usid);
 		session.setAttribute(ServletUtil.LOGIN_USER, current_user);
 		return current_user;
 	}
 
-	//查询所有的博客专家
-	@RequestMapping(value ="professor" ,method=RequestMethod.POST)
+	// 查询所有的博客专家
+	@RequestMapping(value = "professor", method = RequestMethod.POST)
 	@ResponseBody
-	public List<B_user> findProfessor(){
+	public List<B_user> findProfessor() {
 		return userService.findProfessor();
 	}
+
+	// 后台数据对文章的条件查询
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	@ResponseBody
+	public List<B_user> comboselect(String uinfo1) {
+			return  userService.findUserAll();
+	}
+
+	// 后台通过条件查询(name为条件查询参数名 ，param为条件查询的参数值 例如:{name: tname,param:'原创')
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "findByParam", method = RequestMethod.POST)
+	@ResponseBody
+	public List<B_user> findUserByParam(String name, String param, String rows, String page)
+			throws UnsupportedEncodingException {
+		// param = new String(param.getBytes("ISO-8859-1"), "UTF-8");
+		LogManager.getLogger().debug("条件查询用户  neme:" + name + ",param :" + param);
+		if (name.trim().equals("uname")) {
+			return userService.findUserByuname(param);
+		} else if (name.trim().equals("uemail")) {
+			return userService.findUserByuemail(param);
+		} 
+		return userService.findUserAll();
+	}
+
 }

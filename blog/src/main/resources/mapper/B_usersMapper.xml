@@ -21,6 +21,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findUserByUsid" parameterType="Integer" resultType="B_user">
 		select * from b_user where usid=#{usid}
 	</select>
+	
+	<!-- 通过用户名查询用户 -->
+	<select id="findUserByuname" parameterType="String" resultType="B_user">
+		select bu.* from b_user bu
+		<choose>
+			<when test="_parameter!= null ">
+				where bu.uname like '%${_parameter}%'
+				or bu.uname like
+				'%${_parameter}'
+				or bu.uname like
+				'${_parameter}%'
+			</when>
+		</choose>
+	</select>
+	
+	<!-- 通过邮件查询用户 -->
+	<select id="findUserByuemail" parameterType="String" resultType="B_user">
+		select bu.* from b_user bu
+		<choose>
+			<when test="_parameter!= null ">
+				where bu.uemail like '%${_parameter}%'
+				or bu.uemail like
+				'%${_parameter}'
+				or bu.uemail like
+				'${_parameter}%'
+			</when>
+		</choose>
+	</select>
+	
 	<!-- 查询所有的用户 -->
 	<select id="findUserAll" resultType="B_user">
 		select * from b_user

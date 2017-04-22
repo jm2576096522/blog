@@ -86,32 +86,7 @@ $("#columnList")
 							} ] ]
 				});
 
-// 板块文章添加
-$.post("article/list", function(data) {
-	$('#caid').combobox('reset');
-	$("#caid").combobox({
-		data : data.rows,
-		valueField : 'aid',
-		textField : 'atitle',
-		required : true,
-		multiple : true,
-		panelHeight : 'auto'
-	});
-	$('#caid').combobox('getValue');
-}, "json");
 
-// 板主邮箱
-$.post("blog/list", function(data) {
-	$('#cuemail').combobox('clear');
-	$("#cuemail").combobox({
-		data : data.rows,
-		valueField : 'uemail',
-		textField : 'uemail',
-		required : true,
-		panelHeight : 'auto'
-	});
-	$('#cuemail').combobox('getValue');
-}, "json");
 
 $("#detailsColumn").dialog({
 	title : "板块详情",
@@ -148,8 +123,91 @@ $("#addColumnForm").form(
 $(".addBtn").linkbutton({
 	iconCls : "icon-add",
 	onClick : function() {
+		$('#caid').combobox('clear');
+		$('#cuemail').combobox('clear');
 		$("#addColumnForm").form("reset");
 		$("#addColumn").dialog("open");
+		// 板块文章添加
+		$.post("article/list", function(data) {
+
+			// alert(JSON.stringify(data.rows))
+			/*data.rows.unshift({
+				aid : "-1",
+				atitle : "全选",
+				
+			});// 插入json到最前面
+*/			// alert(JSON.stringify(data.rows));
+			$("#caid").combobox(
+					{
+						data : data.rows,
+						valueField : 'aid',
+						textField : 'atitle',
+						required : true,
+						multiple : true,
+						mode : 'remote',
+						panelHeight : 200,
+						formatter : function(row) { // formatter方法就是实现了在每个下拉选项前面增加checkbox框的方法
+							var opts = $(this).combobox('options');
+							return '<input type="checkbox" class="combobox-checkbox">'
+									+ row[opts.textField]
+						},
+						onLoadSuccess : function() { // 下拉框数据加载成功调用
+							/*
+							 * var val = $(this).combobox("getData"); for ( var
+							 * item in val[0]) { if (item == "aid") { var
+							 * s=$("#caid").combobox("select", val[0][item]);
+							 */
+									var opts = $(this).combobox('options');
+									var target = this;
+									var values = $(target).combobox('getValues');// 获取选中的值的values
+									$.map(values, function(value) {
+										var el = opts.finder.getEl(target, value);
+										el.find('input.combobox-checkbox')._propAttr('checked',
+												true);
+									})
+								// }
+							// }
+							
+						},
+						onSelect : function(row) { // 选中一个选项时调用
+							var opts = $(this).combobox('options');
+							// 获取选中的值的values
+							var vals=row[opts.valueField];
+							/*if(vals=='-1'){//全选
+								alert(JSON.stringify(row));
+								row=data.rows;
+								alert(JSON.stringify(row));
+							}*/
+						//	alert(JSON.stringify(row));
+							// 设置选中值所对应的复选框为选中状态
+							var el = opts.finder.getEl(this, row[opts.valueField]);
+							el.find('input.combobox-checkbox')._propAttr('checked',
+									true);
+						},
+						onUnselect : function(row) {// 不选中一个选项时调用
+							var opts = $(this).combobox('options');
+							// 获取选中的值的values
+							$("#caid").val($(this).combobox('getValues'));
+
+							var el = opts.finder.getEl(this, row[opts.valueField]);
+							el.find('input.combobox-checkbox')._propAttr('checked',
+									false);
+						}
+
+					});
+		}, "json");
+
+		// 板主邮箱
+		$.post("blog/list", function(data) {
+			// $('#cuemail').combobox('clear');
+			$("#cuemail").combobox({
+				data : data.rows,
+				valueField : 'uemail',
+				textField : 'uemail',
+				// required : true,
+				panelHeight : 'auto'
+			});
+		}, "json");
 	}
 });
 $(".updBtn").linkbutton({

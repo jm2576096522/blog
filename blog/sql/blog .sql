@@ -24,6 +24,8 @@ create table b_user(
        upersondesc varchar2(200)        --用户个人描述
 );
 select * from b_user;
+select * from b_user where uemail='2576096522@qq.com'
+update b_user set  uemail='2576096522@qq.com' where usid=10151
 
 insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'1506173890@qq.com','a');
 update  b_user set upassword = '6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2';
@@ -64,7 +66,7 @@ create table b_admin(
        adpassword varchar2(50) default '6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2',   --管理员密码 (默认值为 a)
        admail varchar2(50) not null unique --添加管理员邮箱（忘记密码登录）
 );
- 
+ update b_admin set  admail='2576096522@qq.com' where adname='admin'
  truncate table B_ADMIN;--删除表数据
  alter table b_admin add (admail varchar2(50) not null unique);--添加管理员邮箱（忘记密码登录）
 
@@ -98,6 +100,8 @@ create table b_tag(
 -----------为文章表签表添加一个字段
 alter table b_tag add tusid int references b_user(usid);
 -----------------------------------
+--
+update b_tag set   tusid=10151
 
 --创建序列
 create  sequence seq_tagid start with 1;
@@ -131,6 +135,8 @@ to_char(sysdate,'yyyy-MM-dd hh:mm:ss'),'java是面向对象的一种编程，由
 
 -----更改时间
 update b_article set atime = to_char(sysdate,'yyyy-MM-dd hh24:mm:ss') where aid = 122;
+
+update b_article set aviewnum = 50 where usid=10151;
 
 select to_char(sysdate,'yyyy-MM-dd hh:mm:ss')  from dual;
 

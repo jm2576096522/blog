@@ -9,6 +9,7 @@ select * from B_TAG;--标签
 select * from B_TYPE;--类型
 select  * from B_USER;--用户
 select  * from b_drafets;--草稿
+select * from b_column;--专栏
 
 ---------------------删除表和序列-----------
 drop table b_admin;
@@ -18,7 +19,7 @@ drop table b_article;
 drop table b_type;   
 drop table b_tag;
 drop table b_user;
-
+drop table b_column;
 
 drop sequence seq_usid;
 drop sequence seq_adid;
@@ -26,7 +27,7 @@ drop sequence seq_aid;
 drop sequence seq_cid;
 drop sequence seq_drid;
 drop sequence seq_tagid;
-
+drop sequence seq_coid;
 ------------------------start create table---------------------
 -----创建序列---
 create sequence seq_usid start with 10001 increment by 1;
@@ -125,6 +126,21 @@ create table b_drafets(
        drcontent varchar2(800),   --文章文本内容
        drpic varchar2(600)        --文章图片  
 );
+
+--博客专栏
+create sequence seq_coid start with 1;
+create table b_column(
+       coid int primary key,               --专栏id
+       cotitle  varchar2(40) not null,      --专栏标题
+     cocontent varchar2(100) ,  --专栏说明
+       usid int references b_user(usid) not null,     --专栏创建者id
+       cotime varchar2(40),                --专栏创建时间
+       coaid varchar2(200),				--专栏里面所有文章的id
+       copic varchar2(600),                --专栏图片  
+       coviewnum  int  default 0 ,       --专栏浏览量
+       articlenum int  default 0 -- 文章数
+);
+
 
 --------------------end create table-----------------------
 
