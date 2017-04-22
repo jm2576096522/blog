@@ -79,12 +79,21 @@ function updata_userInfo() {
 	var uprofession = $("#uprofession").val();
 	var upersondesc = $("#upersondesc").val();
 	getUddress();
-	$.post("blog/update_userInfo",{uname:uname,ubirthday:ubirthday,uphone:uphone,uprofession:uprofession,upersondesc:upersondesc,usex:usex,uaddress:uaddress},
-			function(data){
-		  $.messager.alert("操作提示", "操作成功！","info",function(){
-			  location.reload();
-		  });
-	},"json");
+	
+	var getBLen1= uname.replace(/[^\x00-\xff]/g,"ab").length;
+	var getBLen2= uprofession.replace(/[^\x00-\xff]/g,"ab").length;
+	var getBLen3= upersondesc.replace(/[^\x00-\xff]/g,"ab").length;
+	
+	if(getBLen1 > 30 || getBLen2>40 || getBLen3>200){
+		alert("昵称/职业/个性签名不符合限制条件...");
+	}else{
+		$.post("blog/update_userInfo",{uname:uname,ubirthday:ubirthday,uphone:uphone,uprofession:uprofession,upersondesc:upersondesc,usex:usex,uaddress:uaddress},
+				function(data){
+			  $.messager.alert("操作提示", "操作成功！","info",function(){
+				  location.reload();
+			  });
+		},"json");
+	}
 }
 
 var uaddress; // 获得地址 变量

@@ -65,8 +65,8 @@
 				<h2 class="blog-comment" align="center">新建博客</h2>
 				<fieldset>
 					<div class="am-form-group am-u-sm-4 blog-clear-left">
-						<label>标题</label><input type="text" id="atitle" name="atitle"
-							placeholder="标题">
+						<label>标题</label><span id="span1" style="margin-left:10px;color:red;"></span><input type="text" id="atitle" name="atitle"
+							placeholder="标题" onBlur="show1(this)">
 					</div>
 					<div class="am-form-group am-u-sm-4">
 						<label>标签 </label> <select name="tagid" id="tag">
@@ -90,8 +90,8 @@
 						<label> 上传图片 </label><input type="file" id="upicDate"
 							name="upicDate" placeholder="选择文件" onchange="chgPic(this)">
 					</p>
-					<p id="controlNav"></p>
 				</fieldset>
+				<p id="controlNav"></p>
 			</form>
 				
 		</div>
@@ -236,7 +236,8 @@
 			var getBLen;
 			getBLen = str.replace(/[^\x00-\xff]/g,"ab").length;
 			if(getBLen >30){
-				$.messager.alert("操作提示","标题过长，应在30个字符以内...","error");
+				  $.messager.alert("操作提示","标题过长，应在30个字符以内...","error"); 
+			/* 	alert("标题过长，应在30个字符以内..."); */
 			}else{
 				$("#add_form").form({
 					url : "article/addArticle",
@@ -269,59 +270,88 @@
 		}
 		/* 更改文章的请求 */
 		function update_article() {
-			$("#add_form").form({
-				url : "article/updateArticle",
-				success : function(data) {
-					if (data.trim() > 0) {
-						$.messager.alert("操作提示", "更改成功...", "info", function() {
-							location.href = "page/blogManager.jsp";
-						});
-					} else {
-						$.messager.alert("操作提示", "更改失败！！", "error", function() {
-							location.reload();
-						});
-					}
+			var str = $("#atitle").val();
+			var getBLen;
+			getBLen = str.replace(/[^\x00-\xff]/g,"ab").length;
+			if(getBLen >30){
+				  $.messager.alert("操作提示","标题过长，应在30个字符以内...","error"); 
+			/* 	alert("标题过长，应在30个字符以内..."); */
+			}else{
+				var str = $("#atitle").val();
+				var getBLen;
+				getBLen = str.replace(/[^\x00-\xff]/g,"ab").length;
+				if(getBLen >30){
+					$.messager.alert("操作提示","标题过长，应在30个字符以内...","error");
+				}else{
+					$("#add_form").form({
+						url : "article/updateArticle",
+						success : function(data) {
+							if (data.trim() > 0) {
+								$.messager.alert("操作提示", "更改成功...", "info", function() {
+									location.href = "page/blogManager.jsp";
+								});
+							} else {
+								$.messager.alert("操作提示", "更改失败！！", "error", function() {
+									location.reload();
+								});
+							}
+						}
+					});
 				}
-			});
+			}
 		}
 		/* 保存到草稿箱 */
 		function saveArticle() {
-			$("#add_form").form({
-				url : "drafets/addDrafet",
-				success : function(data) {
-					if (data.trim() == "true") {
-						$.messager.alert("操作提示", "保存成功...", "info", function() {
-							location.reload();
-						});
-					} else {
-						$.messager.alert("操作提示", "保存失败！！", "error");
+			var str = $("#atitle").val();
+			var getBLen;
+			getBLen = str.replace(/[^\x00-\xff]/g,"ab").length;
+			if(getBLen >30){
+				  $.messager.alert("操作提示","标题过长，应在30个字符以内...","error"); 
+			/* 	alert("标题过长，应在30个字符以内..."); */
+			}else{
+				$("#add_form").form({
+					url : "drafets/addDrafet",
+					success : function(data) {
+						if (data.trim() == "true") {
+							$.messager.alert("操作提示", "保存成功...", "info", function() {
+								location.reload();
+							});
+						} else {
+							$.messager.alert("操作提示", "保存失败！！", "error");
+						}
 					}
-				}
-			});
+				});
+			}
 		}
 		/* 更改草稿箱 */
 		function updateDrafets() {
-			$("#add_form").form({
-				url : "drafets/updateDrafets",
-				success : function(data) {
-					if (data.trim() == "true") {
-						$.messager.alert("操作提示", "保存成功...", "info", function() {
-							location.reload();
-						});
-					} else {
-						$.messager.alert("操作提示", "保存失败！！", "error");
+			var str = $("#atitle").val();
+			var getBLen;
+			getBLen = str.replace(/[^\x00-\xff]/g,"ab").length;
+			if(getBLen >30){
+				  $.messager.alert("操作提示","标题过长，应在30个字符以内...","error"); 
+			/* 	alert("标题过长，应在30个字符以内..."); */
+			}else{
+				$("#add_form").form({
+					url : "drafets/updateDrafets",
+					success : function(data) {
+						if (data.trim() == "true") {
+							$.messager.alert("操作提示", "保存成功...", "info", function() {
+								location.reload();
+							});
+						} else {
+							$.messager.alert("操作提示", "保存失败！！", "error");
+						}
 					}
-				}
-			});
+				});
+			}
 		}
 
 		// 如果url 拼接有aid 
 		function findArticleByAid() {
 			$.post(
-							"article/findArticleByAid",
-							{
-								aid : aid
-							},
+					"article/findArticleByAid",
+					{aid : aid},
 							function(data) {
 								$("#atitle").val(data.atitle);
 								$("#tag").val(data.tagname);
@@ -338,29 +368,39 @@
 		}
 		// 如果url 拼接有drid
 		function findDrafetsByDrid() {
-			$
-					.post(
-							"drafets/findDrafetByDrid",
-							{
-								drid : drid
-							},
-							function(data) {
-								$("#atitle").val(data.drtitle);
-								$("#tag").val(data.drtagid);
-								$("#type").val(data.drtypeid);
-								$("#acontent").val(data.drcontent.trim());
-								if (data.drpic != null) {
-									var picStr = "<img src='"+data.drpic+"' style='width: 400px; height: 200px;'>";
-								} else {
-									var picStr = "<img src='images/not_pic.jpg'>";
-								}
-								$("#show_img").html(picStr);
-							});
+			$.post(
+					"drafets/findDrafetByDrid",
+					{
+						drid : drid
+					},
+				function(data) {
+					$("#atitle").val(data.drtitle);
+					$("#tag").val(data.drtagid);
+					$("#type").val(data.drtypeid);
+					$("#acontent").val(data.drcontent.trim());
+					if (data.drpic != null) {
+					var picStr = "<img src='"+data.drpic+"' style='width: 400px; height: 200px;'>";
+					} else {
+				var picStr = "<img src='images/not_pic.jpg'>";
+						}
+					$("#show_img").html(picStr);
+			});
 		}
 		//点击取消，返回
 		function backFirst() {
 			location.href = "page/blogManager.jsp";
 		}
+		
+		//验证
+		 function show1(obj){
+			 var str = $("#atitle").val();
+				var getBLen= str.replace(/[^\x00-\xff]/g,"ab").length;
+				if(getBLen >30){
+					$("#span1").html("标题过长，只允许30个字符..");
+				}else{
+					$("#span1").html("");
+				}
+	    } 
 	</script>
 </body>
 

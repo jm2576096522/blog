@@ -86,7 +86,8 @@
 						<ul>	
 							<li>
 								<label>昵 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：</label> 
-								<input id="uname" type="text" name="uname" placeholder="请输入你的个人昵称" />
+								<input id="uname" type="text" name="uname" placeholder="请输入你的个人昵称" onBlur="show1(this)"/>
+								<span id="span1" style="margin-left:30px;color:red;padding-left:30px;"></span>
 							</li>
 							<li>
 								<label>性 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label> 
@@ -116,11 +117,13 @@
 							</li>
 							<li>
 								<label>擅长职业：</label> 
-								<input id="uprofession" name="uprofession">
+								<input id="uprofession" name="uprofession" onBlur="show2(this)">
+								<span id="span2" style="margin-left:30px;color:red;padding-left:30px;"></span>
 							</li>
 							<li>
 								<label>个性签名：</label> 
-								<textarea id="upersondesc" rows="4" cols="45" style="resize:none; overflow: scroll;"></textarea>
+								<textarea id="upersondesc" rows="4" cols="45" style="resize:none; overflow: scroll;" onBlur="show3(this)"></textarea>
+								<span id="span3" style="margin-left:30px;color:red;padding-left:30px;"></span>
 							</li>
 						</ul>
 							<button class="button_reset" type="reset">取消</button>
@@ -185,6 +188,41 @@
 		    } 
 		});
 	}
+	
+	/* 验证 */
+	function show1(obj){
+			 	var str = $("#uname").val();
+				var getBLen= str.replace(/[^\x00-\xff]/g,"ab").length;
+				if(getBLen >30){
+					$("#span1").html("昵称超出限制，在此不允许超过30个字符...");
+					$("#span1").css("background","url(images/onError.gif) no-repeat left center");
+				}else{
+					$("#span1").html("");
+					$("#span1").css("background","");
+				}
+	    } 
+	function show2(obj){
+	 	var str = $("#uprofession").val();
+		var getBLen= str.replace(/[^\x00-\xff]/g,"ab").length;
+		if(getBLen >40){
+			$("#span2").html("内容不得超过40个字符...");
+			$("#span2").css("background","url(images/onError.gif) no-repeat left center");
+		}else{
+			$("#span2").html("");
+			$("#span2").css("background","");
+		}
+	} 
+	function show3(obj){
+	 	var str = $("#upersondesc").val();
+		var getBLen= str.replace(/[^\x00-\xff]/g,"ab").length;
+		if(getBLen >200){
+			$("#span3").html("内容不得超过200个字符...");
+			$("#span3").css("background","url(images/onError.gif) no-repeat left center");
+		}else{
+			$("#span3").html("");
+			$("#span3").css("background","");
+		}
+	} 
 	</script>
 </body>
 </html>

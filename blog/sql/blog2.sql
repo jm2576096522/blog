@@ -38,7 +38,7 @@ create table b_user(
        usid int primary key,               --用户id
        uemail varchar2(50) not null unique, --用户账号(邮箱登录)
        upassword varchar2(50) not null,   --用户密码
-       uname varchar2(50),         		  --用户（昵称）    
+       uname varchar2(30),         		  --用户（昵称）    
        usex varchar2(4)  default '男' check (usex in('男','女')),     --用户性别
        ubirthday varchar2(30),            --用户出生日期
        uaddress varchar2(50),             --用户所在地
@@ -50,9 +50,9 @@ create table b_user(
 
 -----管理员表--------------------
 
------创建序列---
+	-----创建序列---
 create sequence seq_adid start with 1001 increment by 1; 
--------end-------
+	-------end-------
 create table b_admin(
        adid int primary key,              --管理员id 
        adname varchar2(30) not null unique,      --管理员名称
@@ -74,9 +74,9 @@ select 3 , '翻译' from dual;
 
 -----文章类别标签表-------------
 
------创建序列---
+	-----创建序列---
 create  sequence seq_tagid start with 1 increment by 1;
--------end-------
+	-------end-------
 create table b_tag(
        tagid int primary key,      			 		--标签id
        tusid int references b_user(usid),			--用户id
@@ -85,9 +85,9 @@ create table b_tag(
 
 -----文章内容表----------
 
------创建序列---
+	-----创建序列---
 create sequence seq_aid start with 1 increment by 1;
--------end-------
+	-------end-------
 create table b_article(
        aid int primary key,               --文章id
        atitle varchar2(30) not null,      --文章标题
@@ -101,9 +101,9 @@ create table b_article(
 );
 --------评论表----------
 
------创建序列---
+	-----创建序列---
 create sequence seq_cid start with 1 increment by 1;
--------end-------
+	-------end-------
 create table b_comment(
        cid int primary key,               --评论id
        caid int references b_article(aid) on delete cascade,--评论文章id
@@ -113,9 +113,9 @@ create table b_comment(
 );
 
 -----草稿箱----------
------创建序列---
+	-----创建序列---
 create sequence seq_drid start with 1 increment by 1;
--------end-------
+	-------end-------
 create table b_drafets(
        drid int primary key,      --草稿箱id  
        usid int references b_user(usid) on delete cascade,     --文章作者      
@@ -132,7 +132,7 @@ create sequence seq_coid start with 1;
 create table b_column(
        coid int primary key,               --专栏id
        cotitle  varchar2(40) not null,      --专栏标题
-     cocontent varchar2(100) ,  --专栏说明
+       cocontent varchar2(100) ,  --专栏说明
        usid int references b_user(usid) not null,     --专栏创建者id
        cotime varchar2(40),                --专栏创建时间
        coaid varchar2(200),				--专栏里面所有文章的id

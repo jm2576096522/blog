@@ -70,13 +70,14 @@
 				style="width: 80%; margin: auto;" enctype="multipart/form-data">
 				<fieldset>
 					<div class="am-form-group am-u-sm-4 blog-clear-left" style="width:100%;">
-						<label>标题</label><input type="text" style="width:33%;" id="cotitle" name="cotitle"
-							placeholder="标题">
+						<label>标题</label><span id="span1" style="margin-left:30px;color:red;"></span><input type="text" style="width:33%;" id="cotitle" name="cotitle"
+							placeholder="标题"  onBlur="show1(this)">
 					</div>
 					<div class="am-form-group">
 						<label style="float: left;">专栏描述 </label>
+						<span id="span2" style="margin-left:30px;color:red;"></span>
 						<textarea name="cocontent" id="cocontent" rows="15"
-							style="height: 150px;" placeholder="一字千金"></textarea>
+							style="height: 150px;" placeholder="一字千金" onBlur="show2(this)"></textarea>
 					</div>
 					<div id="show_img"></div>
 					<p>
@@ -135,18 +136,27 @@
 		}
 		/* 添加文章的请求 */
 		function add_article() {
-			$("#add_form").form({
-				url : "column/addColumn",
-				success : function(data) {
-					if (data.trim() == "true") {
-						$.messager.alert("操作提示", "添加成功...", "info", function() {
-							location.href = "page/blog_column.jsp";
-						});
-					} else {
-						$.messager.alert("操作提示", "添加失败！！", "error");
+			var str = $("#cotitle").val();
+			var getBLen= str.replace(/[^\x00-\xff]/g,"ab").length;
+			
+		 	var conStr = $("#cocontent").val();
+			var conLen= conStr.replace(/[^\x00-\xff]/g,"ab").length;
+			if(getBLen >40 || conLen>100){
+				alert("标题名称 /专栏描述超出限制...");
+			}else{
+				$("#add_form").form({
+					url : "column/addColumn",
+					success : function(data) {
+						if (data.trim() == "true") {
+							$.messager.alert("操作提示", "添加成功...", "info", function() {
+								location.href = "page/blog_column.jsp";
+							});
+						} else {
+							$.messager.alert("操作提示", "添加失败！！", "error");
+						}
 					}
-				}
-			});
+				});
+			}
 		}
 		/* 清空图片 */
 		function reset_img() {
@@ -169,21 +179,50 @@
 		}
 		/* 更改专栏 */
 		function update_article() {
-			$("#add_form").form({
-				url : "column/updateColumn",
-				success : function(data){
-					if (data > 0){
-						$.messager.alert("操作提示", "更改成功...", "info", function() {
-							location.href = "page/blog_column.jsp";
-						});
-					} else {
-						$.messager.alert("操作提示", "更改失败！！", "error", function() {
-							location.reload();
-						});
+			var str = $("#cotitle").val();
+			var getBLen= str.replace(/[^\x00-\xff]/g,"ab").length;
+			
+		 	var conStr = $("#cocontent").val();
+			var conLen= conStr.replace(/[^\x00-\xff]/g,"ab").length;
+			if(getBLen >40 || conLen>100){
+				alert("标题名称 /专栏描述超出限制...");
+			}else{
+				$("#add_form").form({
+					url : "column/updateColumn",
+					success : function(data){
+						if (data > 0){
+							$.messager.alert("操作提示", "更改成功...", "info", function() {
+								location.href = "page/blog_column.jsp";
+							});
+						} else {
+							$.messager.alert("操作提示", "更改失败！！", "error", function() {
+								location.reload();
+							});
+						}
 					}
-				}
-			});
+				});
+			}
 		}
+		//验证
+		 function show1(obj){
+			 	var str = $("#cotitle").val();
+				var getBLen= str.replace(/[^\x00-\xff]/g,"ab").length;
+				if(getBLen >40){
+					$("#span1").html("标题名称过长，不允许超过40个字符...");
+				}else{
+					$("#span1").html("");
+				}
+	    } 
+		 function show2(obj){
+			 	var str = $("#cocontent").val();
+				var getBLen= str.replace(/[^\x00-\xff]/g,"ab").length;
+				if(getBLen >100){
+					$("#span2").html("专栏描述内容过多，应在100个字符以内...");
+				}else{
+					$("#span2").html("");
+				}
+	    }
+	
 	</script>
 
 </body>
