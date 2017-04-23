@@ -90,6 +90,7 @@ function show11() {
                             // 数据点点击事件
                             // 其中 e 变量为事件对象，this 为当前数据点对象
                             click: function (e) {
+                            	alert(JSON.stringify(e));
                                 $('.message').html( '标签名:' + this.x + '</b><br/>文章数: ' + this.y);
                             }
                         }

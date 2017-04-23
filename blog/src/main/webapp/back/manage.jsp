@@ -123,7 +123,7 @@
 				<tr>
 					<td align="right">原密码:</td>
 					<td><input id="propwd" name="propwd"
-						class="easyui-passwordbox"
+						class="easyui-passwordbox" <%-- value="${loginAdmin.adpassword}" --%>
 						data-options="prompt:'请输入原密码',required:true" style="width: 150px;" /></td>
 				</tr>
 				<tr>

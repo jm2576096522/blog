@@ -211,7 +211,7 @@ function aboutUs() {
 	$.messager
 			.alert(
 					'联系我们',
-					'<table cellpadding="10"><tr><th >联系人</th><th>手机</th><th>qq</th></tr><tr><td>姜媚</td><td>18473435230</td><td>2576096522</td></tr><tr><td>黄震</td><td>15573483933</td><td>793623923</td></tr><tr><td>袁湘云</td><td>14568541234</td><td>554236522</td></tr></table>',
+					'<table cellpadding="5"><tr><th>联系人</th><th>手机</th><th>qq</th></tr><tr><td>姜媚</td><td>18473435230</td><td>2576096522</td></tr><tr><td>黄震</td><td>15573483933</td><td>793623923</td></tr><tr><td>袁湘云</td><td>14568541234</td><td>554236522</td></tr></table>',
 					'info');
 }
 

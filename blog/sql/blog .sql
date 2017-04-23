@@ -1,11 +1,20 @@
 -------------blog项目 --------
+update b_article set aviewnum = (aviewnum+10) where usid=10002;--添加浏览量
 
 文章数大于10 ，浏览量大于20 ，  返回文章总数， 总浏览量 aviewnum  用户基本信息
 select * from b_user bu inner join
 (select usid,count(1) articlenum ,sum(aviewnum) aviewtotal from b_article group by usid) t on t.usid = bu.usid
 where t.articlenum>10 and t.aviewtotal>20;
 select sum(aviewnum) from b_article where usid = 10007;
-
+--查询标签表（重复的标签名分组计数）；tagid,tusid,tagname
+select tag.*,nvl(w.articlenum,0) as articlenum from
+		(select g.tagid,count(1) as articlenum from
+		(select t.tagid from b_tag t inner join b_article a on t.tagid = a.tagid ) g
+		group by g.tagid) w
+		right join B_TAG tag on w.tagid = tag.tagid order
+		by w.tagid
+select * from b_tag t group by t.tagname
+		
 select sysdate from dual;
 -------------------------------------
 create sequence seq_usid start with 10001;
@@ -92,7 +101,7 @@ select 2 , '转载' from dual union
 select 3 , '翻译' from dual;
 
 select * from B_TYPE;
------文章标签类别表
+-----文章标签类别表 
 create table b_tag(
        tagid int primary key,      			 		--标签id
        tusid int references b_user(usid),			--用户id
@@ -135,11 +144,13 @@ create table b_article(
 );
 insert into b_article values(seq_aid.nextval,'java编程',1,1,10001,
 to_char(sysdate,'yyyy-MM-dd hh:mm:ss'),'java是面向对象的一种编程，由属性和方法组成。Java对c的有点是不适用指针，实现跨区域','',0);
+alter table b_article modify acontent varchar2(2000) ;
+
 
 -----更改时间
 update b_article set atime = to_char(sysdate,'yyyy-MM-dd hh24:mm:ss') where aid = 122;
 
-update b_article set aviewnum = 50 where usid=10151;
+update b_article set aviewnum = (aviewnum+10) where usid=10002;
 
 select to_char(sysdate,'yyyy-MM-dd hh:mi:ss')  from dual;
 

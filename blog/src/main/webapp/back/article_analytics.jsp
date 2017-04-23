@@ -97,6 +97,7 @@ function show() {
                             // 数据点点击事件
                             // 其中 e 变量为事件对象，this 为当前数据点对象
                             click: function (e) {
+                            	alert(JSON.stringify(e));
                                 $('.message').html( '用户id:'+this.x+'</b><br/>用户名：' +map.get(this.x)+ '<br/> 发表文章数：' +this.y );
                             }
                         }

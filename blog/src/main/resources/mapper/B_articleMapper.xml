@@ -85,11 +85,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listArticleByuname" parameterType="String"
 		resultType="B_article">
 		select ba.*,
-		bu.uname,bt.tagname,bty.tname from b_article ba
+		bu.uname,bt.tagname,bty.tname,nvl(w.commentnum,0) as commentnum from b_article ba
 		inner join
 		b_user bu on ba.usid = bu.usid
 		left join b_tag bt on ba.tagid=bt.tagid
 		left join b_type bty on ba.tid =bty.tid
+		left join (select d.caid,count(1) as commentnum from (
+			select caid from B_COMMENT b right join B_ARTICLE ba on ba.aid = b.caid) d group by d.caid) w
+			on w.caid = ba.aid   
 		<choose>
 			<when test="_parameter!= null ">
 				where bu.uname like '%${_parameter}%'
@@ -104,12 +107,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listArticleBytname" parameterType="String"
 		resultType="B_article">
 		select ba.*,
-		bu.uname,bt.tagname,bty.tname from b_article ba
+		bu.uname,bt.tagname,bty.tname ,nvl(w.commentnum,0) as commentnum from b_article ba
 		inner join
 		b_user bu on ba.usid = bu.usid
 		left join b_tag bt on
 		ba.tagid=bt.tagid
 		left join b_type bty on ba.tid =bty.tid
+		left join (select d.caid,count(1) as commentnum from (
+			select caid from B_COMMENT b right join B_ARTICLE ba on ba.aid = b.caid) d group by d.caid) w
+			on w.caid = ba.aid   
 		<choose>
 			<when test="_parameter!= null ">
 				where bty.tname like '%${_parameter}%'
@@ -122,11 +128,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listArticleBytagname" parameterType="String"
 		resultType="B_article">
 		select ba.*,
-		bu.uname,bt.tagname,bty.tname from b_article ba
+		bu.uname,bt.tagname,bty.tname,nvl(w.commentnum,0) as commentnum from b_article ba
 		inner join
 		b_user bu on ba.usid = bu.usid
 		left join b_tag bt on ba.tagid=bt.tagid
 		left join b_type bty on ba.tid =bty.tid
+		left join (select d.caid,count(1) as commentnum from (
+			select caid from B_COMMENT b right join B_ARTICLE ba on ba.aid = b.caid) d group by d.caid) w
+			on w.caid = ba.aid   
 		<choose>
 			<when test="_parameter!= null ">
 				where bt.tagname like '%${_parameter}%'
