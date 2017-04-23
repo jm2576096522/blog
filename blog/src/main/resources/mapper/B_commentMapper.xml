@@ -87,8 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 添加评论 -->
 	<insert id="insertComment" parameterType="B_comment">
 		insert into b_comment
-		values(seq_cid.nextval,#{caid},#{usid},#{ccontent},to_char(sysdate,'yyyy-MM-dd
-		hh:mm:ss'))
+		values(seq_cid.nextval,#{caid},#{usid},#{ccontent},to_char(sysdate,'yyyy-MM-dd hh:mi:ss'))
 	</insert>
 
 	<!-- 删除评论 -->

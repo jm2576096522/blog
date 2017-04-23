@@ -6,6 +6,7 @@ select * from b_user bu inner join
 where t.articlenum>10 and t.aviewtotal>20;
 select sum(aviewnum) from b_article where usid = 10007;
 
+select sysdate from dual;
 -------------------------------------
 create sequence seq_usid start with 10001;
 
@@ -138,7 +139,7 @@ update b_article set atime = to_char(sysdate,'yyyy-MM-dd hh24:mm:ss') where aid 
 
 update b_article set aviewnum = 50 where usid=10151;
 
-select to_char(sysdate,'yyyy-MM-dd hh:mm:ss')  from dual;
+select to_char(sysdate,'yyyy-MM-dd hh:mi:ss')  from dual;
 
 	select * from (
 		select t.*, rownum rn  from (select bar.*,bu.uname,bt.tagname,bty.tname,nvl(w.commentnum,0) as commentnum from b_article bar
