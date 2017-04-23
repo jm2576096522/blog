@@ -82,6 +82,7 @@ function tag_add(){
 	}else{
 		$.post("tag/add",{tagname:newTag},function(){
 			$.messager.alert("操作提示","添加成功","info",function(){
+				$("#add_tag").val("");
 				location.reload();
 			});
 		});

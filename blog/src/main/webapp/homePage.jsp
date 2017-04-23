@@ -10,7 +10,8 @@
 <link rel="shortcut icon" href="assets/i/favicon.png" />
 <link href="css/base.css" rel="stylesheet">
 <link href="css/index.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="easyui/themes/default/easyui.css">
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/sliders.js"></script>
 </head>
@@ -38,12 +39,7 @@
 			<div class="banner">
 				<div id="slide-holder">
 					<div id="slide-runner">
-						<a target="_blank"><img id="slide-img-1" src="images/a1.jpg"
-							alt="" /></a> <a target="_blank"><img id="slide-img-2"
-							src="images/a2.jpg" alt="" /></a> <a target="_blank"><img
-							id="slide-img-3" src="images/a3.jpg" alt="" /></a> <a
-							target="_blank"><img id="slide-img-4" src="images/a4.jpg"
-							alt="" /></a>
+						<div id="article_top_img"></div>
 						<div id="slide-controls">
 							<p id="slide-client" class="text">
 								<strong></strong><span></span>
@@ -53,28 +49,6 @@
 						</div>
 					</div>
 				</div>
-				<script>
-					if (!window.slider) {
-						var slider = {};
-					}
-					slider.data = [ {
-						"id" : "slide-img-1", // 与slide-runner中的img标签id对应
-						"client" : "标题1",
-						"desc" : "这里修改描述 这里修改描述 这里修改描述" //这里修改描述
-					}, {
-						"id" : "slide-img-2",
-						"client" : "标题2",
-						"desc" : "add your description here"
-					}, {
-						"id" : "slide-img-3",
-						"client" : "标题3",
-						"desc" : "add your description here"
-					}, {
-						"id" : "slide-img-4",
-						"client" : "标题4",
-						"desc" : "add your description here"
-					} ];
-				</script>
 			</div>
 			<!-- banner代码 结束 -->
 			<div class="topnews">
@@ -132,43 +106,19 @@
 					<ul class="hd" id="tab">
 						<li class="cur"><a>点击排行</a></li>
 						<li><a>最新文章</a></li>
-						<!-- <li><a>站长推荐</a></li> -->
 					</ul>
 				</div>
 				<div class="ms-main" id="ms-main">
-					<div style="display: block;" class="bd bd-news" >
-					<!-- 点击排行 -->
+					<div style="display: block;" class="bd bd-news">
+						<!-- 点击排行 -->
 						<ul id="listArticleByHot">
-							<!-- <li><a target="_blank">住在手机里的朋友</a></li>
-							<li><a target="_blank">教你怎样用欠费手机拨打电话</a></li>
-							<li><a target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码...</a></li>
-							<li><a target="_blank">手机的16个惊人小秘密，据说99.999%的人都不知</a></li>
-							<li><a target="_blank">你面对的是生活而不是手机</a></li>
-							<li><a target="_blank">豪雅手机正式发布! 在法国全手工打造的奢侈品</a></li> -->
 						</ul>
 					</div>
 					<div class="bd bd-news">
-					<!--最新文章  -->
+						<!--最新文章  -->
 						<ul id="listArticleByNew">
-							<!-- <li><a target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码...</a></li>
-							<li><a target="_blank">手机的16个惊人小秘密，据说99.999%的人都不知</a></li>
-							<li><a target="_blank">住在手机里的朋友</a></li>
-							<li><a target="_blank">教你怎样用欠费手机拨打电话</a></li>
-							<li><a target="_blank">你面对的是生活而不是手机</a></li>
-							<li><a target="_blank">豪雅手机正式发布! 在法国全手工打造的奢侈品</a></li> -->
 						</ul>
 					</div>
-					<!-- <div class="bd bd-news">
-					站长推荐 
-						<ul>
-							<li><a target="_blank">手机的16个惊人小秘密，据说99.999%的人都不知</a></li>
-							<li><a target="_blank">你面对的是生活而不是手机</a></li>
-							<li><a target="_blank">住在手机里的朋友</a></li>
-							<li><a target="_blank">豪雅手机正式发布! 在法国全手工打造的奢侈品</a></li>
-							<li><a target="_blank">教你怎样用欠费手机拨打电话</a></li>
-							<li><a target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码...</a></li>
-						</ul>
-					</div> -->
 				</div>
 				<!--ms-main end -->
 			</div>
@@ -177,7 +127,7 @@
 			<div class="cloud">
 				<h3>标签云</h3>
 				<ul id="tag">
-				<!--自动获取所有标签  -->
+					<!--自动获取所有标签  -->
 				</ul>
 			</div>
 			<div class="tuwen">
@@ -221,7 +171,7 @@
 					<li><a>Html</a></li>
 					<li><a>CSS3</a></li>
 					<li><a>Html5+css3</a></li>
-					<li><a>百度</a></li>
+					<li><a href="http://www.baidu.com">百度</a></li>
 				</ul>
 			</div>
 		</div>
@@ -237,6 +187,64 @@
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="js/homePage.js"></script>
 	<script type="text/javascript" src="js/moreOperation.js"></script>
+
+	<!--  -->
+	<script type="text/javascript">
+		//头部的滚动图片
+		var top_content = '';
+
+		var array = [];
+
+		$
+				.ajax({
+					url : "article/findByHot",
+					type : "GET",
+					async : false,
+					data : {
+						currPage : 1,
+						pageSize : 4
+					},
+					success : function(data) {
+						var top_article = '';
+						for (var i = 0; i < data.length; i++) {
+							top_article += '<a onclick="articleDetail('+data[i].aid+')" target="_blank"><img style="width:670px;height:280px;" id="slide-img-'
+									+ (i + 1)
+									+ '" src="'
+									+ data[i].apic
+									+ '" alt="" /></a>';
+							top_content = '{"id" : "slide-img-' + (i + 1)
+									+ '","client" : "标题' + (i + 1)
+									+ '","desc" : "' + data[i].atitle + '"}';
+							array.push(top_content);
+						}
+						$("#article_top_img").html(top_article);
+					}
+				});
+		if (!window.slider) {
+			var slider = {};
+			alert(123);
+		}
+		
+		/* 	slider.data =array; */
+		 	slider.data = [ {
+							"id" : "slide-img-1", // 与slide-runner中的img标签id对应
+							"client" : "标题1",
+							"desc" : "这里修改描述 这里修改描述 这里修改描述" //这里修改描述
+						}, {
+							"id" : "slide-img-2",
+							"client" : "标题2",
+							"desc" : "add your description here"
+						}, {
+							"id" : "slide-img-3",
+							"client" : "标题3",
+							"desc" : "add your description here"
+						}, {
+							"id" : "slide-img-4",
+							"client" : "标题4",
+							"desc" : "add your description here"
+						} ];
+		
+	</script>
 
 </body>
 

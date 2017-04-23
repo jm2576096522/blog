@@ -191,7 +191,7 @@ $.post("tag/list", function(data) {
 }, "json");
 
 //异步加载排行文章
-$.get("article/findByHot",{currPage:1,pageSize:10}, function(data) {
+$.get("article/findByHot",{currPage:1,pageSize:6}, function(data) {
 	var articleHot = "";
 	for (var i = 0; i < data.length; i++) {
 		$("#listArticleByHot").append("<li><a onclick='articleDetail("+data[i].aid+")'><b>" + data[i].atitle + "</b></a></li>");
@@ -199,9 +199,12 @@ $.get("article/findByHot",{currPage:1,pageSize:10}, function(data) {
 }, "json");
 
 //异步加载最新文章
-$.get("article/findArticle",{currPage:1,pageSize:10}, function(data) {
+$.get("article/findArticle",{currPage:1,pageSize:6}, function(data) {
 	var articleNew = "";
 	for (var i = 0; i < data.length; i++) {
 		$("#listArticleByNew").append("<li><a onclick='articleDetail("+data[i].aid+")'><b>" + data[i].atitle + "</b></a></li>");
 	}
 }, "json");
+
+
+
