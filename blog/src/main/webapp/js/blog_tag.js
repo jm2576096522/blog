@@ -113,16 +113,14 @@ function cancelrow(editIndex) {
 // 添加类别标签
 function tag_add() {
 	var newTag = $("#add_tag").val();
-	if (newTag == "") {
-		$.messager.alert("失败提示", "类别不能为空", "error");
-	} else {
-		$.post("tag/add", {
-			tagname : newTag
-		}, function() {
-			$.messager.alert("操作提示", "添加成功", "info", function() {
+	if(newTag == ""){
+		$.messager.alert("失败提示","类别不能为空","error");
+	}else{
+		$.post("tag/add",{tagname:newTag},function(){
+			$.messager.alert("操作提示","添加成功","info",function(){
+				$("#add_tag").val("");
 				location.reload();
 			});
 		});
-		$('#add_tag').val("");
 	}
 }

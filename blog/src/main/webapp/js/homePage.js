@@ -205,3 +205,6 @@ $.get("article/findArticle",{currPage:1,pageSize:6}, function(data) {
 		$("#listArticleByNew").append("<li><a onclick='articleDetail("+data[i].aid+")'><b>" + data[i].atitle + "</b></a></li>");
 	}
 }, "json");
+
+
+
