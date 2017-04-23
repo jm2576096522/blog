@@ -178,7 +178,7 @@ function check_login3(){
 		location.href="blogColumn.jsp";
 	} 
 }
-
+//加载所有标签
 var tempTid = "";
 //异步加载标签信息
 $.post("tag/list", function(data) {
@@ -186,8 +186,22 @@ $.post("tag/list", function(data) {
 		$("#tag").append("<li><a href='?tagid=" + data[i].tagid + "'><b>" + data[i].tagname + "</b></a></li>");
 	}
 	$("#tag a").click(function(){
-		tempTid = this.href.substr(this.href.indexOf("?") + 1);
 		loadMoreArticle();
-		return false;
 	});
+}, "json");
+
+//异步加载排行文章
+$.get("article/findByHot",{currPage:1,pageSize:10}, function(data) {
+	var articleHot = "";
+	for (var i = 0; i < data.length; i++) {
+		$("#listArticleByHot").append("<li><a onclick='articleDetail("+data[i].aid+")'><b>" + data[i].atitle + "</b></a></li>");
+	}
+}, "json");
+
+//异步加载最新文章
+$.get("article/findArticle",{currPage:1,pageSize:10}, function(data) {
+	var articleNew = "";
+	for (var i = 0; i < data.length; i++) {
+		$("#listArticleByNew").append("<li><a onclick='articleDetail("+data[i].aid+")'><b>" + data[i].atitle + "</b></a></li>");
+	}
 }, "json");
