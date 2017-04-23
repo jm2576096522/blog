@@ -280,7 +280,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="acontent!=null"> acontent=#{acontent}, </if>
 			<if test="apic!=null"> apic=#{apic}, </if>
 			<if test="aviewnum!=null">aviewnum=#{aviewnum},</if>
-			atime = to_char(sysdate,'yyyy-MM-dd hh24:mm:ss')
+			atime = to_char(sysdate,'yyyy-MM-dd hh24:mi:ss')
 		</set>
 		where aid=#{aid}
 	</update>
@@ -288,8 +288,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertArticle" parameterType="B_article">
 		insert into b_article
 		(aid,atitle,tid,tagid,usid,atime,acontent,apic)
-		values(seq_aid.nextval,#{atitle},#{tid},#{tagid},#{usid},to_char(sysdate,'yyyy-MM-dd
-		hh24:mm:ss'),#{acontent},#{apic})
+		values(seq_aid.nextval,#{atitle},#{tid},#{tagid},#{usid},to_char(sysdate,'yyyy-MM-dd hh24:mi:ss'),#{acontent},#{apic})
 	</insert>
 	<!-- 删除博客 -->
 	<delete id="deleteArticle">

@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into b_column
 		(coid,cotitle,coaid,cotime,usid,cocontent,copic,articlenum)
 		values(seq_coid.nextval,#{cotitle},#{coaid},to_char(sysdate,'yyyy-MM-dd
-		hh:mm:ss'),(select bu.usid from b_user bu where
+		hh:mi:ss'),(select bu.usid from b_user bu where
 		bu.uemail=#{uemail}),#{cocontent},#{copic},#{articlenum})
 	</insert>
 	
@@ -58,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="addColumnByUsid" parameterType="B_column">
 		insert into b_column(coid,cotitle,cocontent,usid,cotime,copic)
 			values(seq_coid.nextval,#{cotitle},#{cocontent},#{usid},
-			to_char(sysdate,'yyyy-MM-dd hh24:mm:ss'),#{copic})
+			to_char(sysdate,'yyyy-MM-dd hh24:mi:ss'),#{copic})
 	</insert>
 	<!-- 查询个人板块 -->
 	<select id="findColumnByUsid" parameterType="B_column" resultType="B_column">
@@ -94,7 +94,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="cotitle!=null"> cotitle=#{cotitle}, </if>
 			<if test="cocontent!=null"> cocontent=#{cocontent}, </if>
 			<if test="copic!=null"> copic=#{copic}, </if>
-			cotime = to_char(sysdate,'yyyy-MM-dd hh24:mm:ss')
+			cotime = to_char(sysdate,'yyyy-MM-dd hh24:mi:ss')
 		</set>
 		where coid=#{coid}
 	</update>

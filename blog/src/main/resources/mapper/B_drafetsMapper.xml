@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 添加草稿 -->
 	<insert id="addDrafet" parameterType="B_article">
 		insert into b_drafets values(seq_drid.nextval,#{usid},#{atitle},#{tid},#{tagid},to_char(sysdate,'yyyy-MM-dd
-		hh24:mm:ss'),#{acontent},#{apic})
+		hh24:mi:ss'),#{acontent},#{apic})
 	</insert>	
 	
 	<!-- 根据用户id查询 -->
@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into b_article
 		(aid,atitle,tid,tagid,usid,atime,acontent,apic)
 		values(seq_aid.nextval,#{drtitle},#{drtypeid},#{drtagid},#{usid},to_char(sysdate,'yyyy-MM-dd
-		hh24:mm:ss'),#{drcontent},#{drpic})
+		hh24:mi:ss'),#{drcontent},#{drpic})
 	</insert>
 	<!-- 修改草稿 -->
 	<update id="updateDrafets" parameterType="B_drafets">
@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="drtagid!=null"> drtagid=#{drtagid},	</if>
 			<if test="drcontent!=null"> drcontent=#{drcontent}, </if>
 			<if test="drpic!=null"> drpic=#{drpic}, </if>
-			drtime = to_char(sysdate,'yyyy-MM-dd hh24:mm:ss')
+			drtime = to_char(sysdate,'yyyy-MM-dd hh24:mi:ss')
 		</set>
 		where drid=#{drid}
 	</update>
