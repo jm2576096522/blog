@@ -73,7 +73,6 @@
 	}
 	
 		 $.post("column/list",function(data){
-		//	 alert(data);
 			 data=data.rows;
 			var proStr ='';
 			for(var i=0;i<data.length;i++){

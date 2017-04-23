@@ -160,7 +160,7 @@
 					commentDetail += '<span>'+data[i].ctime+'</span></div>';
 					commentDetail += '<div style="width:100%;padding:10px;">';
 					commentDetail += '<img alt="" src="'+data[i].upic+'" style="height:35px;width:50px;margin-left:10px;">';
-					commentDetail += '<span style="margin-left:20px;">'+data[i].ccontent+'</span></div>';
+					commentDetail += '<span style="margin-left:20px;">'+htmlEncodeJQ(data[i].ccontent)+'</span></div>';
 				}
 			}else{
 				commentDetail += '<div style="background:#E4E4E4;width:100%;padding:10px 20px;">暂无评论...</div>';
@@ -169,6 +169,7 @@
 			
 		});
 	}
+	
 	//获取总数
 	function listNum(){
 		$.post("comment/listNum",{caid:aid},function(data){
@@ -231,6 +232,14 @@
 		currPage = totalPage;
 		viewComment();
 		listNum();
+	}
+	
+	function htmlEncodeJQ ( str ) {
+		return $('<span/>').text( str ).html();
+	}
+		 
+	function htmlDecodeJQ ( str ) {
+	  	return $('<span/>').html( str ).text();
 	}
 	</script>
 </body>

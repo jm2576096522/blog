@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
@@ -23,6 +24,8 @@ import com.yc.ssm.us.entity.PaginationBean;
 import com.yc.ssm.us.service.B_articleService;
 import com.yc.ssm.us.service.B_columnService;
 import com.yc.ssm.us.service.B_drafetsService;
+import com.yc.ssm.us.util.Forbidener;
+import com.yc.ssm.us.util.IpUtils;
 import com.yc.ssm.us.util.ServletUtil;
 import com.yc.ssm.us.service.B_tagService;
 import com.yc.ssm.us.service.B_typeService;
@@ -231,8 +234,17 @@ public class B_articleHandler<T> {
 	// 浏览量的增加
 	@RequestMapping(value = "updateAviewNum", method = RequestMethod.POST)
 	@ResponseBody
-	public int updateAviewNum(@RequestParam("aid") Integer aid) {
-		return articleService.updateAviewNum(aid);
+	public int updateAviewNum(@RequestParam("aid") Integer aid, HttpServletRequest request) {
+		
+		Forbidener fb = Forbidener.getInstance();
+		String testIP = IpUtils.getIpAddr(request)+aid;
+		LogManager.getLogger().debug("浏览器解析到的ip:" + testIP);
+		if (fb.check(testIP)) {
+			LogManager.getLogger().debug("进行浏览量+1");
+			return articleService.updateAviewNum(aid);
+		}
+		LogManager.getLogger().debug("该文章已被点击浏览过");
+		return 0;
 	}
 
 	// 删除文章
