@@ -89,5 +89,6 @@ public class B_tagHandler {
 		LogManager.getLogger().debug("获得所有的类别标签");
 		return b_tagService.findALlTags();
 	}
+	
 
 }

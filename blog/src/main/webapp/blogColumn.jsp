@@ -29,19 +29,19 @@
 			<li><a href="personPage.jsp">我的博客</a></li>
 		</ul>
 		<!-- 菜单栏右部分 -->
-		<div id="top_right" class="show_loginUser" style="float: right;">
-			<img src="${loginUser.getUpic()}"
-				style="float: left; width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
-			<div style="float: left; height: 100%; line-height: 50px;">
-				欢迎 : <input type="text" id="loginUname" readonly="readonly"
-					value="${loginUser.getUname()}" /> <select id="user_select"
-					style="border: none;">
-					<option disabled="disabled" selected="selected">&nbsp;&nbsp;更多</option>
-					<option onclick="switch_user()">切换用户</option>
-					<option onclick="login_out()">退出</option>
-				</select>
+			<div id="top_right" class="show_loginUser" style="float: right;">
+				<img src="${loginUser.getUpic()}" id="top_img"
+					style="float: left; width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
+				<div style="float: left; height: 100%; line-height: 50px;">
+					欢迎 : <input type="text" id="loginUname" readonly="readonly"
+						value="${loginUser.getUname()}" /> <select id="user_select"
+						style="border: none;">
+						<option disabled="disabled" selected="selected">&nbsp;&nbsp;更多</option>
+						<option onclick="switch_user()">切换用户</option>
+						<option onclick="login_out()">退出</option>
+					</select>
+				</div>
 			</div>
-		</div>
 	</nav>
 	<hr>
 	<article>
@@ -67,6 +67,11 @@
 	<script type="text/javascript" src="js/moreOperation.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript">
+	var result = $("#top_img").attr("src");
+	if(result == ""){
+		$("#top_img").attr("src","images/not_pic.jpg");
+	}
+	
 		 $.post("column/list",function(data){
 		//	 alert(data);
 			 data=data.rows;

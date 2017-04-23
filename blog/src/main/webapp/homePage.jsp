@@ -195,8 +195,7 @@
 
 		var array = [];
 
-		$
-				.ajax({
+		$.ajax({
 					url : "article/findByHot",
 					type : "GET",
 					async : false,
