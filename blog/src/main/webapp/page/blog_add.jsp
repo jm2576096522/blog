@@ -208,7 +208,7 @@
 		}
 
 		/* 获取类别标签的请求 */
-		$.get("tag/findAllTags", function(data) {
+		$.get("tag/findAll", function(data) {
 			for (var i = 0; i < data.length; i++) {
 				var option = "<option value='" + data[i].tagid + "'>"
 						+ data[i].tagname + "</option>";

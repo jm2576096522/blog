@@ -21,6 +21,7 @@ drop table b_tag;
 drop table b_column;
 drop table b_user;
 
+
 drop sequence seq_usid;
 drop sequence seq_adid;
 drop sequence seq_aid;
@@ -147,7 +148,9 @@ create table b_column(
 ---插入测试用户账号
 	insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'123@qq.com','6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2');
 
-	insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'12345678@qq.com','6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2');	
+	insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'6789@qq.com','6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2');
+
+	insert into b_user(usid,uemail,upassword) values(seq_usid.nextval,'321@qq.com','6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2');	
 -----插入管理员账号
 	insert into B_ADMIN values(seq_adid.nextval,'admin','6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2','2576096522@qq.com');
 
