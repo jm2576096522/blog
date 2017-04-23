@@ -95,10 +95,12 @@ select * from B_TYPE;
 create table b_tag(
        tagid int primary key,      			 		--标签id
        tusid int references b_user(usid),			--用户id
-       tagname varchar2(10) not null unique         --标签名称
+       tagname varchar2(10) not null ,         --标签名称
 );
 -----------为文章表签表添加一个字段
 alter table b_tag add tusid int references b_user(usid);
+--修改文章标签的约束
+alter table b_tag modify tagname  not null ,
 -----------------------------------
 --
 update b_tag set   tusid=10151
@@ -346,3 +348,6 @@ select tag.*,nvl(w.articlenum,0) as articlenum from
 		group by g.tagid) w
 		right join B_TAG tag on w.tagid = tag.tagid order
 		by w.tagid
+
+		
+		select  sysdate from dual;

@@ -18,8 +18,8 @@ drop table b_DRAFETS;
 drop table b_article;
 drop table b_type;   
 drop table b_tag;
-drop table b_user;
 drop table b_column;
+drop table b_user;
 
 drop sequence seq_usid;
 drop sequence seq_adid;
@@ -80,7 +80,7 @@ create  sequence seq_tagid start with 1 increment by 1;
 create table b_tag(
        tagid int primary key,      			 		--标签id
        tusid int references b_user(usid),			--用户id
-       tagname varchar2(10) not null unique         --标签名称
+       tagname varchar2(10) not null         --标签名称
 );
 
 -----文章内容表----------
@@ -131,7 +131,7 @@ create table b_drafets(
 create sequence seq_coid start with 1;
 create table b_column(
        coid int primary key,               --专栏id
-       cotitle  varchar2(40) not null,      --专栏标题
+       cotitle  varchar2(40) not null,      --专栏标题（中文20个字 ）
        cocontent varchar2(100) ,  --专栏说明
        usid int references b_user(usid) not null,     --专栏创建者id
        cotime varchar2(40),                --专栏创建时间
