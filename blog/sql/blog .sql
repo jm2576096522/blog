@@ -1,5 +1,7 @@
 -------------blog项目 --------
 update b_article set aviewnum = (aviewnum+10) where usid=10002;--添加浏览量
+update b_user set  uemail='2576096522@qq.com' where usid=10002;--修改用户邮箱
+update b_admin set  admail='2576096522@qq.com' where adname='admin';--修改管理员邮箱
 
 文章数大于10 ，浏览量大于20 ，  返回文章总数， 总浏览量 aviewnum  用户基本信息
 select * from b_user bu inner join

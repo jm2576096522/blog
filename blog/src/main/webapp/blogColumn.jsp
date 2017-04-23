@@ -52,7 +52,7 @@
 		<hr>
 		<div style="height: 800px;">
 		<!--  内容区-->
-			<div id="content"></div>
+			<div id="content11"></div>
 		</div>
 
 	</article>
@@ -68,6 +68,7 @@
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript">
 		 $.post("column/list",function(data){
+		//	 alert(data);
 			 data=data.rows;
 			var proStr ='';
 			for(var i=0;i<data.length;i++){
@@ -84,7 +85,7 @@
 				proStr += '<div class="count_1 fr"><b>'+data[i].coviewnum+'</b> <span>板块阅读量</span></div>';
 				proStr += '</dd></dl>';
 			}
-			$("#content").html(proStr);
+			$("#content11").html(proStr);
 		}); 
 		 
 		//用户详情
