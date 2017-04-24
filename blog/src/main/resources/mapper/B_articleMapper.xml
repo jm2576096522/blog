@@ -125,7 +125,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</choose>
 	</select>
 	<!--通过标签名查询 -->
-	<select id="listArticleBytagname" parameterType="String"
+	<select id="listArticleBytagname" parameterType="B_article"
 		resultType="B_article">
 		select ba.*,
 		bu.uname,bt.tagname,bty.tname,nvl(w.commentnum,0) as commentnum from b_article ba
@@ -134,18 +134,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		left join b_tag bt on ba.tagid=bt.tagid
 		left join b_type bty on ba.tid =bty.tid
 		left join (select d.caid,count(1) as commentnum from (
-			select caid from B_COMMENT b right join B_ARTICLE ba on ba.aid = b.caid) d group by d.caid) w
-			on w.caid = ba.aid   
+			select caid from B_COMMENT b right join B_ARTICLE ba on ba.aid = b.caid) d group by d.caid ) w
+			on w.caid = ba.aid 
 		<choose>
 			<when test="_parameter!= null ">
-				where bt.tagname like '%${_parameter}%'
+				where lower(bt.tagname) like '%${tagname}%'
 				or bt.tagname
 				like
-				'%${_parameter}'
+				'%${tagname}'
 				or bt.tagname like
-				'${_parameter}%'
+				'${tagname}%'
 			</when>
 		</choose>
+		order by ba.aviewnum desc
 	</select>
 
 	<!--通过板块文章id对应的文章信息 -->

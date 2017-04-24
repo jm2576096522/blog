@@ -28,22 +28,24 @@ public class B_tagHandler {
 	// 分页显示标签
 	@RequestMapping(value = "list", method = RequestMethod.POST)
 	@ResponseBody
-/*	public PaginationBean<B_tag> list(String rows, String page) {
-		LogManager.getLogger().debug("list:row==>" + rows + ",page==>" + page);
-		return b_tagService.partTag(page, rows);// 异步数据响应
-	}*/
+
 	public List<B_tag> list(String rows, String page) {
 		LogManager.getLogger().debug("list:row==>" + rows + ",page==>" + page);
 		return b_tagService.findAll();// 异步数据响应
 	}
-	
-	
+
+	// 通过标签名查询
+	@RequestMapping(value = "showTaginfo")
+	@ResponseBody
+	public B_tag tagInfo(String tagname) {
+		return b_tagService.tagInfo(tagname);// 异步数据响应
+	}
+
 	@RequestMapping(value = "analytics", method = RequestMethod.POST)
 	@ResponseBody
 	public List<B_tag> TagAnalytics() {
 		return b_tagService.TagAnalytics();// 异步数据响应
 	}
-	
 
 	// 修改标签
 	@RequestMapping("modify")
@@ -56,7 +58,7 @@ public class B_tagHandler {
 	// 添加标签
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@ResponseBody
-	public int insertTag(B_tag b_tag,HttpSession session) {
+	public int insertTag(B_tag b_tag, HttpSession session) {
 		B_user currUser = (B_user) session.getAttribute("loginUser");
 		Integer usid = currUser.getUsid();
 		b_tag.setTusid(usid);
@@ -71,24 +73,24 @@ public class B_tagHandler {
 		LogManager.getLogger().debug("我是delete type的处理");
 		return b_tagService.deleteTag(tagid);
 	}
-	//结合文章表（返回所引用对应类别的文章数）查询所有的标签
+
+	// 结合文章表（返回所引用对应类别的文章数）查询所有的标签
 	@RequestMapping("findAll")
 	@ResponseBody
-	public List<B_tag> findAllByUsid(B_tag b_tag,HttpSession session){
+	public List<B_tag> findAllByUsid(B_tag b_tag, HttpSession session) {
 		B_user currUser = (B_user) session.getAttribute("loginUser");
 		Integer usid = currUser.getUsid();
 		b_tag.setTusid(usid);
 		LogManager.getLogger().debug("结合文章表查询所有的标签的处理");
 		return b_tagService.findAllByUsid(b_tag);
 	}
-	
-	//获得所有的类别标签
+
+	// 获得所有的类别标签
 	@RequestMapping("findAllTags")
 	@ResponseBody
 	public List<B_tag> findALlTags() {
 		LogManager.getLogger().debug("获得所有的类别标签");
 		return b_tagService.findALlTags();
 	}
-	
 
 }

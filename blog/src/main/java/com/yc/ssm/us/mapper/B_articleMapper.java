@@ -32,7 +32,7 @@ public interface B_articleMapper {
 	List<B_article> listArticleBytname(String tname);
 
 	// 通过标签名查询文章
-	List<B_article> listArticleBytagname(String tagname);
+	List<B_article> listArticleBytagname(B_article b_article);
 
 	// 查询板块的文章
 	List<B_article> listArticleByCoaid(List<String> listcoaid);

@@ -25,9 +25,9 @@ public class B_articleServiceImpl implements B_articleService {
 	}
 
 	@Override
-	public List<B_article> listArticleBytagname(String tagname) {
+	public List<B_article> listArticleBytagname(B_article b_article) {
 		// 通过标签名查询博客文章
-		return b_articleMapper.listArticleBytagname(tagname);
+		return b_articleMapper.listArticleBytagname(b_article);
 	}
 
 	// 更改博客文章

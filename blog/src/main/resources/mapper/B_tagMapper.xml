@@ -8,33 +8,55 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from b_tag
 	</select>
 	<!-- 结合文章表 查询所有的标签 -->
+	<!-- <select id="findAll" resultType="B_tag"> select tag.*,nvl(w.articlenum,0) 
+		as articlenum from (select g.tagid,count(1) as articlenum from (select t.tagid 
+		from b_tag t inner join b_article a on t.tagid = a.tagid ) g group by g.tagid) 
+		w right join B_TAG tag on w.tagid = tag.tagid order by w.tagid </select> -->
+	<!-- 查询所有标签（忽略大小写）及标签对应的文章数 -->
 	<select id="findAll" resultType="B_tag">
-		select tag.*,nvl(w.articlenum,0) as articlenum from
-		(select g.tagid,count(1) as articlenum from
-		(select t.tagid from b_tag t inner join b_article a on t.tagid = a.tagid ) g
-		group by g.tagid) w
-		right join B_TAG tag on w.tagid = tag.tagid order
-		by w.tagid
+		select g.tagname
+		tagname,count(g.tagname) as articlenum from
+		(select lower(t.tagname) tagname from b_tag t inner join b_article a on
+		t.tagid = a.tagid ) g
+		group by g.tagname
 	</select>
-	
-	<!-- 结合文章表（返回所引用对应类别的文章数）查询  （个人 的tusid） 所有的标签 -->
+
+	<!--通过标签名 查询标签信息及标签对应的文章数 -->
+	<select id="tagInfo" resultType="B_tag">
+		select * from (select g.tagname tagname,count(g.tagname) as articlenum from
+		(select lower(t.tagname) tagname from b_tag t inner join b_article a on
+		t.tagid = a.tagid ) g
+		group by g.tagname) tag
+		<if test="_parameter!= null ">
+			where tag.tagname like '${_parameter}'
+		</if>
+	</select>
+	<!-- 结合文章表（返回所引用对应类别的文章数）查询 （个人 的tusid） 所有的标签 -->
 	<select id="findAllByUsid" resultType="B_tag" parameterType="B_tag">
 		select tag.*,nvl(w.articlenum,0) as articlenum from
-		(select g.tagid,count(1) as articlenum from
-		(select t.tagid from b_tag t inner join b_article a on t.tagid = a.tagid ) g
+		(select
+		g.tagid,count(1) as articlenum from
+		(select t.tagid from b_tag t inner
+		join b_article a on t.tagid = a.tagid ) g
 		group by g.tagid) w
-		right join B_TAG tag on w.tagid = tag.tagid where tag.tusid = #{tusid} order
-		by w.tagid
+		right join
+		B_TAG tag on w.tagid = tag.tagid where tag.tusid = #{tusid} order
+		by
+		w.tagid
 	</select>
 
 	<select id="findTag" parameterType="string" resultType="boolean">
-		select count(1) from b_tag where tagname=#{tagname}
+		select
+		count(1) from b_tag where tagname=#{tagname}
 	</select>
-	
+
 	<!-- 查询标签对应文章数的排行（前十） -->
-	<select id="TagAnalytics" resultType="B_tag"  >
-		select n.*,rownum from (select  
-		bt.tagname tagname, bt.tagid tagid,COUNT(ba.aid) articleNum from b_article ba,b_tag bt where bt.tagid(+)=ba.tagid GROUP BY bt.tagname,bt.tagid ORDER BY articleNum DESC ) n where 10>=rownum
+	<select id="TagAnalytics" resultType="B_tag">
+		select n.*,rownum
+		from (select g.tagname tagname,count(g.tagname) as articlenum from
+		(select lower(t.tagname) tagname from b_tag t inner join b_article a
+		on t.tagid = a.tagid ) g
+		group by g.tagname ORDER BY articleNum DESC ) n where 10>=rownum
 	</select>
 
 
@@ -57,13 +79,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		rn>(${currPage}-1)*${pageSize}
 	</select>
 	<!-- 更改类别标签信息 -->
-	
-		<!--  添加类别表签-->
+
+	<!-- 添加类别表签 -->
 	<insert id="insertTag" parameterType="B_tag">
-		insert into b_tag(tagid,tagname,tusid)
+		insert into
+		b_tag(tagid,tagname,tusid)
 		values(seq_tagid.nextval,#{tagname},#{tusid})
 	</insert>
-	
+
 	<update id="modifyTag" parameterType="B_tag">
 		update b_tag
 		<set>
@@ -72,8 +95,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</set>
 		where tagid=#{tagid}
-	</update>	
-	<!--删除类别标签  -->
+	</update>
+	<!--删除类别标签 -->
 	<delete id="deleteTag">
 		delete from b_tag where tagid=#{tagid}
 	</delete>

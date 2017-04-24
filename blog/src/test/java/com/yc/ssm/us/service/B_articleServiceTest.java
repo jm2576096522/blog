@@ -22,7 +22,9 @@ public class B_articleServiceTest {
 	// 条件查询文章
 	@Test
 	public void testListArticleBytagname() {
-		List<B_article> articles = bart.listArticleBytagname("java");
+		B_article article=new B_article();
+		article.setTagname("java");
+		List<B_article> articles = bart.listArticleBytagname(article);
 		System.out.println("查询结果==》");
 		for (B_article b_article : articles) {
 			System.out.println(b_article);
