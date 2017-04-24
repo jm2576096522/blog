@@ -78,12 +78,12 @@ function loadMoreArticle(){
 	
 	$.post("article/articleTotal",function(data){
 		 var ulStr = "";
-		 ulStr +="<li ><a onclick='prePage()'>&laquo; Prev</a></li>";
+		 ulStr +="<li ><a onclick='prePage()'>&laquo;上一页</a></li>";
 		 ulStr +="<li ><a onclick='firstPage()'>首页</a></li>";
 		 ulStr +="<li><a>"+currPage+"/"+data.totalPage+"</a></li>";
 		 ulStr +="<li><a>共:"+data.total+"条</a></li>";
 		 ulStr +="<li ><a onclick='lastPage()'>尾页</a></li>";
-		 ulStr +="<li ><a onclick='nextPage()'>Next &raquo;</a></li>";
+		 ulStr +="<li ><a onclick='nextPage()'>下一页 &raquo;</a></li>";
 		 totalPage = data.totalPage;
 		 $("#myUI").html(ulStr);
 	 });

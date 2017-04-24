@@ -181,7 +181,7 @@
 		<p class="ft-copyright">© 2015 AllMobilize, Inc. Licensed under
 			MIT license. Made with love By LWXYFER1</p>
 		<div id="tbox">
-			<a id="togbook"></a> <a id="gotop" href="javascript:void(0)"></a>
+			<a id="gotop" href="javascript:void(0)"></a>
 		</div>
 	</footer>
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
@@ -190,6 +190,21 @@
 
 	<!--  -->
 	<script type="text/javascript">
+		/* 回到顶部 */
+		var screenw = document.documentElement.clientWidth || document.body.clientWidth;
+		var screenh = document.documentElement.clientHeight || document.body.clientHeight;
+			var oTop = document.getElementById("gotop");
+			
+			oTop.style.left = screenw - oTop.offsetWidth + "px";
+			oTop.style.top = screenh - oTop.offsetHeight + "px";
+			window.onscroll = function() {
+				var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+				oTop.style.top = screenh - oTop.offsetHeight + scrolltop + "px";
+			}
+			oTop.onclick = function() {
+				document.documentElement.scrollTop = document.body.scrollTop = 0;
+			}
+
 		//头部的滚动图片
 		var top_content = '';
 
@@ -206,10 +221,10 @@
 					success : function(data) {
 						var top_article = '';
 						for (var i = 0; i < data.length; i++) {
-							top_article += '<a onclick="articleDetail('+data[i].aid+')" target="_blank"><img style="width:670px;height:280px;" id="slide-img-'
-									+ (i + 1)
-									+ '" src="'
-									+ data[i].apic
+							top_article += '<a onclick="articleDetail('
+									+ data[i].aid
+									+ ')" target="_blank"><img style="width:670px;height:280px;" id="slide-img-'
+									+ (i + 1) + '" src="' + data[i].apic
 									+ '" alt="" /></a>';
 							top_content = '{"id" : "slide-img-' + (i + 1)
 									+ '","client" : "标题' + (i + 1)
@@ -223,26 +238,25 @@
 			var slider = {};
 			alert(123);
 		}
-		
+
 		/* 	slider.data =array; */
-		 	slider.data = [ {
-							"id" : "slide-img-1", // 与slide-runner中的img标签id对应
-							"client" : "标题1",
-							"desc" : "这里修改描述 这里修改描述 这里修改描述" //这里修改描述
-						}, {
-							"id" : "slide-img-2",
-							"client" : "标题2",
-							"desc" : "add your description here"
-						}, {
-							"id" : "slide-img-3",
-							"client" : "标题3",
-							"desc" : "add your description here"
-						}, {
-							"id" : "slide-img-4",
-							"client" : "标题4",
-							"desc" : "add your description here"
-						} ];
-		
+		slider.data = [ {
+			"id" : "slide-img-1", // 与slide-runner中的img标签id对应
+			"client" : "标题1",
+			"desc" : "这里修改描述 这里修改描述 这里修改描述" //这里修改描述
+		}, {
+			"id" : "slide-img-2",
+			"client" : "标题2",
+			"desc" : "add your description here"
+		}, {
+			"id" : "slide-img-3",
+			"client" : "标题3",
+			"desc" : "add your description here"
+		}, {
+			"id" : "slide-img-4",
+			"client" : "标题4",
+			"desc" : "add your description here"
+		} ];
 	</script>
 
 </body>

@@ -270,7 +270,7 @@ function openDatail(index) {
 	$("#detailsArticle").dialog("open");
 	var row = $("#articleList").datagrid("getRows")[index];
 	$("#Aaid").html(row.aid);
-	$("#Aatitle").html(row.atitle);
+	$("#Atitle").html(row.atitle);
 	$("#Atid").html(row.tname);
 	$("#Atagid").html(row.tagname);
 	$("#Ausid").html(row.uname);
