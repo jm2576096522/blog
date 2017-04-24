@@ -53,7 +53,7 @@
 		<div class="am-u-sm-12">
 			<!-- 文章详情 -->
 			<div id="articleDetail">
-				<article class="am-article blog-article-p">
+				<article class="am-article blog-article-p" style="min-height: 300px;">
 					<div class="am-article-hd">
 						<h1 class="am-article-title blog-text-center">博客专家规则</h1>
 						<br>
@@ -62,19 +62,11 @@
 							<h2>博客专家条件</h2>
 							<ol type="1">
 								<li>该博主所发文章数大于10</li>
-								<li>文章的浏览量不小于20</li>
+								<li>文章的浏览量大于20</li>
 							</ol>
 							<h2>博客专家福利：</h2>	
 							<ol type="1">
 								<li>允许添加专栏</li>
-							</ol>
-							<h3>注意事项：</h3>
-							<ol type="1">
-								<li>CSDN博客专家如有违反CSDN网站规则的行为，如大量发布广告或软文，对CSDN网站造成不良影响等，将永久取消其CSDN博客专家身份。</li>
-								<li>CSDN博客专家在六个月内如果没有发布任何原创或翻译博文，其博客专家身份将自动取消，转为博客频道荣誉专家，进入博客频道荣誉专家列表，不能继续享有博客专家的福利。希望恢复博客专家身份可联系管理员重新申请。</li>
-								<li>CSDN博客专家是CSDN给予质量较高的技术博客的一个荣誉称号，代表官方对其博客内容的肯定。但CSDN博客专家不是CSDN博客的全职或兼职管理人员，不具备CSDN博客的管理权力，其观点及行为仅代表个人，不代表CSDN官方立场。</li>
-								<li>博客专家中的“行业名家”是与CSDN网站有合作关系的博客专家级用户。</li>
-								<li>所有博客专家（包括荣誉专家）均为实名制。 </li>
 							</ol>
 							
 						</div>
@@ -85,7 +77,7 @@
 		</div>
 	</div>
 	<!-- content end -->
-	<footer class="blog-footer">
+	<footer class="blog-footer" style="margin-top:200px;">
 
 		<div class="blog-text-center">© 2015 AllMobilize, Inc. Licensed
 			under MIT license. Made with love By LWXYFER</div>

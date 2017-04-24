@@ -63,9 +63,10 @@
 					class="am-u-lg-4 am-u-md-5 am-u-sm-7 am-u-sm-centered blog-text-center">
 					<span class="am-icon-tags"> &nbsp;</span>标签：<a id="tag"></a>
 					<hr>
-					<a><span class="am-icon-qq am-icon-fw am-primary blog-icon"></span></a> 
-					<a><span class="am-icon-wechat am-icon-fw blog-icon"></span></a>
-					<a><span class="am-icon-weibo am-icon-fw blog-icon"></span></a>
+					<div id="share">
+						
+					</div>
+				
 				</div>
 			</div>
 
@@ -130,6 +131,8 @@
 	if(aid != "null"){
 		$.post("article/findArticleByAid",{aid:aid},function(data){
 			var articleStr ='' ;
+			var acontent= data.acontent.replace(/<[^>]+>/g,"");
+			
 			articleStr +='<article class="am-article blog-article-p"><div class="am-article-hd">';
 			articleStr +='<h1 class="am-article-title blog-text-center">'+data.atitle+'</h1>';
 			articleStr +='<p class="am-article-meta blog-text-center">';
@@ -141,6 +144,8 @@
 			articleStr +='</div></article>';
 			$("#tag").html(data.tagname);
 			$("#articleDetail").html(articleStr);
+			var shareStr = '<a href="http://v.t.sina.com.cn/share/share.php?title='+acontent+'&loginRnd=1493023777628#_loginLayer_1493023844015"><span class="am-icon-weibo am-icon-fw blog-icon"></span></a>'
+			$("#share").html(shareStr);
 		});
 
 		viewComment();
@@ -174,12 +179,12 @@
 	function listNum(){
 		$.post("comment/listNum",{caid:aid},function(data){
 			var ulStr = "";
-				ulStr +="<li ><a onclick='prePage()'>&laquo; Prev</a></li>";
+				ulStr +="<li ><a onclick='prePage()'>&laquo; 上一页</a></li>";
 				ulStr +="<li ><a onclick='firstPage()'>首页</a></li>";
 				ulStr +="<li><a>"+currPage+"/"+data.totalPage+"</a></li>";
 				ulStr +="<li><a>共:"+data.total+"条</a></li>";
 				ulStr +="<li ><a onclick='lastPage()'>尾页</a></li>";
-				ulStr +="<li ><a onclick='nextPage()'>Next &raquo;</a></li>";
+				ulStr +="<li ><a onclick='nextPage()'>下一页 &raquo;</a></li>";
 				totalPage = data.totalPage;
 				$("#myUI").html(ulStr);
 		});

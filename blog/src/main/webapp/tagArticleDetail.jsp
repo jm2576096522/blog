@@ -51,8 +51,7 @@
 		<!-- 文章内容区 -->
 		<div class="am-u-md-8 am-u-sm-12">
 			<div id="tagArticle"></div>
-			<ul class="am-pagination"
-				style="width: 100%; text-align: center; margin-top: 30px;" id="myUI"></ul>
+			
 		</div>
 
 		<div class="am-u-md-4 am-u-sm-12 blog-sidebar">

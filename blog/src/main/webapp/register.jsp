@@ -80,12 +80,6 @@
       <br>
       <button type="button" class="am-btn am-btn-primary am-btn-block am-btn-lg am-radius am-animation-slide-bottom log-animation-delay-b" onClick="register()">注 册</button>
       <br>
-      <div class="am-btn-group am-animation-slide-bottom log-animation-delay-b">
-      <p>支持第三方注册</p>
-      <a href="#" class="am-btn am-btn-secondary am-btn-sm"><i class="am-icon-github am-icon-sm"></i>Github</a>
-      <a href="#" class="am-btn am-btn-success am-btn-sm"><i class="am-icon-google-plus-square am-icon-sm"></i>Google+</a>
-      <a href="#" class="am-btn am-btn-primary am-btn-sm"><i class="am-icon-stack-overflow am-icon-sm"></i>stackOverflow</a>
-      </div>
     </form>
   </div>
   </div>

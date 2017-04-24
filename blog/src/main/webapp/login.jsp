@@ -99,19 +99,7 @@
 					<button type="submit"
 						class="am-btn am-btn-primary am-btn-block am-btn-lg am-radius am-animation-slide-bottom log-animation-delay">登
 						录</button>
-					<p class="am-animation-slide-bottom log-animation-delay">
-						<a href="#">忘记密码?</a>
-					</p>
-					<div
-						class="am-btn-group  am-animation-slide-bottom log-animation-delay-b">
 					
-						<a class="am-btn am-btn-secondary am-btn-sm">
-						<i class="am-icon-github am-icon-sm"></i>Github</a>
-						<a class="am-btn am-btn-primary am-btn-sm">
-						<i class="am-icon-stack-overflow am-icon-sm"></i>stackOverflow</a> 
-						<a class="am-btn am-btn-success am-btn-sm">
-						<i class="am-icon-google-plus-square am-icon-sm"></i>Google+</a>
-					</div>
 				</form>
 			</div>
 		</div>
@@ -119,16 +107,7 @@
 			under MIT license. </footer>
 	</div>
 
-
-
-	<!--[if (gte IE 9)|!(IE)]><!-->
 	<script src="assets/js/jquery.min.js"></script>
-	<!--<![endif]-->
-	<!--[if lte IE 8 ]>
-<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
-<![endif]-->
 	<script src="assets/js/amazeui.min.js"></script>
 	<script src="assets/js/app.js"></script>
 
