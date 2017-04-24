@@ -270,7 +270,7 @@ function openDatail(index) {
 	$("#dcotime").html(row.cotime);
 	$("#darticlenum").html(row.articlenum);
 	$("#dcoviewnum").html(row.coviewnum);
-	$("#dcocontent").html(row.cocontent);
+	$("#dcocontent").html(htmlEncodeJQ(row.cocontent));
 	if (row.copic) {
 		$("#dcopic").attr("src", row.copic);
 	} else {

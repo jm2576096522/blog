@@ -277,7 +277,7 @@ function openDatail(index) {
 	$("#Aatime").html(row.atime);
 	$("#Aaviewnum").html(row.aviewnum);
 	$("#Acommentnum").html(row.commentnum);
-	$("#Aacontent").html(row.acontent);
+	$("#Aacontent").html(htmlEncodeJQ(row.acontent));
 	if (row.apic) {
 		$("#pic").attr("src", row.apic);
 	} else {
@@ -321,4 +321,14 @@ function exportExcel() {
             }
         }
     });
+}
+
+
+//防js注入
+function htmlEncodeJQ ( str ) {
+	return $('<span/>').text( str ).html();
+}
+	 
+function htmlDecodeJQ ( str ) {
+	return $('<span/>').html( str ).text();
 }
