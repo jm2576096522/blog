@@ -77,4 +77,9 @@ public class B_tagServiceImpl implements B_tagService {
 	public List<B_tag> TagAnalytics() {
 		return b_tagMapper.TagAnalytics();
 	}
+
+	@Override
+	public B_tag tagInfo(String tagname) {
+		return b_tagMapper.tagInfo(tagname);
+	}
 }

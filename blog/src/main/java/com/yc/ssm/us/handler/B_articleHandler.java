@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
@@ -23,6 +24,8 @@ import com.yc.ssm.us.entity.PaginationBean;
 import com.yc.ssm.us.service.B_articleService;
 import com.yc.ssm.us.service.B_columnService;
 import com.yc.ssm.us.service.B_drafetsService;
+import com.yc.ssm.us.util.Forbidener;
+import com.yc.ssm.us.util.IpUtils;
 import com.yc.ssm.us.util.ServletUtil;
 import com.yc.ssm.us.service.B_tagService;
 import com.yc.ssm.us.service.B_typeService;
@@ -228,11 +231,31 @@ public class B_articleHandler<T> {
 		return articleService.modifyArticle(b_article);
 	}
 
-	// 浏览量的增加
+	// 浏览量的增加(通过比较(ip地址+文章id+用户id)在一天之内是否被点击，来进行浏览量的增加)
 	@RequestMapping(value = "updateAviewNum", method = RequestMethod.POST)
 	@ResponseBody
-	public int updateAviewNum(@RequestParam("aid") Integer aid) {
-		return articleService.updateAviewNum(aid);
+	public int updateAviewNum(@RequestParam("aid") Integer aid, HttpServletRequest request) {
+		B_user user = (B_user) request.getSession().getAttribute("loginUser");
+		int usid = user.getUsid();// 获取用户id
+		// System.out.println("usid"+usid);
+		Forbidener fb = Forbidener.getInstance();
+		String testIP = IpUtils.getIpAddr(request) + aid + usid;
+		LogManager.getLogger().debug("浏览器解析到的ip:" + testIP);
+
+		if (fb.check(testIP)) {
+			LogManager.getLogger().debug("进行浏览量+1");
+			return articleService.updateAviewNum(aid);
+		}
+		LogManager.getLogger().debug("该文章已被点击浏览过");
+		return 0;
+	}
+
+	// 通过标签名查询文章
+	@RequestMapping(value = "tagArticleDetail", method = RequestMethod.POST)
+	@ResponseBody
+	public List<B_article> tagArticleDetail(B_article b_article) {
+		LogManager.getLogger().debug("获取的标签名是:" + b_article.getTagname());
+		return articleService.listArticleBytagname(b_article);
 	}
 
 	// 删除文章
@@ -312,7 +335,12 @@ public class B_articleHandler<T> {
 		} else if (name.trim().equals("tname")) {
 			return articleService.findArticleBytname(param);
 		} else if (name.trim().equals("tagname")) {
-			return articleService.listArticleBytagname(param);
+			B_article article = new B_article();
+			article.setTagname(param);
+			article.setPageSize(Integer.parseInt(rows));
+			article.setCurrPage(Integer.parseInt(page));
+			LogManager.getLogger().debug("按标签名查询"+article);
+			return articleService.listArticleBytagname(article);
 		} else if (name.trim().equals("cotitle")) {
 			// 先通过板块标题查询板块文章的id
 			String coaid = b_columnService.findCoaidByCotitle(param);

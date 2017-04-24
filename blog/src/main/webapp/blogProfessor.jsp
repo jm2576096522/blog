@@ -75,6 +75,7 @@
 	
 		 $.post("blog/professor",function(data){
 			var proStr ='';
+			//alert(JSON.stringify(data));
 			for(var i=0;i<data.length;i++){
 				proStr += '<dl class="experts_list">';
 				if(data[i].upic == null){

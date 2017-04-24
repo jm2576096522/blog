@@ -19,7 +19,7 @@ public interface B_articleService {
 	List<B_article> findPersonArticle(Integer usid);
 
 	// 通过标签名查询博客文章
-	List<B_article> listArticleBytagname(String tagname);
+	List<B_article> listArticleBytagname(B_article b_article);
 
 	// 查询博客文章(通过文章id)
 	B_article findArticleByAid(Integer aid);

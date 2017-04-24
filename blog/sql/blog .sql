@@ -1,18 +1,17 @@
 -------------blog项目 --------
 update b_article set aviewnum = (aviewnum+10) where usid=10002;--添加浏览量
+update b_user set  uemail='2576096522@qq.com' where usid=10002;--修改用户邮箱
+update b_admin set  admail='2576096522@qq.com' where adname='admin';--修改管理员邮箱
 
 文章数大于10 ，浏览量大于20 ，  返回文章总数， 总浏览量 aviewnum  用户基本信息
 select * from b_user bu inner join
 (select usid,count(1) articlenum ,sum(aviewnum) aviewtotal from b_article group by usid) t on t.usid = bu.usid
 where t.articlenum>10 and t.aviewtotal>20;
 select sum(aviewnum) from b_article where usid = 10007;
---查询标签表（重复的标签名分组计数）；tagid,tusid,tagname
-select tag.*,nvl(w.articlenum,0) as articlenum from
-		(select g.tagid,count(1) as articlenum from
-		(select t.tagid from b_tag t inner join b_article a on t.tagid = a.tagid ) g
-		group by g.tagid) w
-		right join B_TAG tag on w.tagid = tag.tagid order
-		by w.tagid
+--查询标签表（重复的标签名分组计数,忽略标签名大小写）；tagid,tusid,tagname
+		select g.tagname tagname,count(g.tagname) as articlenum from
+			(select lower(t.tagname) tagname,a.aid aid from b_tag t inner join b_article a on t.tagid = a.tagid ) g
+			group by g.tagname ;
 select * from b_tag t group by t.tagname
 		
 select sysdate from dual;

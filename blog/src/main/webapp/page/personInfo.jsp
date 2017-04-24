@@ -77,8 +77,8 @@
 								<label>头 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;像：</label> 
 								<img src="images/not_pic.jpg" id="upic" width="150" height="150" > <!--圆形样式 style=" border-radius:50%;" -->
 								<input id="upicPath" type="file" name="upicDate" onchange="chgPic(this)"/>
-								<button type="button" id="camera" onclick="open_camera()">摄像头</button>
-								<button type="submit" style="margin-top:10px;" id="pic_submit" onclick="upload_img()">上传图片</button>
+								<!-- <button type="button" id="camera" onclick="open_camera()">摄像头</button> -->
+								<button type="submit" style="margin-top:10px;margin-left:9%;" id="pic_submit" onclick="upload_img()">上传图片</button>
 							</li>
 						</ul>
 					</form>

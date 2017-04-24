@@ -185,10 +185,11 @@
 		</div>
 	</footer>
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
-	<script type="text/javascript" src="js/homePage.js"></script>
-	<script type="text/javascript" src="js/moreOperation.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/homePage.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/moreOperation.js"></script>
 
 	<!--  -->
+
 	<script type="text/javascript">
 		/* 回到顶部 */
 		var screenw = document.documentElement.clientWidth || document.body.clientWidth;
@@ -204,6 +205,7 @@
 			oTop.onclick = function() {
 				document.documentElement.scrollTop = document.body.scrollTop = 0;
 			}
+
 
 		//头部的滚动图片
 		var top_content = '';

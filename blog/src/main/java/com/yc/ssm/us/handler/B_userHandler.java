@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.yc.ssm.us.entity.B_article;
 import com.yc.ssm.us.entity.B_user;
 import com.yc.ssm.us.entity.PaginationBean;
 import com.yc.ssm.us.service.B_userService;
@@ -49,8 +47,8 @@ public class B_userHandler {
 		HttpSession session = request.getSession();
 		// 获取图片验证码
 		String imageCode = (String) session.getAttribute("imageCode");
-		System.out.println("项目发布ming:" + session.getAttribute("deployName"));
-		System.out.println("user的值是：" + user);
+		LogManager.getLogger().debug("项目发布ming:" + session.getAttribute("deployName"));
+		LogManager.getLogger().debug("user的值是：" + user);
 		if (user == null) {
 			request.setAttribute(ServletUtil.ERROR_MESSAGE, "用户名或密码错误！！！");
 			return "forward:/login.jsp";
@@ -60,7 +58,7 @@ public class B_userHandler {
 		} else {
 			session.setAttribute(ServletUtil.LOGIN_USER, user);
 			current_user = (B_user) session.getAttribute("loginUser");
-			System.out.println("用户session" + session.getAttribute("loginUser"));
+			LogManager.getLogger().debug("用户session" + session.getAttribute("loginUser"));
 			return "redirect:/homePage.jsp";
 
 		}
@@ -194,7 +192,6 @@ public class B_userHandler {
 	}
 
 	// 后台通过条件查询(name为条件查询参数名 ，param为条件查询的参数值 例如:{name: tname,param:'原创')
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "findByParam", method = RequestMethod.POST)
 	@ResponseBody
 	public List<B_user> findUserByParam(String name, String param, String rows, String page)

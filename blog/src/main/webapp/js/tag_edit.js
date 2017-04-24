@@ -11,20 +11,8 @@ $("#tagList")
 					pageList : [ 5, 10, 15, 20, 25, 30 ],
 					columns : [ [
 							{
-								field : 'tagid',
-								title : '编号',
-								width : 100,
-								align : 'center'
-							},
-							{
 								field : 'tagname',
 								title : '标签名',
-								width : 100,
-								align : 'center'
-							},
-							{
-								field : 'tusid',
-								title : '用户编号',
 								width : 100,
 								align : 'center'
 							},

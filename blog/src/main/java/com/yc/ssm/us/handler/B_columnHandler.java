@@ -41,7 +41,7 @@ public class B_columnHandler {
 	@RequestMapping(value = "list", method = RequestMethod.POST)
 	@ResponseBody
 	public PaginationBean<B_column> list(String rows, String page) {
-		System.out.println("list:row==>" + rows + ",page==>" + page);
+		LogManager.getLogger().debug("list:row==>" + rows + ",page==>" + page);
 		return columnService.partColumn(page, rows);// 异步数据响应
 	}
 
@@ -49,7 +49,7 @@ public class B_columnHandler {
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@ResponseBody
 	public int addColumn(@RequestParam("picData") MultipartFile picData, B_column b_column) {
-		System.out.println("add:b_column==>" + b_column);
+		LogManager.getLogger().debug("add:b_column==>" + b_column);
 		String picPath = null;
 		if (picData != null && !picData.isEmpty()) {// 判断是否有文件上传
 			try {
@@ -67,7 +67,7 @@ public class B_columnHandler {
 			listcoaid.add(str);
 		}
 		b_column.setArticlenum(listcoaid.size());
-		System.out.println("上传图片==》b_column:" + b_column + "----------板块文章数" + b_column.getArticlenum());
+		LogManager.getLogger().debug("上传图片==》b_column:" + b_column + "----------板块文章数" + b_column.getArticlenum());
 		return columnService.addColumn(b_column);// 异步数据响应
 	}
 
