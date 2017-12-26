@@ -126,7 +126,7 @@
 		
 		/* 编辑 */
 		function editrow(index){
-			window.location.href="page/blog_add.jsp?drid="+index;
+			window.location.href="/blog/page/blog_add.jsp?drid="+index;
 		}
 		/* 删除 */
 		function deleterow(index){
@@ -156,7 +156,7 @@
 					});
 				}else{
 					$.messager.alert("操作提示","发表失败!","error",function(){
-						location.href="page/blogDrafets.jsp";
+						location.href="/blog/page/blogDrafets.jsp";
 					});
 				}
 				

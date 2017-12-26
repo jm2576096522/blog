@@ -5,11 +5,11 @@
 
 //切换用户
 function switch_user(){
-	location.href ="login.jsp";
+	window.location.href ="/blog/login.jsp";
 }
 //退出登录
 function login_out(){
 	$.get("blog/login_out",function(data){
-			location.href = "homePage.jsp";
+		window.location.href = "/blog/homePage.jsp";
 	});
 }

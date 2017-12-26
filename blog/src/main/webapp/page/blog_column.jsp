@@ -100,7 +100,7 @@
 			$("#top_img").attr("src","images/not_pic.jpg");
 		}
 		function column_add(){
-			location.href="page/column_add.jsp"
+			location.href="/blog/page/column_add.jsp"
 		}
 		$.post("column/findColumnByUsid",function(data){
 			var tableStr ;
@@ -140,12 +140,12 @@
 		}
 		function updaterow(index){
 			if(index != ""){
-				location.href="page/column_add.jsp?coid="+index;
+				location.href="/blog/page/column_add.jsp?coid="+index;
 			}
 		}
 		
 		function addrow(index){
-			location.href="page/columnArticle_add.jsp?coid="+index;
+			location.href="/blog/page/columnArticle_add.jsp?coid="+index;
 		}
 	</script>
 	

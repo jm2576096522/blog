@@ -223,6 +223,9 @@
 					success : function(data) {
 						var top_article = '';
 						for (var i = 0; i < data.length; i++) {
+							if(data[i].apic == null){
+								data[i].apic="images/not_img1.png";
+							}
 							top_article += '<a onclick="articleDetail('
 									+ data[i].aid
 									+ ')" target="_blank"><img style="width:670px;height:280px;" id="slide-img-'

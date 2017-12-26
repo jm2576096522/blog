@@ -82,7 +82,7 @@
 				$.post("column/addArticleByCoid",{coaid:coaid,coid:coid},function(data){
 						if(data > 0){
 							$.messager.alert("操作提示","添加成功...","info",function(){
-								location.href="page/blog_column.jsp";
+								location.href="/blog/page/blog_column.jsp";
 							});
 						}else{
 							$.messager.alert("操作提示","添加失败！！","error");
@@ -92,7 +92,7 @@
 		});
 		/* 返回 */
 		$("#back").click(function(){
-			location.href="page/blog_column.jsp";
+			location.href="/blog/page/blog_column.jsp";
 		});
 	</script>
 </body>

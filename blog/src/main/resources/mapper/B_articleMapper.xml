@@ -258,7 +258,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 查询用户id所作的文章数及总页数   by  atitle 标题查询-->
 	<select id="findArticleNumByAtitle" parameterType="B_article" resultType="B_article">
-		select count(1) total ,ceil(count(1)/${pageSize}) totalPage from b_article b where usid = #{usid} and atitle like #{atitle}
+		select count(1) total ,ceil(count(1)/${pageSize}) totalPage from b_article b where usid = #{usid} and atitle like '%' || #{atitle} || '%'
 	</select>
 
 

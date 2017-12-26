@@ -88,42 +88,43 @@ function findArticleByAtitle(){
 function listNumByAtitle(atitle){
 	$.post("article/findArticleNumByAtitle",{pageSize:pageSize,atitle:atitle},function(data){
 		var ulStr = "";
-		ulStr +="<li ><a onclick='prePageByAtitle("+index+")'>&laquo; Prev</a></li>";
-		ulStr +="<li ><a onclick='firstPageByAtitle("+index+")'>首页</a></li>";
+		//alert(JSON.stringify(data));
+		ulStr +="<li ><a onclick='prePageByAtitle()'>&laquo; Prev</a></li>";
+		ulStr +="<li ><a onclick='firstPageByAtitle()'>首页</a></li>";
 		ulStr +="<li><a>"+currPage+"/"+data.totalPage+"</a></li>";
 		ulStr +="<li><a>共:"+data.total+"条</a></li>";
-		ulStr +="<li ><a onclick='lastPageByAtitle("+index+")'>尾页</a></li>";
-		ulStr +="<li ><a onclick='nextPageByAtitle("+index+")'>Next &raquo;</a></li>";
+		ulStr +="<li ><a onclick='lastPageByAtitle()'>尾页</a></li>";
+		ulStr +="<li ><a onclick='nextPageByAtitle()'>Next &raquo;</a></li>";
 		totalPage = data.totalPage;
 		$("#myUI").html(ulStr);
 	});
 }
-function nextPageByAtitle(index){
+function nextPageByAtitle(){
 	if(currPage == totalPage){
 		currPage = currPage;
 	}else{
 		currPage += 1;
-		findArticleByAtitle(index);
+		findArticleByAtitle();
 	}
 }
 /* 上一页 */
-function prePageByAtitle(index){
+function prePageByAtitle(){
 	if(currPage == 1){
 		currPage = currPage;
 	}else{
 		currPage -= 1;
-		findArticleByAtitle(index);
+		findArticleByAtitle();
 	}
 }
 /* 首页 */
-function firstPageByAtitle(index){
+function firstPageByAtitle(){
 	currPage = 1;
-	findArticleByAtitle(index);
+	findArticleByAtitle();
 }
 /* 尾页 */
-function lastPageByAtitle(index){
+function lastPageByAtitle(){
 	currPage = totalPage;
-	findArticleByAtitle(index);
+	findArticleByAtitle();
 }
 
 
@@ -269,8 +270,8 @@ function lastPageByType(index){
 
 
 /* 编辑 */
-function editrow(index){
-	window.location.href="page/blog_add.jsp?aid="+index;
+function editrow(index){ 
+	window.location.href="/blog/page/blog_add.jsp?aid="+index;
 }
 /* 删除 */
 function deleterow(index){

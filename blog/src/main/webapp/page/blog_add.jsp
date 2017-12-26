@@ -83,7 +83,7 @@
 					<div class="am-form-group">
 						<label>内容 </label>
 						<textarea name="acontent" id="acontent" rows="15"
-							style="height: 150px;" placeholder="一字千金"></textarea>
+							style="height: 150px;" ></textarea>
 					</div>
 					<div id="show_img"></div>
 					<p>
@@ -245,12 +245,12 @@
 						if (data.trim() == "true") {
 							$.messager.alert("操作提示", "添加成功...", "info", function() {
 								if (aid != "null") {
-									location.href = "page/blogManager.jsp";
+									location.href = "/blog/page/blogManager.jsp";
 								} else if (drid != "null") {
 									$.post("drafets/deleteDrafets", {
 										drid : drid
 									}, function(data) {
-										location.href = "page/blogDrafets.jsp";
+										location.href = "/blog/page/blogDrafets.jsp";
 									});
 								} else {
 									location.reload();
@@ -288,7 +288,7 @@
 						success : function(data) {
 							if (data.trim() > 0) {
 								$.messager.alert("操作提示", "更改成功...", "info", function() {
-									location.href = "page/blogManager.jsp";
+									location.href = "/blog/page/blogManager.jsp";
 								});
 							} else {
 								$.messager.alert("操作提示", "更改失败！！", "error", function() {
@@ -388,7 +388,7 @@
 		}
 		//点击取消，返回
 		function backFirst() {
-			location.href = "page/blogManager.jsp";
+			location.href = "/blog/page/blogManager.jsp";
 		}
 		
 		//验证

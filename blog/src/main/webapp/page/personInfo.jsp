@@ -165,7 +165,7 @@
 	 });
 	
 	function open_camera(){
-		location.href="page/camera.jsp";
+		location.href="/blog/page/camera.jsp";
 	}
 	
 	function upload_img(){
